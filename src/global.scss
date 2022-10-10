@@ -1,0 +1,74 @@
+/* Colors */
+$darkBlue: #096DD9;
+$blue: #40A9FF;
+$lightBlue: #91D5FF;
+
+$darkOrange: #EF6C00;
+$orange: #FA8C16;
+$lightOrange: #FFC069;
+
+$darkGray: #BFBFBF;
+$gray: #D9D9D9;
+$lightGray: #F0F2F5;
+/*-----------------*/
+
+/* Fonts */
+@import url('http://fonts.cdnfonts.com/css/montserrat');
+@import url('http://fonts.googleapis.com/css/roboto');
+@import url('http://fonts.googleapis.com/css/noto-sans');
+
+@font-face {
+  font-family: "Tektur";
+  src: local("Tektur"), url("./fonts/Tektur/Tektur-Medium.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "TekturBold";
+  src: local("Tektur"), url("./fonts/Tektur/Tektur-Bold.ttf") format("truetype");
+}
+
+$Tektur:  "Tektur", sans-serif;
+$Roboto:  "Roboto", sans-serif;
+$Montserrat:  "Montserrat", sans-serif;
+$NotoSans:  "Noto Sans", sans-serif;
+
+$fontWeight: 400;
+
+$h1-fontSize: 48px;
+$h2-fontSize: 40px;
+$h3-fontSize: 36px;
+$h4-fontSize: 32px;
+$h5-fontSize: 24px;
+/*-----------------*/
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: $lightGray;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: $Tektur;
+  font-weight: $fontWeight;
+}
+
+h1 {
+  font-size: $h1-fontSize;
+  line-height: 60px;
+}
+
+h2 {
+  font-size: $h2-fontSize;
+}
+
+h3 {
+  font-size: $h4-fontSize;
+}
+
+h4 {
+  font-size: $h4-fontSize;
+}
+
+h5 {
+  font-size: $h5-fontSize;
+}
