@@ -1,11 +1,23 @@
+@import "../../../global";
+
 .intro {
   padding: 95px 0 75px;
   box-sizing: border-box;
   background: linear-gradient(55.47deg, #40A9FF 15.83%, #0084EF 30.26%, #0267BA 38.72%);
-  height: calc(100vh - 100px);
-  clip-path: polygon(0 0, 100% 0, 100% 50%, 80% 100%, 20% 70%, 0 20%);
+  height: 700px;
+  clip-path: polygon(0 0, 100% 0, 100% 50%, 80% 100%, 20% 85%, 0 25%);
 
-  .info__title {
+  & &__info {
     color: #FFFFFF;
+
+    .info__title {
+      margin-bottom: 32px;
+    }
+
+    .info__text {
+      color: #FFFFFF;
+      font-size: 16px;
+      line-height: 19px;
+    }
   }
 }

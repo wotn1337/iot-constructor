@@ -13,9 +13,10 @@ $lightGray: #F0F2F5;
 /*-----------------*/
 
 /* Fonts */
-@import url('http://fonts.cdnfonts.com/css/montserrat');
-@import url('http://fonts.googleapis.com/css/roboto');
-@import url('http://fonts.googleapis.com/css/noto-sans');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat');
+@import url('https://fonts.googleapis.com/css2?family=Roboto');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans');
+@import url('https://fonts.googleapis.com/css2?family=Inter');
 
 @font-face {
   font-family: "Tektur";
@@ -31,6 +32,7 @@ $Tektur:  "Tektur", sans-serif;
 $Roboto:  "Roboto", sans-serif;
 $Montserrat:  "Montserrat", sans-serif;
 $NotoSans:  "Noto Sans", sans-serif;
+$Inter:  "Inter", sans-serif;
 
 $fontWeight: 400;
 
@@ -45,11 +47,13 @@ body {
   margin: 0;
   padding: 0;
   background-color: $lightGray;
+  font-weight: $fontWeight;
 }
 
 h1, h2, h3, h4, h5, h6 {
   font-family: $Tektur;
-  font-weight: $fontWeight;
+  color: inherit;
+  margin: 0;
 }
 
 h1 {

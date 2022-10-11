@@ -1,0 +1,11 @@
+@import '../../../../global';
+
+.navbar {
+  border: none;
+  font-family: $NotoSans;
+
+  .ant-menu-item:hover a, .ant-menu-item-selected a {
+    color: $blue !important;
+    border-bottom-color: $darkBlue;
+  }
+}
