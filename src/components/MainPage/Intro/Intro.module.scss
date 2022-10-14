@@ -1,23 +1,33 @@
 @import "../../../global";
 
 .intro {
-  padding: 95px 0 75px;
+  padding: 115px 0 75px;
   box-sizing: border-box;
   background: linear-gradient(-15.32deg, #40A9FF 10.83%, #0084EF 30.26%, #0267BA 48.72%);
-  height: 600px;
-  clip-path: polygon(0 0, 100% 0, 100% 50%, 85% 100%, 12% 85%, 0 25%);
+  height: 630px;
+  clip-path: polygon(0 0, 100% 0, 100% 50%, 84% 100%, 12% 85%, 0 25%);
+  margin: 0 !important;
+  width: 100%;
 
-  & &__info {
+  &__image {
+    padding-right: 0 !important;
+  }
+
+  &__info {
     color: #FFFFFF;
+    padding-top: 53px;
+    padding-left: 0 !important;
 
     .info__title {
       margin-bottom: 32px;
     }
 
     .info__text {
+      font-family: $NotoSans;
       color: #FFFFFF;
       font-size: 16px;
-      line-height: 19px;
+      line-height: 22px;
+      margin-bottom: 48px;
     }
   }
 }

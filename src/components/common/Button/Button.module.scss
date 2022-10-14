@@ -1,0 +1,33 @@
+@import '../../../global';
+
+.button {
+  font-family: $NotoSans;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  color: black;
+  border-radius: 2px;
+  border: none;
+  padding: 6.4px 18px;
+  min-height: 39px;
+  max-width: 300px;
+  white-space: inherit;
+  height: auto;
+
+  span {
+    word-break: break-all;
+  }
+}
+
+.button.primary {
+  background-color: $orange;
+  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.043);
+  border: 1px solid #FA8C16;
+  color: white;
+}
+
+.button.default {
+  background-color: white;
+  border: 1px solid #D9D9D9;
+  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.016);
+}

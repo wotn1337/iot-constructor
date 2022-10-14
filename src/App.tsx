@@ -13,6 +13,10 @@ export const App = () => {
 					<Route path={PageRoutes.CONSTRUCTOR} element={<h1>Конструктор</h1>} />
 					<Route path={PageRoutes.PROFESSIONS} element={<h1>Профессии</h1>} />
 					<Route path={PageRoutes.EMPLOYEES} element={<h1>Сотрудники</h1>} />
+					<Route
+						path={PageRoutes.PARTNERS}
+						element={<h1>Партнеры (Без СБЕРа, пусть логотип сначала в порядок приведут)</h1>}
+					/>
 				</Route>
 			</Routes>
 		</BrowserRouter>

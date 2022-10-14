@@ -3,4 +3,5 @@ export enum PageRoutes {
 	CONSTRUCTOR = 'constructor',
 	PROFESSIONS = 'professions',
 	EMPLOYEES = 'employees',
+	PARTNERS = 'partners',
 }

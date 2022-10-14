@@ -34,6 +34,10 @@ export const Layout: React.FC<LayoutProps> = () => {
 									label: <NavLink to={PageRoutes.EMPLOYEES}>Сотрудники</NavLink>,
 									key: PageRoutes.EMPLOYEES,
 								},
+								{
+									label: <NavLink to={PageRoutes.PARTNERS}>Партнеры</NavLink>,
+									key: PageRoutes.PARTNERS,
+								},
 							]}
 						/>
 					</Col>
