@@ -1,6 +1,6 @@
 import React from 'react';
-import { Hexagon } from '../../common/Hexagon/Hexagon';
 import { IntroImage } from '../../../images';
+import { Hexagon } from '../../../components';
 
 type AboutProps = {};
 
