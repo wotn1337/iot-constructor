@@ -1,0 +1,23 @@
+.about {
+  padding-top: 20px;
+
+  .info {
+    width: 600px;
+
+    &__title {
+      margin-bottom: 32px;
+    }
+
+    div.info__text {
+      width: 500px;
+      line-height: 20.8px;
+      margin-bottom: 64px;
+    }
+
+    &__list {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+  }
+}

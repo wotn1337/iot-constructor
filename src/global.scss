@@ -40,6 +40,7 @@ $h5-fontSize: 24px;
 body {
   margin: 0;
   padding: 0;
+  font-family: $NotoSans;
   background-color: $lightGray;
   font-weight: $fontWeight;
 }
@@ -65,6 +66,7 @@ h3 {
 
 h4 {
   font-size: $h4-fontSize;
+  line-height: 41.6px;
 }
 
 h5 {
