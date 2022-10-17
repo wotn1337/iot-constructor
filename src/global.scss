@@ -16,8 +16,13 @@ $lightGray: #F0F2F5;
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans');
 
 @font-face {
-  font-family: "Tektur";
+  font-family: "TekturMedium";
   src: local("Tektur"), url("./fonts/Tektur/Tektur-Medium.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "TekturRegular";
+  src: local("Tektur"), url("./fonts/Tektur/Tektur-Regular.ttf") format("truetype");
 }
 
 @font-face {
@@ -25,7 +30,9 @@ $lightGray: #F0F2F5;
   src: local("Tektur"), url("./fonts/Tektur/Tektur-Bold.ttf") format("truetype");
 }
 
-$Tektur:  "Tektur", sans-serif;
+$TekturMedium:  "TekturMedium", sans-serif;
+$TekturRegular:  "TekturRegular", sans-serif;
+$TekturBold:  "TekturBold", sans-serif;
 $NotoSans:  "Noto Sans", sans-serif;
 
 $fontWeight: 400;
@@ -46,7 +53,7 @@ body {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: $Tektur;
+  font-family: $TekturRegular;
   color: inherit;
   margin: 0;
 }

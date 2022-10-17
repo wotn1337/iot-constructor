@@ -1,6 +1,5 @@
 import React from 'react';
-import { Intro } from '../components';
-import { About } from '../components/MainPage/About/About';
+import { Intro, About, StudentReview } from '../components';
 
 type MainPageProps = {};
 
@@ -9,6 +8,7 @@ export const MainPage: React.FC<MainPageProps> = () => {
 		<>
 			<Intro />
 			<About />
+			<StudentReview />
 		</>
 	);
 };
