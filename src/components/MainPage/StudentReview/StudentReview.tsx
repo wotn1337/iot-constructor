@@ -2,11 +2,13 @@ import React from 'react';
 import s from './StudentReview.module.scss';
 import { Reviews } from './Reviews/Reviews';
 import { ReviewCardProps } from './Reviews/ReviewCard/ReviewCard';
+import 'react-responsive-carousel/lib/styles/carousel.min.css';
 
 type StudentReviewProps = {};
 
 const reviews: ReviewCardProps[] = [
 	{
+		id: 1,
 		avatar: null,
 		name: 'Student Studentov 1',
 		review:
@@ -16,7 +18,8 @@ const reviews: ReviewCardProps[] = [
 		badge: '2022 год выпуска',
 	},
 	{
-		avatar: null,
+		id: 2,
+		avatar: 'https://mdbcdn.b-cdn.net/img/new/avatars/2.webp',
 		name: 'Student Studentov 2',
 		review:
 			'Безусловно, социально-экономическое развитие представляет собой интересный эксперимент проверки поэтапного и последовательного развития общества.\n' +
@@ -25,6 +28,7 @@ const reviews: ReviewCardProps[] = [
 		badge: '2022 год выпуска',
 	},
 	{
+		id: 3,
 		avatar: null,
 		name: 'Student Studentov 3',
 		review:
@@ -34,6 +38,7 @@ const reviews: ReviewCardProps[] = [
 		badge: '2022 год выпуска',
 	},
 	{
+		id: 4,
 		avatar: null,
 		name: 'Student Studentov 4',
 		review:
@@ -43,6 +48,7 @@ const reviews: ReviewCardProps[] = [
 		badge: '2022 год выпуска',
 	},
 	{
+		id: 5,
 		avatar: null,
 		name: 'Student Studentov 5',
 		review:
@@ -51,15 +57,16 @@ const reviews: ReviewCardProps[] = [
 			'Современные технологии достигли такого уровня, что сложившаяся структура организации играет определяющее значение для кластеризации усилий!',
 		badge: '2022 год выпуска',
 	},
-	{
-		avatar: null,
-		name: 'Student Studentov 6',
-		review:
-			'Безусловно, социально-экономическое развитие представляет собой интересный эксперимент проверки поэтапного и последовательного развития общества.\n' +
-			'\n' +
-			'Современные технологии достигли такого уровня, что сложившаяся структура организации играет определяющее значение для кластеризации усилий!',
-		badge: '2022 год выпуска',
-	},
+	// {
+	// 	id: 6,
+	// 	avatar: null,
+	// 	name: 'Student Studentov 6',
+	// 	review:
+	// 		'Безусловно, социально-экономическое развитие представляет собой интересный эксперимент проверки поэтапного и последовательного развития общества.\n' +
+	// 		'\n' +
+	// 		'Современные технологии достигли такого уровня, что сложившаяся структура организации играет определяющее значение для кластеризации усилий!',
+	// 	badge: '2022 год выпуска',
+	// },
 ];
 
 export const StudentReview: React.FC<StudentReviewProps> = () => {

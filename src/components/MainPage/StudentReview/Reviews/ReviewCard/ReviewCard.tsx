@@ -6,6 +6,7 @@ import { UserOutlined } from '@ant-design/icons';
 const { Text, Paragraph } = Typography;
 
 export type ReviewCardProps = {
+	id: number;
 	avatar: string | null;
 	name: string;
 	review: string;

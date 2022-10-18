@@ -6,9 +6,11 @@ type MainPageProps = {};
 export const MainPage: React.FC<MainPageProps> = () => {
 	return (
 		<>
-			<Intro />
-			<About />
-			<StudentReview />
+			<section style={{ paddingBottom: 128 }}>
+				<Intro />
+				<About />
+				<StudentReview />
+			</section>
 		</>
 	);
 };
