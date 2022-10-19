@@ -55,7 +55,7 @@ export const Hexagon: React.FC<HexagonProps> = ({ border, rotateAngle, image, ..
 const HexagonComponent = styled.div<HexagonProps>`
 	width: ${({ size }) => 2 * size}px;
 	height: ${({ size }) => size * Math.sqrt(3)}px;
-	background-color: ${({ color = 'white' }) => color};
+	background: ${({ color = 'white' }) => color};
 	clip-path: polygon(25% 0, 75% 0, 100% 50%, 75% 100%, 25% 100%, 0 50%);
 	transform: rotate(${({ rotateAngle }) => rotateAngle}deg);
 	display: flex;

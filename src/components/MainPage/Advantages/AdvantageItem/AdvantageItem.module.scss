@@ -1,0 +1,35 @@
+@import "../../../../global";
+
+.advantage {
+  text-align: left;
+  margin-bottom: 80px;
+
+  &__title {
+    width: 100%;
+  }
+
+  &__description {
+    font-family: $NotoSans;
+    font-size: 16px;
+    margin-bottom: 0 !important;
+  }
+}
+
+.marker {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+
+
+  &__dot {
+    height: 0;
+    width: 10px;
+    border-bottom: 2px solid $darkOrange;
+    border-radius: 2px;
+  }
+
+  &__text {
+    font-family: $NotoSans;
+    color: rgba(0, 0, 0, 0.45);;
+  }
+}
