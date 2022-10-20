@@ -16,11 +16,11 @@ export const AdvantageItem: React.FC<AdvantageItemProps> = ({ title, description
 			<h5 className={s.advantage__title}>{title}</h5>
 			<Paragraph className={s.advantage__description}>{description}</Paragraph>
 			{list && (
-				<div className={s.marker}>
+				<div className={s.advantage__marker}>
 					{list.map((item) => (
-						<Space style={{ gap: '5px' }}>
-							<div className={s.marker__dot} />
-							<div className={s.marker__text}>{item}</div>
+						<Space>
+							<div className={s.advantage__marker__dot} />
+							<div className={s.advantage__marker__text}>{item}</div>
 						</Space>
 					))}
 				</div>
