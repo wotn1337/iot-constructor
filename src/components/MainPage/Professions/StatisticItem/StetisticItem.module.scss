@@ -1,0 +1,16 @@
+@import "../../../../global";
+
+.statistic {
+  min-width: 244px;
+
+  &__amount {
+    font-size: 40px;
+    font-weight: 500;
+    color: $orange;
+  }
+
+  &__caption {
+    color: rgba(0, 0, 0, 0.85);
+    line-height: 130%;
+  }
+}
