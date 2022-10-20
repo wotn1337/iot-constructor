@@ -14,9 +14,10 @@ type HexagonProps = {
 	rotateAngle?: number;
 	image?: string;
 	border?: BorderProps;
+	style?: React.CSSProperties;
 };
 
-export const Hexagon: React.FC<HexagonProps> = ({ border, rotateAngle, image, ...props }) => {
+export const Hexagon: React.FC<HexagonProps> = ({ border, rotateAngle, image, style, ...props }) => {
 	const inner = image ? (
 		<Image
 			src={image}
@@ -38,13 +39,14 @@ export const Hexagon: React.FC<HexagonProps> = ({ border, rotateAngle, image, ..
 					size={props.size + (border.padding ?? 0) + (border.width ?? 0)}
 					rotateAngle={rotateAngle}
 					color={border.color}
+					style={{ ...style }}
 				>
 					<HexagonComponent color="#F0F2F5" size={props.size + (border.padding ?? 0)}>
 						<HexagonComponent {...props}>{inner}</HexagonComponent>
 					</HexagonComponent>
 				</HexagonComponent>
 			) : (
-				<HexagonComponent rotateAngle={rotateAngle} {...props}>
+				<HexagonComponent rotateAngle={rotateAngle} style={{ ...style }} {...props}>
 					{inner}
 				</HexagonComponent>
 			)}
