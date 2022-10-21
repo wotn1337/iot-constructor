@@ -7,13 +7,9 @@ import { DotComponent } from './AdvantageItem/DotComponent';
 import { LabelComponent } from './AdvantageItem/LabelComponent/LabelComponent';
 import { ElectiveIcon, LevelIcon, TechnologyIcon } from './../../../images';
 
-type AdvantagesProps = {};
+const advantages = AdvantagesList.map((item) => <AdvantageItem {...item} key={item.id} />);
 
-const advantages = AdvantagesList.map((item) => (
-	<AdvantageItem title={item.title} description={item.description} list={item.list} />
-));
-
-export const Advantages: React.FC<AdvantagesProps> = ({ ...props }) => {
+export const Advantages = ({ ...props }) => {
 	return (
 		<Row className="advantagesWrapper">
 			<Col className="title">

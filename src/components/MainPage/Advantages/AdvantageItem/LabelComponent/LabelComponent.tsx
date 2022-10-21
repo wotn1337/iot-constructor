@@ -4,7 +4,7 @@ import { Space } from 'antd';
 import { Hexagon } from '../../../../common/Hexagon/Hexagon';
 
 type LabelComponentProps = {
-	align: string;
+	align: 'left' | 'right';
 	image: string;
 };
 
