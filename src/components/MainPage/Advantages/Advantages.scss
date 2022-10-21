@@ -1,0 +1,54 @@
+@import "../../../global";
+
+.advantagesWrapper {
+  margin-top: 129px;
+  align-items: center;
+  justify-content: center;
+
+  .title {
+    width: 100%;
+
+    .text {
+      text-align: center;
+      margin-bottom: 160px;
+    }
+  }
+
+  .ant-timeline-item-tail {
+    border-left: 2px solid rgba(0, 0, 0, 0.25) !important;
+    top: 29px;
+    height: calc(100% - 49px);
+    border-radius: 3px;
+  }
+
+  .ant-timeline-item-head {
+    background-color: transparent;
+  }
+
+  .ant-timeline-item-content {
+    top: -80px;
+  }
+
+  .ant-timeline.ant-timeline-label .ant-timeline-item-label {
+    top: -64px;
+    width: calc(50% - 21px);
+  }
+
+  .ant-timeline.ant-timeline-label .ant-timeline-item-left .ant-timeline-item-content {
+    left: calc(50% + 102px);
+  }
+
+  .ant-timeline.ant-timeline-label .ant-timeline-item-right .ant-timeline-item-content {
+    right: 80px;
+  }
+
+  .ant-timeline.ant-timeline-label .ant-timeline-item-left .ant-timeline-item-label {
+    left: -15px;
+  }
+
+  .ant-timeline.ant-timeline-label .ant-timeline-item-right .ant-timeline-item-label {
+    left: calc(50% + 23px);
+  }
+}
+
+

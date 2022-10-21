@@ -1,0 +1,70 @@
+@import "../../../global";
+
+.professionWrapper {
+  position: relative;
+  height: 655px;
+  margin-top: 129px;
+  padding: 58px 0;
+  justify-content: center;
+  background-color: #FFFFFF;
+  box-shadow: inset 0px -4px 30px rgba(0, 0, 0, 0.15), inset 0px 4px 30px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+}
+
+.profession {
+  display: grid;
+  width: 1112px;
+  margin: 0 auto;
+  grid-template-columns: 700px 440px;
+  grid-template-rows: repeat(5, auto);
+  grid-template-areas:
+  "t i"
+  "d i"
+  "note i"
+  "stat i"
+  "b i";
+
+  &__title {
+    grid-area: t;
+    line-height: 130%;
+    z-index: 1;
+  }
+
+  &__image {
+    grid-area: i;
+    z-index: 1;
+  }
+
+  &__description {
+    grid-area: d;
+    max-width: 491px;
+    margin-bottom: 0;
+    font-size: 18px;
+    color: rgba(0, 0, 0, 0.85);
+    line-height: 130%;
+    z-index: 1;
+  }
+
+  &__note {
+    grid-area: note;
+    height: 23px;
+    font-size: 18px;
+    color: rgba(0, 0, 0, 0.45);
+    z-index: 1;
+  }
+
+  &__statistic {
+    display: flex;
+    grid-area: stat;
+    z-index: 1;
+  }
+
+  &__button {
+    grid-area: b;
+    z-index: 1;
+  }
+
+  .hexagon {
+    position: absolute;
+  }
+}
