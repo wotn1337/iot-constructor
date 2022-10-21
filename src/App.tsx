@@ -1,26 +1,24 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { Layout } from './components';
+import { MainPage } from './pages';
+import { PageRoutes } from './routes';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
-
-export default App;
+export const App = () => {
+	return (
+		<BrowserRouter>
+			<Routes>
+				<Route element={<Layout />}>
+					<Route path={PageRoutes.MAIN} element={<MainPage />} />
+					<Route path={PageRoutes.CONSTRUCTOR} element={<h1>Конструктор</h1>} />
+					<Route path={PageRoutes.PROFESSIONS} element={<h1>Профессии</h1>} />
+					<Route path={PageRoutes.EMPLOYEES} element={<h1>Сотрудники</h1>} />
+					<Route
+						path={PageRoutes.PARTNERS}
+						element={<h1>Партнеры (Без СБЕРа, пусть логотип сначала в порядок приведут)</h1>}
+					/>
+				</Route>
+			</Routes>
+		</BrowserRouter>
+	);
+};

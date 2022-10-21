@@ -1,0 +1,13 @@
+@import '../../../../global';
+
+.navbar {
+  border: none;
+  min-width: calc(1200px - 100px);
+  display: flex;
+  justify-content: flex-end;
+
+  .ant-menu-item:hover a, .ant-menu-item-selected a {
+    color: $blue !important;
+    border-bottom-color: $darkBlue;
+  }
+}
