@@ -20,7 +20,7 @@ export const LabelComponent: React.FC<LabelComponentProps> = ({ align, image }) 
 		/>
 	);
 	return (
-		<Space style={{ gap: '12px' }}>
+		<Space size={12}>
 			{align === 'right' ? (
 				<>
 					{line}
