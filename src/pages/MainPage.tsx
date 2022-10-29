@@ -7,7 +7,7 @@ type MainPageProps = {};
 
 export const MainPage: React.FC<MainPageProps> = () => {
 	return (
-		<section style={{ paddingBottom: 128 }}>
+		<section>
 			<Intro />
 			<About />
 			<Advantages />

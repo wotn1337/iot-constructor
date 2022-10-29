@@ -4,6 +4,7 @@ import s from './Layout.module.scss';
 import { Navbar } from './Header/Navbar/Navbar';
 import { NavLink, Outlet } from 'react-router-dom';
 import { PageRoutes } from '../../routes';
+import { FooterBlock } from './Footer/Footer';
 
 const { Header } = AntdLayout;
 
@@ -44,6 +45,7 @@ export const Layout: React.FC<LayoutProps> = () => {
 				</Row>
 			</Header>
 			<Outlet />
+			<FooterBlock />
 		</AntdLayout>
 	);
 };
