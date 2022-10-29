@@ -9,15 +9,17 @@ type ButtonProps = {
 	icon?: React.ReactNode;
 	disabled?: boolean;
 	style?: React.CSSProperties;
+	href?: string;
 };
 
-export const Button: React.FC<ButtonProps> = ({ text, onClick, type = 'default', disabled = false, icon, style }) => {
+export const Button: React.FC<ButtonProps> = ({ text, onClick, type = 'default', disabled = false, href, icon, style }) => {
 	return (
 		<AntdButton
 			onClick={onClick}
 			disabled={disabled}
 			icon={icon}
 			className={`${s.button} ${type === 'primary' ? s.primary : s.default}`}
+			href={href}
 			style={{ ...style }}
 		>
 			{text}
