@@ -6,15 +6,17 @@ type ButtonProps = {
 	text: string;
 	type?: 'primary' | 'default';
 	onClick?: React.MouseEventHandler<HTMLElement>;
+	icon?: React.ReactNode;
 	disabled?: boolean;
 	style?: React.CSSProperties;
 };
 
-export const Button: React.FC<ButtonProps> = ({ text, onClick, type = 'default', disabled = false, style }) => {
+export const Button: React.FC<ButtonProps> = ({ text, onClick, type = 'default', disabled = false, icon, style }) => {
 	return (
 		<AntdButton
 			onClick={onClick}
 			disabled={disabled}
+			icon={icon}
 			className={`${s.button} ${type === 'primary' ? s.primary : s.default}`}
 			style={{ ...style }}
 		>
