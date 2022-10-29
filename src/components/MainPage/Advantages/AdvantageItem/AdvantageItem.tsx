@@ -17,8 +17,8 @@ export const AdvantageItem: React.FC<AdvantageItemProps> = ({ title, description
 			<Paragraph className={s.advantage__description}>{description}</Paragraph>
 			{list && (
 				<div className={s.advantage__marker}>
-					{list.map((item) => (
-						<Space>
+					{list.map((item, index) => (
+						<Space key={index}>
 							<div className={s.advantage__marker__dot} />
 							<div className={s.advantage__marker__text}>{item}</div>
 						</Space>
