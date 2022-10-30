@@ -2,8 +2,8 @@ import React from 'react';
 import { Layout as AntdLayout } from 'antd';
 import s from './Layout.module.scss';
 import { Outlet } from 'react-router-dom';
-import { FooterBlock } from './Footer/Footer';
 import { Header } from './Header/Header';
+import { Footer } from './Footer/Footer';
 
 const { Content } = AntdLayout;
 
@@ -16,7 +16,7 @@ export const Layout: React.FC<LayoutProps> = () => {
 			<Content className={s.content}>
 				<Outlet />
 			</Content>
-			<FooterBlock />
+			<Footer />
 		</AntdLayout>
 	);
 };

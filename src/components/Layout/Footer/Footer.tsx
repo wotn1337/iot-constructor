@@ -5,7 +5,7 @@ import { PageRoutes } from '../../../routes';
 import { TelegramIcon, VKIcon } from '../../../images';
 import './Footer.scss';
 
-const { Footer } = Layout;
+const { Footer: AntdFooter } = Layout;
 
 const linkStyles = {
 	color: 'rgba(0, 0, 0, 0.45)',
@@ -16,9 +16,10 @@ const linkStyles = {
 	border: 'none',
 };
 
-export const FooterBlock = () => {
+
+export const Footer = ({ ...props }) => {
 	return (
-		<Footer className="footer">
+		<AntdFooter className="footer">
 			<Row gutter={168} justify="center" style={{ margin: 0 }}>
 				<Col className="footer__brand">
 					<Space direction="vertical" size="large">
@@ -40,10 +41,30 @@ export const FooterBlock = () => {
 					<Space direction="vertical" size="large">
 						<p className="text_primary">Ссылки</p>
 						<Space direction="vertical" size="middle">
-							<Link text="Конструктор" href={PageRoutes.CONSTRUCTOR} key={0} style={linkStyles} />
-							<Link text="Профессии" href={PageRoutes.PROFESSIONS} key={1} style={linkStyles} />
-							<Link text="Сотрудники" href={PageRoutes.EMPLOYEES} key={2} style={linkStyles} />
-							<Link text="Партнёры" href={PageRoutes.PARTNERS} key={3} style={linkStyles} />
+							<Link
+								text="Конструктор"
+								href={PageRoutes.CONSTRUCTOR}
+								key={PageRoutes.CONSTRUCTOR}
+								style={linkStyles}
+							/>
+							<Link
+								text="Профессии"
+								href={PageRoutes.PROFESSIONS}
+								key={PageRoutes.PROFESSIONS}
+								style={linkStyles}
+							/>
+							<Link
+								text="Сотрудники"
+								href={PageRoutes.EMPLOYEES}
+								key={PageRoutes.EMPLOYEES}
+								style={linkStyles}
+							/>
+							<Link
+								text="Партнёры"
+								href={PageRoutes.PARTNERS}
+								key={PageRoutes.PARTNERS}
+								style={linkStyles}
+							/>
 						</Space>
 					</Space>
 				</Col>
@@ -67,6 +88,6 @@ export const FooterBlock = () => {
 					</Space>
 				</Col>
 			</Row>
-		</Footer>
+		</AntdFooter>
 	);
 };
