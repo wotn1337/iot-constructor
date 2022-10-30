@@ -16,7 +16,7 @@ export const Link: React.FC<LinkProps> = ({ text, onClick, disabled, style, href
 		<AntdButton
 			type="link"
 			className="link"
-			href={href}
+			href={'#/' + href}
 			onClick={onClick}
 			disabled={disabled}
 			icon={icon}

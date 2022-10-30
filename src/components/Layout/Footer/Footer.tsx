@@ -16,8 +16,7 @@ const linkStyles = {
 	border: 'none',
 };
 
-
-export const Footer = ({ ...props }) => {
+export const Footer = () => {
 	return (
 		<AntdFooter className="footer">
 			<Row gutter={168} justify="center" style={{ margin: 0 }}>
@@ -74,13 +73,13 @@ export const Footer = ({ ...props }) => {
 						<Space direction="vertical" size="middle">
 							<Link
 								text="Вконтакте"
-								href="#"
+								href=""
 								icon={<img className="footer__social__icon" src={VKIcon} alt="icon" />}
 								style={linkStyles}
 							/>
 							<Link
 								text="Telegram"
-								href="#"
+								href=""
 								icon={<img className="footer__social__icon" src={TelegramIcon} alt="icon" />}
 								style={linkStyles}
 							/>
