@@ -1,18 +1,16 @@
 import React from 'react';
 import { Image, Space } from 'antd';
+import { Partner } from '../../../../common/types';
 
 type PartnersListProps = {
-	images: {
-		id: string | number;
-		src: string;
-	}[];
+	partners: Partner[];
 };
 
-export const PartnersList: React.FC<PartnersListProps> = ({ images }) => {
+export const PartnersList: React.FC<PartnersListProps> = ({ partners }) => {
 	return (
 		<Space size={66}>
-			{images.map((image) => (
-				<Image src={image.src} key={image.id} preview={false} height={80} />
+			{partners.map((p) => (
+				<Image src={p.logo} key={p.id} preview={false} height={80} />
 			))}
 		</Space>
 	);

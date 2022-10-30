@@ -2,28 +2,9 @@
 
 .layout {
     min-height: 100vh;
-}
 
-.header {
-    height: 100px;
-    background-color: #FFFFFF;
-    padding: 0;
-}
-
-.logo {
-    width: 67px;
-    height: 67px;
-    background-color: $darkBlue;
-}
-
-.header__inner {
-    height: 100%;
-    width: 1200px;
-    margin: auto;
-}
-
-.menu {
-    width: 350px;
-    height: 30px;
-    background-color: #D9D9D9;
+    .content {
+        display: flex;
+        flex-direction: column;
+    }
 }
