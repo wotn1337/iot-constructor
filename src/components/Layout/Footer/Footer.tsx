@@ -16,10 +16,10 @@ const linkStyles = {
 	border: 'none',
 };
 
-export const FooterBlock = ({ ...props }) => {
+export const FooterBlock = () => {
 	return (
 		<Footer className="footer">
-			<Row gutter={168} justify="center">
+			<Row gutter={168} justify="center" style={{ margin: 0 }}>
 				<Col className="footer__brand">
 					<Space direction="vertical" size="large">
 						<div className="footer__brand__logo" />

@@ -1,0 +1,19 @@
+@import "../../../global";
+
+.header {
+  height: 100px;
+  background-color: #FFFFFF;
+  padding: 0;
+
+  .logo {
+    width: 67px;
+    height: 67px;
+    background-color: $darkBlue;
+  }
+
+  .header__inner {
+    height: 100%;
+    width: 1200px;
+    margin: auto;
+  }
+}

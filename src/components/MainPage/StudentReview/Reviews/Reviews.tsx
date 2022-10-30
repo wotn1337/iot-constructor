@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import { ReviewCard, ReviewCardProps } from './ReviewCard/ReviewCard';
+import { ReviewCard } from './ReviewCard/ReviewCard';
 import { Carousel } from 'react-responsive-carousel';
 import { Pagination, Space } from 'antd';
 import s from './Reviews.module.scss';
+import type { StudentReview } from '../../../../common/types';
 
 type ReviewsProps = {
-	reviews: ReviewCardProps[];
+	reviews: StudentReview[];
 };
 
 export const Reviews: React.FC<ReviewsProps> = ({ reviews }) => {
@@ -40,13 +41,15 @@ export const Reviews: React.FC<ReviewsProps> = ({ reviews }) => {
 			>
 				{reviewPairs}
 			</Carousel>
-			<Pagination
-				className={s.pagination}
-				size="small"
-				total={Math.ceil(reviews.length / 2)}
-				pageSize={1}
-				onChange={(page) => setCurrentPage(page - 1)}
-			/>
+			{reviews.length > 2 && (
+				<Pagination
+					className={s.pagination}
+					size="small"
+					total={Math.ceil(reviews.length / 2)}
+					pageSize={1}
+					onChange={(page) => setCurrentPage(page - 1)}
+				/>
+			)}
 		</>
 	);
 };
