@@ -1,12 +1,12 @@
 import React from 'react';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { HashRouter, Route, Routes } from 'react-router-dom';
 import { Layout } from './components';
 import { MainPage } from './pages';
 import { PageRoutes } from './routes';
 
 export const App = () => {
 	return (
-		<BrowserRouter>
+		<HashRouter>
 			<Routes>
 				<Route element={<Layout />}>
 					<Route path={PageRoutes.MAIN} element={<MainPage />} />
@@ -16,6 +16,6 @@ export const App = () => {
 					<Route path={PageRoutes.PARTNERS} element={<h1>Партнеры</h1>} />
 				</Route>
 			</Routes>
-		</BrowserRouter>
+		</HashRouter>
 	);
 };
