@@ -16,3 +16,17 @@ export type StudentReview = {
 	educational_direction: string | null;
 	year_of_issue: number | null;
 };
+
+export type Contacts = {
+	id: Id;
+	address: string;
+	phone_number: string;
+	email: string;
+	institute: string;
+};
+
+export type SocialNetworks = {
+	name: string;
+	url: string;
+	icon: string;
+};

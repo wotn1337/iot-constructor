@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button as AntdButton } from 'antd';
+import { Button as AntdButton, ButtonProps } from 'antd';
 import './Link.scss';
 
 type LinkProps = {
@@ -9,9 +9,10 @@ type LinkProps = {
 	disabled?: boolean;
 	icon?: React.ReactNode;
 	style?: React.CSSProperties;
+	target?: ButtonProps['target'];
 };
 
-export const Link: React.FC<LinkProps> = ({ text, onClick, disabled, style, href, icon }) => {
+export const Link: React.FC<LinkProps> = ({ text, onClick, disabled, style, href, icon, target = '_self' }) => {
 	return (
 		<AntdButton
 			type="link"
@@ -21,6 +22,7 @@ export const Link: React.FC<LinkProps> = ({ text, onClick, disabled, style, href
 			disabled={disabled}
 			icon={icon}
 			style={{ ...style }}
+			target={target}
 		>
 			{text}
 		</AntdButton>
