@@ -39,7 +39,6 @@ export const admissionCommitteeContactsAPI = {
 export const socialNetworksAPI = {
 	getSocialNetworks: async () => {
 		const res = await instance.get<SocialNetworksResponse>('socialNetworksBlock');
-		console.log(res);
 		return res.data.social_networks_block.data;
 	},
 };

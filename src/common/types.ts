@@ -25,7 +25,7 @@ export type Contacts = {
 	institute: string;
 };
 
-export type SocialNetworks = {
+export type SocialNetwork = {
 	name: string;
 	url: string;
 	icon: string;

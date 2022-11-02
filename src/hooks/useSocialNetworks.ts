@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
-import { SocialNetworks } from '../common/types';
+import { SocialNetwork } from '../common/types';
 import { socialNetworksAPI } from '../API/API';
 import { message } from 'antd';
 
 export const useSocialNetworks = () => {
-	const [socialNetworks, setSocialNetworks] = useState<SocialNetworks[]>([]);
+	const [socialNetworks, setSocialNetworks] = useState<SocialNetwork[]>([]);
 	const [loading, setLoading] = useState(true);
 
 	// get social networks
