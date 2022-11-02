@@ -21,7 +21,7 @@ const linkStyles = {
 export const Footer = ({ ...props }) => {
 	const { contacts, loading: contactsLoading } = useContacts();
 	const { socialNetworks, loading: socialNetworksLoading } = useSocialNetworks();
-
+  
 	return (
 		<AntdFooter className="footer">
 			<Loader loading={contactsLoading || socialNetworksLoading} size="default">
