@@ -12,7 +12,6 @@ export const MainPage: React.FC<MainPageProps> = () => {
 	const { partners, loading: partnersLoading } = usePartners();
 	const { reviews, loading: studentReviewsLoading } = useStudentReviews();
 	const loading = partnersLoading || studentReviewsLoading;
-	console.log(reviews);
 
 	return (
 		<Loader loading={loading} size="large">
