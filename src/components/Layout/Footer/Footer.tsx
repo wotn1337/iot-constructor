@@ -18,10 +18,10 @@ const linkStyles = {
 	border: 'none',
 };
 
-export const Footer = ({ ...props }) => {
+export const Footer = () => {
 	const { contacts, loading: contactsLoading } = useContacts();
 	const { socialNetworks, loading: socialNetworksLoading } = useSocialNetworks();
-  
+
 	return (
 		<AntdFooter className="footer">
 			<Loader loading={contactsLoading || socialNetworksLoading} size="default">
@@ -79,6 +79,7 @@ export const Footer = ({ ...props }) => {
 							<Space direction="vertical" size="middle">
 								{socialNetworks.map((item) => (
 									<Link
+										key={item.name}
 										text={item.name}
 										href={item.url}
 										icon={<img className="footer__social__icon" src={item.icon} alt="icon" />}

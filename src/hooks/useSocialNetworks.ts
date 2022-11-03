@@ -17,6 +17,6 @@ export const useSocialNetworks = () => {
 			.catch(() => message.error('Не удалось получить список социальных сетей!'))
 			.finally(() => setLoading(false));
 	}, []);
-	console.log(socialNetworks);
+
 	return { socialNetworks, loading };
 };
