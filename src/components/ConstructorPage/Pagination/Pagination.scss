@@ -1,0 +1,43 @@
+@import '../../../constants';
+
+.ConstructorPage_wrapper__OtUet {
+  ul.pagination {
+    width: fit-content;
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    margin: 0 auto;
+
+    li.ant-pagination-prev, li.ant-pagination-next {
+      button.ant-pagination-item-link {
+        span.anticon {
+          font-size: 24px;
+        }
+      }
+    }
+
+    li.ant-pagination-item {
+      width: 83px;
+      height: 47px;
+      position: relative;
+      background-color: white !important;
+      border: 1px solid $gray !important;
+      border-radius: 2px;
+      box-sizing: border-box;
+
+      a {
+        font-size: 20px;
+        font-family: $TekturMedium;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+
+      }
+    }
+
+    li.ant-pagination-item-active {
+      border-color: #1890FF !important;
+    }
+  }
+}

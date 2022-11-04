@@ -1,5 +1,6 @@
 import React from 'react';
 import { Pagination as AntdPagination } from 'antd';
+import './Pagination.scss';
 
 type PaginationProps = {
 	total: number;
@@ -8,5 +9,14 @@ type PaginationProps = {
 };
 
 export const Pagination: React.FC<PaginationProps> = ({ total, current, onChange }) => {
-	return <AntdPagination total={total} pageSize={1} current={current + 1} onChange={(page) => onChange(page - 1)} />;
+	return (
+		<AntdPagination
+			size="small"
+			total={total}
+			pageSize={1}
+			current={current + 1}
+			onChange={(page) => onChange(page - 1)}
+			className="pagination"
+		/>
+	);
 };
