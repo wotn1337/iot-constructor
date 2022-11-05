@@ -1,0 +1,40 @@
+@import "../../../../constants";
+
+.card {
+  background-color: white;
+  min-height: 150px;
+  max-width: 400px;
+  padding: 0 33px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 22px;
+  border: 1px solid #1890FF;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+  border-radius: 2px;
+  transition: 300ms;
+
+  &__title {
+    font-family: $NotoSans;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 130%;
+    text-align: center;
+    color: rgba(0, 0, 0, 0.85);
+    transition: 300ms;
+  }
+
+  &:hover, &.selected {
+    cursor: pointer;
+    border-color: $orange;
+
+    .card__icon {
+      filter: invert(54%) sepia(100%) saturate(500%) hue-rotate(346deg) brightness(97%) contrast(103%);
+    }
+
+    .card__title {
+      color: $orange
+    }
+  }
+}

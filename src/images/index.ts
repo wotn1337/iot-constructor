@@ -6,5 +6,18 @@ import QrImage from './main_page/qr-image.svg';
 import RobotRectangle from './users/robot_rectangle.svg';
 import RobotTriangle from './users/robot_triangle.svg';
 import RobotOval from './users/robot_oval.svg';
+import Document from './constructor/document.svg';
+import LightBlue from './constructor/light_blue.svg';
 
-export { IntroImage, ElectiveIcon, LevelIcon, TechnologyIcon, QrImage, RobotTriangle, RobotRectangle, RobotOval };
+export {
+	IntroImage,
+	ElectiveIcon,
+	LevelIcon,
+	TechnologyIcon,
+	QrImage,
+	RobotTriangle,
+	RobotRectangle,
+	RobotOval,
+	Document,
+	LightBlue,
+};

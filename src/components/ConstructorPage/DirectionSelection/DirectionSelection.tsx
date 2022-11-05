@@ -37,16 +37,20 @@ const DIRECTIONS: Direction[] = [
 ];
 
 type ChoiceInstituteProps = {
-	selected: Id | undefined;
+	selectedDirection: Id | undefined;
 	setSelected: React.Dispatch<React.SetStateAction<Id | undefined>>;
 };
 
-export const DirectionSelection: React.FC<ChoiceInstituteProps> = ({ selected, setSelected }) => {
+export const DirectionSelection: React.FC<ChoiceInstituteProps> = ({ selectedDirection, setSelected }) => {
 	return (
 		<Row gutter={[20, 32]}>
 			{DIRECTIONS.map((dir) => (
 				<Col key={dir.id} span={12}>
-					<DirectionCard {...dir} selected={selected === dir.id} onClick={() => setSelected(dir.id)} />
+					<DirectionCard
+						{...dir}
+						selected={selectedDirection === dir.id}
+						onClick={() => setSelected(dir.id)}
+					/>
 				</Col>
 			))}
 		</Row>
