@@ -1,9 +1,9 @@
 import { Avatar, Badge, Card, Typography } from 'antd';
 import React from 'react';
 import './ReviewCard.scss';
-import { UserOutlined } from '@ant-design/icons';
 import type { StudentReview } from '../../../../../common/types';
 import { getBadge } from '../../utils';
+import { getAvatarPlaceholder } from '../../../../../common/utils';
 
 const { Text, Paragraph } = Typography;
 
@@ -22,7 +22,7 @@ export const ReviewCard: React.FC<ReviewCardProps> = ({
 	return (
 		<Badge.Ribbon text={badge} color="#FA8C16">
 			<Card className="card">
-				<Avatar size={90} icon={<UserOutlined />} src={photo} className="card__avatar" />
+				<Avatar size={90} icon={<img src={getAvatarPlaceholder()} alt=''/>} src={photo} className="card__avatar" />
 				<Text className="card__name">{author}</Text>
 				<Paragraph className="card__review">{text}</Paragraph>
 			</Card>

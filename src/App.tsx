@@ -1,7 +1,7 @@
 import React from 'react';
 import { HashRouter, Route, Routes } from 'react-router-dom';
 import { Layout } from './components';
-import { MainPage } from './pages';
+import { ConstructorPage, MainPage } from './pages';
 import { ROUTES } from './routes';
 
 export const App = () => {

@@ -1,4 +1,4 @@
-@import '../../../../../global';
+@import '../../../../../constants';
 
 .ant-ribbon-wrapper {
   .ant-ribbon {
@@ -46,7 +46,7 @@
     }
 
     &::-webkit-scrollbar-thumb {
-      background-color: $lightBlue;
+      background-color: $extraLightBlue;
       border-radius: 2px;
     }
   }
