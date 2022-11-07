@@ -1,11 +1,14 @@
 @import "../../../constants";
 
 .intro {
-  padding: 115px 0 75px;
+  padding: 95px 0 75px;
   box-sizing: border-box;
-  background: linear-gradient(-15.32deg, #40A9FF 10.83%, #0084EF 30.26%, #0267BA 48.72%);
+  background-image: url("../../../images/main_page/intro_all_hexagons.svg");
+  background-position: center 30%;
+  background-repeat: no-repeat;
+  background-size: cover;
   height: 630px;
-  clip-path: polygon(0 0, 100% 0, 100% 50%, 84% 100%, 12% 85%, 0 25%);
+  clip-path: polygon(0 0, 100% 0, 100% 50%, 84% 100%, 12% 85%, 0 35%);
   margin: 0 !important;
   width: 100%;
 
@@ -15,12 +18,13 @@
 
   &__info {
     color: #FFFFFF;
-    padding-top: 53px;
     padding-left: 0 !important;
+    padding-top: 35px;
 
     .info__title {
       margin-bottom: 32px;
       font-family: $TekturMedium;
+      width: 500px;
     }
 
     .info__text {
