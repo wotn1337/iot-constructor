@@ -8,7 +8,9 @@
 
 .card {
   width: 500px;
-  height: 310px;
+  .ant-card-body {
+    height: 325px;
+  }
 
   .ant-card-body {
     padding: 32px 24px;
@@ -19,21 +21,28 @@
     margin: 0 auto;
   }
 
-  &__name {
+  &__info {
+    margin: 8px 16px;
     font-style: normal;
     font-weight: 400;
-    font-size: 12px;
     line-height: 22px;
     text-align: center;
-    display: block;
-    color: rgba(0, 0, 0, 0.85);
-    margin: 8px 16px;
+
+    .card__name {
+      font-size: 12px;
+      color: rgba(0, 0, 0, 0.85);
+    }
+
+    .card__direction {
+      font-size: 10px;
+      color: $darkGray;
+    }
   }
 
   &__review {
     text-align: left;
     margin: 0;
-    height: 130px;
+    height: 115px;
     overflow-y: auto;
 
     &::-webkit-scrollbar {
