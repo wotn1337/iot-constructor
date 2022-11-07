@@ -1,4 +1,4 @@
-import IntroImage from './main_page/introImage.svg';
+import IntroImage from './main_page/intro_image_2.svg';
 import ElectiveIcon from './main_page/elective.svg';
 import LevelIcon from './main_page/level.svg';
 import TechnologyIcon from './main_page/technology.svg';
@@ -24,8 +24,8 @@ export {
 	RobotOval,
 	Document,
 	LightBlue,
-  LogoIrit,
-  LocationIcon,
-  MailIcon,
-  PhoneIcon
+	LogoIrit,
+	LocationIcon,
+	MailIcon,
+	PhoneIcon,
 };

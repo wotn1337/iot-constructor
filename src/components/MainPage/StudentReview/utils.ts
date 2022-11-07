@@ -9,10 +9,6 @@ export const getBadge = (
 		return `${issueYear} год выпуска`;
 	}
 
-	if (educationalDirection) {
-		return educationalDirection;
-	}
-
 	if (course) {
 		return `${course} курс`;
 	}

@@ -1,4 +1,4 @@
-import { Avatar, Badge, Card, Typography } from 'antd';
+import { Avatar, Badge, Card, Space, Typography } from 'antd';
 import React from 'react';
 import './ReviewCard.scss';
 import type { StudentReview } from '../../../../../common/types';
@@ -22,8 +22,16 @@ export const ReviewCard: React.FC<ReviewCardProps> = ({
 	return (
 		<Badge.Ribbon text={badge} color="#FA8C16">
 			<Card className="card">
-				<Avatar size={90} icon={<img src={getAvatarPlaceholder()} alt=''/>} src={photo} className="card__avatar" />
-				<Text className="card__name">{author}</Text>
+				<Avatar
+					size={90}
+					icon={<img src={getAvatarPlaceholder()} alt="" />}
+					src={photo}
+					className="card__avatar"
+				/>
+				<Space className="card__info" size={0} direction="vertical">
+					<Text className="card__name">{author}</Text>
+					<Text className="card__direction">{educational_direction}</Text>
+				</Space>
 				<Paragraph className="card__review">{text}</Paragraph>
 			</Card>
 		</Badge.Ribbon>

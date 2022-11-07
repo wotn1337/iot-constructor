@@ -13,7 +13,7 @@ export const useStudentReviews = () => {
 		const { getReviews } = studentReviewsAPI;
 
 		getReviews()
-			.then((data) => setReviews(data))
+			.then((data) => setReviews(data.reviews))
 			.catch(() => message.error('Не удалось получить отзывы студентов :('))
 			.finally(() => setLoading(false));
 	}, []);

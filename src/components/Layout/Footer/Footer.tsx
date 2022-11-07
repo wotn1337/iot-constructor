@@ -33,18 +33,29 @@ export const Footer = () => {
 								<IconText
 									icon={LocationIcon}
 									textElement={<span className="text_default">{contacts?.address}</span>}
+									key={contacts?.address}
 								/>,
 								<IconText
 									icon={PhoneIcon}
-									textElement={<span className="text_default">{contacts?.phone_number}</span>}
+									textElement={
+										<a className="text_default" href={`tel:${contacts?.phone_number}`}>
+											{contacts?.phone_number}
+										</a>
+									}
+									key={contacts?.phone_number}
 								/>,
 								<IconText
 									icon={MailIcon}
-									textElement={<span className="text_default">{contacts?.email}</span>}
+									textElement={
+										<a className="text_default" href={`mailto:${contacts?.email}`}>
+											{contacts?.email}
+										</a>
+									}
+									key={contacts?.email}
 								/>,
 							]}
 							titleGap={20}
-							itemsGap={20}
+							itemsGap={16}
 						/>
 					</Col>
 					<Col className="footer__navigation">
@@ -69,7 +80,7 @@ export const Footer = () => {
 									key={sn.name}
 									icon={sn.icon}
 									textElement={
-										<a href={sn.url} className="text_default" target="_blank">
+										<a href={sn.url} className="text_default" target="_blank" rel="noreferrer">
 											{sn.name}
 										</a>
 									}

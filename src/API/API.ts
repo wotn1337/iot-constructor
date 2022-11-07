@@ -25,7 +25,7 @@ export const partnersAPI = {
 export const studentReviewsAPI = {
 	getReviews: async () => {
 		const res = await instance.get<StudentReviewResponse>('reviews');
-		return res.data.reviews;
+		return res.data;
 	},
 };
 

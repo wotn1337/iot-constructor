@@ -10,8 +10,8 @@ type IntroProps = {};
 
 export const Intro: React.FC<IntroProps> = () => {
 	return (
-		<Row className={s.intro} gutter={168} justify="center" align="top">
-			<Col className={s.intro__info} flex="684px">
+		<Row className={s.intro} gutter={100} justify="center" align="top">
+			<Col className={s.intro__info} flex="625px">
 				<h1 className={s.info__title}>Современный формат обучения</h1>
 				<Paragraph className={s.info__text}>
 					Система индивидуальных образовательных траекторий позволяет сделать обучение в университете
