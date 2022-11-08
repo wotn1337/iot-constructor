@@ -1,4 +1,4 @@
-import IntroImage from './main_page/intro_image_2.svg';
+import IntroImage from './main_page/intro_image.svg';
 import ElectiveIcon from './main_page/elective.svg';
 import LevelIcon from './main_page/level.svg';
 import TechnologyIcon from './main_page/technology.svg';

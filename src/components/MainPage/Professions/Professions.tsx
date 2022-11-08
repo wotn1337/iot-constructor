@@ -9,7 +9,7 @@ export const Professions = () => {
 		<section className={s.professionWrapper}>
 			<div className={s.profession}>
 				<h3 className={s.profession__title}>Востребованные профессии доступнее чем кажется</h3>
-				<img className={s.profession__image} src={IntroImage} alt='professions'/>
+				<img className={s.profession__image} src={IntroImage} alt="professions" width={440} />
 				<p className={s.profession__description}>
 					В современном мире существуют сотни раличных специальностей в сфере IT, от дизайнеров до инженеров
 					по машинному обучению. Многие из востребованных профессий вы сможете освоить в ИРИТ-РТФ благодаря

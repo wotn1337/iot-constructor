@@ -20,7 +20,7 @@ export const Intro: React.FC<IntroProps> = () => {
 				<Button text="Создать свою траекторию" type="primary" style={{ width: 289 }} />
 			</Col>
 			<Col className={s.intro__image}>
-				<Image src={IntroImage} preview={false} />
+				<Image src={IntroImage} preview={false} width={457} />
 			</Col>
 		</Row>
 	);
