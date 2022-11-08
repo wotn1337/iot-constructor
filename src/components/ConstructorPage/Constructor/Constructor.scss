@@ -1,0 +1,32 @@
+@import "../../../constants";
+
+.constructor {
+  &__middle {
+    margin: 32px 0;
+
+    .score {
+      width: 392px;
+      height: 608px;
+
+      &__title {
+        display: flex;
+        align-items: center;
+        height: 45px;
+        font-family: $TekturMedium;
+        font-size: 18px;
+        line-height: 22px;
+        margin-bottom: 24px;
+      }
+    }
+  }
+
+  .ant-progress-show-info .ant-progress-outer {
+    margin-right: 0;
+    padding-right: 0;
+  }
+
+  .ant-progress-text {
+    display: none;
+  }
+
+}
