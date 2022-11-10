@@ -1,7 +1,9 @@
 import axios from 'axios';
 import {
 	AdmissionCommitteeContactsResponse,
+	EducationalModulesResponse,
 	PartnersResponse,
+	ProfessionalTrajectories,
 	SocialNetworksResponse,
 	StudentReviewResponse,
 } from './types';
@@ -40,5 +42,21 @@ export const socialNetworksAPI = {
 	getSocialNetworks: async () => {
 		const res = await instance.get<SocialNetworksResponse>('socialNetworksBlock');
 		return res.data.social_networks_block.data;
+	},
+};
+
+export const educationalModulesAPI = {
+	getEducationalModules: async (id: number, semester: number) => {
+		const res = await instance.get<EducationalModulesResponse>(
+			`educationalDirections/${id}/educationalModules?semester=${semester}`
+		);
+		return res.data.educational_modules;
+	},
+};
+
+export const professionalTrajectoriesAPI = {
+	getProfessionalTrajectories: async () => {
+		const res = await instance.get<ProfessionalTrajectories>('professionalTrajectories');
+		return res.data.professional_trajectories;
 	},
 };

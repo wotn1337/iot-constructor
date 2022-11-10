@@ -23,6 +23,7 @@
     &:disabled {
       background: #F5F5F5;
       color: rgba(0, 0, 0, 0.25);
+      cursor: not-allowed;
     }
 }
 

@@ -2,82 +2,40 @@ import React from 'react';
 import { DragDropContext } from 'react-beautiful-dnd';
 import { Row } from 'antd';
 import { Column } from './Column/Column';
+import { EducationModule } from '../../../../common/types';
+import { ColumnType } from './types';
 
-type TrackPickerProps = {};
-type Tag = {
-	id: string;
-	name: string;
-};
-
-export type CourseType = {
-	id: string;
-	name: string;
-	tags?: Tag[];
+type TrackPickerProps = {
+	modules: EducationModule[];
 };
 
 const onDragEnd = () => {
 	return;
 };
 
-export type ColumnType = {
-	name: string;
-	items: CourseType[];
-	extra: boolean;
-};
-
-export const TrackPicker: React.FC<TrackPickerProps> = ({ ...props }) => {
+export const TrackPicker: React.FC<TrackPickerProps> = ({ modules }) => {
 	const columns: ColumnType[] = [
 		{
+			id: 0,
 			name: 'Выберите курсы',
-			items: [
-				{
-					id: '1',
-					name: 'js',
-					tags: [
-						{ id: '0', name: 'web' },
-						{ id: '1', name: 'gameGev' },
-					],
-				},
-				{
-					id: '2',
-					name: 'python',
-				},
-				{
-					id: '3',
-					name: 'java',
-				},
-				{
-					id: '4',
-					name: 'js',
-					tags: [{ id: '0', name: 'web' }],
-				},
-				{
-					id: '5',
-					name: 'python',
-				},
-				{
-					id: '6',
-					name: 'java',
-				},
-				{
-					id: '7',
-					name: 'js',
-					tags: [{ id: '0', name: 'web' }],
-				},
-			],
+			items: modules,
 			extra: true,
 		},
 		{
+			id: 1,
 			name: 'Мои курсы',
-			items: [],
+			items: modules?.map((module) => ({
+				...module,
+				disciplines: module.is_spec ? module.disciplines : [],
+			})),
 			extra: false,
 		},
 	];
 	return (
 		<Row gutter={20}>
 			<DragDropContext onDragEnd={onDragEnd}>
-				{Object.entries(columns).map(([columnId, column], index) => (
-					<Column columnId={columnId} column={column} key={index} />
+				{columns.map((item) => (
+					<Column column={item} key={item.id} />
 				))}
 			</DragDropContext>
 		</Row>

@@ -30,3 +30,35 @@ export type SocialNetwork = {
 	url: string;
 	icon: string;
 };
+
+export type Course = {
+	id: Id;
+	title: string;
+	description: string;
+	limit: number;
+	realization: string;
+	partner?: Partner;
+};
+
+export type Trajectory = {
+	id: Id;
+	title: string;
+	description: string;
+	color: string;
+};
+
+export type Discipline = {
+	id: Id;
+	title: string;
+	description: string;
+	courses: Course[];
+	professional_trajectories?: Trajectory[];
+};
+
+export type EducationModule = {
+	id: Id;
+	title: string;
+	choice_limit: number;
+	is_spec: boolean;
+	disciplines: Discipline[];
+};
