@@ -2,8 +2,8 @@ import React from 'react';
 import { Col, Layout, Row, Space } from 'antd';
 import { PageRoutes } from '../../../routes';
 import './Footer.scss';
-import { useContacts } from '../../../hooks/useContacts';
-import { useSocialNetworks } from '../../../hooks/useSocialNetworks';
+import { useContactsQuery } from '../../../hooks/useContactsQuery';
+import { useSocialNetworksQuery } from '../../../hooks/useSocialNetworksQuery';
 import { Loader } from '../../common/Loader/Loader';
 import { TitledList } from '../../common/TitledList/TitledList';
 import { IconText } from '../../common/IconText/IconText';
@@ -13,12 +13,18 @@ import { NavLink } from 'react-router-dom';
 const { Footer: AntdFooter } = Layout;
 
 export const Footer = () => {
-	const { contacts, loading: contactsLoading } = useContacts();
-	const { socialNetworks, loading: socialNetworksLoading } = useSocialNetworks();
+	const { data: contacts, isFetching: contactsFetching, isLoading: contactsLoading } = useContactsQuery();
+	const {
+		data: socialNetworks,
+		isFetching: socialNetworksFetching,
+		isLoading: socialNetworksLoading,
+	} = useSocialNetworksQuery();
+
+	const loading = contactsFetching || contactsLoading || socialNetworksLoading || socialNetworksFetching;
 
 	return (
 		<AntdFooter className="footer">
-			<Loader loading={contactsLoading || socialNetworksLoading} size="default">
+			<Loader loading={loading} size="default">
 				<Row gutter={168} justify="center" style={{ margin: 0 }}>
 					<Col className="footer__brand">
 						<Space direction="vertical" size="large">
@@ -71,23 +77,25 @@ export const Footer = () => {
 						/>
 					</Col>
 					<Col className="footer__social">
-						<TitledList
-							title="Мы в социальных сетях"
-							titleGap={14}
-							itemsGap={16}
-							items={socialNetworks.map((sn) => (
-								<IconText
-									key={sn.name}
-									icon={sn.icon}
-									textElement={
-										<a href={sn.url} className="text_default" target="_blank" rel="noreferrer">
-											{sn.name}
-										</a>
-									}
-									gap={8}
-								/>
-							))}
-						/>
+						{socialNetworks && (
+							<TitledList
+								title="Мы в социальных сетях"
+								titleGap={14}
+								itemsGap={16}
+								items={socialNetworks.map((sn) => (
+									<IconText
+										key={sn.name}
+										icon={sn.icon}
+										textElement={
+											<a href={sn.url} className="text_default" target="_blank" rel="noreferrer">
+												{sn.name}
+											</a>
+										}
+										gap={8}
+									/>
+								))}
+							/>
+						)}
 					</Col>
 				</Row>
 			</Loader>
