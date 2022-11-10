@@ -4,6 +4,7 @@ import { Layout } from './components';
 import { ConstructorPage, MainPage } from './pages';
 import { ROUTES } from './routes';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { AcademicPlan } from './components/ConstructorPage/AcademicPlan/AcademicPlan';
 
 const queryClient = new QueryClient();
 
@@ -18,6 +19,7 @@ export const App = () => {
 						<Route path={ROUTES.PROFESSIONS} element={<h1>Профессии</h1>} />
 						<Route path={ROUTES.EMPLOYEES} element={<h1>Сотрудники</h1>} />
 						<Route path={ROUTES.PARTNERS} element={<h1>Партнеры</h1>} />
+						<Route path={'/academic-plan'} element={<AcademicPlan />} />
 					</Route>
 				</Routes>
 			</HashRouter>
