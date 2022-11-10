@@ -38,10 +38,10 @@ export const About: React.FC<AboutProps> = () => {
 				<h4 className={s.info__title}>Что такое индивидуальные образовательные траектории?</h4>
 				<Typography.Paragraph className={s.info__text}>
 					Это уникальный маршрут студентов Уральского федерального университета, который формируется каждый
-					семестр.
+					семестр
 					<br />
 					<br />
-					Студенты могут выбирать разные дисциплины, преподавателей, уровни сложности и технологии обучения.
+					Студенты могут выбирать разные дисциплины, преподавателей, уровни сложности и технологии обучения
 				</Typography.Paragraph>
 				<Typography.Paragraph className={s.info__text}></Typography.Paragraph>
 				<div className={s.info__list}>

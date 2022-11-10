@@ -2,11 +2,14 @@
 
 .professionWrapper {
   position: relative;
-  height: 655px;
+  height: 644px;
   margin-top: 129px;
   padding: 58px 0;
   justify-content: center;
   background-color: #FFFFFF;
+  background-image: url("../../../images/main_page/profession_background.svg");
+  background-repeat: no-repeat;
+  background-size: cover;
   box-shadow: inset 0px -4px 30px rgba(0, 0, 0, 0.15), inset 0px 4px 30px rgba(0, 0, 0, 0.15);
   overflow: hidden;
 }

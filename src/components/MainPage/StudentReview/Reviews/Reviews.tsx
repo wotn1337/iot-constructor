@@ -1,31 +1,20 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { ReviewCard } from './ReviewCard/ReviewCard';
 import { Carousel } from 'react-responsive-carousel';
 import { Pagination, Space } from 'antd';
 import s from './Reviews.module.scss';
-import type { StudentReview } from '../../../../common/types';
+import { setStudentReviewsPage, useMainPageContext } from '../../Context';
+import { useStudentReviewsQuery } from '../../../../hooks/useStudentReviewsQuery';
+import { Loader } from '../../../common/Loader/Loader';
 
-type ReviewsProps = {
-	reviews: StudentReview[];
-};
+type ReviewsProps = {};
 
-export const Reviews: React.FC<ReviewsProps> = ({ reviews }) => {
-	const [currentPage, setCurrentPage] = useState(0);
-	const reviewPairs = [];
-
-	for (let i = 0; i < reviews.length; i = i + 2) {
-		const hasPair = i <= reviews.length - 2;
-		reviewPairs.push(
-			<Space size={20} key={`${reviews[i].id}${hasPair ? '_' + reviews[i + 1].id : ''}`}>
-				{i < reviews.length && (
-					<>
-						<ReviewCard {...reviews[i]} />
-						{hasPair && <ReviewCard {...reviews[i + 1]} />}
-					</>
-				)}
-			</Space>
-		);
-	}
+export const Reviews: React.FC<ReviewsProps> = () => {
+	const {
+		state: { studentReviewsPage },
+		dispatch,
+	} = useMainPageContext();
+	const { data, isLoading, isFetching } = useStudentReviewsQuery(studentReviewsPage);
 
 	return (
 		<>
@@ -37,17 +26,25 @@ export const Reviews: React.FC<ReviewsProps> = ({ reviews }) => {
 				showIndicators={false}
 				showThumbs={false}
 				className={s.carousel}
-				selectedItem={currentPage}
+				selectedItem={studentReviewsPage - 1}
 			>
-				{reviewPairs}
+				{[
+					<Loader loading={isLoading || isFetching} style={{ height: 327 }} size="large" key="carousel">
+						<Space size={20}>
+							{data?.reviews.map((r) => (
+								<ReviewCard {...r} key={r.id} />
+							))}
+						</Space>
+					</Loader>,
+				]}
 			</Carousel>
-			{reviews.length > 2 && (
+			{data && data.meta.last_page > 2 && (
 				<Pagination
 					className={s.pagination}
 					size="small"
-					total={Math.ceil(reviews.length / 2)}
+					total={data?.meta.last_page}
 					pageSize={1}
-					onChange={(page) => setCurrentPage(page - 1)}
+					onChange={(page) => dispatch(setStudentReviewsPage(page))}
 				/>
 			)}
 		</>

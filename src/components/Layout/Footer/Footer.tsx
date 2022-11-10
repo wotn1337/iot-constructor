@@ -1,30 +1,30 @@
 import React from 'react';
 import { Col, Layout, Row, Space } from 'antd';
-import { Link } from '../../common/Link/Link';
 import { PageRoutes } from '../../../routes';
 import './Footer.scss';
-import { useContacts } from '../../../hooks/useContacts';
-import { useSocialNetworks } from '../../../hooks/useSocialNetworks';
+import { useContactsQuery } from '../../../hooks/useContactsQuery';
+import { useSocialNetworksQuery } from '../../../hooks/useSocialNetworksQuery';
 import { Loader } from '../../common/Loader/Loader';
+import { TitledList } from '../../common/TitledList/TitledList';
+import { IconText } from '../../common/IconText/IconText';
+import { LocationIcon, MailIcon, PhoneIcon } from '../../../images';
+import { NavLink } from 'react-router-dom';
 
 const { Footer: AntdFooter } = Layout;
 
-const linkStyles = {
-	color: 'rgba(0, 0, 0, 0.45)',
-	fontWeight: 400,
-	padding: 0,
-	lineHeight: '19px',
-	height: 19,
-	border: 'none',
-};
-
 export const Footer = () => {
-	const { contacts, loading: contactsLoading } = useContacts();
-	const { socialNetworks, loading: socialNetworksLoading } = useSocialNetworks();
+	const { data: contacts, isFetching: contactsFetching, isLoading: contactsLoading } = useContactsQuery();
+	const {
+		data: socialNetworks,
+		isFetching: socialNetworksFetching,
+		isLoading: socialNetworksLoading,
+	} = useSocialNetworksQuery();
+
+	const loading = contactsFetching || contactsLoading || socialNetworksLoading || socialNetworksFetching;
 
 	return (
 		<AntdFooter className="footer">
-			<Loader loading={contactsLoading || socialNetworksLoading} size="default">
+			<Loader loading={loading} size="default">
 				<Row gutter={168} justify="center" style={{ margin: 0 }}>
 					<Col className="footer__brand">
 						<Space direction="vertical" size="large">
@@ -33,62 +33,69 @@ export const Footer = () => {
 						</Space>
 					</Col>
 					<Col className="footer__contacts">
-						<Space direction="vertical" size="large">
-							<p className="text_primary">Контакты приёмной комисси</p>
-							<Space direction="vertical" size="middle">
-								<p className="text_default">{contacts?.address}</p>
-								<p className="text_default">{contacts?.phone_number}</p>
-								<p className="text_default">{contacts?.email}</p>
-							</Space>
-						</Space>
+						<TitledList
+							title="Контакты приёмной комиссии"
+							items={[
+								<IconText
+									icon={LocationIcon}
+									textElement={<span className="text_default">{contacts?.address}</span>}
+									key={contacts?.address}
+								/>,
+								<IconText
+									icon={PhoneIcon}
+									textElement={
+										<a className="text_default" href={`tel:${contacts?.phone_number}`}>
+											{contacts?.phone_number}
+										</a>
+									}
+									key={contacts?.phone_number}
+								/>,
+								<IconText
+									icon={MailIcon}
+									textElement={
+										<a className="text_default" href={`mailto:${contacts?.email}`}>
+											{contacts?.email}
+										</a>
+									}
+									key={contacts?.email}
+								/>,
+							]}
+							titleGap={20}
+							itemsGap={16}
+						/>
 					</Col>
 					<Col className="footer__navigation">
-						<Space direction="vertical" size="large">
-							<p className="text_primary">Ссылки</p>
-							<Space direction="vertical" size="middle">
-								<Link
-									text="Конструктор"
-									href={PageRoutes.CONSTRUCTOR}
-									key={PageRoutes.CONSTRUCTOR}
-									style={linkStyles}
-								/>
-								<Link
-									text="Профессии"
-									href={PageRoutes.PROFESSIONS}
-									key={PageRoutes.PROFESSIONS}
-									style={linkStyles}
-								/>
-								<Link
-									text="Сотрудники"
-									href={PageRoutes.EMPLOYEES}
-									key={PageRoutes.EMPLOYEES}
-									style={linkStyles}
-								/>
-								<Link
-									text="Партнёры"
-									href={PageRoutes.PARTNERS}
-									key={PageRoutes.PARTNERS}
-									style={linkStyles}
-								/>
-							</Space>
-						</Space>
+						<TitledList
+							title="Ссылки"
+							items={PageRoutes.map((item) => (
+								<NavLink to={item.route} key={item.route} className="text_default">
+									{item.title}
+								</NavLink>
+							))}
+							titleGap={20}
+							itemsGap={16}
+						/>
 					</Col>
 					<Col className="footer__social">
-						<Space direction="vertical" size="large">
-							<p className="text_primary">Мы в социальных сетях</p>
-							<Space direction="vertical" size="middle">
-								{socialNetworks.map((item) => (
-									<Link
-										key={item.name}
-										text={item.name}
-										href={item.url}
-										icon={<img className="footer__social__icon" src={item.icon} alt="icon" />}
-										target="_blank"
-										style={linkStyles}
+						{socialNetworks && (
+							<TitledList
+								title="Мы в социальных сетях"
+								titleGap={14}
+								itemsGap={16}
+								items={socialNetworks.map((sn) => (
+									<IconText
+										key={sn.name}
+										icon={sn.icon}
+										textElement={
+											<a href={sn.url} className="text_default" target="_blank" rel="noreferrer">
+												{sn.name}
+											</a>
+										}
+										gap={8}
 									/>
 								))}
-							</Space>
-						</Space>
+							/>
+						)}
 					</Col>
 				</Row>
 			</Loader>
