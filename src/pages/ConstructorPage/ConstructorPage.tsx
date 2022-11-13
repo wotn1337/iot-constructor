@@ -19,7 +19,7 @@ export const ConstructorPage: React.FC<ConstructorProps> = () => {
 			title: 'Как вы хотите использовать конструктор?',
 			content: <TypeSelection selectedType={selectedType} setSelected={setSelectedType} />,
 		},
-		{ title: '', content: <Constructor /> },
+		{ title: '', content: <Constructor selectedDirection={selectedDirection ?? 1} /> },
 	];
 
 	const onChangeStep = (step: number) => {

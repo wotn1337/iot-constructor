@@ -1,0 +1,30 @@
+@import "../../../../../constants";
+
+.module {
+  padding-bottom: 8px;
+  margin-bottom: 14px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+
+  &__title {
+    font-size: 16px;
+    color: rgba(0, 0, 0, 0.45);
+  }
+
+  &:last-child {
+    padding-bottom: 0;
+    margin-bottom: 0;
+    border-bottom: none;
+  }
+
+  &__placeholder {
+    width: 345px;
+    height: 65px;
+    padding: 8px;
+    margin: 8px 0;
+    gap: 8px;
+    background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' rx='2' ry='2' stroke='%2340A9FFFF' stroke-width='1' stroke-dasharray='9%2c 9' stroke-dashoffset='0' stroke-linecap='round'/%3e%3c/svg%3e");
+    border-radius: 2px;
+    color: rgba(0, 0, 0, 0.45);
+    font-weight: 300;
+  }
+}
