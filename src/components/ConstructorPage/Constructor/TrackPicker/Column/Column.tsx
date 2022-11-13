@@ -15,7 +15,7 @@ export const Column: React.FC<ColumnProps> = ({ column }) => {
 			<div className={s.card}>
 				<div className={s.card__head}>
 					<p className={s.card__head__title}>{column.name}</p>
-					{column.extra && (
+					{column.name === 'Выберите курсы' && (
 						<Tooltip
 							className={s.card__head__icon}
 							placement="topRight"
@@ -28,7 +28,7 @@ export const Column: React.FC<ColumnProps> = ({ column }) => {
 				</div>
 				<div className={s.card__content}>
 					{column.items.map((item) => (
-						<Module module={item} key={item.id} />
+						<Module columnName={column.name} module={item} key={item.id} />
 					))}
 				</div>
 			</div>

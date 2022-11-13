@@ -7,6 +7,7 @@ import {
 	SocialNetworksResponse,
 	StudentReviewResponse,
 } from './types';
+import { Id } from '../common/types';
 
 const DOMAIN = 'https://constructor-iot-backend.na4u.ru';
 const VERSION = 'v1';
@@ -46,9 +47,9 @@ export const socialNetworksAPI = {
 };
 
 export const educationalModulesAPI = {
-	getEducationalModules: async (id: number, semester: number) => {
+	getEducationalModules: async (id: Id, semester: number) => {
 		const res = await instance.get<EducationalModulesResponse>(
-			`educationalDirections/${id}/educationalModules?semester=${semester}`
+			`educationalDirections/${id}/educationalModules?semesterId=${semester}`
 		);
 		return res.data.educational_modules;
 	},

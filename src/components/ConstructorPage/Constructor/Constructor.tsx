@@ -8,8 +8,11 @@ import { TrackPicker } from './TrackPicker/TrackPicker';
 import { useEducationalModules } from '../../../hooks/useEducationalModules';
 import { Loader } from '../../common/Loader/Loader';
 import { useProfessionalTrajectories } from '../../../hooks/useProfessionalTrajectories';
+import { Id } from '../../../common/types';
 
-type ConstructorProps = {};
+type ConstructorProps = {
+	selectedDirection: Id;
+};
 
 export type SemesterType = {
 	id: number;
@@ -18,7 +21,7 @@ export type SemesterType = {
 	finish: boolean;
 };
 
-export const Constructor: React.FC<ConstructorProps> = ({ ...props }) => {
+export const Constructor: React.FC<ConstructorProps> = ({ selectedDirection }) => {
 	const [percent, setPercent] = useState(40);
 	const { trajectories } = useProfessionalTrajectories();
 	const [semesters, setSemesters] = useState<SemesterType[]>([
@@ -66,7 +69,7 @@ export const Constructor: React.FC<ConstructorProps> = ({ ...props }) => {
 		},
 	]);
 	const [currentSemester, setCurrentSemester] = useState(3);
-	let { modules, loading } = useEducationalModules(1, currentSemester);
+	let { modules, loading } = useEducationalModules(selectedDirection, currentSemester);
 
 	return (
 		<div className="constructor">

@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
-import { EducationModule } from '../common/types';
+import { EducationModule, Id } from '../common/types';
 import { educationalModulesAPI } from '../API/API';
 import { message } from 'antd';
 
-export const useEducationalModules = (id = 1, semester: number) => {
+export const useEducationalModules = (id: Id, semester: number) => {
 	const [modules, setModules] = useState<EducationModule[]>([]);
 	const [loading, setLoading] = useState(true);
 

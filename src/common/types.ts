@@ -43,6 +43,7 @@ export type Course = {
 export type Trajectory = {
 	id: Id;
 	title: string;
+	slug: string;
 	description: string;
 	color: string;
 };
