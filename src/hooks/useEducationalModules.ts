@@ -3,7 +3,7 @@ import { EducationModule, Id } from '../common/types';
 import { educationalModulesAPI } from '../API/API';
 import { message } from 'antd';
 
-export const useEducationalModules = (id: Id, semester: number) => {
+export const useEducationalModules = (id: Id, semester: Id) => {
 	const [modules, setModules] = useState<EducationModule[]>([]);
 	const [loading, setLoading] = useState(true);
 

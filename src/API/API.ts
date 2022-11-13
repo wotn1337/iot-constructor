@@ -47,7 +47,7 @@ export const socialNetworksAPI = {
 };
 
 export const educationalModulesAPI = {
-	getEducationalModules: async (id: Id, semester: number) => {
+	getEducationalModules: async (id: Id, semester: Id) => {
 		const res = await instance.get<EducationalModulesResponse>(
 			`educationalDirections/${id}/educationalModules?semesterId=${semester}`
 		);

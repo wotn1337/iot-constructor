@@ -2,11 +2,16 @@ import React, { useState } from 'react';
 import { Space, Switch, Typography } from 'antd';
 import { CheckOutlined, CloseOutlined } from '@ant-design/icons';
 import s from './AcademicPlan.module.scss';
+import { useConstructorContext } from '../Context';
 
 type AcademicPlanProps = {};
 
 export const AcademicPlan: React.FC<AcademicPlanProps> = () => {
+	const {
+		state: { columns },
+	} = useConstructorContext();
 	const [showMain, setShowMain] = useState(true);
+	console.log(columns);
 
 	return (
 		<Space className={s.academicPlanWrapper} direction="vertical" size={48}>

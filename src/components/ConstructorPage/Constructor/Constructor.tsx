@@ -9,66 +9,19 @@ import { useEducationalModules } from '../../../hooks/useEducationalModules';
 import { Loader } from '../../common/Loader/Loader';
 import { useProfessionalTrajectories } from '../../../hooks/useProfessionalTrajectories';
 import { Id } from '../../../common/types';
+import { setCurrentSemester, useConstructorContext } from '../Context';
 
 type ConstructorProps = {
 	selectedDirection: Id;
 };
 
-export type SemesterType = {
-	id: number;
-	name: string;
-	disabled?: boolean;
-	finish: boolean;
-};
-
 export const Constructor: React.FC<ConstructorProps> = ({ selectedDirection }) => {
+	const {
+		state: { semesters, currentSemester },
+		dispatch,
+	} = useConstructorContext();
 	const [percent, setPercent] = useState(40);
 	const { trajectories } = useProfessionalTrajectories();
-	const [semesters, setSemesters] = useState<SemesterType[]>([
-		{
-			id: 1,
-			name: '1',
-			disabled: true,
-			finish: false,
-		},
-		{
-			id: 2,
-			name: '2',
-			disabled: true,
-			finish: false,
-		},
-		{
-			id: 3,
-			name: '3',
-			finish: false,
-		},
-		{
-			id: 4,
-			name: '4',
-			finish: false,
-		},
-		{
-			id: 5,
-			name: '5',
-			finish: false,
-		},
-		{
-			id: 6,
-			name: '6',
-			finish: false,
-		},
-		{
-			id: 7,
-			name: '7',
-			finish: false,
-		},
-		{
-			id: 8,
-			name: '8',
-			finish: false,
-		},
-	]);
-	const [currentSemester, setCurrentSemester] = useState(3);
 	let { modules, loading } = useEducationalModules(selectedDirection, currentSemester);
 
 	return (
@@ -114,7 +67,7 @@ export const Constructor: React.FC<ConstructorProps> = ({ selectedDirection }) =
 							semester={sem}
 							key={sem.id}
 							selected={currentSemester === sem.id}
-							setCurrentSemester={setCurrentSemester}
+							setCurrentSemester={(id) => dispatch(setCurrentSemester(id))}
 						/>
 					))}
 				</Row>

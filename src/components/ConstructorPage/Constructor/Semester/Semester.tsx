@@ -1,12 +1,13 @@
 import React from 'react';
 import { Col } from 'antd';
-import { SemesterType } from '../Constructor';
 import s from './Semester.module.scss';
+import { Semester as SemesterType } from '../../Context/types';
+import { Id } from '../../../../common/types';
 
 type SemesterProps = {
 	semester: SemesterType;
 	selected: boolean;
-	setCurrentSemester: (id: number) => void;
+	setCurrentSemester: (id: Id) => void;
 };
 
 export const Semester: React.FC<SemesterProps> = ({ semester, selected, setCurrentSemester }) => {

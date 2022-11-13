@@ -1,25 +1,31 @@
-import React, { useState } from 'react';
-import { DirectionSelection, TypeSelection, Constructor, Pagination } from '../../components/ConstructorPage';
-import s from './ConstructorPage.module.scss';
-import { Id } from '../../common/types';
+import React from 'react';
+import s from './ConstructorPageContent.module.scss';
 import { message } from 'antd';
+import { DirectionSelection } from '../DirectionSelection/DirectionSelection';
+import { TypeSelection } from '../TypeSelection/TypeSelection';
+import { Constructor } from '../Constructor/Constructor';
+import { AcademicPlan } from '../AcademicPlan/AcademicPlan';
+import { Pagination } from '../Pagination/Pagination';
+import { setCurrentStep, useConstructorContext } from '../Context';
 
 type ConstructorProps = {};
 
-export const ConstructorPage: React.FC<ConstructorProps> = () => {
-	const [currentStep, setCurrentStep] = useState(0);
-	const [selectedDirection, setSelectedDirection] = useState<Id>();
-	const [selectedType, setSelectedType] = useState<Id>();
+export const ConstructorPageContent: React.FC<ConstructorProps> = () => {
+	const {
+		state: { currentStep, selectedDirection, selectedType },
+		dispatch,
+	} = useConstructorContext();
 	const steps = [
 		{
 			title: 'Выберите направление подготовки',
-			content: <DirectionSelection selectedDirection={selectedDirection} setSelected={setSelectedDirection} />,
+			content: <DirectionSelection />,
 		},
 		{
 			title: 'Как вы хотите использовать конструктор?',
-			content: <TypeSelection selectedType={selectedType} setSelected={setSelectedType} />,
+			content: <TypeSelection />,
 		},
 		{ title: '', content: <Constructor selectedDirection={selectedDirection ?? 1} /> },
+		{ title: '', content: <AcademicPlan /> },
 	];
 
 	const onChangeStep = (step: number) => {
@@ -28,7 +34,7 @@ export const ConstructorPage: React.FC<ConstructorProps> = () => {
 		} else if (step === 2 && !selectedType) {
 			message.warn('Необходимо выбрать тип конструктора');
 		} else {
-			setCurrentStep(step);
+			dispatch(setCurrentStep(step));
 		}
 	};
 
