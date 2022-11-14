@@ -13,13 +13,13 @@ export const MainPageContextInitialState: ConstructorContextState = {
 		{
 			id: 1,
 			name: '1',
-			disabled: true,
+			disabled: false,
 			finish: false,
 		},
 		{
 			id: 2,
 			name: '2',
-			disabled: true,
+			disabled: false,
 			finish: false,
 		},
 		{
