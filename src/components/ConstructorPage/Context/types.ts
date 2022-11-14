@@ -1,6 +1,7 @@
 import type { Dispatch } from 'react';
 import { EducationModule, Id } from '../../../common/types';
 import { setColumns, setCurrentSemester, setCurrentStep, setSelectedDirection, setSelectedType } from './actions';
+import { ColumnType } from '../Constructor/TrackPicker/types';
 
 export type ConstructorContextState = {
 	currentStep: number;
@@ -19,6 +20,7 @@ export type Step = {
 export type Semester = {
 	id: Id;
 	name: string;
+	columns?: ColumnType[];
 	disabled?: boolean;
 	finish: boolean;
 };

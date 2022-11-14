@@ -19,25 +19,31 @@ export const TrackPicker: React.FC<TrackPickerProps> = ({ modules }) => {
 	const onDragEnd = (result: DropResult, columns: ColumnType[]) => {
 		if (!result.destination) return;
 		const { source, destination } = result;
-		console.log(source, destination);
+		// console.log(source, destination);
 		if (source.droppableId !== destination.droppableId) {
-			console.log('ddddd');
-			console.log(columns[0], columns[1]);
-			const sourceColumn = columns[0].items.find((module) => module.id === +source.droppableId);
-			const destColumn = columns[1].items.find((module) => module.id === +destination?.droppableId);
-			console.log(sourceColumn, destColumn);
+			// const startColumn = source.droppableId.includes('_') ? 1 : 0;
+			// const endColumn = startColumn ? 0 : 1;
+			// console.log('ddddd');
+			// console.log(startColumn, endColumn);
+			const sourceColumn = columns[0].items.find(
+				(module) => module.id.toString() === source.droppableId.toString()
+			);
+			const destColumn = columns[1].items.find(
+				(module) => module.id.toString() === destination?.droppableId.toString()
+			);
+			// console.log(sourceColumn, destColumn);
 			if (sourceColumn && destColumn) {
 				const sourceItems = [...sourceColumn.disciplines];
 				const destItems = [...destColumn.disciplines];
 				const [removed] = sourceItems.splice(source.index, 1);
-				console.log(sourceItems, destItems);
+				// console.log(sourceItems, destItems);
 				destItems.splice(destination.index, 0, removed);
 				dispatch(
 					setColumns([
 						{
 							...columns[0],
 							items: columns[0].items.map((module) => {
-								return module.id === +source.droppableId
+								return module.id.toString() === source.droppableId.toString()
 									? {
 											...module,
 											disciplines: sourceItems,
@@ -48,7 +54,7 @@ export const TrackPicker: React.FC<TrackPickerProps> = ({ modules }) => {
 						{
 							...columns[1],
 							items: columns[1].items.map((module) => {
-								return module.id === +destination.droppableId
+								return module.id.toString() === destination.droppableId.toString()
 									? {
 											...module,
 											disciplines: destItems,
@@ -56,15 +62,6 @@ export const TrackPicker: React.FC<TrackPickerProps> = ({ modules }) => {
 									: { ...module };
 							}),
 						},
-
-						// [source.droppableId]: {
-						// 	...sourceColumn,
-						// 	items: sourceItems,
-						// },
-						// [destination.droppableId]: {
-						// 	...destColumn,
-						// 	items: destItems,
-						// },
 					])
 				);
 			}
@@ -88,12 +85,12 @@ export const TrackPicker: React.FC<TrackPickerProps> = ({ modules }) => {
 					name: 'Мои курсы',
 					items: modules?.map((module) => ({
 						...module,
-						id: +module.id + 100,
+						id: `module_${module.id}`,
 						disciplines: module.is_spec
 							? []
 							: module.disciplines.map((discipline) => ({
 									...discipline,
-									id: +discipline.id + 10000,
+									id: `${module.id}_${discipline.id}`,
 							  })),
 					})),
 					extra: false,

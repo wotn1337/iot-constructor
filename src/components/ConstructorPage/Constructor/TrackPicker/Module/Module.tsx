@@ -11,7 +11,11 @@ type ModuleProps = {
 
 export const Module: React.FC<ModuleProps> = ({ module, columnName }) => {
 	return columnName === 'Выберите курсы' && !module.is_spec ? null : (
-		<Droppable droppableId={module.id.toString()} key={module.id} isDropDisabled={!module.is_spec}>
+		<Droppable
+			droppableId={module.id.toString()}
+			key={module.id}
+			isDropDisabled={!module.is_spec || module.disciplines.length === module.choice_limit}
+		>
 			{(provided) => {
 				return (
 					<div className={s.module} {...provided.droppableProps} ref={provided.innerRef}>
@@ -23,6 +27,8 @@ export const Module: React.FC<ModuleProps> = ({ module, columnName }) => {
 									course={item}
 									key={item.id}
 									index={index}
+									moduleTitle={module.title}
+									columnName={columnName}
 									isDragDisabled={!module.is_spec}
 									isSelected={columnName === 'Мои курсы'}
 								/>
