@@ -1,7 +1,7 @@
 import React from 'react';
 import { Col, Row } from 'antd';
 import { Direction, DirectionCard } from './DirectionCard/DirectionCard';
-import { Id } from '../../../common/types';
+import { setSelectedDirection, useConstructorContext } from '../Context';
 
 const DIRECTIONS: Direction[] = [
 	{
@@ -36,20 +36,21 @@ const DIRECTIONS: Direction[] = [
 	},
 ];
 
-type ChoiceInstituteProps = {
-	selectedDirection: Id | undefined;
-	setSelected: React.Dispatch<React.SetStateAction<Id | undefined>>;
-};
+type ChoiceInstituteProps = {};
 
-export const DirectionSelection: React.FC<ChoiceInstituteProps> = ({ selectedDirection, setSelected }) => {
+export const DirectionSelection: React.FC<ChoiceInstituteProps> = () => {
+	const {
+		state: { selectedDirection },
+		dispatch,
+	} = useConstructorContext();
 	return (
 		<Row gutter={[20, 32]}>
 			{DIRECTIONS.map((dir) => (
-				<Col key={dir.id} span={12}>
+				<Col key={`dirCard-${dir.id}`} span={12}>
 					<DirectionCard
 						{...dir}
 						selected={selectedDirection === dir.id}
-						onClick={() => setSelected(dir.id)}
+						onClick={() => dispatch(setSelectedDirection(dir.id))}
 					/>
 				</Col>
 			))}

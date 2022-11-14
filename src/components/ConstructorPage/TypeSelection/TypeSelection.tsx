@@ -1,9 +1,9 @@
 import React from 'react';
 import { Col, Row } from 'antd';
-import { LightBlue, Document } from '../../../images';
+import { Document, LightBlue } from '../../../images';
 import { TypeCard } from './TypeCard/TypeCard';
-import { Id } from '../../../common/types';
 import s from './TypeSelection.module.scss';
+import { setSelectedType, useConstructorContext } from '../Context';
 
 const CONSTRUCTOR_TYPES = [
 	{
@@ -18,17 +18,23 @@ const CONSTRUCTOR_TYPES = [
 	},
 ];
 
-type TypeSelectionProps = {
-	selectedType: Id | undefined;
-	setSelected: React.Dispatch<React.SetStateAction<Id | undefined>>;
-};
+type TypeSelectionProps = {};
 
-export const TypeSelection: React.FC<TypeSelectionProps> = ({ selectedType, setSelected }) => {
+export const TypeSelection: React.FC<TypeSelectionProps> = () => {
+	const {
+		state: { selectedType },
+		dispatch,
+	} = useConstructorContext();
+
 	return (
 		<Row gutter={20} className={s.wrapper}>
 			{CONSTRUCTOR_TYPES.map((type) => (
 				<Col key={type.id} span={12}>
-					<TypeCard {...type} selected={selectedType === type.id} onClick={() => setSelected(type.id)} />
+					<TypeCard
+						{...type}
+						selected={selectedType === type.id}
+						onClick={() => dispatch(setSelectedType(type.id))}
+					/>
 				</Col>
 			))}
 		</Row>

@@ -27,7 +27,7 @@ export const DirectionCard: React.FC<DirectionCardProps> = ({ name, code, info, 
 			<div className={s.card__code__wrapper}>
 				<div className={s.inner}>
 					{code.split('.').map((n, index) => (
-						<span key={index} className={s.number}>
+						<span key={`code-part-${index}`} className={s.number}>
 							{n}
 						</span>
 					))}
@@ -36,8 +36,8 @@ export const DirectionCard: React.FC<DirectionCardProps> = ({ name, code, info, 
 			<Space direction="vertical" size={24} className={s.card__info}>
 				<p className={s.info__title}>{name}</p>
 				<Space direction="vertical" size={8} className={s.info__list}>
-					{info.map((i) => (
-						<Space key={i.id} size={16}>
+					{info.map((i, index) => (
+						<Space key={`info-part-${i.id}-${index}`} size={16}>
 							<span className={s.item__title}>{i.title}</span>
 							<span>{i.value}</span>
 						</Space>
