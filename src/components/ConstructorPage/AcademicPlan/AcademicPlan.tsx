@@ -12,8 +12,8 @@ type AcademicPlanProps = {};
 const getSemesters = (columnItems: Column['items']) => {
 	const semesters: Semester[] = [
 		{
-			id: 1,
-			number: 1,
+			id: 3,
+			number: 3,
 			lists: [
 				{ id: 1, type: 'default', title: 'Обязательные курсы', items: [] },
 				{ id: 1, type: 'primary', title: 'Курсы по выбору', items: [] },
@@ -24,11 +24,11 @@ const getSemesters = (columnItems: Column['items']) => {
 	columnItems.forEach((item) => {
 		if (item.is_spec) {
 			item.disciplines.forEach((disc) => {
-				semesters[0].lists[1].items.push(disc.title);
+				semesters[0].lists[1].items.push(disc);
 			});
 		} else {
 			item.disciplines.forEach((disc) => {
-				semesters[0].lists[0].items.push(disc.title);
+				semesters[0].lists[0].items.push(disc);
 			});
 		}
 	});

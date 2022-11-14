@@ -1,4 +1,4 @@
-import { Id } from '../../../common/types';
+import { Discipline, Id } from '../../../common/types';
 
 export type Semester = {
 	id: Id;
@@ -10,5 +10,5 @@ export type List = {
 	id: Id;
 	title: string;
 	type: 'default' | 'primary';
-	items: string[];
+	items: Discipline[];
 };
