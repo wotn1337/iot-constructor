@@ -1,15 +1,16 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Col, Progress, Row, Space } from 'antd';
 import './Constructor.scss';
 import { Button } from '../../common/Button/Button';
 import { Semester } from './Semester/Semester';
-import { Score } from './Score/Score';
 import { TrackPicker } from './TrackPicker/TrackPicker';
 import { useEducationalModules } from '../../../hooks/useEducationalModules';
 import { Loader } from '../../common/Loader/Loader';
 import { useProfessionalTrajectories } from '../../../hooks/useProfessionalTrajectories';
 import { Id } from '../../../common/types';
 import { setCurrentSemester, useConstructorContext } from '../Context';
+import { TrackProgresses } from './TrackProgresses/TrackProgresses';
+import { TitledProgressProps } from './TrackProgresses/TitledProgress/TitledProgress';
 
 type ConstructorProps = {
 	selectedDirection: Id;
@@ -21,8 +22,20 @@ export const Constructor: React.FC<ConstructorProps> = ({ selectedDirection }) =
 		dispatch,
 	} = useConstructorContext();
 	const [percent, setPercent] = useState(40);
+	const [tracks, setTracks] = useState<TitledProgressProps[]>([]);
 	const { trajectories } = useProfessionalTrajectories();
 	let { modules, loading } = useEducationalModules(selectedDirection, currentSemester);
+
+	useEffect(() => {
+		setTracks(
+			trajectories.map((track) => ({
+				id: track.id,
+				title: track.title,
+				color: track.color,
+				percent: 50,
+			}))
+		);
+	}, [trajectories]);
 
 	return (
 		<div className="constructor">
@@ -46,9 +59,7 @@ export const Constructor: React.FC<ConstructorProps> = ({ selectedDirection }) =
 					<Col className="score">
 						<div className="score__title">Мои треки</div>
 						<Space size="small" direction="vertical">
-							{trajectories.map((track) => (
-								<Score track={track} score={+track.id} key={track.id} />
-							))}
+							<TrackProgresses tracks={tracks} />
 						</Space>
 					</Col>
 				</Row>
