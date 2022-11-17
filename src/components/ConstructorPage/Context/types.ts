@@ -1,7 +1,14 @@
 import type { Dispatch } from 'react';
 import { EducationModule, Id } from '../../../common/types';
-import { setColumns, setCurrentSemester, setCurrentStep, setSelectedDirection, setSelectedType } from './actions';
-import { ColumnType } from '../Constructor/TrackPicker/types';
+import {
+	setColumns,
+	setCurrentSemester,
+	setCurrentStep,
+	setSelectedDirection,
+	setSelectedType,
+	setSemesterColumns,
+	setSemesterFinish,
+} from './actions';
 
 export type ConstructorContextState = {
 	currentStep: number;
@@ -9,7 +16,7 @@ export type ConstructorContextState = {
 	selectedType?: Id;
 	semesters: Semester[];
 	currentSemester: Id;
-	columns: Column[];
+	columns: IColumns;
 };
 
 export type Step = {
@@ -20,7 +27,7 @@ export type Step = {
 export type Semester = {
 	id: Id;
 	name: string;
-	columns?: ColumnType[];
+	columns?: IColumns;
 	disabled?: boolean;
 	finish: boolean;
 };
@@ -32,12 +39,18 @@ export type Column = {
 	extra: boolean;
 };
 
+export interface IColumns {
+	[key: string]: Column;
+}
+
 export type ConstructorContextActions = ReturnType<
 	| typeof setCurrentStep
 	| typeof setSelectedDirection
 	| typeof setSelectedType
 	| typeof setCurrentSemester
 	| typeof setColumns
+	| typeof setSemesterColumns
+	| typeof setSemesterFinish
 >;
 
 export type ConstructorContext = {

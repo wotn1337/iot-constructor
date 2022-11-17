@@ -40,6 +40,9 @@ export const Constructor: React.FC<ConstructorProps> = ({ selectedDirection }) =
 				/>
 
 				<Row gutter={20} className="constructor__middle">
+					<Col className="picker">
+						<TrackPicker modules={modules} />
+					</Col>
 					<Col className="score">
 						<div className="score__title">Мои треки</div>
 						<Space size="small" direction="vertical">
@@ -47,9 +50,6 @@ export const Constructor: React.FC<ConstructorProps> = ({ selectedDirection }) =
 								<Score track={track} score={+track.id} key={track.id} />
 							))}
 						</Space>
-					</Col>
-					<Col className="picker">
-						<TrackPicker modules={modules} />
 					</Col>
 				</Row>
 

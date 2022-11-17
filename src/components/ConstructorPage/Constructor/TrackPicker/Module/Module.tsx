@@ -1,16 +1,16 @@
 import React from 'react';
 import { Card } from '../Card/Card';
-import { EducationModule } from '../../../../../common/types';
+import { EducationModule, Id } from '../../../../../common/types';
 import { Droppable } from 'react-beautiful-dnd';
 import s from './Module.module.scss';
 
 type ModuleProps = {
-	columnName: string;
+	columnId: Id;
 	module: EducationModule;
 };
 
-export const Module: React.FC<ModuleProps> = ({ module, columnName }) => {
-	return columnName === 'Выберите курсы' && !module.is_spec ? null : (
+export const Module: React.FC<ModuleProps> = ({ module, columnId }) => {
+	return columnId === 1 && !module.is_spec ? null : (
 		<Droppable
 			droppableId={module.id.toString()}
 			key={module.id}
@@ -27,10 +27,9 @@ export const Module: React.FC<ModuleProps> = ({ module, columnName }) => {
 									course={item}
 									key={item.id}
 									index={index}
-									moduleTitle={module.title}
-									columnName={columnName}
 									isDragDisabled={!module.is_spec}
-									isSelected={columnName === 'Мои курсы'}
+									isSelected={columnId === 2}
+									droppableId={module.id.toString()}
 								/>
 							))}
 						</div>

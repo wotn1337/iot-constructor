@@ -18,6 +18,7 @@
     &:hover:not(:disabled) {
       border: 1px solid $fontBlue;
       color: $fontBlue;
+      scale: 1.1;
     }
 
     &:disabled {
@@ -27,13 +28,13 @@
     }
 }
 
+.selected:not(:disabled) {
+  border: 1px solid $fontBlue;
+  color: $fontBlue;
+  scale: 1.1;
+}
 
 .finish:not(:focus) {
   border: 1px solid #73D13D;
   color: #73D13D;
-}
-
-.selected:not(:disabled) {
-  border: 1px solid $fontBlue;
-  color: $fontBlue;
 }
