@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Col, Progress, Row, Space } from 'antd';
+import { Col, Progress, Row } from 'antd';
 import './Constructor.scss';
 import { Button } from '../../common/Button/Button';
 import { Semester } from './Semester/Semester';
@@ -58,9 +58,7 @@ export const Constructor: React.FC<ConstructorProps> = ({ selectedDirection }) =
 					</Col>
 					<Col className="score">
 						<div className="score__title">Мои треки</div>
-						<Space size="small" direction="vertical">
-							<TrackProgresses tracks={tracks} />
-						</Space>
+						<TrackProgresses tracks={tracks} />
 					</Col>
 				</Row>
 
