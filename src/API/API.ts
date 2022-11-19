@@ -61,3 +61,9 @@ export const professionalTrajectoriesAPI = {
 		return res.data.professional_trajectories;
 	},
 };
+
+export const disciplinsAPI = {
+	getDisciplin: async (id: Id) => {
+		return undefined;
+	},
+};
