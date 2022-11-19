@@ -44,7 +44,7 @@ export const TrackPicker: React.FC<TrackPickerProps> = ({ modules }) => {
 		}
 	};
 
-	useMemo(() => {
+	useEffect(() => {
 		columns['2'].items.forEach((module) =>
 			module.disciplines.forEach((item) =>
 				item.professional_trajectories?.forEach((track) => {

@@ -19,25 +19,29 @@ export const Module: React.FC<ModuleProps> = ({ module, column }) => {
 			isDropDisabled={!module.is_spec || module.disciplines.length === module.choice_limit}
 		>
 			{(provided) => {
-				return !module.is_spec ? (
-					<RequiredModule module={module} columnId={column.id} />
-				) : (
+				return (
 					<div className={s.module} {...provided.droppableProps} ref={provided.innerRef}>
-						<p className={s.module__title}>{module.title}</p>
-						<div className={!module.disciplines.length ? s.module__placeholder : undefined}>
-							{!module.disciplines.length && <p>Курс не выбран</p>}
-							{module.disciplines.map((item, index) => (
-								<Card
-									course={item}
-									key={item.id}
-									index={index}
-									isDragDisabled={!module.is_spec}
-									isSelected={column.id === 2}
-									droppableId={module.id.toString()}
-								/>
-							))}
-						</div>
-						{provided.placeholder}
+						{!module.is_spec ? (
+							<RequiredModule module={module} columnId={column.id} />
+						) : (
+							<>
+								<p className={s.module__title}>{module.title}</p>
+								<div className={!module.disciplines.length ? s.module__placeholder : undefined}>
+									{!module.disciplines.length && <p>Курс не выбран</p>}
+									{module.disciplines.map((item, index) => (
+										<Card
+											course={item}
+											key={item.id}
+											index={index}
+											isDragDisabled={!module.is_spec}
+											isSelected={column.id === 2}
+											droppableId={module.id.toString()}
+										/>
+									))}
+								</div>
+								{provided.placeholder}
+							</>
+						)}
 					</div>
 				);
 			}}
