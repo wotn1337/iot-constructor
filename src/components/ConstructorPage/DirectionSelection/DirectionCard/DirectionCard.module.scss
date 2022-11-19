@@ -10,8 +10,26 @@
   box-sizing: border-box;
   transition: 300ms;
 
-  &:hover, &.selected {
+  &:hover {
     cursor: pointer;
+    border: 1px solid $darkBlue;
+
+    .card__code__wrapper {
+      .inner {
+        .number {
+          color: $darkBlue;
+        }
+      }
+    }
+
+    .card__info {
+      .info__title {
+        color: $darkBlue;
+      }
+    }
+  }
+
+  &.selected {
     border: 1px solid $orange;
 
     .card__code__wrapper {

@@ -3,16 +3,24 @@ import { Button as AntdButton } from 'antd';
 import s from './Button.module.scss';
 
 type ButtonProps = {
-	text: string;
 	type?: 'primary' | 'default';
 	onClick?: React.MouseEventHandler<HTMLElement>;
 	icon?: React.ReactNode;
 	disabled?: boolean;
 	style?: React.CSSProperties;
 	href?: string;
+	children?: React.ReactNode;
 };
 
-export const Button: React.FC<ButtonProps> = ({ text, onClick, type = 'default', disabled = false, href, icon, style }) => {
+export const Button: React.FC<ButtonProps> = ({
+	onClick,
+	type = 'default',
+	disabled = false,
+	href,
+	icon,
+	style,
+	children,
+}) => {
 	return (
 		<AntdButton
 			onClick={onClick}
@@ -22,7 +30,7 @@ export const Button: React.FC<ButtonProps> = ({ text, onClick, type = 'default',
 			href={href}
 			style={{ ...style }}
 		>
-			{text}
+			{children}
 		</AntdButton>
 	);
 };

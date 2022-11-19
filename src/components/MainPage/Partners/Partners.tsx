@@ -11,7 +11,7 @@ export const Partners: React.FC<PartnersProps> = () => {
 		<Space direction="vertical" align="center" size={82} className={s.partners}>
 			<h4 className={s.partners__title}>Партнёры образовательных программ</h4>
 			<PartnersList />
-			<Button text="Посмотреть всех" href="#/partners" />
+			<Button href="#/partners">Посмотреть всех</Button>
 		</Space>
 	);
 };

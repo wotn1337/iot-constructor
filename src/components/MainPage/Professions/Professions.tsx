@@ -21,7 +21,7 @@ export const Professions = () => {
 					<StatisticItem amount="1 292" caption="Вакансии в Екатеринбурге" />
 				</div>
 				<div className={s.profession__button}>
-					<Button text={'Посмотреть профессии'} type="primary" />
+					<Button type="primary">Посмотреть профессии</Button>
 				</div>
 			</div>
 		</section>
