@@ -43,21 +43,23 @@ export const AcademicPlan: React.FC<AcademicPlanProps> = () => {
 	const [showDefault, setShowDefault] = useState(true);
 
 	return (
-		<Space className={s.academicPlanWrapper} direction="vertical" size={48}>
-			<div className={s.titleWrapper}>
-				<h4>Подробный учебный план</h4>
-				<Space direction="horizontal" size={10}>
-					<Typography.Text type="secondary">Показывать обязательные курсы</Typography.Text>
-					<Switch
-						checkedChildren={<CheckOutlined />}
-						unCheckedChildren={<CloseOutlined />}
-						defaultChecked
-						checked={showDefault}
-						onChange={setShowDefault}
-					/>
-				</Space>
-			</div>
-			<AcademicPlanGrid semesters={getSemesters(columns[1].items)} showDefault={showDefault} />
-		</Space>
+		<>
+			<Space className={s.academicPlanWrapper} direction="vertical" size={48}>
+				<div className={s.titleWrapper}>
+					<h4>Подробный учебный план</h4>
+					<Space direction="horizontal" size={10}>
+						<Typography.Text type="secondary">Показывать обязательные курсы</Typography.Text>
+						<Switch
+							checkedChildren={<CheckOutlined />}
+							unCheckedChildren={<CloseOutlined />}
+							defaultChecked
+							checked={showDefault}
+							onChange={setShowDefault}
+						/>
+					</Space>
+				</div>
+				<AcademicPlanGrid semesters={getSemesters(columns[1].items)} showDefault={showDefault} />
+			</Space>
+		</>
 	);
 };
