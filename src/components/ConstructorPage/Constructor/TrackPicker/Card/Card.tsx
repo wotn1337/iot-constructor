@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Draggable } from 'react-beautiful-dnd';
 import './Card.scss';
-import { Tag } from 'antd';
+import { Tag, Tooltip } from 'antd';
 import { CloseOutlined, QuestionOutlined } from '@ant-design/icons';
 import { Discipline } from '../../../../../common/types';
 import { setColumns, setSemesterColumns, setSemesterFinish, useConstructorContext } from '../../../Context';
@@ -17,7 +17,7 @@ type ColumnProps = {
 
 export const Card: React.FC<ColumnProps> = ({ course, index, droppableId, isDragDisabled, isSelected }) => {
 	const {
-		state: { columns, currentSemester },
+		state: { columns, currentSemester, tracks },
 		dispatch,
 	} = useConstructorContext();
 	const [badgeVisible, setBadgeVisible] = useState<boolean>(false);
@@ -52,8 +52,12 @@ export const Card: React.FC<ColumnProps> = ({ course, index, droppableId, isDrag
 														droppableId: droppableId.split('_')[1],
 														index: 0,
 													};
-													console.log(source, destination);
-													let data = deleteTask(columns, source.droppableId, source.index);
+													let data = deleteTask(
+														columns,
+														tracks,
+														source.droppableId,
+														source.index
+													);
 													let newData = data?.newColumns;
 													let removed = data?.removed;
 
@@ -61,6 +65,7 @@ export const Card: React.FC<ColumnProps> = ({ course, index, droppableId, isDrag
 														newData =
 															addTask(
 																newData,
+																tracks,
 																destination?.droppableId,
 																destination?.index,
 																removed
@@ -103,13 +108,18 @@ export const Card: React.FC<ColumnProps> = ({ course, index, droppableId, isDrag
 							</div>
 							<div className="card__tags">
 								{course.professional_trajectories?.map((tag) => (
-									<Tag
-										className="card__tags__tag"
-										color={isSelected ? 'success' : 'blue'}
-										key={tag.id}
-									>
-										{tag.slug}
-									</Tag>
+									<Tooltip title={tag.title}>
+										<Tag
+											className="card__tags__tag"
+											style={{
+												backgroundColor: `white`,
+												border: `1px solid ${tag.color}`,
+											}}
+											key={tag.id}
+										>
+											{tag.slug}
+										</Tag>
+									</Tooltip>
 								))}
 							</div>
 						</div>

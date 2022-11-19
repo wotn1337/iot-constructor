@@ -8,9 +8,8 @@ import { useEducationalModules } from '../../../hooks/useEducationalModules';
 import { Loader } from '../../common/Loader/Loader';
 import { useProfessionalTrajectories } from '../../../hooks/useProfessionalTrajectories';
 import { Id } from '../../../common/types';
-import { setCurrentSemester, useConstructorContext } from '../Context';
+import { setCurrentSemester, setTracks, useConstructorContext } from '../Context';
 import { TrackProgresses } from './TrackProgresses/TrackProgresses';
-import { TitledProgressProps } from './TrackProgresses/TitledProgress/TitledProgress';
 
 type ConstructorProps = {
 	selectedDirection: Id;
@@ -18,22 +17,27 @@ type ConstructorProps = {
 
 export const Constructor: React.FC<ConstructorProps> = ({ selectedDirection }) => {
 	const {
-		state: { semesters, currentSemester },
+		state: { semesters, currentSemester, tracks },
 		dispatch,
 	} = useConstructorContext();
 	const [percent, setPercent] = useState(40);
-	const [tracks, setTracks] = useState<TitledProgressProps[]>([]);
 	const { trajectories } = useProfessionalTrajectories();
 	let { modules, loading } = useEducationalModules(selectedDirection, currentSemester);
 
 	useEffect(() => {
-		setTracks(
-			trajectories.map((track) => ({
-				id: track.id,
-				title: track.title,
-				color: track.color,
-				percent: 50,
-			}))
+		const finishedSemesters = semesters.filter((sem) => sem.finish).length;
+		setPercent(finishedSemesters * (100 / 8));
+	}, [semesters]);
+
+	useEffect(() => {
+		dispatch(
+			setTracks(
+				trajectories.map((track) => ({
+					...track,
+					points: 0,
+					percent: 0,
+				}))
+			)
 		);
 	}, [trajectories]);
 
@@ -57,7 +61,7 @@ export const Constructor: React.FC<ConstructorProps> = ({ selectedDirection }) =
 						<TrackPicker modules={modules} />
 					</Col>
 					<Col className="score">
-						<div className="score__title">Мои треки</div>
+						<div className="score__title">Мои траектории</div>
 						<TrackProgresses tracks={tracks} />
 					</Col>
 				</Row>

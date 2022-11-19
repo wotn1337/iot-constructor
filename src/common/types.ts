@@ -46,6 +46,8 @@ export type Trajectory = {
 	slug: string;
 	description: string;
 	color: string;
+	discipline_evaluation: number;
+	sum_discipline_levels_points: number;
 };
 
 export type Discipline = {

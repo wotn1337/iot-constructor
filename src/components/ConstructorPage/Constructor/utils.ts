@@ -1,4 +1,4 @@
-import { IColumns } from '../Context/types';
+import { IColumns, TrackProgress } from '../Context/types';
 import { Discipline, EducationModule } from '../../../common/types';
 
 export const clone = (data: IColumns) => {
@@ -42,7 +42,7 @@ const getNewColumnsData = (
 	};
 };
 
-export const deleteTask = (columns: IColumns, droppableId: string, index: number) => {
+export const deleteTask = (columns: IColumns, tracks: TrackProgress[], droppableId: string, index: number) => {
 	columns = clone(columns);
 	let columnKey = getColumnKey(columns, droppableId);
 	const module = getTargetModule(columns, columnKey, droppableId);
@@ -54,7 +54,13 @@ export const deleteTask = (columns: IColumns, droppableId: string, index: number
 	}
 };
 
-export const addTask = (columns: IColumns, droppableId: string, index: number, newDiscipline: Discipline) => {
+export const addTask = (
+	columns: IColumns,
+	tracks: TrackProgress[],
+	droppableId: string,
+	index: number,
+	newDiscipline: Discipline
+) => {
 	columns = clone(columns);
 	let columnKey = getColumnKey(columns, droppableId);
 	const module = getTargetModule(columns, columnKey, droppableId);

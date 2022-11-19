@@ -1,9 +1,15 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { DragDropContext, DropResult } from 'react-beautiful-dnd';
 import { Row } from 'antd';
 import { Column } from './Column/Column';
-import { EducationModule } from '../../../../common/types';
-import { setColumns, setSemesterColumns, setSemesterFinish, useConstructorContext } from '../../Context';
+import { Discipline, EducationModule } from '../../../../common/types';
+import {
+	setColumns,
+	setSemesterColumns,
+	setSemesterFinish,
+	setTracksPoints,
+	useConstructorContext,
+} from '../../Context';
 import { IColumns } from '../../Context/types';
 import { addTask, deleteTask } from '../utils';
 
@@ -13,19 +19,19 @@ type TrackPickerProps = {
 
 export const TrackPicker: React.FC<TrackPickerProps> = ({ modules }) => {
 	const {
-		state: { columns, currentSemester, semesters },
+		state: { columns, currentSemester, semesters, tracks },
 		dispatch,
 	} = useConstructorContext();
 
 	const onDragEnd = (result: DropResult, columns: IColumns) => {
 		if (!result.destination) return;
 		const { source, destination } = result;
-		let data = deleteTask(columns, source.droppableId, source.index);
+		let data = deleteTask(columns, tracks, source.droppableId, source.index);
 		let newData = data?.newColumns;
 		let removed = data?.removed;
 
 		if (newData && removed) {
-			newData = addTask(newData, destination?.droppableId, destination?.index, removed) ?? {};
+			newData = addTask(newData, tracks, destination?.droppableId, destination?.index, removed) ?? {};
 			dispatch(setColumns(newData));
 			dispatch(setSemesterColumns({ id: currentSemester, columns: newData }));
 			if (
@@ -38,35 +44,64 @@ export const TrackPicker: React.FC<TrackPickerProps> = ({ modules }) => {
 		}
 	};
 
+	useMemo(() => {
+		columns['2'].items.forEach((module) =>
+			module.disciplines.forEach((item) =>
+				item.professional_trajectories?.forEach((track) => {
+					const course = tracks.find((t) => t.id === track.id);
+					if (course) {
+						dispatch(
+							setTracksPoints({
+								id: track.id,
+								points: course.points + track.discipline_evaluation,
+							})
+						);
+					}
+				})
+			)
+		);
+	}, [columns]);
+
 	useEffect(() => {
 		const data = semesters.find((sem) => sem.id.toString() === currentSemester.toString())?.columns;
 		if (data) {
 			dispatch(setColumns(data));
-		} else
+		} else {
+			const disciplines: Discipline[] = [];
+			modules
+				.filter((module) => !module.is_spec)
+				.forEach((module) => {
+					module.disciplines.forEach((disc) => disciplines.push(disc));
+				});
+			const requiredModule: EducationModule = {
+				id: 'required_module',
+				title: 'Обязательные дисциплины',
+				is_spec: false,
+				disciplines: disciplines,
+				choice_limit: 0,
+			};
 			dispatch(
 				setColumns({
 					'1': {
 						...columns['1'],
-						items: modules?.map((module) => ({
-							...module,
-							disciplines: module.is_spec ? module.disciplines : [],
-						})),
+						items: modules?.filter((module) => module.is_spec),
 					},
 					'2': {
 						...columns['2'],
-						items: modules?.map((module) => ({
-							...module,
-							id: `module_${module.id}`,
-							disciplines: module.is_spec
-								? []
-								: module.disciplines.map((discipline) => ({
-										...discipline,
-										id: `${module.id}_${discipline.id}`,
-								  })),
-						})),
+						items: [
+							...modules
+								?.filter((module) => module.is_spec)
+								.map((module) => ({
+									...module,
+									id: `module_${module.id}`,
+									disciplines: [],
+								})),
+							requiredModule,
+						],
 					},
 				})
 			);
+		}
 	}, [dispatch]);
 
 	return (

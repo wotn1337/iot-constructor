@@ -28,7 +28,7 @@ export const Column: React.FC<ColumnProps> = ({ column }) => {
 				</div>
 				<div className={s.card__content}>
 					{column.items.map((item) => (
-						<Module columnId={column.id} module={item} key={item.id} />
+						<Module column={column} module={item} key={item.id} />
 					))}
 				</div>
 			</div>

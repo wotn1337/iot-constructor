@@ -8,7 +8,10 @@ import {
 	setSelectedType,
 	setSemesterColumns,
 	setSemesterFinish,
+	setTracks,
+	setTracksPoints,
 } from './actions';
+import React from 'react';
 
 export type ConstructorContextState = {
 	currentStep: number;
@@ -17,6 +20,7 @@ export type ConstructorContextState = {
 	semesters: Semester[];
 	currentSemester: Id;
 	columns: IColumns;
+	tracks: TrackProgress[];
 };
 
 export type Step = {
@@ -43,6 +47,18 @@ export interface IColumns {
 	[key: string]: Column;
 }
 
+export type TrackProgress = {
+	id: Id;
+	title: string;
+	color: React.CSSProperties['color'];
+	points: number;
+	percent?: number;
+	discipline_evaluation?: number;
+	slug?: string;
+	description?: string;
+	sum_discipline_levels_points: number;
+};
+
 export type ConstructorContextActions = ReturnType<
 	| typeof setCurrentStep
 	| typeof setSelectedDirection
@@ -51,6 +67,8 @@ export type ConstructorContextActions = ReturnType<
 	| typeof setColumns
 	| typeof setSemesterColumns
 	| typeof setSemesterFinish
+	| typeof setTracks
+	| typeof setTracksPoints
 >;
 
 export type ConstructorContext = {

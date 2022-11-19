@@ -7,6 +7,8 @@ import {
 	SET_SELECTED_TYPE,
 	SET_SEMESTER_COLUMNS,
 	SET_SEMESTER_FINISH,
+	SET_TRACK_POINTS,
+	SET_TRACKS,
 } from './constants';
 
 export const MainPageContextInitialState: ConstructorContextState = {
@@ -50,9 +52,10 @@ export const MainPageContextInitialState: ConstructorContextState = {
 		{
 			id: 8,
 			name: '8',
-			finish: false,
+			finish: true,
 		},
 	],
+	tracks: [],
 	currentSemester: 1,
 	columns: {
 		'1': {
@@ -113,6 +116,26 @@ export const MainPageContextReducer = (
 								finish: action.payload.isFinished,
 						  }
 						: sem
+				),
+			};
+		}
+		case SET_TRACKS: {
+			return {
+				...state,
+				tracks: action.payload,
+			};
+		}
+		case SET_TRACK_POINTS: {
+			return {
+				...state,
+				tracks: state.tracks.map((track) =>
+					track.id === action.payload.id
+						? {
+								...track,
+								points: action.payload.points,
+								percent: (action.payload.points / track.sum_discipline_levels_points) * 100,
+						  }
+						: track
 				),
 			};
 		}
