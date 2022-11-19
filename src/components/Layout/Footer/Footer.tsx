@@ -25,7 +25,7 @@ export const Footer = () => {
 	return (
 		<AntdFooter className="footer">
 			<Loader loading={loading} size="default">
-				<Row gutter={168} justify="center" style={{ margin: 0 }}>
+				<Row gutter={{ xxl: 168, xl: 100 }} justify="center" style={{ margin: 0 }}>
 					<Col className="footer__brand">
 						<Space direction="vertical" size="large">
 							<div className="footer__brand__logo" />
