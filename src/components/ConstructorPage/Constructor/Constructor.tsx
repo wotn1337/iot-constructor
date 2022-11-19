@@ -68,12 +68,9 @@ export const Constructor: React.FC<ConstructorProps> = ({ selectedDirection }) =
 
 				<Row gutter={20}>
 					<Col>
-						<Button
-							type="primary"
-							text="Создать траекторию"
-							disabled={percent !== 100}
-							style={{ width: 392, height: 47 }}
-						/>
+						<Button type="primary" disabled={percent !== 100} style={{ width: 392, height: 47 }}>
+							Создать траекторию
+						</Button>
 					</Col>
 					{semesters.map((sem) => (
 						<Semester

@@ -17,7 +17,9 @@ export const Intro: React.FC<IntroProps> = () => {
 					Система индивидуальных образовательных траекторий позволяет сделать обучение в университете
 					персонализированным и получить дополнительные компетенции
 				</Paragraph>
-				<Button text="Создать свою траекторию" type="primary" style={{ width: 289 }} />
+				<Button type="primary" style={{ width: 289 }}>
+					Создать свою траекторию
+				</Button>
 			</Col>
 			<Col className={s.intro__image}>
 				<Image src={IntroImage} preview={false} width={457} />

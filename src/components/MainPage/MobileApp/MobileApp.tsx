@@ -18,7 +18,7 @@ export const MobileApp: React.FC<MobileAppProps> = () => {
 					<Paragraph className={s.info__text}>
 						Больше информации и ответы на часто задаваемые вопросы, можно найти в нашем приложении
 					</Paragraph>
-					<Button text="Скачать приложение" type="primary" />
+					<Button type="primary">Скачать приложение</Button>
 				</Col>
 				<Col className={s.row__image}>
 					<Image src={QrImage} preview={false} />
