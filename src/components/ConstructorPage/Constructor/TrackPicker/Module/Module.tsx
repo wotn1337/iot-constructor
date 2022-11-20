@@ -3,14 +3,16 @@ import { Card } from '../Card/Card';
 import { EducationModule } from '../../../../../common/types';
 import { Droppable } from 'react-beautiful-dnd';
 import s from './Module.module.scss';
+import { RequiredModule } from '../RequiredModule/RequiredModule';
+import { Column } from '../../../Context/types';
 
 type ModuleProps = {
-	columnName: string;
+	column: Column;
 	module: EducationModule;
 };
 
-export const Module: React.FC<ModuleProps> = ({ module, columnName }) => {
-	return columnName === 'Выберите курсы' && !module.is_spec ? null : (
+export const Module: React.FC<ModuleProps> = ({ module, column }) => {
+	return column.id === 1 && !module.is_spec ? null : (
 		<Droppable
 			droppableId={module.id.toString()}
 			key={module.id}
@@ -19,22 +21,27 @@ export const Module: React.FC<ModuleProps> = ({ module, columnName }) => {
 			{(provided) => {
 				return (
 					<div className={s.module} {...provided.droppableProps} ref={provided.innerRef}>
-						<p className={s.module__title}>{module.title}</p>
-						<div className={!module.disciplines.length ? s.module__placeholder : undefined}>
-							{!module.disciplines.length && <p>Курс не выбран</p>}
-							{module.disciplines.map((item, index) => (
-								<Card
-									course={item}
-									key={item.id}
-									index={index}
-									moduleTitle={module.title}
-									columnName={columnName}
-									isDragDisabled={!module.is_spec}
-									isSelected={columnName === 'Мои курсы'}
-								/>
-							))}
-						</div>
-						{provided.placeholder}
+						{!module.is_spec ? (
+							<RequiredModule module={module} columnId={column.id} />
+						) : (
+							<>
+								<p className={s.module__title}>{module.title}</p>
+								<div className={!module.disciplines.length ? s.module__placeholder : undefined}>
+									{!module.disciplines.length && <p>Курс не выбран</p>}
+									{module.disciplines.map((item, index) => (
+										<Card
+											course={item}
+											key={item.id}
+											index={index}
+											isDragDisabled={!module.is_spec}
+											isSelected={column.id === 2}
+											droppableId={module.id.toString()}
+										/>
+									))}
+								</div>
+								{provided.placeholder}
+							</>
+						)}
 					</div>
 				);
 			}}

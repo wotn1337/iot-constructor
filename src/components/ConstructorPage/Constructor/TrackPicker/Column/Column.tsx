@@ -3,7 +3,7 @@ import s from './Column.module.scss';
 import { Col, Tooltip } from 'antd';
 import { QuestionCircleOutlined } from '@ant-design/icons';
 import { Module } from '../Module/Module';
-import { ColumnType } from '../types';
+import { Column as ColumnType } from '../../../Context/types';
 
 type ColumnProps = {
 	column: ColumnType;
@@ -14,8 +14,8 @@ export const Column: React.FC<ColumnProps> = ({ column }) => {
 		<Col key={column.id}>
 			<div className={s.card}>
 				<div className={s.card__head}>
-					<p className={s.card__head__title}>{column.name}</p>
-					{column.name === 'Выберите курсы' && (
+					<p className={column.id === 2 ? s.title__blue : s.title}>{column.name}</p>
+					{column.id === 1 && (
 						<Tooltip
 							className={s.card__head__icon}
 							placement="topRight"
@@ -28,7 +28,7 @@ export const Column: React.FC<ColumnProps> = ({ column }) => {
 				</div>
 				<div className={s.card__content}>
 					{column.items.map((item) => (
-						<Module columnName={column.name} module={item} key={item.id} />
+						<Module column={column} module={item} key={item.id} />
 					))}
 				</div>
 			</div>

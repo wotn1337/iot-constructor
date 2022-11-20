@@ -5,6 +5,10 @@ import {
 	SET_CURRENT_STEP,
 	SET_SELECTED_DIRECTION,
 	SET_SELECTED_TYPE,
+	SET_SEMESTER_COLUMNS,
+	SET_SEMESTER_FINISH,
+	SET_TRACK_POINTS,
+	SET_TRACKS,
 } from './constants';
 
 export const MainPageContextInitialState: ConstructorContextState = {
@@ -13,14 +17,12 @@ export const MainPageContextInitialState: ConstructorContextState = {
 		{
 			id: 1,
 			name: '1',
-			disabled: false,
-			finish: false,
+			finish: true,
 		},
 		{
 			id: 2,
 			name: '2',
-			disabled: false,
-			finish: false,
+			finish: true,
 		},
 		{
 			id: 3,
@@ -50,11 +52,25 @@ export const MainPageContextInitialState: ConstructorContextState = {
 		{
 			id: 8,
 			name: '8',
-			finish: false,
+			finish: true,
 		},
 	],
-	currentSemester: 3,
-	columns: [],
+	tracks: [],
+	currentSemester: 1,
+	columns: {
+		'1': {
+			id: 1,
+			name: 'Выберите дисциплины',
+			items: [],
+			extra: true,
+		},
+		'2': {
+			id: 2,
+			name: 'Мои дисциплины',
+			items: [],
+			extra: false,
+		},
+	},
 };
 
 export const MainPageContextReducer = (
@@ -76,6 +92,52 @@ export const MainPageContextReducer = (
 		}
 		case SET_COLUMNS: {
 			return { ...state, columns: action.payload };
+		}
+		case SET_SEMESTER_COLUMNS: {
+			return {
+				...state,
+				semesters: state.semesters.map((sem) =>
+					sem.id === action.payload.id
+						? {
+								...sem,
+								columns: action.payload.columns,
+						  }
+						: sem
+				),
+			};
+		}
+		case SET_SEMESTER_FINISH: {
+			return {
+				...state,
+				semesters: state.semesters.map((sem) =>
+					sem.id === action.payload.id
+						? {
+								...sem,
+								finish: action.payload.isFinished,
+						  }
+						: sem
+				),
+			};
+		}
+		case SET_TRACKS: {
+			return {
+				...state,
+				tracks: action.payload,
+			};
+		}
+		case SET_TRACK_POINTS: {
+			return {
+				...state,
+				tracks: state.tracks.map((track) =>
+					track.id === action.payload.id
+						? {
+								...track,
+								points: action.payload.points,
+								percent: (action.payload.points / track.sum_discipline_levels_points) * 100,
+						  }
+						: track
+				),
+			};
 		}
 		default:
 			return state;
