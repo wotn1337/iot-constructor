@@ -6,7 +6,7 @@ import { TypeSelection } from '../TypeSelection/TypeSelection';
 import { Constructor } from '../Constructor/Constructor';
 import { AcademicPlan } from '../AcademicPlan/AcademicPlan';
 import { setCurrentStep, useConstructorContext } from '../Context';
-import { DisciplinModal } from '../DisciplinModal/DisciplinModal';
+import { DisciplineModal } from '../DisciplineModal/DisciplineModal';
 import { NavigationTitle } from '../NavigationTitle/NavigationTitle';
 
 type ConstructorProps = {};
@@ -28,7 +28,7 @@ export const ConstructorPageContent: React.FC<ConstructorProps> = () => {
 		{ title: '', content: <Constructor selectedDirection={selectedDirection ?? 1} /> },
 		{ title: '', content: <AcademicPlan /> },
 	];
-	const [disciplinId, setDisciplinId] = useState();
+	const [disciplinId, setDisciplinId] = useState(true);
 
 	const onChangeStep = (step: number) => {
 		if (step > currentStep && !selectedDirection) {
@@ -48,7 +48,7 @@ export const ConstructorPageContent: React.FC<ConstructorProps> = () => {
 				onBack={currentStep !== 0 ? () => onChangeStep(currentStep - 1) : undefined}
 			/>
 			<div className={s.content}>{steps[currentStep].content}</div>
-			<DisciplinModal open={!!disciplinId} onCancel={() => setDisciplinId(undefined)} />
+			<DisciplineModal open={disciplinId} onCancel={() => setDisciplinId(false)} />
 		</section>
 	);
 };
