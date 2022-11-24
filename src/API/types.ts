@@ -16,5 +16,8 @@ export type AdmissionCommitteeContactsResponse = {
 export type SocialNetworksResponse = {
 	social_networks_block: { id: string; data: SocialNetwork[]; institute: string };
 };
-export type EducationalModulesResponse = { educational_modules: EducationModule[] };
+export type EducationalModulesResponse = {
+	meta: { total: number };
+	semesters: { educationalModules: EducationModule[] }[];
+};
 export type ProfessionalTrajectories = { professional_trajectories: Trajectory[] };

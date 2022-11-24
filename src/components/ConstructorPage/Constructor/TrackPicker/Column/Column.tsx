@@ -1,6 +1,6 @@
 import React from 'react';
 import s from './Column.module.scss';
-import { Col, Tooltip } from 'antd';
+import { Col, Empty, Tooltip } from 'antd';
 import { QuestionCircleOutlined } from '@ant-design/icons';
 import { Module } from '../Module/Module';
 import { Column as ColumnType } from '../../../Context/types';
@@ -10,6 +10,7 @@ type ColumnProps = {
 };
 
 export const Column: React.FC<ColumnProps> = ({ column }) => {
+	const isColumnEmpty = column.items.length === 0;
 	return (
 		<Col key={column.id}>
 			<div className={s.card}>
@@ -26,7 +27,13 @@ export const Column: React.FC<ColumnProps> = ({ column }) => {
 						</Tooltip>
 					)}
 				</div>
-				<div className={s.card__content}>
+				<div className={`${s.card__content} ${isColumnEmpty ? s.emptyColumn : ''}`}>
+					{isColumnEmpty && (
+						<Empty
+							description="В этом семестре нет дисциплин по выбору"
+							image={Empty.PRESENTED_IMAGE_SIMPLE}
+						/>
+					)}
 					{column.items.map((item) => (
 						<Module column={column} module={item} key={item.id} />
 					))}

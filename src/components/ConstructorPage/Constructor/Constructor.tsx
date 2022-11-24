@@ -8,7 +8,7 @@ import { useEducationalModules } from '../../../hooks/useEducationalModules';
 import { Loader } from '../../common/Loader/Loader';
 import { useProfessionalTrajectories } from '../../../hooks/useProfessionalTrajectories';
 import { Id } from '../../../common/types';
-import { setCurrentSemester, setTracks, useConstructorContext } from '../Context';
+import { setCurrentSemester, setSemesters, setTracks, useConstructorContext } from '../Context';
 import { TrackProgresses } from './TrackProgresses/TrackProgresses';
 
 type ConstructorProps = {
@@ -22,7 +22,7 @@ export const Constructor: React.FC<ConstructorProps> = ({ selectedDirection }) =
 	} = useConstructorContext();
 	const [percent, setPercent] = useState(40);
 	const { trajectories } = useProfessionalTrajectories();
-	let { modules, loading } = useEducationalModules(selectedDirection, currentSemester);
+	let { modules, loading, semesters: semestersFromBack } = useEducationalModules(selectedDirection, currentSemester);
 
 	useEffect(() => {
 		const finishedSemesters = semesters.filter((sem) => sem.finish).length;
@@ -40,6 +40,12 @@ export const Constructor: React.FC<ConstructorProps> = ({ selectedDirection }) =
 			)
 		);
 	}, [trajectories]);
+
+	useEffect(() => {
+		if (semesters.length === 0) {
+			dispatch(setSemesters(semestersFromBack));
+		}
+	}, [semestersFromBack]);
 
 	return (
 		<div className="constructor">
@@ -67,19 +73,19 @@ export const Constructor: React.FC<ConstructorProps> = ({ selectedDirection }) =
 				</Row>
 
 				<Row gutter={20}>
+					{semesters.map((sem) => (
+						<Semester
+							semester={sem}
+							key={sem.id}
+							selected={currentSemester === sem.order}
+							setCurrentSemester={(order) => dispatch(setCurrentSemester(order))}
+						/>
+					))}
 					<Col>
 						<Button type="primary" disabled={percent !== 100} style={{ width: 392, height: 47 }}>
 							Создать траекторию
 						</Button>
 					</Col>
-					{semesters.map((sem) => (
-						<Semester
-							semester={sem}
-							key={sem.id}
-							selected={currentSemester === sem.id}
-							setCurrentSemester={(id) => dispatch(setCurrentSemester(id))}
-						/>
-					))}
 				</Row>
 			</Loader>
 		</div>
