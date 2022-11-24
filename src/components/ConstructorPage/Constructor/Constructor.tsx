@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Col, Progress, Row } from 'antd';
+import { Col, Progress, Row, Space } from 'antd';
 import './Constructor.scss';
 import { Button } from '../../common/Button/Button';
 import { Semester } from './Semester/Semester';
@@ -62,25 +62,30 @@ export const Constructor: React.FC<ConstructorProps> = ({ selectedDirection }) =
 					status="active"
 				/>
 
-				<Row gutter={20} className="constructor__middle">
-					<Col className="picker">
+				<div className="constructor__middle">
+					<div className="constructor__middle__pagination">
+						<Space direction="vertical" size={16}>
+							<p className="title">семестры</p>
+							{semesters.map((sem) => (
+								<Semester
+									semester={sem}
+									key={sem.id}
+									selected={currentSemester === sem.order}
+									setCurrentSemester={(order) => dispatch(setCurrentSemester(order))}
+								/>
+							))}
+						</Space>
+					</div>
+					<div className="picker">
 						<TrackPicker modules={modules} />
-					</Col>
-					<Col className="score">
+					</div>
+					<div className="score">
 						<div className="score__title">Мои траектории</div>
 						<TrackProgresses tracks={tracks} />
-					</Col>
-				</Row>
+					</div>
+				</div>
 
 				<Row gutter={20}>
-					{semesters.map((sem) => (
-						<Semester
-							semester={sem}
-							key={sem.id}
-							selected={currentSemester === sem.order}
-							setCurrentSemester={(order) => dispatch(setCurrentSemester(order))}
-						/>
-					))}
 					<Col>
 						<Button type="primary" disabled={percent !== 100} style={{ width: 392, height: 47 }}>
 							Создать траекторию
