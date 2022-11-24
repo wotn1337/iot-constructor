@@ -1,4 +1,4 @@
-import { IColumns, TrackProgress } from '../Context/types';
+import { IColumns } from '../Context/types';
 import { Discipline, EducationModule } from '../../../common/types';
 import { message } from 'antd';
 import { DropResult } from 'react-beautiful-dnd';
@@ -44,7 +44,7 @@ const getNewColumnsData = (
 	};
 };
 
-export const deleteTask = (columns: IColumns, tracks: TrackProgress[], droppableId: string, index: number) => {
+export const deleteTask = (columns: IColumns, droppableId: string, index: number) => {
 	columns = clone(columns);
 	let columnKey = getColumnKey(columns, droppableId);
 	const module = getTargetModule(columns, columnKey, droppableId);
@@ -56,13 +56,7 @@ export const deleteTask = (columns: IColumns, tracks: TrackProgress[], droppable
 	}
 };
 
-export const addTask = (
-	columns: IColumns,
-	tracks: TrackProgress[],
-	droppableId: string,
-	index: number,
-	newDiscipline: Discipline
-) => {
+export const addTask = (columns: IColumns, droppableId: string, index: number, newDiscipline: Discipline) => {
 	columns = clone(columns);
 	let columnKey = getColumnKey(columns, droppableId);
 	const module = getTargetModule(columns, columnKey, droppableId);

@@ -3,13 +3,7 @@ import { DragDropContext, DropResult } from 'react-beautiful-dnd';
 import { message, Row } from 'antd';
 import { Column } from './Column/Column';
 import { Discipline, EducationModule } from '../../../../common/types';
-import {
-	setColumns,
-	setSemesterColumns,
-	setSemesterFinish,
-	setTracksPoints,
-	useConstructorContext,
-} from '../../Context';
+import { setColumns, setSemesterColumns, setSemesterFinish, useConstructorContext } from '../../Context';
 import { IColumns } from '../../Context/types';
 import { addTask, deleteTask, isDropValid } from '../utils';
 
@@ -19,7 +13,7 @@ type TrackPickerProps = {
 
 export const TrackPicker: React.FC<TrackPickerProps> = ({ modules }) => {
 	const {
-		state: { columns, currentSemester, semesters, tracks },
+		state: { columns, currentSemester, semesters },
 		dispatch,
 	} = useConstructorContext();
 
@@ -29,12 +23,12 @@ export const TrackPicker: React.FC<TrackPickerProps> = ({ modules }) => {
 		if (!destination) {
 			return message.warn('Необходимо перетащить курс в соседнюю колонку');
 		}
-		let data = deleteTask(columns, tracks, source.droppableId, source.index);
+		let data = deleteTask(columns, source.droppableId, source.index);
 		let newData = data?.newColumns;
 		let removed = data?.removed;
 
 		if (newData && removed) {
-			newData = addTask(newData, tracks, destination?.droppableId, destination?.index, removed) ?? {};
+			newData = addTask(newData, destination?.droppableId, destination?.index, removed) ?? {};
 			dispatch(setColumns(newData));
 			dispatch(setSemesterColumns({ id: currentSemester, columns: newData }));
 			// if (
@@ -50,27 +44,12 @@ export const TrackPicker: React.FC<TrackPickerProps> = ({ modules }) => {
 	useEffect(() => {
 		if (
 			columns['2'].items.every((module) => {
-				console.log(module.choice_limit, module.disciplines.length, module.is_spec);
 				return !module.choice_limit || (module.choice_limit === module.disciplines.length && module.is_spec);
 			})
 		) {
 			dispatch(setSemesterFinish({ id: currentSemester, isFinished: true }));
 		}
-		columns['2'].items.forEach((module) =>
-			module.disciplines.forEach((item) =>
-				item.professional_trajectories?.forEach((track) => {
-					const course = tracks.find((t) => t.id === track.id);
-					if (course) {
-						dispatch(
-							setTracksPoints({
-								id: track.id,
-								points: course.points + track.discipline_evaluation,
-							})
-						);
-					}
-				})
-			)
-		);
+
 		dispatch(setSemesterColumns({ id: currentSemester, columns }));
 	}, [columns]);
 
