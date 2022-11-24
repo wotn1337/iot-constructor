@@ -8,7 +8,7 @@ import { useEducationalModules } from '../../../hooks/useEducationalModules';
 import { Loader } from '../../common/Loader/Loader';
 import { useProfessionalTrajectories } from '../../../hooks/useProfessionalTrajectories';
 import { Id } from '../../../common/types';
-import { setCurrentSemester, setSemesters, setTracks, useConstructorContext } from '../Context';
+import { setCurrentSemester, setCurrentStep, setSemesters, setTracks, useConstructorContext } from '../Context';
 import { TrackProgresses } from './TrackProgresses/TrackProgresses';
 
 type ConstructorProps = {
@@ -82,7 +82,12 @@ export const Constructor: React.FC<ConstructorProps> = ({ selectedDirection }) =
 						/>
 					))}
 					<Col>
-						<Button type="primary" disabled={percent !== 100} style={{ width: 392, height: 47 }}>
+						<Button
+							type="primary"
+							disabled={percent < 80}
+							style={{ width: 392, height: 47 }}
+							onClick={() => dispatch(setCurrentStep(3))}
+						>
 							Создать траекторию
 						</Button>
 					</Col>

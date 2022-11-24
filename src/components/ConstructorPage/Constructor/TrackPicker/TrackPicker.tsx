@@ -71,6 +71,7 @@ export const TrackPicker: React.FC<TrackPickerProps> = ({ modules }) => {
 				})
 			)
 		);
+		dispatch(setSemesterColumns({ id: currentSemester, columns }));
 	}, [columns]);
 
 	useEffect(() => {
