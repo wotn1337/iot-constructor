@@ -12,7 +12,7 @@ type SemesterProps = {
 
 export const Semester: React.FC<SemesterProps> = ({ semesterTitle, lists, showDefault }) => {
 	return (
-		<Space size={16} direction="vertical">
+		<Space size={16} direction="vertical" style={{ width: '100%' }}>
 			<Typography.Text className={s.semesterTitle}>{semesterTitle}</Typography.Text>
 			{lists.map((list) => (
 				<DisciplinsList key={list.id} {...list} hidden={!showDefault && list.type === 'default'} />

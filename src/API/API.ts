@@ -47,11 +47,11 @@ export const socialNetworksAPI = {
 };
 
 export const educationalModulesAPI = {
-	getEducationalModules: async (id: Id, semester: Id) => {
+	getEducationalModules: async (id: Id, semester: number) => {
 		const res = await instance.get<EducationalModulesResponse>(
-			`educationalDirections/${id}/educationalModules?semesterId=${semester}`
+			`educationalDirections/${id}/educationalModules?paginate=true&page=${semester}`
 		);
-		return res.data.educational_modules;
+		return res.data;
 	},
 };
 

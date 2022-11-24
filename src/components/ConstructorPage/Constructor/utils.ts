@@ -1,5 +1,7 @@
 import { IColumns, TrackProgress } from '../Context/types';
 import { Discipline, EducationModule } from '../../../common/types';
+import { message } from 'antd';
+import { DropResult } from 'react-beautiful-dnd';
 
 export const clone = (data: IColumns) => {
 	return JSON.parse(JSON.stringify(data));
@@ -68,5 +70,26 @@ export const addTask = (
 		const newDisciplines = module?.disciplines;
 		newDisciplines?.splice(index, 0, newDiscipline);
 		return getNewColumnsData(columns, columnKey, module, newDisciplines, droppableId);
+	}
+};
+
+const isModulesEqual = (source: string, destination: string) => {
+	if (source.includes('_')) {
+		return source.split('_')[1] === destination;
+	}
+	return source === destination.split('_')[1];
+};
+
+const isModulesInSameColumn = (source: string, destination: string) => {
+	return (source.includes('_') && destination.includes('_')) || (!source.includes('_') && !destination.includes('_'));
+};
+
+export const isDropValid = (result: DropResult) => {
+	const { source, destination } = result;
+	if (!destination || isModulesInSameColumn(source.droppableId, destination?.droppableId)) {
+		return message.warn('Необходимо перетащить курс в соседнюю колонку');
+	}
+	if (!isModulesEqual(source.droppableId, destination?.droppableId)) {
+		return message.warn('Неверный модуль!');
 	}
 };

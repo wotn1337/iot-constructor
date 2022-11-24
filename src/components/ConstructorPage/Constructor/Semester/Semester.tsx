@@ -2,15 +2,15 @@ import React from 'react';
 import { Col } from 'antd';
 import s from './Semester.module.scss';
 import { Semester as SemesterType } from '../../Context/types';
-import { Id } from '../../../../common/types';
 
 type SemesterProps = {
 	semester: SemesterType;
 	selected: boolean;
-	setCurrentSemester: (id: Id) => void;
+	setCurrentSemester: (order: number) => void;
 };
 
 export const Semester: React.FC<SemesterProps> = ({ semester, selected, setCurrentSemester }) => {
+	console.log(semester.finish);
 	return (
 		<Col>
 			<button
@@ -19,7 +19,7 @@ export const Semester: React.FC<SemesterProps> = ({ semester, selected, setCurre
 				key={semester.id}
 				onClick={(e) => {
 					e.preventDefault();
-					setCurrentSemester(semester.id);
+					setCurrentSemester(semester.order);
 				}}
 			>
 				{semester.name}

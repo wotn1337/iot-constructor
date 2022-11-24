@@ -6,11 +6,12 @@ import {
 	SET_SELECTED_TYPE,
 	SET_SEMESTER_COLUMNS,
 	SET_SEMESTER_FINISH,
+	SET_SEMESTERS,
 	SET_TRACK_POINTS,
 	SET_TRACKS,
 } from './constants';
 import { Id } from '../../../common/types';
-import { IColumns, TrackProgress } from './types';
+import { IColumns, Semester, TrackProgress } from './types';
 
 type Action<T extends string, U extends any = any> = { type: T; payload: U };
 
@@ -29,7 +30,7 @@ export const setSelectedType = <T extends Id>(typeId: T): Action<typeof SET_SELE
 	payload: typeId,
 });
 
-export const setCurrentSemester = <T extends Id>(currSem: T): Action<typeof SET_CURRENT_SEMESTER, T> => ({
+export const setCurrentSemester = <T extends number>(currSem: T): Action<typeof SET_CURRENT_SEMESTER, T> => ({
 	type: SET_CURRENT_SEMESTER,
 	payload: currSem,
 });
@@ -44,6 +45,11 @@ export const setSemesterColumns = <T extends { id: Id; columns: IColumns }>(
 ): Action<typeof SET_SEMESTER_COLUMNS, T> => ({
 	type: SET_SEMESTER_COLUMNS,
 	payload: data,
+});
+
+export const setSemesters = <T extends Semester[]>(semester: T): Action<typeof SET_SEMESTERS, T> => ({
+	type: SET_SEMESTERS,
+	payload: semester,
 });
 
 export const setSemesterFinish = <T extends { id: Id; isFinished: boolean }>(
