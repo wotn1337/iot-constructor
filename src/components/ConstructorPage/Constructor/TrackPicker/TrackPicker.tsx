@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { DragDropContext, DropResult } from 'react-beautiful-dnd';
-import { message, Row } from 'antd';
+import { message } from 'antd';
 import { Column } from './Column/Column';
 import { Discipline, EducationModule } from '../../../../common/types';
 import { setColumns, setSemesterColumns, setSemesterFinish, useConstructorContext } from '../../Context';
@@ -31,13 +31,13 @@ export const TrackPicker: React.FC<TrackPickerProps> = ({ modules }) => {
 			newData = addTask(newData, destination?.droppableId, destination?.index, removed) ?? {};
 			dispatch(setColumns(newData));
 			dispatch(setSemesterColumns({ id: currentSemester, columns: newData }));
-			// if (
-			// 	newData['2'].items
-			// 		.filter((module) => module.is_spec)
-			// 		.every((module) => module.choice_limit === module.disciplines.length)
-			// ) {
-			// 	dispatch(setSemesterFinish({ id: currentSemester, isFinished: true }));
-			// } else dispatch(setSemesterFinish({ id: currentSemester, isFinished: false }));
+			if (
+				newData['2'].items
+					.filter((module) => module.is_spec)
+					.every((module) => module.choice_limit === module.disciplines.length)
+			) {
+				dispatch(setSemesterFinish({ id: currentSemester, isFinished: true }));
+			} else dispatch(setSemesterFinish({ id: currentSemester, isFinished: false }));
 		}
 	};
 
@@ -49,7 +49,6 @@ export const TrackPicker: React.FC<TrackPickerProps> = ({ modules }) => {
 		) {
 			dispatch(setSemesterFinish({ id: currentSemester, isFinished: true }));
 		}
-
 		dispatch(setSemesterColumns({ id: currentSemester, columns }));
 	}, [columns]);
 
@@ -93,15 +92,13 @@ export const TrackPicker: React.FC<TrackPickerProps> = ({ modules }) => {
 				})
 			);
 		}
-	}, []);
+	}, [currentSemester]);
 
 	return (
-		<Row gutter={20}>
-			<DragDropContext onDragEnd={(result) => onDragEnd(result, columns)}>
-				{Object.values(columns).map((item) => (
-					<Column column={item} key={item.id} />
-				))}
-			</DragDropContext>
-		</Row>
+		<DragDropContext onDragEnd={(result) => onDragEnd(result, columns)}>
+			{Object.values(columns).map((item) => (
+				<Column column={item} key={item.id} />
+			))}
+		</DragDropContext>
 	);
 };

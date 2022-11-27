@@ -1,6 +1,6 @@
 import React from 'react';
 import s from './Column.module.scss';
-import { Col, Empty, Tooltip } from 'antd';
+import { Empty, Tooltip } from 'antd';
 import { QuestionCircleOutlined } from '@ant-design/icons';
 import { Module } from '../Module/Module';
 import { Column as ColumnType } from '../../../Context/types';
@@ -12,7 +12,7 @@ type ColumnProps = {
 export const Column: React.FC<ColumnProps> = ({ column }) => {
 	const isColumnEmpty = column.items.length === 0;
 	return (
-		<Col key={column.id}>
+		<div key={column.id}>
 			<div className={s.card}>
 				<div className={s.card__head}>
 					<p className={column.id === 2 ? s.title__blue : s.title}>{column.name}</p>
@@ -39,6 +39,6 @@ export const Column: React.FC<ColumnProps> = ({ column }) => {
 					))}
 				</div>
 			</div>
-		</Col>
+		</div>
 	);
 };
