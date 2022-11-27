@@ -18,14 +18,22 @@
     }
   }
 
-  .disciplin-item {
-    &:hover {
-      color: $fontBlue;
-      cursor: pointer;
-    }
+  .discipline-item {
+    .item-inner {
+      width: 100%;
 
-    &:active {
-      color: $darkBlue;
+      &:hover {
+        color: $fontBlue;
+        cursor: pointer;
+      }
+
+      &:active {
+        color: $darkBlue;
+      }
+
+      .ant-space-item:has(.tags-list) {
+        margin-left: auto;
+      }
     }
   }
 

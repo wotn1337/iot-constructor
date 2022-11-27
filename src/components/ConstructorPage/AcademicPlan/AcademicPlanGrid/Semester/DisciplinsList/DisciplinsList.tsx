@@ -16,10 +16,10 @@ export const DisciplinsList: React.FC<DisciplinsListProps> = ({ title, items, ty
 			bordered
 			dataSource={items}
 			renderItem={(item) => (
-				<List.Item className="disciplin-item" onClick={() => dispatch(setDisciplineId(item.id))}>
-					<Space direction="vertical" size={8}>
+				<List.Item className="discipline-item" onClick={() => dispatch(setDisciplineId(item.id))}>
+					<Space direction="vertical" size={8} className="item-inner">
 						{item.title}
-						<Space size={4}>
+						<Space size={4} className="tags-list">
 							{item.professional_trajectories?.map((track) => (
 								<Tag key={track.id} color={track.color} text={track.slug} />
 							))}
