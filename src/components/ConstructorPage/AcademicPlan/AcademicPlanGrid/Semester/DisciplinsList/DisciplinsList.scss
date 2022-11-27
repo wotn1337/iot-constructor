@@ -18,10 +18,17 @@
     }
   }
 
-  .disc-tag {
-    margin: 0;
-    background-color: black;
+  .disciplin-item {
+    &:hover {
+      color: $fontBlue;
+      cursor: pointer;
+    }
+
+    &:active {
+      color: $darkBlue;
+    }
   }
+
 
   .ant-list-empty-text {
     text-align: left;

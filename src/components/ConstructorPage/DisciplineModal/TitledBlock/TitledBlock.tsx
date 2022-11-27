@@ -9,7 +9,7 @@ type TitledBlockProps = {
 
 export const TitledBlock: React.FC<TitledBlockProps> = ({ title, children }) => {
 	return (
-		<Space direction="vertical" size={16}>
+		<Space direction="vertical" size={16} className={s.titledBlock}>
 			<Typography.Text className={s.title}>{title}</Typography.Text>
 			<div>{children}</div>
 		</Space>

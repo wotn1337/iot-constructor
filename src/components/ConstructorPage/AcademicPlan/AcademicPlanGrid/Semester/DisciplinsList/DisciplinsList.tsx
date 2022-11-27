@@ -3,10 +3,12 @@ import { List, Space } from 'antd';
 import { List as ListType } from '../../../types';
 import './DisciplinsList.scss';
 import { Tag } from '../../../../../common/Tag/Tag';
+import { setDisciplineId, useConstructorContext } from '../../../../Context';
 
 type DisciplinsListProps = ListType & { hidden: boolean };
 
 export const DisciplinsList: React.FC<DisciplinsListProps> = ({ title, items, type, hidden, placeholder }) => {
+	const { dispatch } = useConstructorContext();
 	return (
 		<List
 			size="small"
@@ -14,7 +16,7 @@ export const DisciplinsList: React.FC<DisciplinsListProps> = ({ title, items, ty
 			bordered
 			dataSource={items}
 			renderItem={(item) => (
-				<List.Item>
+				<List.Item className="disciplin-item" onClick={() => dispatch(setDisciplineId(item.id))}>
 					<Space direction="vertical" size={8}>
 						{item.title}
 						<Space size={4}>

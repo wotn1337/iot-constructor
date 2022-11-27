@@ -1,4 +1,12 @@
-import { Contacts, EducationModule, Partner, SocialNetwork, StudentReview, Trajectory } from '../common/types';
+import {
+	Contacts,
+	Discipline,
+	EducationModule,
+	Partner,
+	SocialNetwork,
+	StudentReview,
+	Trajectory,
+} from '../common/types';
 
 export type PartnersResponse = { partners: Partner[] };
 export type StudentReviewResponse = {
@@ -21,3 +29,4 @@ export type EducationalModulesResponse = {
 	semesters: { educationalModules: EducationModule[] }[];
 };
 export type ProfessionalTrajectories = { professional_trajectories: Trajectory[] };
+export type DisciplinesResponse = { discipline: Discipline };

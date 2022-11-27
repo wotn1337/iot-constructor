@@ -2,6 +2,7 @@ import {
 	SET_COLUMNS,
 	SET_CURRENT_SEMESTER,
 	SET_CURRENT_STEP,
+	SET_DISCIPLINE_ID,
 	SET_SELECTED_DIRECTION,
 	SET_SELECTED_TYPE,
 	SET_SEMESTER_COLUMNS,
@@ -69,4 +70,9 @@ export const setTracksPoints = <T extends { id: Id; points: number }>(
 ): Action<typeof SET_TRACK_POINTS, T> => ({
 	type: SET_TRACK_POINTS,
 	payload: track,
+});
+
+export const setDisciplineId = <T extends Id | undefined>(id: T): Action<typeof SET_DISCIPLINE_ID, T> => ({
+	type: SET_DISCIPLINE_ID,
+	payload: id,
 });
