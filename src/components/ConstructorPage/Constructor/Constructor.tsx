@@ -6,10 +6,10 @@ import { Semester } from './Semester/Semester';
 import { TrackPicker } from './TrackPicker/TrackPicker';
 import { useEducationalModules } from '../../../hooks/useEducationalModules';
 import { Loader } from '../../common/Loader/Loader';
-import { useProfessionalTrajectories } from '../../../hooks/useProfessionalTrajectories';
 import { Id } from '../../../common/types';
-import { setCurrentSemester, setSemesters, setTracks, useConstructorContext } from '../Context';
+import { setCurrentSemester, setCurrentStep, setSemesters, setTracks, useConstructorContext } from '../Context';
 import { TrackProgresses } from './TrackProgresses/TrackProgresses';
+import { useProfessionalTrajectories } from '../../../hooks/useProfessionalTrajectories';
 
 type ConstructorProps = {
 	selectedDirection: Id;
@@ -17,28 +17,20 @@ type ConstructorProps = {
 
 export const Constructor: React.FC<ConstructorProps> = ({ selectedDirection }) => {
 	const {
-		state: { semesters, currentSemester, tracks },
+		state: { semesters, currentSemester, currentStep },
 		dispatch,
 	} = useConstructorContext();
-	const [percent, setPercent] = useState(40);
 	const { trajectories } = useProfessionalTrajectories();
+	const [percent, setPercent] = useState(0);
 	let { modules, loading, semesters: semestersFromBack } = useEducationalModules(selectedDirection, currentSemester);
 
 	useEffect(() => {
-		const finishedSemesters = semesters.filter((sem) => sem.finish).length;
-		setPercent(finishedSemesters * (100 / 8));
+		const finishedSemestersCount = semesters.filter((sem) => sem.finish).length;
+		setPercent(finishedSemestersCount * (100 / semesters.length));
 	}, [semesters]);
 
 	useEffect(() => {
-		dispatch(
-			setTracks(
-				trajectories.map((track) => ({
-					...track,
-					points: 0,
-					percent: 0,
-				}))
-			)
-		);
+		dispatch(setTracks(trajectories.map((track) => ({ ...track, points: 0, percent: 0 }))));
 	}, [trajectories]);
 
 	useEffect(() => {
@@ -61,7 +53,6 @@ export const Constructor: React.FC<ConstructorProps> = ({ selectedDirection }) =
 					trailColor="#D9D9D9"
 					status="active"
 				/>
-
 				<div className="constructor__middle">
 					<div className="constructor__middle__pagination">
 						<Space direction="vertical" size={16}>
@@ -81,13 +72,18 @@ export const Constructor: React.FC<ConstructorProps> = ({ selectedDirection }) =
 					</div>
 					<div className="score">
 						<div className="score__title">Мои траектории</div>
-						<TrackProgresses tracks={tracks} />
+						<TrackProgresses />
 					</div>
 				</div>
 
 				<Row gutter={20}>
 					<Col>
-						<Button type="primary" disabled={percent !== 100} style={{ width: 392, height: 47 }}>
+						<Button
+							type="primary"
+							disabled={percent < 100}
+							style={{ width: 392, height: 47 }}
+							onClick={() => dispatch(setCurrentStep(currentStep + 1))}
+						>
 							Создать траекторию
 						</Button>
 					</Col>

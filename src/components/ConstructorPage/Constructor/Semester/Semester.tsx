@@ -10,7 +10,6 @@ type SemesterProps = {
 };
 
 export const Semester: React.FC<SemesterProps> = ({ semester, selected, setCurrentSemester }) => {
-	console.log(semester.finish);
 	return (
 		<Col>
 			<button

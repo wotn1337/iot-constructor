@@ -17,7 +17,7 @@ type ColumnProps = {
 
 export const Card: React.FC<ColumnProps> = ({ course, index, droppableId, isDragDisabled, isSelected }) => {
 	const {
-		state: { columns, currentSemester, tracks },
+		state: { columns, currentSemester },
 		dispatch,
 	} = useConstructorContext();
 	const [badgeVisible, setBadgeVisible] = useState<boolean>(false);
@@ -52,12 +52,7 @@ export const Card: React.FC<ColumnProps> = ({ course, index, droppableId, isDrag
 														droppableId: droppableId.split('_')[1],
 														index: 0,
 													};
-													let data = deleteTask(
-														columns,
-														tracks,
-														source.droppableId,
-														source.index
-													);
+													let data = deleteTask(columns, source.droppableId, source.index);
 													let newData = data?.newColumns;
 													let removed = data?.removed;
 
@@ -65,7 +60,6 @@ export const Card: React.FC<ColumnProps> = ({ course, index, droppableId, isDrag
 														newData =
 															addTask(
 																newData,
-																tracks,
 																destination?.droppableId,
 																destination?.index,
 																removed

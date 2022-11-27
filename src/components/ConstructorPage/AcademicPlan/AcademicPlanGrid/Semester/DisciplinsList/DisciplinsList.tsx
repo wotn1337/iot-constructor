@@ -6,7 +6,7 @@ import { Tag } from '../../../../../common/Tag/Tag';
 
 type DisciplinsListProps = ListType & { hidden: boolean };
 
-export const DisciplinsList: React.FC<DisciplinsListProps> = ({ title, items, type, hidden }) => {
+export const DisciplinsList: React.FC<DisciplinsListProps> = ({ title, items, type, hidden, placeholder }) => {
 	return (
 		<List
 			size="small"
@@ -26,7 +26,7 @@ export const DisciplinsList: React.FC<DisciplinsListProps> = ({ title, items, ty
 				</List.Item>
 			)}
 			className="disciplins-list"
-			locale={{ emptyText: 'В этом семестре отсутствуют курсы по выбору' }}
+			locale={{ emptyText: placeholder }}
 			style={{ display: hidden ? 'none' : 'block' }}
 		/>
 	);
