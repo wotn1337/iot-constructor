@@ -16,18 +16,25 @@ export const Header: React.FC<HeaderProps> = () => {
 			<Row justify="space-between" align="middle" className={s.header__inner}>
 				<Col className={s.header__logos}>
 					<NavLink to="/">
-						<div className={s.logo} />
-					</NavLink>
-					<NavLink to="/">
 						<Image src={LogoIrit} preview={false} />
 					</NavLink>
 				</Col>
 				<Col>
 					<Navbar
-						items={PageRoutes.map((item) => ({
-							label: <NavLink to={item.route}>{item.title}</NavLink>,
-							key: item.route,
-						}))}
+						items={[
+							...PageRoutes.map((item) => ({
+								label: <NavLink to={item.route}>{item.title}</NavLink>,
+								key: item.route,
+							})),
+							{
+								label: (
+									<a href="https://forms.gle/ffYJXod5HmRZZHfv5" target="_blank" rel="noreferrer">
+										Оставить отзыв
+									</a>
+								),
+								key: 'review',
+							},
+						]}
 					/>
 				</Col>
 			</Row>

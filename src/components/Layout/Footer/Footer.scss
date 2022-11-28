@@ -2,13 +2,6 @@
 
 .footer {
   background-color: #FFFFFF;
-  &__brand {
-    &__logo {
-      width: 60px;
-      height: 60px;
-      background-color: $gray;
-    }
-  }
 
   .text_default {
     font-weight: 400;

@@ -1,33 +1,27 @@
-import React, { useEffect, useState } from 'react';
-import { Progress, Space } from 'antd';
+import React, { useEffect } from 'react';
+import { Space } from 'antd';
 import './Constructor.scss';
-import { Button } from '../../common/Button/Button';
 import { Semester } from './Semester/Semester';
 import { TrackPicker } from './TrackPicker/TrackPicker';
 import { useEducationalModules } from '../../../hooks/useEducationalModules';
 import { Loader } from '../../common/Loader/Loader';
-import { Id } from '../../../common/types';
-import { setCurrentSemester, setCurrentStep, setSemesters, setTracks, useConstructorContext } from '../Context';
+import { setCurrentSemester, setSemesters, setTracks, useConstructorContext } from '../Context';
 import { TrackProgresses } from './TrackProgresses/TrackProgresses';
 import { useProfessionalTrajectories } from '../../../hooks/useProfessionalTrajectories';
 
-type ConstructorProps = {
-	selectedDirection: Id;
-};
+type ConstructorProps = {};
 
-export const Constructor: React.FC<ConstructorProps> = ({ selectedDirection }) => {
+export const Constructor: React.FC<ConstructorProps> = () => {
 	const {
-		state: { semesters, currentSemester, currentStep },
+		state: { semesters, currentSemester, selectedDirection },
 		dispatch,
 	} = useConstructorContext();
 	const { trajectories } = useProfessionalTrajectories();
-	const [percent, setPercent] = useState(0);
-	let { modules, loading, semesters: semestersFromBack } = useEducationalModules(selectedDirection, currentSemester);
-
-	useEffect(() => {
-		const finishedSemestersCount = semesters.filter((sem) => sem.finish).length;
-		setPercent(finishedSemestersCount * (100 / semesters.length));
-	}, [semesters]);
+	let {
+		modules,
+		loading,
+		semesters: semestersFromBack,
+	} = useEducationalModules(selectedDirection ?? 1, currentSemester);
 
 	useEffect(() => {
 		dispatch(setTracks(trajectories.map((track) => ({ ...track, points: 0, percent: 0 }))));
@@ -63,27 +57,6 @@ export const Constructor: React.FC<ConstructorProps> = ({ selectedDirection }) =
 						<div className="score__title">Мои траектории</div>
 						<TrackProgresses />
 					</div>
-				</div>
-
-				<div className="constructor__end">
-					<Progress
-						percent={percent}
-						strokeWidth={40}
-						strokeLinecap="butt"
-						strokeColor={{
-							'0%': '#FFFFFF',
-							'100%': '#FF8413',
-						}}
-						trailColor="#D9D9D9"
-					/>
-					<Button
-						type="primary"
-						disabled={percent < 100}
-						style={{ width: 289, height: 40 }}
-						onClick={() => dispatch(setCurrentStep(currentStep + 1))}
-					>
-						Создать траекторию
-					</Button>
 				</div>
 			</Loader>
 		</div>
