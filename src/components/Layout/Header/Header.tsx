@@ -16,9 +16,6 @@ export const Header: React.FC<HeaderProps> = () => {
 			<Row justify="space-between" align="middle" className={s.header__inner}>
 				<Col className={s.header__logos}>
 					<NavLink to="/">
-						<div className={s.logo} />
-					</NavLink>
-					<NavLink to="/">
 						<Image src={LogoIrit} preview={false} />
 					</NavLink>
 				</Col>

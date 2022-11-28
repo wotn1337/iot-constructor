@@ -1,5 +1,5 @@
 import React from 'react';
-import { Col, Layout, Row, Space } from 'antd';
+import { Col, Image, Layout, Row, Space } from 'antd';
 import { PageRoutes } from '../../../routes';
 import './Footer.scss';
 import { useContactsQuery } from '../../../hooks/useContactsQuery';
@@ -7,7 +7,7 @@ import { useSocialNetworksQuery } from '../../../hooks/useSocialNetworksQuery';
 import { Loader } from '../../common/Loader/Loader';
 import { TitledList } from '../../common/TitledList/TitledList';
 import { IconText } from '../../common/IconText/IconText';
-import { LocationIcon, MailIcon, PhoneIcon } from '../../../images';
+import { LocationIcon, LogoIrit, MailIcon, PhoneIcon } from '../../../images';
 import { NavLink } from 'react-router-dom';
 
 const { Footer: AntdFooter } = Layout;
@@ -28,7 +28,9 @@ export const Footer = () => {
 				<Row gutter={{ xxl: 168, xl: 100 }} justify="center" style={{ margin: 0 }}>
 					<Col className="footer__brand">
 						<Space direction="vertical" size="large">
-							<div className="footer__brand__logo" />
+							<NavLink to="/">
+								<Image src={LogoIrit} preview={false} />
+							</NavLink>
 							<p className="text_default">© ИРИТ-РТФ ИОТ, 2022</p>
 						</Space>
 					</Col>
