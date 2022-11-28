@@ -10,6 +10,7 @@ import {
 	SET_SEMESTERS,
 	SET_TRACK_POINTS,
 	SET_TRACKS,
+	SET_DISCIPLINE_ID,
 } from './constants';
 
 export const MainPageContextInitialState: ConstructorContextState = {
@@ -145,6 +146,9 @@ export const MainPageContextReducer = (
 						: track
 				),
 			};
+		}
+		case SET_DISCIPLINE_ID: {
+			return { ...state, disciplineId: action.payload };
 		}
 		default:
 			return state;

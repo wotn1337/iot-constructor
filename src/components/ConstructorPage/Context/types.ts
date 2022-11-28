@@ -4,6 +4,7 @@ import {
 	setColumns,
 	setCurrentSemester,
 	setCurrentStep,
+	setDisciplineId,
 	setSelectedDirection,
 	setSelectedType,
 	setSemesterColumns,
@@ -22,6 +23,7 @@ export type ConstructorContextState = {
 	currentSemester: number;
 	columns: IColumns;
 	tracks: TrackProgress[];
+	disciplineId?: Id;
 };
 
 export type Step = {
@@ -72,6 +74,7 @@ export type ConstructorContextActions = ReturnType<
 	| typeof setSemesterFinish
 	| typeof setTracks
 	| typeof setTracksPoints
+	| typeof setDisciplineId
 >;
 
 export type ConstructorContext = {

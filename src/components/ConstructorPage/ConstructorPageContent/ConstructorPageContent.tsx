@@ -1,21 +1,27 @@
-import React, { useState } from 'react';
+import React from 'react';
 import s from './ConstructorPageContent.module.scss';
 import { message } from 'antd';
 import { DirectionSelection } from '../DirectionSelection/DirectionSelection';
 import { TypeSelection } from '../TypeSelection/TypeSelection';
 import { Constructor } from '../Constructor/Constructor';
 import { AcademicPlan } from '../AcademicPlan/AcademicPlan';
-import { setCurrentStep, useConstructorContext } from '../Context';
+import { setCurrentStep, setDisciplineId, useConstructorContext } from '../Context';
 import { DisciplineModal } from '../DisciplineModal/DisciplineModal';
 import { NavigationTitle } from '../NavigationTitle/NavigationTitle';
+import { useDisciplineQuery } from '../../../hooks/useDisciplineQuery';
 
 type ConstructorProps = {};
 
 export const ConstructorPageContent: React.FC<ConstructorProps> = () => {
 	const {
-		state: { currentStep, selectedDirection, selectedType },
+		state: { currentStep, selectedDirection, selectedType, disciplineId },
 		dispatch,
 	} = useConstructorContext();
+	const {
+		data: discipline,
+		isFetching: disciplineFetching,
+		isLoading: disciplineLoading,
+	} = useDisciplineQuery(disciplineId);
 	const steps = [
 		{
 			title: 'Выберите направление подготовки',
@@ -28,7 +34,6 @@ export const ConstructorPageContent: React.FC<ConstructorProps> = () => {
 		{ title: '', content: <Constructor selectedDirection={selectedDirection ?? 1} /> },
 		{ title: '', content: <AcademicPlan /> },
 	];
-	const [disciplinId, setDisciplinId] = useState(true);
 
 	const onChangeStep = (step: number) => {
 		if (step > currentStep && !selectedDirection) {
@@ -48,7 +53,12 @@ export const ConstructorPageContent: React.FC<ConstructorProps> = () => {
 				onBack={currentStep !== 0 ? () => onChangeStep(currentStep - 1) : undefined}
 			/>
 			<div className={s.content}>{steps[currentStep].content}</div>
-			<DisciplineModal open={disciplinId} onCancel={() => setDisciplinId(false)} />
+			<DisciplineModal
+				discipline={discipline}
+				loading={disciplineLoading || disciplineFetching}
+				open={!!disciplineId}
+				onCancel={() => dispatch(setDisciplineId(undefined))}
+			/>
 		</section>
 	);
 };

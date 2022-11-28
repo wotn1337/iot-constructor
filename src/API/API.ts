@@ -1,6 +1,7 @@
 import axios from 'axios';
 import {
 	AdmissionCommitteeContactsResponse,
+	DisciplinesResponse,
 	EducationalModulesResponse,
 	PartnersResponse,
 	ProfessionalTrajectories,
@@ -63,7 +64,11 @@ export const professionalTrajectoriesAPI = {
 };
 
 export const disciplinsAPI = {
-	getDisciplin: async (id: Id) => {
+	getDisciplin: async (id: Id | undefined) => {
+		if (id) {
+			const res = await instance.get<DisciplinesResponse>(`disciplines/${id}`);
+			return res.data.discipline;
+		}
 		return undefined;
 	},
 };

@@ -18,10 +18,25 @@
     }
   }
 
-  .disc-tag {
-    margin: 0;
-    background-color: black;
+  .discipline-item {
+    .item-inner {
+      width: 100%;
+
+      &:hover {
+        color: $fontBlue;
+        cursor: pointer;
+      }
+
+      &:active {
+        color: $darkBlue;
+      }
+
+      .ant-space-item:has(.tags-list) {
+        margin-left: auto;
+      }
+    }
   }
+
 
   .ant-list-empty-text {
     text-align: left;

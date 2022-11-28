@@ -3,7 +3,13 @@ import { Draggable } from 'react-beautiful-dnd';
 import './Card.scss';
 import { CloseOutlined, QuestionOutlined } from '@ant-design/icons';
 import { Discipline } from '../../../../../common/types';
-import { setColumns, setSemesterColumns, setSemesterFinish, useConstructorContext } from '../../../Context';
+import {
+	setColumns,
+	setDisciplineId,
+	setSemesterColumns,
+	setSemesterFinish,
+	useConstructorContext,
+} from '../../../Context';
 import { addTask, deleteTask } from '../../utils';
 import { Tag } from '../../../../common/Tag/Tag';
 
@@ -81,7 +87,10 @@ export const Card: React.FC<ColumnProps> = ({ course, index, droppableId, isDrag
 							<div className="card__header">
 								<p>{course.title}</p>
 								<div className="card__header__buttons" style={{ opacity: badgeVisible ? 100 : 0 }}>
-									<button className="button question">
+									<button
+										className="button question"
+										onClick={() => dispatch(setDisciplineId(course.id))}
+									>
 										<QuestionOutlined />
 									</button>
 									{isSelected && !isDragDisabled && (
