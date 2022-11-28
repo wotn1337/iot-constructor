@@ -4,17 +4,20 @@ import { Document, LightBlue } from '../../../images';
 import { TypeCard } from './TypeCard/TypeCard';
 import s from './TypeSelection.module.scss';
 import { setSelectedType, useConstructorContext } from '../Context';
+import { STEP_TYPES } from '../types';
 
 const CONSTRUCTOR_TYPES = [
 	{
 		id: 1,
 		icon: LightBlue,
 		title: 'Создать траекторию с нуля',
+		type: STEP_TYPES.CONSTRUCTOR,
 	},
 	{
 		id: 2,
 		icon: Document,
 		title: 'Посмотреть готовые траектории',
+		type: STEP_TYPES.TRAJECTORIES,
 	},
 ];
 
@@ -32,8 +35,8 @@ export const TypeSelection: React.FC<TypeSelectionProps> = () => {
 				<Col key={type.id} span={12}>
 					<TypeCard
 						{...type}
-						selected={selectedType === type.id}
-						onClick={() => dispatch(setSelectedType(type.id))}
+						selected={selectedType === type.type}
+						onClick={() => dispatch(setSelectedType(type.type))}
 					/>
 				</Col>
 			))}

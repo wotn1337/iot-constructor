@@ -10,6 +10,7 @@ import { DisciplineModal } from '../DisciplineModal/DisciplineModal';
 import { Navigation } from '../Navigation/Navigation';
 import { useDisciplineQuery } from '../../../hooks/useDisciplineQuery';
 import { Step, STEP_TYPES } from '../types';
+import { PageInProgress } from '../../common/PageInProgress/PageInProgress';
 
 type ConstructorProps = {};
 
@@ -35,7 +36,15 @@ export const ConstructorPageContent: React.FC<ConstructorProps> = () => {
 			content: <TypeSelection />,
 			type: STEP_TYPES.TYPE_SELECTION,
 		},
-		{ content: <Constructor />, type: STEP_TYPES.CONSTRUCTOR },
+		{
+			content:
+				selectedType === STEP_TYPES.CONSTRUCTOR ? (
+					<Constructor />
+				) : (
+					<PageInProgress page="Просмотр траекторий" />
+				),
+			type: selectedType === STEP_TYPES.CONSTRUCTOR ? STEP_TYPES.CONSTRUCTOR : STEP_TYPES.TRAJECTORIES,
+		},
 		{ content: <AcademicPlan />, type: STEP_TYPES.ACADEMIC_PLAN },
 	];
 
@@ -60,7 +69,12 @@ export const ConstructorPageContent: React.FC<ConstructorProps> = () => {
 				{steps[currentStep].title && <h4 className={s.title}>{steps[currentStep].title}</h4>}
 				<div className={s.content}>{steps[currentStep].content}</div>
 				<Navigation
-					onNext={currentStep !== steps.length - 1 ? () => onChangeStep(currentStep + 1) : undefined}
+					onNext={
+						currentStep !== steps.length - 1 &&
+						!(currentStep === 2 && selectedType === STEP_TYPES.TRAJECTORIES)
+							? () => onChangeStep(currentStep + 1)
+							: undefined
+					}
 					onBack={currentStep !== 0 ? () => onChangeStep(currentStep - 1) : undefined}
 					percent={percent}
 					stepType={steps[currentStep].type}

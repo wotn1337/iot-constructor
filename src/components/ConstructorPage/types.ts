@@ -9,4 +9,5 @@ export enum STEP_TYPES {
 	TYPE_SELECTION = 'type-selection',
 	CONSTRUCTOR = 'constructor',
 	ACADEMIC_PLAN = 'academic-plan',
+	TRAJECTORIES = 'trajectories',
 }
