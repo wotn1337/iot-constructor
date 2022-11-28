@@ -29,7 +29,10 @@ export const DisciplineModal: React.FC<DisciplineModalProps> = ({ open, discipli
 			<Skeleton loading={loading} paragraph={{ rows: 5 }}>
 				<Space direction="vertical" size={24} className="disciplineModal__content">
 					<TitledBlock title="Описание">
-						<div className="disciplineModal__content__description">{discipline?.description}</div>
+						<div
+							className="disciplineModal__content__description"
+							dangerouslySetInnerHTML={{ __html: discipline?.description ?? '' }}
+						/>
 					</TitledBlock>
 					<TitledBlock title="Список курсов">
 						<CourseList courses={discipline?.courses} />
