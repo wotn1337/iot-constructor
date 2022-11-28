@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { Draggable } from 'react-beautiful-dnd';
 import './Card.scss';
-import { Tag, Tooltip } from 'antd';
 import { CloseOutlined, QuestionOutlined } from '@ant-design/icons';
 import { Discipline } from '../../../../../common/types';
 import { setColumns, setSemesterColumns, setSemesterFinish, useConstructorContext } from '../../../Context';
 import { addTask, deleteTask } from '../../utils';
+import { Tag } from '../../../../common/Tag/Tag';
 
 type ColumnProps = {
 	course: Discipline;
@@ -21,6 +21,50 @@ export const Card: React.FC<ColumnProps> = ({ course, index, droppableId, isDrag
 		dispatch,
 	} = useConstructorContext();
 	const [badgeVisible, setBadgeVisible] = useState<boolean>(false);
+
+	const onCloseHandle = () => {
+		const source = {
+			droppableId: droppableId,
+			index: index,
+		};
+		const destination = {
+			droppableId: droppableId.split('_')[1],
+			index: 0,
+		};
+		let data = deleteTask(columns, source.droppableId, source.index);
+		let newData = data?.newColumns;
+		let removed = data?.removed;
+
+		if (newData && removed) {
+			newData = addTask(newData, destination?.droppableId, destination?.index, removed) ?? {};
+			dispatch(setColumns(newData));
+			dispatch(
+				setSemesterColumns({
+					id: currentSemester,
+					columns: newData,
+				})
+			);
+			if (
+				newData['2'].items
+					.filter((module) => module.is_spec)
+					.every((module) => module.choice_limit === module.disciplines.length)
+			) {
+				dispatch(
+					setSemesterFinish({
+						id: currentSemester,
+						isFinished: true,
+					})
+				);
+			} else
+				dispatch(
+					setSemesterFinish({
+						id: currentSemester,
+						isFinished: false,
+					})
+				);
+		}
+	};
+
 	return (
 		<Draggable draggableId={course.id.toString()} key={index} index={index} isDragDisabled={isDragDisabled}>
 			{(provided) => {
@@ -42,78 +86,20 @@ export const Card: React.FC<ColumnProps> = ({ course, index, droppableId, isDrag
 									</button>
 									{isSelected && !isDragDisabled && (
 										<button className="button close">
-											<CloseOutlined
-												onClick={() => {
-													const source = {
-														droppableId: droppableId,
-														index: index,
-													};
-													const destination = {
-														droppableId: droppableId.split('_')[1],
-														index: 0,
-													};
-													let data = deleteTask(columns, source.droppableId, source.index);
-													let newData = data?.newColumns;
-													let removed = data?.removed;
-
-													if (newData && removed) {
-														newData =
-															addTask(
-																newData,
-																destination?.droppableId,
-																destination?.index,
-																removed
-															) ?? {};
-														dispatch(setColumns(newData));
-														dispatch(
-															setSemesterColumns({
-																id: currentSemester,
-																columns: newData,
-															})
-														);
-														if (
-															newData['2'].items
-																.filter((module) => module.is_spec)
-																.every(
-																	(module) =>
-																		module.choice_limit ===
-																		module.disciplines.length
-																)
-														) {
-															dispatch(
-																setSemesterFinish({
-																	id: currentSemester,
-																	isFinished: true,
-																})
-															);
-														} else
-															dispatch(
-																setSemesterFinish({
-																	id: currentSemester,
-																	isFinished: false,
-																})
-															);
-													}
-												}}
-											/>
+											<CloseOutlined onClick={onCloseHandle} />
 										</button>
 									)}
 								</div>
 							</div>
 							<div className="card__tags">
 								{course.professional_trajectories?.map((tag) => (
-									<Tooltip title={tag.title}>
-										<Tag
-											className="card__tags__tag"
-											style={{
-												backgroundColor: `white`,
-												border: `1px solid ${tag.color}`,
-											}}
-											key={tag.id}
-										>
-											{tag.slug}
-										</Tag>
-									</Tooltip>
+									<Tag
+										text={tag.slug}
+										color={tag.color}
+										tooltipText={tag.title}
+										shouldShowTooltip
+										key={tag.id}
+									/>
 								))}
 							</div>
 						</div>

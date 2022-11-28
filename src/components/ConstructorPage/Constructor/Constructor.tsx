@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Col, Progress, Row, Space } from 'antd';
+import { Progress, Space } from 'antd';
 import './Constructor.scss';
 import { Button } from '../../common/Button/Button';
 import { Semester } from './Semester/Semester';
@@ -42,17 +42,6 @@ export const Constructor: React.FC<ConstructorProps> = ({ selectedDirection }) =
 	return (
 		<div className="constructor">
 			<Loader loading={loading}>
-				<Progress
-					percent={percent}
-					strokeWidth={30}
-					strokeLinecap="butt"
-					strokeColor={{
-						'0%': '#0975D9',
-						'100%': '#18C8FF',
-					}}
-					trailColor="#D9D9D9"
-					status="active"
-				/>
 				<div className="constructor__middle">
 					<div className="constructor__middle__pagination">
 						<Space direction="vertical" size={16}>
@@ -76,18 +65,26 @@ export const Constructor: React.FC<ConstructorProps> = ({ selectedDirection }) =
 					</div>
 				</div>
 
-				<Row gutter={20}>
-					<Col>
-						<Button
-							type="primary"
-							disabled={percent < 100}
-							style={{ width: 392, height: 47 }}
-							onClick={() => dispatch(setCurrentStep(currentStep + 1))}
-						>
-							Создать траекторию
-						</Button>
-					</Col>
-				</Row>
+				<div className="constructor__end">
+					<Progress
+						percent={percent}
+						strokeWidth={40}
+						strokeLinecap="butt"
+						strokeColor={{
+							'0%': '#FFFFFF',
+							'100%': '#FF8413',
+						}}
+						trailColor="#D9D9D9"
+					/>
+					<Button
+						type="primary"
+						disabled={percent < 100}
+						style={{ width: 289, height: 40 }}
+						onClick={() => dispatch(setCurrentStep(currentStep + 1))}
+					>
+						Создать траекторию
+					</Button>
+				</div>
 			</Loader>
 		</div>
 	);

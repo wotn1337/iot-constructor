@@ -5,7 +5,7 @@ import { Column } from './Column/Column';
 import { Discipline, EducationModule } from '../../../../common/types';
 import { setColumns, setSemesterColumns, setSemesterFinish, useConstructorContext } from '../../Context';
 import { IColumns } from '../../Context/types';
-import { addTask, deleteTask, isDropValid } from '../utils';
+import { addTask, deleteTask, isModulesEqual, isModulesInSameColumn } from '../utils';
 
 type TrackPickerProps = {
 	modules: EducationModule[];
@@ -18,11 +18,15 @@ export const TrackPicker: React.FC<TrackPickerProps> = ({ modules }) => {
 	} = useConstructorContext();
 
 	const onDragEnd = (result: DropResult, columns: IColumns) => {
-		isDropValid(result);
 		const { source, destination } = result;
-		if (!destination) {
+
+		if (!destination || isModulesInSameColumn(source.droppableId, destination?.droppableId)) {
 			return message.warn('Необходимо перетащить курс в соседнюю колонку');
 		}
+		if (!isModulesEqual(source.droppableId, destination?.droppableId)) {
+			return message.warn('Неверный модуль!');
+		}
+
 		let data = deleteTask(columns, source.droppableId, source.index);
 		let newData = data?.newColumns;
 		let removed = data?.removed;
@@ -54,6 +58,7 @@ export const TrackPicker: React.FC<TrackPickerProps> = ({ modules }) => {
 
 	useEffect(() => {
 		const data = semesters.find((sem) => sem.id.toString() === currentSemester.toString())?.columns;
+
 		if (data) {
 			dispatch(setColumns(data));
 		} else {
@@ -63,6 +68,7 @@ export const TrackPicker: React.FC<TrackPickerProps> = ({ modules }) => {
 				.forEach((module) => {
 					module.disciplines.forEach((disc) => disciplines.push(disc));
 				});
+
 			const requiredModule: EducationModule = {
 				id: 'required_module',
 				title: 'Обязательные дисциплины',
@@ -70,6 +76,7 @@ export const TrackPicker: React.FC<TrackPickerProps> = ({ modules }) => {
 				disciplines: disciplines,
 				choice_limit: 0,
 			};
+
 			dispatch(
 				setColumns({
 					'1': {
