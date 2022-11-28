@@ -21,10 +21,20 @@ export const Header: React.FC<HeaderProps> = () => {
 				</Col>
 				<Col>
 					<Navbar
-						items={PageRoutes.map((item) => ({
-							label: <NavLink to={item.route}>{item.title}</NavLink>,
-							key: item.route,
-						}))}
+						items={[
+							...PageRoutes.map((item) => ({
+								label: <NavLink to={item.route}>{item.title}</NavLink>,
+								key: item.route,
+							})),
+							{
+								label: (
+									<a href="https://forms.gle/ffYJXod5HmRZZHfv5" target="_blank" rel="noreferrer">
+										Оставить отзыв
+									</a>
+								),
+								key: 'review',
+							},
+						]}
 					/>
 				</Col>
 			</Row>
