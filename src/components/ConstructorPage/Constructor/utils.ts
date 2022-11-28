@@ -1,7 +1,5 @@
-import { IColumns, TrackProgress } from '../Context/types';
+import { IColumns } from '../Context/types';
 import { Discipline, EducationModule } from '../../../common/types';
-import { message } from 'antd';
-import { DropResult } from 'react-beautiful-dnd';
 
 export const clone = (data: IColumns) => {
 	return JSON.parse(JSON.stringify(data));
@@ -44,7 +42,7 @@ const getNewColumnsData = (
 	};
 };
 
-export const deleteTask = (columns: IColumns, tracks: TrackProgress[], droppableId: string, index: number) => {
+export const deleteTask = (columns: IColumns, droppableId: string, index: number) => {
 	columns = clone(columns);
 	let columnKey = getColumnKey(columns, droppableId);
 	const module = getTargetModule(columns, columnKey, droppableId);
@@ -56,13 +54,7 @@ export const deleteTask = (columns: IColumns, tracks: TrackProgress[], droppable
 	}
 };
 
-export const addTask = (
-	columns: IColumns,
-	tracks: TrackProgress[],
-	droppableId: string,
-	index: number,
-	newDiscipline: Discipline
-) => {
+export const addTask = (columns: IColumns, droppableId: string, index: number, newDiscipline: Discipline) => {
 	columns = clone(columns);
 	let columnKey = getColumnKey(columns, droppableId);
 	const module = getTargetModule(columns, columnKey, droppableId);
@@ -73,23 +65,13 @@ export const addTask = (
 	}
 };
 
-const isModulesEqual = (source: string, destination: string) => {
+export const isModulesEqual = (source: string, destination: string) => {
 	if (source.includes('_')) {
 		return source.split('_')[1] === destination;
 	}
 	return source === destination.split('_')[1];
 };
 
-const isModulesInSameColumn = (source: string, destination: string) => {
+export const isModulesInSameColumn = (source: string, destination: string) => {
 	return (source.includes('_') && destination.includes('_')) || (!source.includes('_') && !destination.includes('_'));
-};
-
-export const isDropValid = (result: DropResult) => {
-	const { source, destination } = result;
-	if (!destination || isModulesInSameColumn(source.droppableId, destination?.droppableId)) {
-		return message.warn('Необходимо перетащить курс в соседнюю колонку');
-	}
-	if (!isModulesEqual(source.droppableId, destination?.droppableId)) {
-		return message.warn('Неверный модуль!');
-	}
 };
