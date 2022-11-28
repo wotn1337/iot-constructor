@@ -1,13 +1,21 @@
 .wrapper {
-  padding: 64px 0;
-  width: 1216px;
-  margin: 0 auto;
+  background-image: url("../../../images/constructor/constructor_bg.svg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  flex: 1;
 
-  .title {
-    text-align: center;
-  }
+  .inner {
+    padding: 64px 0;
+    width: 1216px;
+    margin: 0 auto;
 
-  .content {
-    padding: 54px 0 32px;
+    .title {
+      text-align: center;
+    }
+
+    .content {
+      padding: 54px 0 32px;
+    }
   }
 }

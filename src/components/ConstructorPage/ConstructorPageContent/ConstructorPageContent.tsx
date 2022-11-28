@@ -56,20 +56,22 @@ export const ConstructorPageContent: React.FC<ConstructorProps> = () => {
 
 	return (
 		<section className={s.wrapper}>
-			{steps[currentStep].title && <h4 className={s.title}>{steps[currentStep].title}</h4>}
-			<div className={s.content}>{steps[currentStep].content}</div>
-			<Navigation
-				onNext={currentStep !== steps.length - 1 ? () => onChangeStep(currentStep + 1) : undefined}
-				onBack={currentStep !== 0 ? () => onChangeStep(currentStep - 1) : undefined}
-				percent={percent}
-				stepType={steps[currentStep].type}
-			/>
-			<DisciplineModal
-				discipline={discipline}
-				loading={disciplineLoading || disciplineFetching}
-				open={!!disciplineId}
-				onCancel={() => dispatch(setDisciplineId(undefined))}
-			/>
+			<div className={s.inner}>
+				{steps[currentStep].title && <h4 className={s.title}>{steps[currentStep].title}</h4>}
+				<div className={s.content}>{steps[currentStep].content}</div>
+				<Navigation
+					onNext={currentStep !== steps.length - 1 ? () => onChangeStep(currentStep + 1) : undefined}
+					onBack={currentStep !== 0 ? () => onChangeStep(currentStep - 1) : undefined}
+					percent={percent}
+					stepType={steps[currentStep].type}
+				/>
+				<DisciplineModal
+					discipline={discipline}
+					loading={disciplineLoading || disciplineFetching}
+					open={!!disciplineId}
+					onCancel={() => dispatch(setDisciplineId(undefined))}
+				/>
+			</div>
 		</section>
 	);
 };
