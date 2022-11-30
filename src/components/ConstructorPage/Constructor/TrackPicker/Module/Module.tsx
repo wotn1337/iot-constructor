@@ -2,9 +2,11 @@ import React from 'react';
 import { Card } from '../Card/Card';
 import { EducationModule } from '../../../../../common/types';
 import { Droppable } from 'react-beautiful-dnd';
-import s from './Module.module.scss';
-import { RequiredModule } from '../RequiredModule/RequiredModule';
+import './Module.scss';
 import { Column } from '../../../Context/types';
+import { Collapse } from 'antd';
+
+const { Panel } = Collapse;
 
 type ModuleProps = {
 	column: Column;
@@ -20,13 +22,10 @@ export const Module: React.FC<ModuleProps> = ({ module, column }) => {
 		>
 			{(provided) => {
 				return (
-					<div className={s.module} {...provided.droppableProps} ref={provided.innerRef}>
-						{!module.is_spec ? (
-							<RequiredModule module={module} columnId={column.id} />
-						) : (
-							<>
-								<p className={s.module__title}>{module.title}</p>
-								<div className={!module.disciplines.length ? s.module__placeholder : undefined}>
+					<div className="module_wrapper" {...provided.droppableProps} ref={provided.innerRef}>
+						<Collapse ghost defaultActiveKey={module.is_spec ? [`${module.id}`] : ''}>
+							<Panel header={module.title} key={module.id}>
+								<div className={!module.disciplines.length ? 'module_wrapper__placeholder' : undefined}>
 									{!module.disciplines.length && <p>Курс не выбран</p>}
 									{module.disciplines.map((item, index) => (
 										<Card
@@ -39,9 +38,9 @@ export const Module: React.FC<ModuleProps> = ({ module, column }) => {
 										/>
 									))}
 								</div>
-								{provided.placeholder}
-							</>
-						)}
+							</Panel>
+						</Collapse>
+						{provided.placeholder}
 					</div>
 				);
 			}}
