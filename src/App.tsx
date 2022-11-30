@@ -1,5 +1,5 @@
 import React from 'react';
-import { HashRouter, Route, Routes } from 'react-router-dom';
+import { Route, Routes, useLocation } from 'react-router-dom';
 import { Layout } from './components';
 import { ConstructorPage, MainPage } from './pages';
 import { ROUTES } from './routes';
@@ -9,19 +9,23 @@ import { PageInProgress } from './components/common/PageInProgress/PageInProgres
 const queryClient = new QueryClient();
 
 export const App = () => {
+	const { pathname } = useLocation();
+	if (pathname) {
+		// @ts-ignore
+		window.ym(91451529, 'hit', pathname);
+	}
+
 	return (
 		<QueryClientProvider client={queryClient}>
-			<HashRouter>
-				<Routes>
-					<Route element={<Layout />}>
-						<Route path={ROUTES.MAIN} element={<MainPage />} />
-						<Route path={ROUTES.CONSTRUCTOR} element={<ConstructorPage />} />
-						<Route path={ROUTES.PROFESSIONS} element={<PageInProgress page="Профессии" />} />
-						<Route path={ROUTES.EMPLOYEES} element={<PageInProgress page="Кураторы" />} />
-						<Route path={ROUTES.PARTNERS} element={<PageInProgress page="Партнеры" />} />
-					</Route>
-				</Routes>
-			</HashRouter>
+			<Routes>
+				<Route element={<Layout />}>
+					<Route index path={ROUTES.MAIN} element={<MainPage />} />
+					<Route path={`${ROUTES.CONSTRUCTOR}/*`} element={<ConstructorPage />} />
+					<Route path={ROUTES.PROFESSIONS} element={<PageInProgress page="Профессии" />} />
+					<Route path={ROUTES.EMPLOYEES} element={<PageInProgress page="Кураторы" />} />
+					<Route path={ROUTES.PARTNERS} element={<PageInProgress page="Партнеры" />} />
+				</Route>
+			</Routes>
 		</QueryClientProvider>
 	);
 };

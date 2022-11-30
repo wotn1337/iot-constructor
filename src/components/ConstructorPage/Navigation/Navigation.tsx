@@ -1,27 +1,63 @@
-import React from 'react';
-import { Col, Progress, Row } from 'antd';
+import React, { useEffect, useMemo, useState } from 'react';
+import { Col, Progress, Row, Space } from 'antd';
 import { Button } from '../../common/Button/Button';
 import { ArrowLeftOutlined, ArrowRightOutlined } from '@ant-design/icons';
-import { STEP_TYPES } from '../types';
+import { Step, STEP_TYPES } from '../types';
+import { useConstructorContext } from '../Context';
+import { NavLink } from 'react-router-dom';
 
 type NavigationTitleProps = {
-	onBack?: React.MouseEventHandler<HTMLElement>;
-	onNext?: React.MouseEventHandler<HTMLElement>;
+	currentStep: Step | undefined;
 	percent: number;
-	stepType: STEP_TYPES;
+	steps: Step[];
 };
 
-export const Navigation: React.FC<NavigationTitleProps> = ({ onNext, onBack, percent, stepType }) => {
+export const Navigation: React.FC<NavigationTitleProps> = ({ percent, currentStep, steps }) => {
+	const {
+		state: { selectedDirection, selectedType },
+	} = useConstructorContext();
+	const [disabledNext, setDisabledNext] = useState(false);
+	const currentStepIndex = useMemo(
+		() => steps.findIndex((step) => step.type === currentStep?.type),
+		[steps, currentStep]
+	);
+
+	useEffect(() => {
+		switch (currentStep?.type) {
+			case STEP_TYPES.DIRECTION_SELECTION: {
+				setDisabledNext(!selectedDirection);
+				break;
+			}
+			case STEP_TYPES.TYPE_SELECTION: {
+				setDisabledNext(!selectedType);
+				break;
+			}
+			case STEP_TYPES.CONSTRUCTOR: {
+				setDisabledNext(percent < 100);
+				break;
+			}
+			default: {
+				setDisabledNext(false);
+				break;
+			}
+		}
+	}, [currentStep, percent, selectedDirection, selectedType]);
+
 	return (
 		<Row justify="space-between" align="middle" gutter={20} style={{ margin: 0 }}>
 			<Col flex="110px" style={{ padding: 0 }}>
-				{onBack && (
-					<Button onClick={onBack} icon={<ArrowLeftOutlined />}>
-						Назад
+				{currentStep?.type !== STEP_TYPES.DIRECTION_SELECTION && (
+					<Button style={{ color: 'black' }}>
+						<NavLink to={steps[currentStepIndex - 1]?.type}>
+							<Space size={4}>
+								<ArrowLeftOutlined />
+								Назад
+							</Space>
+						</NavLink>
 					</Button>
 				)}
 			</Col>
-			{stepType === STEP_TYPES.CONSTRUCTOR && (
+			{currentStep?.type === STEP_TYPES.CONSTRUCTOR && (
 				<Col flex="auto">
 					<Progress
 						percent={percent}
@@ -37,15 +73,17 @@ export const Navigation: React.FC<NavigationTitleProps> = ({ onNext, onBack, per
 				</Col>
 			)}
 			<Col style={{ padding: 0 }}>
-				{onNext && (
-					<Button
-						type="primary"
-						onClick={onNext}
-						disabled={stepType === STEP_TYPES.CONSTRUCTOR && percent < 100}
-					>
-						{stepType === STEP_TYPES.CONSTRUCTOR && 'Создать траекторию'}
-						{stepType !== STEP_TYPES.CONSTRUCTOR && 'Далее'}
-						{stepType !== STEP_TYPES.CONSTRUCTOR && <ArrowRightOutlined />}
+				{currentStep?.type !== STEP_TYPES.TRAJECTORIES && currentStep?.type !== STEP_TYPES.ACADEMIC_PLAN && (
+					<Button type="primary" disabled={disabledNext}>
+						<NavLink to={steps[currentStepIndex + 1]?.type}>
+							{currentStep?.type === STEP_TYPES.CONSTRUCTOR && 'Создать траекторию'}
+							{currentStep?.type !== STEP_TYPES.CONSTRUCTOR && (
+								<Space size={4}>
+									Далее
+									<ArrowRightOutlined />
+								</Space>
+							)}
+						</NavLink>
 					</Button>
 				)}
 			</Col>
