@@ -11,6 +11,7 @@ import { useDisciplineQuery } from '../../../hooks/useDisciplineQuery';
 import { Step, STEP_TYPES } from '../types';
 import { PageInProgress } from '../../common/PageInProgress/PageInProgress';
 import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
 
 type ConstructorProps = {};
 
@@ -33,11 +34,13 @@ export const ConstructorPageContent: React.FC<ConstructorProps> = () => {
 				title: 'Выберите направление подготовки',
 				content: <DirectionSelection />,
 				type: STEP_TYPES.DIRECTION_SELECTION,
+				pageTitle: 'Выбор направления подготовки',
 			},
 			{
 				title: 'Как вы хотите использовать конструктор?',
 				content: <TypeSelection />,
 				type: STEP_TYPES.TYPE_SELECTION,
+				pageTitle: 'Выбор типа конструктора',
 			},
 			{
 				content:
@@ -47,8 +50,9 @@ export const ConstructorPageContent: React.FC<ConstructorProps> = () => {
 						<PageInProgress page="Просмотр траекторий" />
 					),
 				type: selectedType === STEP_TYPES.CONSTRUCTOR ? STEP_TYPES.CONSTRUCTOR : STEP_TYPES.TRAJECTORIES,
+				pageTitle: selectedType === STEP_TYPES.CONSTRUCTOR ? 'Конструктор траекторий' : 'Просмотр траекторий',
 			},
-			{ content: <AcademicPlan />, type: STEP_TYPES.ACADEMIC_PLAN },
+			{ content: <AcademicPlan />, type: STEP_TYPES.ACADEMIC_PLAN, pageTitle: 'Список дисциплин' },
 		],
 		[selectedType]
 	);
@@ -60,31 +64,36 @@ export const ConstructorPageContent: React.FC<ConstructorProps> = () => {
 	}, [semesters]);
 
 	return (
-		<section className={s.wrapper}>
-			<div className={s.inner}>
-				<Routes>
-					{steps.map((step) => (
-						<Route
-							key={step.type}
-							path={step.type}
-							element={
-								<>
-									<h4 className={s.title}>{step.title}</h4>
-									<div className={s.content}>{step.content}</div>
-								</>
-							}
-						/>
-					))}
-					<Route index element={<Navigate to={steps[0].type} />} />
-				</Routes>
-				<Navigation percent={percent} currentStep={currentStep} steps={steps} />
-				<DisciplineModal
-					discipline={discipline}
-					loading={disciplineLoading || disciplineFetching}
-					open={!!disciplineId}
-					onCancel={() => dispatch(setDisciplineId(undefined))}
-				/>
-			</div>
-		</section>
+		<>
+			<Helmet>
+				<title>{currentStep?.pageTitle}</title>
+			</Helmet>
+			<section className={s.wrapper}>
+				<div className={s.inner}>
+					<Routes>
+						{steps.map((step) => (
+							<Route
+								key={step.type}
+								path={step.type}
+								element={
+									<>
+										<h4 className={s.title}>{step.title}</h4>
+										<div className={s.content}>{step.content}</div>
+									</>
+								}
+							/>
+						))}
+						<Route index element={<Navigate to={steps[0].type} />} />
+					</Routes>
+					<Navigation percent={percent} currentStep={currentStep} steps={steps} />
+					<DisciplineModal
+						discipline={discipline}
+						loading={disciplineLoading || disciplineFetching}
+						open={!!disciplineId}
+						onCancel={() => dispatch(setDisciplineId(undefined))}
+					/>
+				</div>
+			</section>
+		</>
 	);
 };
