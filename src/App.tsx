@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Route, Routes, useLocation } from 'react-router-dom';
 import { Layout } from './components';
 import { ConstructorPage, MainPage } from './pages';
@@ -11,10 +11,13 @@ const queryClient = new QueryClient();
 
 export const App = () => {
 	const { pathname } = useLocation();
-	if (pathname) {
-		// @ts-ignore
-		window.ym(91451529, 'hit', pathname);
-	}
+
+	useEffect(() => {
+		if (pathname) {
+			// @ts-ignore
+			window.ym(91451529, 'hit', pathname);
+		}
+	}, [pathname]);
 
 	return (
 		<>
