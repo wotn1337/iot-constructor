@@ -19,7 +19,7 @@ export const ConstructorPageContent: React.FC<ConstructorProps> = () => {
 	const { pathname } = useLocation();
 	const currentStepType = (pathname.split('/').pop() ?? STEP_TYPES.DIRECTION_SELECTION) as STEP_TYPES;
 	const {
-		state: { selectedType, disciplineId, semesters },
+		state: { selectedType, disciplineId, semesters, currentSemester },
 		dispatch,
 	} = useConstructorContext();
 	const {
@@ -62,6 +62,13 @@ export const ConstructorPageContent: React.FC<ConstructorProps> = () => {
 		const finishedSemestersCount = semesters.filter((sem) => sem.finish).length;
 		setPercent(finishedSemestersCount * (100 / semesters.length));
 	}, [semesters]);
+
+	useEffect(() => {
+		if (currentSemester) {
+			// @ts-ignore
+			window.ym(91451529, 'hit', pathname + '/' + currentSemester);
+		}
+	}, [currentSemester]);
 
 	return (
 		<>
