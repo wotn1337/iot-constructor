@@ -3,6 +3,8 @@ import s from './Intro.module.scss';
 import { Col, Image, Row, Typography } from 'antd';
 import { IntroImage } from '../../../images';
 import { Button } from '../../../components';
+import { NavLink } from 'react-router-dom';
+import { ROUTES } from '../../../routes';
 
 const { Paragraph } = Typography;
 
@@ -17,9 +19,11 @@ export const Intro: React.FC<IntroProps> = () => {
 					Система индивидуальных образовательных траекторий позволяет сделать обучение в университете
 					персонализированным и получить дополнительные компетенции
 				</Paragraph>
-				<Button type="primary" style={{ width: 289 }}>
-					Создать свою траекторию
-				</Button>
+				<NavLink to={ROUTES.CONSTRUCTOR}>
+					<Button type="primary" style={{ width: 289 }}>
+						Создать свою траекторию
+					</Button>
+				</NavLink>
 			</Col>
 			<Col className={s.intro__image}>
 				<Image src={IntroImage} preview={false} width={457} />

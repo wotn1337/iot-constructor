@@ -11,5 +11,7 @@ type NavbarProps = {
 export const Navbar: React.FC<NavbarProps> = ({ items }) => {
 	const currentPage = useCurrentPage();
 
-	return <Menu mode="horizontal" items={items} selectedKeys={[currentPage]} className="navbar" />;
+	return (
+		<Menu mode="horizontal" items={items} selectedKeys={[currentPage]} className="navbar" disabledOverflow={true} />
+	);
 };
