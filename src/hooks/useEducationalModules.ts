@@ -31,7 +31,6 @@ export const useEducationalModules = (id: Id, semester: number) => {
 			.catch(() => message.error('Не удалось получить список курсов :('))
 			.finally(() => {
 				setLoading(false);
-				console.log(semesters);
 			});
 	}, [semester]);
 
