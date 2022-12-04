@@ -6,6 +6,7 @@ import {
 	SocialNetwork,
 	StudentReview,
 	Trajectory,
+	Direction,
 } from '../common/types';
 
 export type PartnersResponse = { partners: Partner[] };
@@ -23,6 +24,11 @@ export type AdmissionCommitteeContactsResponse = {
 };
 export type SocialNetworksResponse = {
 	social_networks_block: { id: string; data: SocialNetwork[]; institute: string };
+};
+
+export type EducationalDirectionsResponse = {
+	meta: { total: number };
+	educational_directions: Direction[];
 };
 export type EducationalModulesResponse = {
 	meta: { total: number };

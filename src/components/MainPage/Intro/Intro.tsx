@@ -5,6 +5,7 @@ import { IntroImage } from '../../../images';
 import { Button } from '../../../components';
 import { NavLink } from 'react-router-dom';
 import { ROUTES } from '../../../routes';
+import { reachGoal } from '../../../common/utils';
 
 const { Paragraph } = Typography;
 
@@ -19,7 +20,7 @@ export const Intro: React.FC<IntroProps> = () => {
 					Система индивидуальных образовательных траекторий позволяет сделать обучение в университете
 					персонализированным и получить дополнительные компетенции
 				</Paragraph>
-				<NavLink to={ROUTES.CONSTRUCTOR}>
+				<NavLink to={ROUTES.CONSTRUCTOR} onClick={() => reachGoal('create')}>
 					<Button type="primary" style={{ width: 289 }}>
 						Создать свою траекторию
 					</Button>

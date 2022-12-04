@@ -9,6 +9,7 @@ import { TitledList } from '../../common/TitledList/TitledList';
 import { IconText } from '../../common/IconText/IconText';
 import { LocationIcon, LogoIrit, MailIcon, PhoneIcon } from '../../../images';
 import { NavLink } from 'react-router-dom';
+import { reachGoal } from '../../../common/utils';
 
 const { Footer: AntdFooter } = Layout;
 
@@ -46,7 +47,11 @@ export const Footer = () => {
 								<IconText
 									icon={PhoneIcon}
 									textElement={
-										<a className="text_default" href={`tel:${contacts?.phone_number}`}>
+										<a
+											className="text_default"
+											href={`tel:${contacts?.phone_number}`}
+											onClick={() => reachGoal('telephone')}
+										>
 											{contacts?.phone_number}
 										</a>
 									}
@@ -55,7 +60,11 @@ export const Footer = () => {
 								<IconText
 									icon={MailIcon}
 									textElement={
-										<a className="text_default" href={`mailto:${contacts?.email}`}>
+										<a
+											className="text_default"
+											href={`mailto:${contacts?.email}`}
+											onClick={() => reachGoal('mailTo')}
+										>
 											{contacts?.email}
 										</a>
 									}
@@ -89,7 +98,13 @@ export const Footer = () => {
 										key={sn.name}
 										icon={sn.icon}
 										textElement={
-											<a href={sn.url} className="text_default" target="_blank" rel="noreferrer">
+											<a
+												href={sn.url}
+												className="text_default"
+												target="_blank"
+												rel="noreferrer"
+												onClick={() => reachGoal(sn.name === 'Telegram' ? 'telegram' : 'vk')}
+											>
 												{sn.name}
 											</a>
 										}

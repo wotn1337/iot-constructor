@@ -3,6 +3,9 @@ import s from './Professions.module.scss';
 import { IntroImage } from '../../../images';
 import { Button } from '../../common/Button/Button';
 import { StatisticItem } from './StatisticItem/StatisticItem';
+import { NavLink } from 'react-router-dom';
+import { ROUTES } from '../../../routes';
+import { reachGoal } from '../../../common/utils';
 
 export const Professions = () => {
 	return (
@@ -11,9 +14,9 @@ export const Professions = () => {
 				<h3 className={s.profession__title}>Востребованные профессии доступнее чем кажется</h3>
 				<img className={s.profession__image} src={IntroImage} alt="professions" width={440} />
 				<p className={s.profession__description}>
-					В современном мире существуют сотни раличных специальностей в сфере IT, от дизайнеров до инженеров
+					В современном мире существуют сотни различных специальностей в сфере IT, от дизайнеров до инженеров
 					по машинному обучению. Многие из востребованных профессий вы сможете освоить в ИРИТ-РТФ благодаря
-					системе гибкого обучени ИОТ
+					системе гибкого обучения ИОТ
 				</p>
 				<span className={s.profession__note}>Прямо сейчас на hh.ru</span>
 				<div className={s.profession__statistic}>
@@ -21,7 +24,9 @@ export const Professions = () => {
 					<StatisticItem amount="1 292" caption="Вакансии в Екатеринбурге" />
 				</div>
 				<div className={s.profession__button}>
-					<Button type="primary">Посмотреть профессии</Button>
+					<NavLink to={ROUTES.PROFESSIONS} onClick={() => reachGoal('seeProfessions')}>
+						<Button type="primary">Посмотреть профессии</Button>
+					</NavLink>
 				</div>
 			</div>
 		</section>

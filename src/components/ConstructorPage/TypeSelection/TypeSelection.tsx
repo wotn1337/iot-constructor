@@ -5,6 +5,7 @@ import { TypeCard } from './TypeCard/TypeCard';
 import s from './TypeSelection.module.scss';
 import { setSelectedType, useConstructorContext } from '../Context';
 import { STEP_TYPES } from '../types';
+import { reachGoal } from '../../../common/utils';
 
 const CONSTRUCTOR_TYPES = [
 	{
@@ -12,12 +13,14 @@ const CONSTRUCTOR_TYPES = [
 		icon: LightBlue,
 		title: 'Создать траекторию с нуля',
 		type: STEP_TYPES.CONSTRUCTOR,
+		onClick: () => reachGoal('makeTrajectory'),
 	},
 	{
 		id: 2,
 		icon: Document,
 		title: 'Посмотреть готовые траектории',
 		type: STEP_TYPES.TRAJECTORIES,
+		onClick: () => reachGoal('showTrajectories'),
 	},
 ];
 
@@ -36,7 +39,10 @@ export const TypeSelection: React.FC<TypeSelectionProps> = () => {
 					<TypeCard
 						{...type}
 						selected={selectedType === type.type}
-						onClick={() => dispatch(setSelectedType(type.type))}
+						onClick={() => {
+							dispatch(setSelectedType(type.type));
+							type.onClick?.();
+						}}
 					/>
 				</Col>
 			))}

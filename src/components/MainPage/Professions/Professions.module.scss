@@ -31,6 +31,7 @@
     grid-area: t;
     line-height: 130%;
     z-index: 1;
+    margin-bottom: 32px;
   }
 
   &__image {
@@ -41,7 +42,7 @@
   &__description {
     grid-area: d;
     max-width: 491px;
-    margin-bottom: 0;
+    margin-bottom: 16px;
     font-size: 18px;
     color: rgba(0, 0, 0, 0.85);
     line-height: 130%;
@@ -54,12 +55,14 @@
     font-size: 18px;
     color: rgba(0, 0, 0, 0.45);
     z-index: 1;
+    margin-bottom: 32px;
   }
 
   &__statistic {
     display: flex;
     grid-area: stat;
     z-index: 1;
+    margin-bottom: 32px;
   }
 
   &__button {
