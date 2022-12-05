@@ -19,7 +19,8 @@ type Goal =
 	| 'makeTrajectory'
 	| 'moreAboutDiscipline'
 	| 'lastCreateTrajectory'
-	| 'showTrajectories';
+	| 'showTrajectories'
+	| 'moreAboutDisciplineUP';
 
 export const reachGoal = (name: Goal) => {
 	// @ts-ignore
