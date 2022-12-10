@@ -10,6 +10,7 @@ import {
 	SET_SEMESTERS,
 	SET_TRACK_POINTS,
 	SET_TRACKS,
+	SET_SELECTED_TRAJECTORY,
 } from './constants';
 import { Id } from '../../../common/types';
 import { IColumns, Semester, TrackProgress } from './types';
@@ -29,6 +30,11 @@ export const setSelectedDirection = <T extends Id>(dirId: T): Action<typeof SET_
 export const setSelectedType = <T extends Id>(typeId: T): Action<typeof SET_SELECTED_TYPE, T> => ({
 	type: SET_SELECTED_TYPE,
 	payload: typeId,
+});
+
+export const setSelectedTrajectory = <T extends Id | undefined>(id: T): Action<typeof SET_SELECTED_TRAJECTORY, T> => ({
+	type: SET_SELECTED_TRAJECTORY,
+	payload: id,
 });
 
 export const setCurrentSemester = <T extends number>(currSem: T): Action<typeof SET_CURRENT_SEMESTER, T> => ({

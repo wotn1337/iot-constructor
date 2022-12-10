@@ -12,6 +12,7 @@ import LogoIrit from './logo_irit.png';
 import LocationIcon from './icons/icon_location.svg';
 import MailIcon from './icons/icon_mail.svg';
 import PhoneIcon from './icons/icon_phone.svg';
+import GreatChoice from './constructor/greate-choice.svg';
 
 export {
 	IntroImage,
@@ -28,4 +29,5 @@ export {
 	LocationIcon,
 	MailIcon,
 	PhoneIcon,
+	GreatChoice,
 };

@@ -11,4 +11,5 @@ export enum STEP_TYPES {
 	CONSTRUCTOR = 'choose-disciplines',
 	ACADEMIC_PLAN = 'academic-plan',
 	TRAJECTORIES = 'trajectories',
+	TRAJECTORY_ANALYSIS = 'trajectory-analysis',
 }

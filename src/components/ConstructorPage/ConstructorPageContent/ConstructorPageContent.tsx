@@ -3,15 +3,17 @@ import s from './ConstructorPageContent.module.scss';
 import { DirectionSelection } from '../DirectionSelection/DirectionSelection';
 import { TypeSelection } from '../TypeSelection/TypeSelection';
 import { Constructor } from '../Constructor/Constructor';
-import { AcademicPlan } from '../AcademicPlan/AcademicPlan';
 import { setDisciplineId, useConstructorContext } from '../Context';
 import { DisciplineModal } from '../DisciplineModal/DisciplineModal';
 import { Navigation } from '../Navigation/Navigation';
 import { useDisciplineQuery } from '../../../hooks/useDisciplineQuery';
 import { Step, STEP_TYPES } from '../types';
-import { PageInProgress } from '../../common/PageInProgress/PageInProgress';
 import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
+import { useEducationalDirectionsQuery } from '../../../hooks/useEducationalDirections';
+import { getDirectionFullTitle } from '../../../common/utils';
+import { Trajectories } from '../Trajectories/Trajectories';
+import { TrajectoryAnalysis } from '../TrajectoryAnalysis/TrajectoryAnalysis';
 
 type ConstructorProps = {};
 
@@ -19,7 +21,7 @@ export const ConstructorPageContent: React.FC<ConstructorProps> = () => {
 	const { pathname } = useLocation();
 	const currentStepType = (pathname.split('/').pop() ?? STEP_TYPES.DIRECTION_SELECTION) as STEP_TYPES;
 	const {
-		state: { selectedType, disciplineId, semesters, currentSemester },
+		state: { selectedType, disciplineId, semesters, currentSemester, selectedDirection },
 		dispatch,
 	} = useConstructorContext();
 	const {
@@ -27,6 +29,7 @@ export const ConstructorPageContent: React.FC<ConstructorProps> = () => {
 		isFetching: disciplineFetching,
 		isLoading: disciplineLoading,
 	} = useDisciplineQuery(disciplineId);
+	const { data: educationalDirections } = useEducationalDirectionsQuery();
 	const [percent, setPercent] = useState<number>(0);
 	const steps: Step[] = useMemo(
 		() => [
@@ -43,16 +46,16 @@ export const ConstructorPageContent: React.FC<ConstructorProps> = () => {
 				pageTitle: 'Выбор типа конструктора',
 			},
 			{
-				content:
-					selectedType === STEP_TYPES.CONSTRUCTOR ? (
-						<Constructor />
-					) : (
-						<PageInProgress page="Просмотр траекторий" />
-					),
+				content: selectedType === STEP_TYPES.CONSTRUCTOR ? <Constructor /> : <Trajectories />,
 				type: selectedType === STEP_TYPES.CONSTRUCTOR ? STEP_TYPES.CONSTRUCTOR : STEP_TYPES.TRAJECTORIES,
+				title: selectedType === STEP_TYPES.CONSTRUCTOR ? undefined : 'Выберите желаемую траекторию',
 				pageTitle: selectedType === STEP_TYPES.CONSTRUCTOR ? 'Конструктор траекторий' : 'Просмотр траекторий',
 			},
-			{ content: <AcademicPlan />, type: STEP_TYPES.ACADEMIC_PLAN, pageTitle: 'Список дисциплин' },
+			{
+				content: <TrajectoryAnalysis />,
+				type: STEP_TYPES.TRAJECTORY_ANALYSIS,
+				pageTitle: 'Анализ траектории',
+			},
 		],
 		[selectedType]
 	);
@@ -84,7 +87,19 @@ export const ConstructorPageContent: React.FC<ConstructorProps> = () => {
 								path={step.type}
 								element={
 									<>
-										<h4 className={s.title}>{step.title}</h4>
+										<div className={s.pageHeader}>
+											<h4 className={s.title}>{step.title}</h4>
+											{selectedDirection &&
+												currentStep?.type !== STEP_TYPES.DIRECTION_SELECTION &&
+												currentStep?.type !== STEP_TYPES.TRAJECTORY_ANALYSIS && (
+													<span className={s.direction}>
+														{getDirectionFullTitle(
+															selectedDirection,
+															educationalDirections
+														)}
+													</span>
+												)}
+										</div>
 										<div className={s.content}>{step.content}</div>
 									</>
 								}
