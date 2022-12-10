@@ -12,6 +12,7 @@ import {
 } from '../../../Context';
 import { addTask, deleteTask } from '../../utils';
 import { Tag } from '../../../../common/Tag/Tag';
+import { reachGoal } from '../../../../../common/utils';
 
 type ColumnProps = {
 	course: Discipline;
@@ -89,7 +90,10 @@ export const Card: React.FC<ColumnProps> = ({ course, index, droppableId, isDrag
 								<div className="card__header__buttons" style={{ opacity: badgeVisible ? 100 : 0 }}>
 									<button
 										className="button question"
-										onClick={() => dispatch(setDisciplineId(course.id))}
+										onClick={() => {
+											dispatch(setDisciplineId(course.id));
+											reachGoal('moreAboutDiscipline');
+										}}
 									>
 										<QuestionOutlined />
 									</button>

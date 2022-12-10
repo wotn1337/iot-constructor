@@ -6,3 +6,23 @@ export const getAvatarPlaceholder = () => {
 
 	return avatars[randNumber];
 };
+
+type Goal =
+	| 'create'
+	| 'seeProfessions'
+	| 'seePartners'
+	| 'telephone'
+	| 'mailTo'
+	| 'vk'
+	| 'telegram'
+	| 'direction'
+	| 'makeTrajectory'
+	| 'moreAboutDiscipline'
+	| 'lastCreateTrajectory'
+	| 'showTrajectories'
+	| 'moreAboutDisciplineUP';
+
+export const reachGoal = (name: Goal) => {
+	// @ts-ignore
+	ym(91451529, 'reachGoal', name);
+};

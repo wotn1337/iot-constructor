@@ -5,6 +5,7 @@ import { ArrowLeftOutlined, ArrowRightOutlined } from '@ant-design/icons';
 import { Step, STEP_TYPES } from '../types';
 import { useConstructorContext } from '../Context';
 import { NavLink } from 'react-router-dom';
+import { reachGoal } from '../../../common/utils';
 
 type NavigationTitleProps = {
 	currentStep: Step | undefined;
@@ -74,7 +75,15 @@ export const Navigation: React.FC<NavigationTitleProps> = ({ percent, currentSte
 			)}
 			<Col style={{ padding: 0 }}>
 				{currentStep?.type !== STEP_TYPES.TRAJECTORIES && currentStep?.type !== STEP_TYPES.ACADEMIC_PLAN && (
-					<Button type="primary" disabled={disabledNext}>
+					<Button
+						type="primary"
+						disabled={disabledNext}
+						onClick={
+							currentStep?.type === STEP_TYPES.CONSTRUCTOR
+								? () => reachGoal('lastCreateTrajectory')
+								: undefined
+						}
+					>
 						<NavLink to={steps[currentStepIndex + 1]?.type}>
 							{currentStep?.type === STEP_TYPES.CONSTRUCTOR && 'Создать траекторию'}
 							{currentStep?.type !== STEP_TYPES.CONSTRUCTOR && (

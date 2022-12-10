@@ -31,7 +31,7 @@ export const MainPageContent: React.FC<MainPageContentProps> = () => {
 				<StudentReview />
 				<Professions />
 				<Partners />
-				<MobileApp />
+				{/*<MobileApp />*/}
 			</section>
 		</Loader>
 	);

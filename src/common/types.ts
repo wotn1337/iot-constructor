@@ -31,6 +31,20 @@ export type SocialNetwork = {
 	icon: string;
 };
 
+export type Direction = {
+	id: Id;
+	title: string;
+	cipher: string;
+	passing_scores: [
+		{
+			year: number | null;
+			passing_score: number | null;
+		}
+	];
+	training_period: string;
+	budget_places: number;
+};
+
 export type Course = {
 	id: Id;
 	title: string;

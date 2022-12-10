@@ -2,6 +2,7 @@ import axios from 'axios';
 import {
 	AdmissionCommitteeContactsResponse,
 	DisciplinesResponse,
+	EducationalDirectionsResponse,
 	EducationalModulesResponse,
 	PartnersResponse,
 	ProfessionalTrajectories,
@@ -44,6 +45,13 @@ export const socialNetworksAPI = {
 	getSocialNetworks: async () => {
 		const res = await instance.get<SocialNetworksResponse>('socialNetworksBlock');
 		return res.data.social_networks_block.data;
+	},
+};
+
+export const educationalDirectionsAPI = {
+	getEducationalDirections: async () => {
+		const res = await instance.get<EducationalDirectionsResponse>('educationalDirections');
+		return res.data.educational_directions;
 	},
 };
 
