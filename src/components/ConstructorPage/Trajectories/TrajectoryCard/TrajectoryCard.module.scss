@@ -1,0 +1,51 @@
+@import "../../../../constants";
+
+.trackCard {
+  height: 100px;
+  box-sizing: border-box;
+  background-color: white;
+  padding: 14px 16px 14px 18px;
+  border-radius: 2px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+  border: 1px solid transparent;
+  transition: 200ms;
+  cursor: pointer;
+
+  .title {
+    font-size: 20px;
+    color: black;
+    transition: 200ms;
+  }
+
+  .trajectoryIcon {
+    opacity: 0.3;
+    transition: 200ms;
+    height: 100%;
+  }
+
+  &:hover {
+    border-color: $fontBlue;
+    //scale: 1.05;
+
+    .title {
+      color: $fontBlue;
+    }
+
+    .trajectoryIcon {
+      opacity: 1;
+    }
+  }
+
+  &.selected {
+    border-color: $orange;
+    //scale: 1.05;
+
+    .title {
+      color: $orange;
+    }
+
+    .trajectoryIcon {
+      opacity: 1;
+    }
+  }
+}

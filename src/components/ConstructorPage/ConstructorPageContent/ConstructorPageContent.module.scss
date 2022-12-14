@@ -1,3 +1,5 @@
+@import "../../../constants";
+
 .wrapper {
   background-image: url("../../../images/constructor/constructor_bg.svg");
   background-size: cover;
@@ -10,8 +12,19 @@
     width: 1216px;
     margin: 0 auto;
 
-    .title {
-      text-align: center;
+    .pageHeader {
+      display: grid;
+      gap: 32px;
+
+      .title {
+        text-align: center;
+      }
+
+      .direction {
+        display: block;
+        text-align: center;
+        color: $fontBlue;
+      }
     }
 
     .content {

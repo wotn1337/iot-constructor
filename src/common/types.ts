@@ -62,6 +62,7 @@ export type Trajectory = {
 	color: string;
 	discipline_evaluation: number;
 	sum_discipline_levels_points: number;
+	icons: string[];
 };
 
 export type Discipline = {

@@ -7,7 +7,7 @@ import { useEducationalModules } from '../../../hooks/useEducationalModules';
 import { Loader } from '../../common/Loader/Loader';
 import { setCurrentSemester, setSemesters, setTracks, useConstructorContext } from '../Context';
 import { TrackProgresses } from './TrackProgresses/TrackProgresses';
-import { useProfessionalTrajectories } from '../../../hooks/useProfessionalTrajectories';
+import { useProfessionalTrajectoriesQuery } from '../../../hooks/useProfessionalTrajectoriesQuery';
 
 type ConstructorProps = {};
 
@@ -16,7 +16,7 @@ export const Constructor: React.FC<ConstructorProps> = () => {
 		state: { semesters, currentSemester, selectedDirection },
 		dispatch,
 	} = useConstructorContext();
-	const { trajectories } = useProfessionalTrajectories();
+	const { data: trajectories } = useProfessionalTrajectoriesQuery();
 	let {
 		modules,
 		loading,
@@ -24,7 +24,7 @@ export const Constructor: React.FC<ConstructorProps> = () => {
 	} = useEducationalModules(selectedDirection ?? 1, currentSemester);
 
 	useEffect(() => {
-		dispatch(setTracks(trajectories.map((track) => ({ ...track, points: 0, percent: 0 }))));
+		dispatch(setTracks(trajectories?.map((track) => ({ ...track, points: 0, percent: 0 })) ?? []));
 	}, [trajectories]);
 
 	useEffect(() => {

@@ -15,7 +15,7 @@ type NavigationTitleProps = {
 
 export const Navigation: React.FC<NavigationTitleProps> = ({ percent, currentStep, steps }) => {
 	const {
-		state: { selectedDirection, selectedType },
+		state: { selectedDirection, selectedType, selectedTrajectory },
 	} = useConstructorContext();
 	const [disabledNext, setDisabledNext] = useState(false);
 	const currentStepIndex = useMemo(
@@ -33,6 +33,10 @@ export const Navigation: React.FC<NavigationTitleProps> = ({ percent, currentSte
 				setDisabledNext(!selectedType);
 				break;
 			}
+			case STEP_TYPES.TRAJECTORIES: {
+				setDisabledNext(!selectedTrajectory);
+				break;
+			}
 			case STEP_TYPES.CONSTRUCTOR: {
 				setDisabledNext(percent < 100);
 				break;
@@ -42,7 +46,7 @@ export const Navigation: React.FC<NavigationTitleProps> = ({ percent, currentSte
 				break;
 			}
 		}
-	}, [currentStep, percent, selectedDirection, selectedType]);
+	}, [currentStep, percent, selectedDirection, selectedType, selectedTrajectory]);
 
 	return (
 		<Row justify="space-between" align="middle" gutter={20} style={{ margin: 0 }}>
@@ -74,7 +78,7 @@ export const Navigation: React.FC<NavigationTitleProps> = ({ percent, currentSte
 				</Col>
 			)}
 			<Col style={{ padding: 0 }}>
-				{currentStep?.type !== STEP_TYPES.TRAJECTORIES && currentStep?.type !== STEP_TYPES.ACADEMIC_PLAN && (
+				{currentStep?.type !== STEP_TYPES.ACADEMIC_PLAN && (
 					<Button
 						type="primary"
 						disabled={disabledNext}
