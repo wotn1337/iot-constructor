@@ -78,7 +78,7 @@ export const Navigation: React.FC<NavigationTitleProps> = ({ percent, currentSte
 				</Col>
 			)}
 			<Col style={{ padding: 0 }}>
-				{currentStep?.type !== STEP_TYPES.ACADEMIC_PLAN && (
+				{currentStep?.type !== STEP_TYPES.TRAJECTORY_ANALYSIS && (
 					<Button
 						type="primary"
 						disabled={disabledNext}

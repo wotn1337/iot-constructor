@@ -4,7 +4,7 @@ import { educationalModulesAPI } from '../API/API';
 import { message } from 'antd';
 import { Semester } from '../components/ConstructorPage/Context/types';
 
-export const useEducationalModules = (id: Id, semester: number) => {
+export const useEducationalModules = (id: Id, semester: number, trajectoryId?: Id) => {
 	const [modules, setModules] = useState<EducationModule[]>([]);
 	const [loading, setLoading] = useState<boolean>(true);
 	const [semesters, setSemesters] = useState<Semester[]>([]);
@@ -14,7 +14,7 @@ export const useEducationalModules = (id: Id, semester: number) => {
 		setLoading(true);
 		const { getEducationalModules } = educationalModulesAPI;
 
-		getEducationalModules(id, semester)
+		getEducationalModules(id, semester, trajectoryId)
 			.then((data) => {
 				setModules(data.semesters[0].educationalModules);
 				let newSemesters: Semester[] = [];

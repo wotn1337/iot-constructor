@@ -5,7 +5,8 @@ import {
 	EducationalDirectionsResponse,
 	EducationalModulesResponse,
 	PartnersResponse,
-	ProfessionalTrajectories,
+	ProfessionalTrajectoriesResponse,
+	ProfessionalTrajectoryResponse,
 	SocialNetworksResponse,
 	StudentReviewResponse,
 } from './types';
@@ -56,9 +57,14 @@ export const educationalDirectionsAPI = {
 };
 
 export const educationalModulesAPI = {
-	getEducationalModules: async (id: Id, semester: number) => {
+	getEducationalModules: async (id: Id, semester: number, trajectoryId?: Id) => {
+		const params = new URLSearchParams(`paginate=true&page=${semester}`);
+		if (trajectoryId) {
+			params.append('professionalTrajectoryId', String(trajectoryId));
+		}
+
 		const res = await instance.get<EducationalModulesResponse>(
-			`educationalDirections/${id}/educationalModules?paginate=true&page=${semester}`
+			`educationalDirections/${id}/educationalModules?${params.toString()}`
 		);
 		return res.data;
 	},
@@ -66,8 +72,15 @@ export const educationalModulesAPI = {
 
 export const professionalTrajectoriesAPI = {
 	getProfessionalTrajectories: async () => {
-		const res = await instance.get<ProfessionalTrajectories>('professionalTrajectories');
+		const res = await instance.get<ProfessionalTrajectoriesResponse>('professionalTrajectories');
 		return res.data.professional_trajectories;
+	},
+
+	getProfessionalTrajectoryById: async (id: Id | undefined) => {
+		const res = await instance.get<ProfessionalTrajectoryResponse>(
+			`professionalTrajectories/${id}?disciplinesCount=true`
+		);
+		return res.data.professional_trajectory;
 	},
 };
 

@@ -25,7 +25,7 @@
 
   &:hover {
     border-color: $fontBlue;
-    //scale: 1.05;
+    scale: 1.05;
 
     .title {
       color: $fontBlue;
@@ -38,7 +38,7 @@
 
   &.selected {
     border-color: $orange;
-    //scale: 1.05;
+    scale: 1.05;
 
     .title {
       color: $orange;
