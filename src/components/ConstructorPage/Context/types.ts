@@ -28,11 +28,6 @@ export type ConstructorContextState = {
 	disciplineId?: Id;
 };
 
-export type Step = {
-	title: string;
-	content: JSX.Element;
-};
-
 export type Semester = {
 	id: Id;
 	name: string;

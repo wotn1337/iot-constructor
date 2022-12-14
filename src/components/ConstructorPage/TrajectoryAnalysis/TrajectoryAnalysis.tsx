@@ -10,7 +10,7 @@ type TrajectoryAnalysisProps = {};
 
 export const TrajectoryAnalysis: React.FC<TrajectoryAnalysisProps> = () => {
 	const {
-		state: { selectedTrajectory },
+		state: { selectedTrajectory, semesters },
 	} = useConstructorContext();
 	const { data, isFetching, isLoading, refetch } = useProfessionalTrajectoryByIdQuery(selectedTrajectory);
 
@@ -23,7 +23,7 @@ export const TrajectoryAnalysis: React.FC<TrajectoryAnalysisProps> = () => {
 			<Space direction="vertical" size={100}>
 				{/*<GreatChoice />*/}
 				{data && <TrajectoryInfo {...data} />}
-				<AcademicPlan />
+				{semesters.length && <AcademicPlan />}
 			</Space>
 		</Loader>
 	);
