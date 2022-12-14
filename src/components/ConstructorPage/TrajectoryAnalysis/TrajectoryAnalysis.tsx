@@ -23,7 +23,7 @@ export const TrajectoryAnalysis: React.FC<TrajectoryAnalysisProps> = () => {
 			<Space direction="vertical" size={100}>
 				{/*<GreatChoice />*/}
 				{data && <TrajectoryInfo {...data} />}
-				{semesters.length && <AcademicPlan />}
+				{!!semesters.length && <AcademicPlan />}
 			</Space>
 		</Loader>
 	);
