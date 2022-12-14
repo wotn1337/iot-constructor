@@ -6,10 +6,11 @@ import { TrajectoryCard } from './TrajectoryCard/TrajectoryCard';
 
 type TrajectoriesProps = {};
 
-export const Trajectories: React.FC<TrajectoriesProps> = ({ ...props }) => {
+export const Trajectories: React.FC<TrajectoriesProps> = () => {
 	const { data, isLoading, isFetching } = useProfessionalTrajectoriesQuery();
+
 	return (
-		<Loader loading={isLoading || isFetching}>
+		<Loader loading={isLoading || isFetching} size="large">
 			<Row gutter={[20, 16]} align="middle">
 				{data?.map((track) => (
 					<Col span={8} key={track.id}>

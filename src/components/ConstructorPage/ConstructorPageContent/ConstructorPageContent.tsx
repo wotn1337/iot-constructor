@@ -3,7 +3,7 @@ import s from './ConstructorPageContent.module.scss';
 import { DirectionSelection } from '../DirectionSelection/DirectionSelection';
 import { TypeSelection } from '../TypeSelection/TypeSelection';
 import { Constructor } from '../Constructor/Constructor';
-import { setDisciplineId, useConstructorContext } from '../Context';
+import { setDisciplineId, setSelectedTrajectory, useConstructorContext } from '../Context';
 import { DisciplineModal } from '../DisciplineModal/DisciplineModal';
 import { Navigation } from '../Navigation/Navigation';
 import { useDisciplineQuery } from '../../../hooks/useDisciplineQuery';
@@ -21,7 +21,7 @@ export const ConstructorPageContent: React.FC<ConstructorProps> = () => {
 	const { pathname } = useLocation();
 	const currentStepType = (pathname.split('/').pop() ?? STEP_TYPES.DIRECTION_SELECTION) as STEP_TYPES;
 	const {
-		state: { selectedType, disciplineId, semesters, currentSemester, selectedDirection },
+		state: { selectedType, disciplineId, semesters, currentSemester, selectedDirection, tracks },
 		dispatch,
 	} = useConstructorContext();
 	const {
@@ -65,6 +65,15 @@ export const ConstructorPageContent: React.FC<ConstructorProps> = () => {
 		const finishedSemestersCount = semesters.filter((sem) => sem.finish).length;
 		setPercent(finishedSemestersCount * (100 / semesters.length));
 	}, [semesters]);
+
+	useEffect(() => {
+		if (percent >= 100) {
+			const tracksCopy = [...tracks];
+			tracksCopy.sort((a, b) => b.points - a.points);
+			console.log(tracksCopy);
+			dispatch(setSelectedTrajectory(tracksCopy[0].id));
+		}
+	}, [percent]);
 
 	useEffect(() => {
 		if (currentSemester) {

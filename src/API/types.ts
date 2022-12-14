@@ -34,5 +34,6 @@ export type EducationalModulesResponse = {
 	meta: { total: number };
 	semesters: { educationalModules: EducationModule[] }[];
 };
-export type ProfessionalTrajectories = { professional_trajectories: Trajectory[] };
+export type ProfessionalTrajectoriesResponse = { professional_trajectories: Trajectory[] };
+export type ProfessionalTrajectoryResponse = { professional_trajectory: Trajectory };
 export type DisciplinesResponse = { discipline: Discipline };
