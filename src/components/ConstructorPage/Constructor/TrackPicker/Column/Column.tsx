@@ -11,6 +11,10 @@ type ColumnProps = {
 
 export const Column: React.FC<ColumnProps> = ({ column }) => {
 	const isColumnEmpty = column.items.length === 0;
+	const tooltipTitle = isColumnEmpty
+		? 'В этом семестре нет курсов по выбору, перейдите к следующему'
+		: 'Необходимо выбрать один курс из каждого блока и перетащить его в Мои дисциплины';
+
 	return (
 		<div key={column.id}>
 			<div className={s.card}>
@@ -21,19 +25,14 @@ export const Column: React.FC<ColumnProps> = ({ column }) => {
 							className={s.card__head__icon}
 							placement="topRight"
 							color="#FA8C16"
-							title="Необходимо выбрать один курс из каждого блока и перетащить его в Мои дисциплины"
+							title={tooltipTitle}
 						>
 							<QuestionCircleOutlined />
 						</Tooltip>
 					)}
 				</div>
 				<div className={`${s.card__content} ${isColumnEmpty ? s.emptyColumn : ''}`}>
-					{isColumnEmpty && (
-						<Empty
-							description="В этом семестре нет дисциплин по выбору"
-							image={Empty.PRESENTED_IMAGE_SIMPLE}
-						/>
-					)}
+					{isColumnEmpty && <Empty description="В этом семестре нет дисциплин по выбору" />}
 					{column.items.map((item) => (
 						<Module column={column} module={item} key={item.id} />
 					))}
