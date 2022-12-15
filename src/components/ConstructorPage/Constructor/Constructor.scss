@@ -21,12 +21,17 @@
     }
 
     .score {
+      display: flex;
       width: 289px;
       height: 608px;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
 
       &__title {
         display: flex;
         align-items: center;
+        justify-content: center;
         height: 45px;
         font-family: $TekturMedium;
         font-size: 18px;

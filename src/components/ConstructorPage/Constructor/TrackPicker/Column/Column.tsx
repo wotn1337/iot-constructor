@@ -21,7 +21,7 @@ export const Column: React.FC<ColumnProps> = ({ column }) => {
 							className={s.card__head__icon}
 							placement="topRight"
 							color="#FA8C16"
-							title="Необходимо выбрать один курс из каждого блока и перетащить его в Мои курсы"
+							title="Необходимо выбрать один курс из каждого блока и перетащить его в Мои дисциплины"
 						>
 							<QuestionCircleOutlined />
 						</Tooltip>

@@ -1,17 +1,41 @@
-import React, { useEffect } from 'react';
-import { Space } from 'antd';
-import { TitledProgress } from './TitledProgress/TitledProgress';
-import s from './TrackProgresses.module.scss';
+import React, { useEffect, useState } from 'react';
 import { setTracks, useConstructorContext } from '../../Context';
 import { TrackProgress } from '../../Context/types';
+import { Doughnut } from 'react-chartjs-2';
+import { Chart as ChartJS, ArcElement } from 'chart.js/auto';
+import { LegendItem } from './LegendItem/LegendItem';
+import { Space } from 'antd';
+import s from './TrackProgresses.module.scss';
 
 type TrackProgressesProps = {};
+
+ChartJS.defaults.plugins.tooltip.callbacks.label = () => '';
+ChartJS.defaults.plugins.legend.display = false;
+ChartJS.register(ArcElement);
 
 export const TrackProgresses: React.FC<TrackProgressesProps> = () => {
 	const {
 		state: { tracks, semesters },
 		dispatch,
 	} = useConstructorContext();
+
+	const [data, setData] = useState({
+		labels: tracks.map((data) => data.title),
+		datasets: [
+			{
+				label: 'tracks',
+				data: tracks.map((data) => data.points),
+				backgroundColor: tracks.map((track) => track.color),
+				borderColor: 'white',
+				borderWidth: 2,
+				hoverOffset: 4,
+				cutout: '75%',
+			},
+		],
+		width: 230,
+		height: 230,
+	});
+	const [legend, setLegend] = useState<TrackProgress[]>([]);
 
 	useEffect(() => {
 		const newTracks: TrackProgress[] = tracks.map((t) => ({ ...t, points: 0 }));
@@ -33,13 +57,27 @@ export const TrackProgresses: React.FC<TrackProgressesProps> = () => {
 		dispatch(setTracks(newTracks.sort((a, b) => Number(b.points) - Number(a.points))));
 	}, [semesters]);
 
+	useEffect(() => {
+		setLegend(tracks.filter((track) => track.points));
+		setData((prevData) => ({
+			...prevData,
+			datasets: [
+				{
+					...prevData.datasets[0],
+					data: tracks.map((data) => data.points),
+				},
+			],
+		}));
+	}, [tracks]);
+
 	return (
-		<Space direction="vertical" size={8} className={s.wrapper}>
-			{tracks
-				.filter((track) => track.points)
-				.map((track) => (
-					<TitledProgress key={track.id} {...track} />
+		<Space direction="vertical" size="large" className={s.wrapper}>
+			<Doughnut data={data} />
+			<Space size="small" direction="vertical">
+				{legend.map((item) => (
+					<LegendItem title={item.title} color={item.color} key={item.id} />
 				))}
+			</Space>
 		</Space>
 	);
 };
