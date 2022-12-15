@@ -1,25 +1,26 @@
 import React from 'react';
-import { Col, Row, Typography } from 'antd';
+import { Col, Row, Space, Typography } from 'antd';
 import { GreatChoice as GreatChoiceIcon } from '../../../../images';
 import s from './GreateChoice.module.scss';
 
 type GreatChoiceProps = {};
 
-export const GreatChoice: React.FC<GreatChoiceProps> = ({ ...props }) => {
+export const GreatChoice: React.FC<GreatChoiceProps> = () => {
 	return (
 		<div className={s.greatChoiceWrapper}>
-			<Row>
+			<Row justify="center" align="middle" gutter={250}>
 				<Col>
-					<h3>Отличный выбор!</h3>
-					<Typography.Paragraph>
-						Наше дело не так однозначно, как может показаться: дальнейшее развитие различных форм
-						деятельности в значительной степени обусловливает важность стандартных подходов. Картельные
-						сговоры не допускают ситуации, при которой сторонники тоталитаризма в науке неоднозначны и будут
-						подвергнуты целой серии независимых исследований.
-					</Typography.Paragraph>
+					<Space direction="vertical" size={60}>
+						<h3>Отличный выбор!</h3>
+						<Typography.Paragraph>
+							А теперь Вы можете узнать чуть больше о траектории, которую выбрали.
+							<br />
+							Надеемся, информацию будет для Вас полезной!
+						</Typography.Paragraph>
+					</Space>
 				</Col>
 				<Col>
-					<img src={GreatChoiceIcon} alt='great choice'/>
+					<img src={GreatChoiceIcon} alt="great choice" />
 				</Col>
 			</Row>
 		</div>

@@ -12,6 +12,7 @@ import {
 	SET_TRACKS,
 	SET_DISCIPLINE_ID,
 	SET_SELECTED_TRAJECTORY,
+	SET_TRAJECTORY_ACADEMIC_PLAN,
 } from './constants';
 
 export const MainPageContextInitialState: ConstructorContextState = {
@@ -112,6 +113,9 @@ export const MainPageContextReducer = (
 		}
 		case SET_DISCIPLINE_ID: {
 			return { ...state, disciplineId: action.payload };
+		}
+		case SET_TRAJECTORY_ACADEMIC_PLAN: {
+			return { ...state, trajectoryAcademicPlan: action.payload };
 		}
 		default:
 			return state;

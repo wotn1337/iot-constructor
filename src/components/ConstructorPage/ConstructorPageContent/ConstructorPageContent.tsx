@@ -14,6 +14,7 @@ import { useEducationalDirectionsQuery } from '../../../hooks/useEducationalDire
 import { getDirectionFullTitle } from '../../../common/utils';
 import { Trajectories } from '../Trajectories/Trajectories';
 import { TrajectoryAnalysis } from '../TrajectoryAnalysis/TrajectoryAnalysis';
+import { GreatChoice } from '../TrajectoryAnalysis/GreatChoice/GreatChoice';
 
 type ConstructorProps = {};
 
@@ -88,6 +89,7 @@ export const ConstructorPageContent: React.FC<ConstructorProps> = () => {
 				<title>{currentStep?.pageTitle}</title>
 			</Helmet>
 			<section className={s.wrapper}>
+				{currentStep?.type === STEP_TYPES.TRAJECTORY_ANALYSIS && <GreatChoice />}
 				<div className={s.inner}>
 					<Routes>
 						{steps.map((step) => (

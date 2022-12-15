@@ -11,6 +11,7 @@ import {
 	SET_TRACK_POINTS,
 	SET_TRACKS,
 	SET_SELECTED_TRAJECTORY,
+	SET_TRAJECTORY_ACADEMIC_PLAN,
 } from './constants';
 import { Id } from '../../../common/types';
 import { IColumns, Semester, TrackProgress } from './types';
@@ -81,4 +82,11 @@ export const setTracksPoints = <T extends { id: Id; points: number }>(
 export const setDisciplineId = <T extends Id | undefined>(id: T): Action<typeof SET_DISCIPLINE_ID, T> => ({
 	type: SET_DISCIPLINE_ID,
 	payload: id,
+});
+
+export const setTrajectoryAcademicPlan = <T extends Semester[] | undefined>(
+	semesters: T
+): Action<typeof SET_TRAJECTORY_ACADEMIC_PLAN, T> => ({
+	type: SET_TRAJECTORY_ACADEMIC_PLAN,
+	payload: semesters,
 });

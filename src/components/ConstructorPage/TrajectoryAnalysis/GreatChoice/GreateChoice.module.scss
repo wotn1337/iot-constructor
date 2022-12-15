@@ -1,3 +1,10 @@
 .greatChoiceWrapper {
+  margin-top: 64px;
+  height: 500px;
+  background-color: white;
   background-image: url("../../../../images/main_page/profession_background.svg");
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: inset 0 -4px 30px rgba(0, 0, 0, 0.15), inset 0px 4px 30px rgba(0, 0, 0, 0.15);
 }

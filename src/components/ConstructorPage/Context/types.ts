@@ -13,6 +13,7 @@ import {
 	setSemesters,
 	setTracks,
 	setTracksPoints,
+	setTrajectoryAcademicPlan,
 } from './actions';
 import React from 'react';
 
@@ -26,6 +27,7 @@ export type ConstructorContextState = {
 	columns: IColumns;
 	tracks: TrackProgress[];
 	disciplineId?: Id;
+	trajectoryAcademicPlan?: Semester[];
 };
 
 export type Semester = {
@@ -73,6 +75,7 @@ export type ConstructorContextActions = ReturnType<
 	| typeof setTracksPoints
 	| typeof setDisciplineId
 	| typeof setSelectedTrajectory
+	| typeof setTrajectoryAcademicPlan
 >;
 
 export type ConstructorContext = {
