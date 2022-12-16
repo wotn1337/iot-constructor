@@ -4,6 +4,7 @@ import { Empty, Tooltip } from 'antd';
 import { QuestionCircleOutlined } from '@ant-design/icons';
 import { Module } from '../Module/Module';
 import { Column as ColumnType } from '../../../Context/types';
+import { Empty as EmptyImage } from './../../../../../images';
 
 type ColumnProps = {
 	column: ColumnType;
@@ -32,7 +33,9 @@ export const Column: React.FC<ColumnProps> = ({ column }) => {
 					)}
 				</div>
 				<div className={`${s.card__content} ${isColumnEmpty ? s.emptyColumn : ''}`}>
-					{isColumnEmpty && <Empty description="В этом семестре нет дисциплин по выбору" />}
+					{isColumnEmpty && (
+						<Empty image={EmptyImage} description="В этом семестре нет дисциплин по выбору" />
+					)}
 					{column.items.map((item) => (
 						<Module column={column} module={item} key={item.id} />
 					))}
