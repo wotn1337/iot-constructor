@@ -73,7 +73,7 @@ export const Card: React.FC<ColumnProps> = ({ course, index, droppableId, isDrag
 	};
 
 	return (
-		<Draggable draggableId={course.id.toString()} key={index} index={index} isDragDisabled={isDragDisabled}>
+		<Draggable draggableId={String(course.id)} key={index} index={index} isDragDisabled={isDragDisabled}>
 			{(provided) => {
 				return (
 					<div

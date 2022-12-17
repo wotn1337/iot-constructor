@@ -15,6 +15,7 @@ import {
 } from './constants';
 import { Id } from '../../../common/types';
 import { IColumns, Semester, TrackProgress } from './types';
+import { STEP_TYPE } from '../types';
 
 type Action<T extends string, U extends any = any> = { type: T; payload: U };
 
@@ -28,7 +29,7 @@ export const setSelectedDirection = <T extends Id>(dirId: T): Action<typeof SET_
 	payload: dirId,
 });
 
-export const setSelectedType = <T extends Id>(typeId: T): Action<typeof SET_SELECTED_TYPE, T> => ({
+export const setSelectedType = <T extends STEP_TYPE>(typeId: T): Action<typeof SET_SELECTED_TYPE, T> => ({
 	type: SET_SELECTED_TYPE,
 	payload: typeId,
 });

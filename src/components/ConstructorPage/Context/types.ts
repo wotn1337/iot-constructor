@@ -16,11 +16,12 @@ import {
 	setTrajectoryAcademicPlan,
 } from './actions';
 import React from 'react';
+import { STEP_TYPE } from '../types';
 
 export type ConstructorContextState = {
 	currentStep: number;
 	selectedDirection?: Id;
-	selectedType?: Id;
+	selectedType?: STEP_TYPE;
 	selectedTrajectory?: Id;
 	semesters: Semester[];
 	currentSemester: number;

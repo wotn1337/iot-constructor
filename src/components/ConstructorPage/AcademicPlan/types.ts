@@ -10,6 +10,12 @@ export type List = {
 	id: Id;
 	title: string;
 	type: 'default' | 'primary';
-	items: Discipline[];
+	items: AcademicPlanItem[];
 	placeholder?: string;
+};
+
+export type AcademicPlanItem = Discipline & {
+	isEmpty?: boolean;
+	emptyText?: string;
+	moduleId?: Id;
 };

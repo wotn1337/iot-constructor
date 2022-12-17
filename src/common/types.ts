@@ -68,10 +68,10 @@ export type Trajectory = {
 };
 
 export type Discipline = {
-	id: Id;
-	title: string;
-	description: string;
-	courses: Course[];
+	id?: Id;
+	title?: string;
+	description?: string;
+	courses?: Course[];
 	professional_trajectories?: Trajectory[];
 };
 

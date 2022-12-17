@@ -7,6 +7,7 @@ import {
 	StudentReview,
 	Trajectory,
 	Direction,
+	Id,
 } from '../common/types';
 
 export type PartnersResponse = { partners: Partner[] };
@@ -32,7 +33,12 @@ export type EducationalDirectionsResponse = {
 };
 export type EducationalModulesResponse = {
 	meta: { total: number };
-	semesters: { educationalModules: EducationModule[] }[];
+	semesters: {
+		id: Id;
+		numerical_representation: number;
+		text_representation: string;
+		educationalModules: EducationModule[];
+	}[];
 };
 export type ProfessionalTrajectoriesResponse = { professional_trajectories: Trajectory[] };
 export type ProfessionalTrajectoryResponse = { professional_trajectory: Trajectory };
