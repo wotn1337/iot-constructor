@@ -26,7 +26,14 @@ export const Module: React.FC<ModuleProps> = ({ module, column }) => {
 						<Collapse ghost defaultActiveKey={module.is_spec ? [`${module.id}`] : ''}>
 							<Panel header={module.title} key={module.id}>
 								<div className={!module.disciplines.length ? 'module_wrapper__placeholder' : undefined}>
-									{!module.disciplines.length && <p>Курс не выбран</p>}
+									{!module.disciplines.length && (
+										<p>
+											Выбрано{' '}
+											<strong className="module_wrapper__placeholder__strong">
+												{`0 / ${module.choice_limit}`}
+											</strong>
+										</p>
+									)}
 									{module.disciplines.map((item, index) => (
 										<Card
 											course={item}

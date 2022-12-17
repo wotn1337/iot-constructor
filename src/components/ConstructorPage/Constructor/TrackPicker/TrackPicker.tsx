@@ -21,7 +21,7 @@ export const TrackPicker: React.FC<TrackPickerProps> = ({ modules }) => {
 		const { source, destination } = result;
 
 		if (!destination || isModulesInSameColumn(source.droppableId, destination?.droppableId)) {
-			return message.warn('Необходимо перетащить курс в соседнюю колонку');
+			return message.warn('Необходимо перетащить десциплину в соседнюю колонку');
 		}
 		if (!isModulesEqual(source.droppableId, destination?.droppableId)) {
 			return message.warn('Неверный модуль!');

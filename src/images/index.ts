@@ -13,6 +13,7 @@ import LocationIcon from './icons/icon_location.svg';
 import MailIcon from './icons/icon_mail.svg';
 import PhoneIcon from './icons/icon_phone.svg';
 import GreatChoice from './constructor/greate-choice.svg';
+import Empty from './constructor/empty.svg';
 
 export {
 	IntroImage,
@@ -30,4 +31,5 @@ export {
 	MailIcon,
 	PhoneIcon,
 	GreatChoice,
+	Empty,
 };

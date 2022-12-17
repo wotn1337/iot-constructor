@@ -20,12 +20,12 @@ export const TrackProgresses: React.FC<TrackProgressesProps> = () => {
 	} = useConstructorContext();
 
 	const [data, setData] = useState({
-		labels: tracks.map((data) => data.title),
+		labels: tracks.filter((track) => !!track.points).map((data) => data.title),
 		datasets: [
 			{
 				label: 'tracks',
-				data: tracks.map((data) => data.points),
-				backgroundColor: tracks.map((track) => track.color),
+				data: tracks.filter((track) => !!track.points).map((data) => data.points),
+				backgroundColor: tracks.filter((track) => !!track.points).map((track) => track.color),
 				borderColor: 'white',
 				borderWidth: 2,
 				hoverOffset: 4,
@@ -61,10 +61,12 @@ export const TrackProgresses: React.FC<TrackProgressesProps> = () => {
 		setLegend(tracks.filter((track) => track.points));
 		setData((prevData) => ({
 			...prevData,
+			labels: tracks.filter((track) => !!track.points).map((data) => data.title),
 			datasets: [
 				{
 					...prevData.datasets[0],
-					data: tracks.map((data) => data.points),
+					data: tracks.filter((track) => !!track.points).map((data) => data.points),
+					backgroundColor: tracks.filter((track) => !!track.points).map((track) => track.color),
 				},
 			],
 		}));
