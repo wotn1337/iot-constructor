@@ -57,8 +57,12 @@ export const educationalDirectionsAPI = {
 };
 
 export const educationalModulesAPI = {
-	getEducationalModules: async (id: Id, semester: number, trajectoryId?: Id) => {
-		const params = new URLSearchParams(`paginate=true&page=${semester}`);
+	getEducationalModules: async (id?: Id, semester?: number, trajectoryId?: Id) => {
+		const params = new URLSearchParams();
+		if (semester) {
+			params.append('paginate', 'true');
+			params.append('page', String(semester));
+		}
 		if (trajectoryId) {
 			params.append('professionalTrajectoryId', String(trajectoryId));
 		}

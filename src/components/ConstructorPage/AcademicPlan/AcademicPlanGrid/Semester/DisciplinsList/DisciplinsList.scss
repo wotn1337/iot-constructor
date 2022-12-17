@@ -19,12 +19,13 @@
   }
 
   .discipline-item {
+    cursor: pointer;
+
     .item-inner {
       width: 100%;
 
       &:hover {
         color: $fontBlue;
-        cursor: pointer;
       }
 
       &:active {
@@ -33,6 +34,18 @@
 
       .ant-space-item:has(.tags-list) {
         margin-left: auto;
+      }
+
+      &__empty {
+        color: $orange;
+
+        &:hover {
+          color: $darkOrange;
+        }
+
+        &:active {
+          color: $superDarkOrange;
+        }
       }
     }
   }

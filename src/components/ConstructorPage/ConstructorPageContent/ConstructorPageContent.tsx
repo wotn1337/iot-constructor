@@ -7,19 +7,20 @@ import { setDisciplineId, setSelectedTrajectory, useConstructorContext } from '.
 import { DisciplineModal } from '../DisciplineModal/DisciplineModal';
 import { Navigation } from '../Navigation/Navigation';
 import { useDisciplineQuery } from '../../../hooks/useDisciplineQuery';
-import { Step, STEP_TYPES } from '../types';
+import { Step, STEP_TYPE } from '../types';
 import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import { useEducationalDirectionsQuery } from '../../../hooks/useEducationalDirections';
 import { getDirectionFullTitle } from '../../../common/utils';
 import { Trajectories } from '../Trajectories/Trajectories';
 import { TrajectoryAnalysis } from '../TrajectoryAnalysis/TrajectoryAnalysis';
+import { GreatChoice } from '../TrajectoryAnalysis/GreatChoice/GreatChoice';
 
 type ConstructorProps = {};
 
 export const ConstructorPageContent: React.FC<ConstructorProps> = () => {
 	const { pathname } = useLocation();
-	const currentStepType = (pathname.split('/').pop() ?? STEP_TYPES.DIRECTION_SELECTION) as STEP_TYPES;
+	const currentStepType = (pathname.split('/').pop() ?? STEP_TYPE.DIRECTION_SELECTION) as STEP_TYPE;
 	const {
 		state: { selectedType, disciplineId, semesters, currentSemester, selectedDirection, tracks },
 		dispatch,
@@ -36,24 +37,24 @@ export const ConstructorPageContent: React.FC<ConstructorProps> = () => {
 			{
 				title: 'Выберите направление подготовки',
 				content: <DirectionSelection />,
-				type: STEP_TYPES.DIRECTION_SELECTION,
+				type: STEP_TYPE.DIRECTION_SELECTION,
 				pageTitle: 'Выбор направления подготовки',
 			},
 			{
 				title: 'Как вы хотите использовать конструктор?',
 				content: <TypeSelection />,
-				type: STEP_TYPES.TYPE_SELECTION,
+				type: STEP_TYPE.TYPE_SELECTION,
 				pageTitle: 'Выбор типа конструктора',
 			},
 			{
-				content: selectedType === STEP_TYPES.CONSTRUCTOR ? <Constructor /> : <Trajectories />,
-				type: selectedType === STEP_TYPES.CONSTRUCTOR ? STEP_TYPES.CONSTRUCTOR : STEP_TYPES.TRAJECTORIES,
-				title: selectedType === STEP_TYPES.CONSTRUCTOR ? undefined : 'Выберите желаемую траекторию',
-				pageTitle: selectedType === STEP_TYPES.CONSTRUCTOR ? 'Конструктор траекторий' : 'Просмотр траекторий',
+				content: selectedType === STEP_TYPE.CONSTRUCTOR ? <Constructor /> : <Trajectories />,
+				type: selectedType === STEP_TYPE.CONSTRUCTOR ? STEP_TYPE.CONSTRUCTOR : STEP_TYPE.TRAJECTORIES,
+				title: selectedType === STEP_TYPE.CONSTRUCTOR ? undefined : 'Выберите желаемую траекторию',
+				pageTitle: selectedType === STEP_TYPE.CONSTRUCTOR ? 'Конструктор траекторий' : 'Просмотр траекторий',
 			},
 			{
 				content: <TrajectoryAnalysis />,
-				type: STEP_TYPES.TRAJECTORY_ANALYSIS,
+				type: STEP_TYPE.TRAJECTORY_ANALYSIS,
 				pageTitle: 'Анализ траектории',
 			},
 		],
@@ -70,7 +71,6 @@ export const ConstructorPageContent: React.FC<ConstructorProps> = () => {
 		if (percent >= 100) {
 			const tracksCopy = [...tracks];
 			tracksCopy.sort((a, b) => b.points - a.points);
-			console.log(tracksCopy);
 			dispatch(setSelectedTrajectory(tracksCopy[0].id));
 		}
 	}, [percent]);
@@ -88,6 +88,7 @@ export const ConstructorPageContent: React.FC<ConstructorProps> = () => {
 				<title>{currentStep?.pageTitle}</title>
 			</Helmet>
 			<section className={s.wrapper}>
+				{currentStep?.type === STEP_TYPE.TRAJECTORY_ANALYSIS && <GreatChoice />}
 				<div className={s.inner}>
 					<Routes>
 						{steps.map((step) => (
@@ -99,8 +100,8 @@ export const ConstructorPageContent: React.FC<ConstructorProps> = () => {
 										<div className={s.pageHeader}>
 											<h4 className={s.title}>{step.title}</h4>
 											{selectedDirection &&
-												currentStep?.type !== STEP_TYPES.DIRECTION_SELECTION &&
-												currentStep?.type !== STEP_TYPES.TRAJECTORY_ANALYSIS && (
+												currentStep?.type !== STEP_TYPE.DIRECTION_SELECTION &&
+												currentStep?.type !== STEP_TYPE.TRAJECTORY_ANALYSIS && (
 													<span className={s.direction}>
 														{getDirectionFullTitle(
 															selectedDirection,

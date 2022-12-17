@@ -19,7 +19,7 @@ export const Course: React.FC<CourseProps> = ({ title, realization, partner, num
 			</Col>
 			{partner && (
 				<Col flex="135px" className={s.course__image}>
-					<Image src={partner.logo} preview={false} />
+					<Image src={partner.logo} preview={false} style={{ maxHeight: 60 }} />
 				</Col>
 			)}
 		</Row>

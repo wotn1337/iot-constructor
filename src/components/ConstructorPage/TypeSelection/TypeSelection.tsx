@@ -4,7 +4,7 @@ import { Document, LightBlue } from '../../../images';
 import { TypeCard } from './TypeCard/TypeCard';
 import s from './TypeSelection.module.scss';
 import { setSelectedType, useConstructorContext } from '../Context';
-import { STEP_TYPES } from '../types';
+import { STEP_TYPE } from '../types';
 import { reachGoal } from '../../../common/utils';
 
 const CONSTRUCTOR_TYPES = [
@@ -12,14 +12,14 @@ const CONSTRUCTOR_TYPES = [
 		id: 1,
 		icon: LightBlue,
 		title: 'Попробовать создать свою траекторию',
-		type: STEP_TYPES.CONSTRUCTOR,
+		type: STEP_TYPE.CONSTRUCTOR,
 		onClick: () => reachGoal('makeTrajectory'),
 	},
 	{
 		id: 2,
 		icon: Document,
 		title: 'Посмотреть готовые траектории',
-		type: STEP_TYPES.TRAJECTORIES,
+		type: STEP_TYPE.TRAJECTORIES,
 		onClick: () => reachGoal('showTrajectories'),
 	},
 ];

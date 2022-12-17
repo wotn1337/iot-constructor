@@ -13,19 +13,22 @@ import {
 	setSemesters,
 	setTracks,
 	setTracksPoints,
+	setTrajectoryAcademicPlan,
 } from './actions';
 import React from 'react';
+import { STEP_TYPE } from '../types';
 
 export type ConstructorContextState = {
 	currentStep: number;
 	selectedDirection?: Id;
-	selectedType?: Id;
+	selectedType?: STEP_TYPE;
 	selectedTrajectory?: Id;
 	semesters: Semester[];
 	currentSemester: number;
 	columns: IColumns;
 	tracks: TrackProgress[];
 	disciplineId?: Id;
+	trajectoryAcademicPlan?: Semester[];
 };
 
 export type Semester = {
@@ -73,6 +76,7 @@ export type ConstructorContextActions = ReturnType<
 	| typeof setTracksPoints
 	| typeof setDisciplineId
 	| typeof setSelectedTrajectory
+	| typeof setTrajectoryAcademicPlan
 >;
 
 export type ConstructorContext = {

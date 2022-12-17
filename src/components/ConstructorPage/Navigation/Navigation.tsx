@@ -2,7 +2,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { Col, Progress, Row, Space } from 'antd';
 import { Button } from '../../common/Button/Button';
 import { ArrowLeftOutlined, ArrowRightOutlined } from '@ant-design/icons';
-import { Step, STEP_TYPES } from '../types';
+import { Step, STEP_TYPE } from '../types';
 import { useConstructorContext } from '../Context';
 import { NavLink } from 'react-router-dom';
 import { reachGoal } from '../../../common/utils';
@@ -25,19 +25,19 @@ export const Navigation: React.FC<NavigationTitleProps> = ({ percent, currentSte
 
 	useEffect(() => {
 		switch (currentStep?.type) {
-			case STEP_TYPES.DIRECTION_SELECTION: {
+			case STEP_TYPE.DIRECTION_SELECTION: {
 				setDisabledNext(!selectedDirection);
 				break;
 			}
-			case STEP_TYPES.TYPE_SELECTION: {
+			case STEP_TYPE.TYPE_SELECTION: {
 				setDisabledNext(!selectedType);
 				break;
 			}
-			case STEP_TYPES.TRAJECTORIES: {
+			case STEP_TYPE.TRAJECTORIES: {
 				setDisabledNext(!selectedTrajectory);
 				break;
 			}
-			case STEP_TYPES.CONSTRUCTOR: {
+			case STEP_TYPE.CONSTRUCTOR: {
 				setDisabledNext(percent < 100);
 				break;
 			}
@@ -51,7 +51,7 @@ export const Navigation: React.FC<NavigationTitleProps> = ({ percent, currentSte
 	return (
 		<Row justify="space-between" align="middle" gutter={20} style={{ margin: 0 }}>
 			<Col flex="110px" style={{ padding: 0 }}>
-				{currentStep?.type !== STEP_TYPES.DIRECTION_SELECTION && (
+				{currentStep?.type !== STEP_TYPE.DIRECTION_SELECTION && (
 					<Button style={{ color: 'black' }}>
 						<NavLink to={steps[currentStepIndex - 1]?.type}>
 							<Space size={4}>
@@ -62,7 +62,7 @@ export const Navigation: React.FC<NavigationTitleProps> = ({ percent, currentSte
 					</Button>
 				)}
 			</Col>
-			{currentStep?.type === STEP_TYPES.CONSTRUCTOR && (
+			{currentStep?.type === STEP_TYPE.CONSTRUCTOR && (
 				<Col flex="auto">
 					<Progress
 						percent={percent}
@@ -78,19 +78,19 @@ export const Navigation: React.FC<NavigationTitleProps> = ({ percent, currentSte
 				</Col>
 			)}
 			<Col style={{ padding: 0 }}>
-				{currentStep?.type !== STEP_TYPES.TRAJECTORY_ANALYSIS && (
+				{currentStep?.type !== STEP_TYPE.TRAJECTORY_ANALYSIS && (
 					<Button
 						type="primary"
 						disabled={disabledNext}
 						onClick={
-							currentStep?.type === STEP_TYPES.CONSTRUCTOR
+							currentStep?.type === STEP_TYPE.CONSTRUCTOR
 								? () => reachGoal('lastCreateTrajectory')
 								: undefined
 						}
 					>
 						<NavLink to={steps[currentStepIndex + 1]?.type}>
-							{currentStep?.type === STEP_TYPES.CONSTRUCTOR && 'Создать траекторию'}
-							{currentStep?.type !== STEP_TYPES.CONSTRUCTOR && (
+							{currentStep?.type === STEP_TYPE.CONSTRUCTOR && 'Создать траекторию'}
+							{currentStep?.type !== STEP_TYPE.CONSTRUCTOR && (
 								<Space size={4}>
 									Далее
 									<ArrowRightOutlined />
