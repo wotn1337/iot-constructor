@@ -2,6 +2,7 @@ import React from 'react';
 import { Direction } from '../../../../common/types';
 import s from './DirectionCard.module.scss';
 import { Space } from 'antd';
+import { MoreInfo } from '../../../common/MoreInfo/MoreInfo';
 
 type DirectionCardProps = Direction & {
 	selected: boolean;
@@ -20,35 +21,28 @@ export const DirectionCard: React.FC<DirectionCardProps> = ({
 	onClick,
 }) => {
 	return (
-		<div className={`${s.card} ${selected ? s.selected : ''}`} onClick={onClick}>
-			<div className={s.card__code__wrapper}>
-				<div className={s.inner}>
-					{cipher.split('.').map((n, index) => (
-						<span key={`code-part-${index}`} className={s.number}>
-							{n}
-						</span>
-					))}
-				</div>
-			</div>
-			<Space direction="vertical" size={24} className={s.card__info}>
-				<p className={s.info__title}>{title}</p>
-				<Space direction="vertical" size={8} className={s.info__list}>
-					<Space size={16}>
-						<span className={s.item__title}>Срок обучения</span>
-						<span>{training_period}</span>
-					</Space>
-					<Space size={16}>
-						<span className={s.item__title}>
-							Проходной балл в {passing_scores[0].year ?? prevYear} году
-						</span>
-						<span>{passing_scores[0].passing_score}</span>
-					</Space>
-					<Space size={16}>
-						<span className={s.item__title}>Бюджетные места</span>
-						<span>{budget_places}</span>
+		<MoreInfo>
+			<div className={`${s.card} ${selected ? s.selected : ''}`} onClick={onClick}>
+				<Space direction="vertical" size={24} className={s.card__info}>
+					<p className={s.info__title}>{`${cipher} ${title}`}</p>
+					<Space direction="vertical" size={8} className={s.info__list}>
+						<Space size={16}>
+							<span className={s.item__title}>Срок обучения</span>
+							<span>{training_period}</span>
+						</Space>
+						<Space size={16}>
+							<span className={s.item__title}>
+								Проходной балл в {passing_scores[0].year ?? prevYear} году
+							</span>
+							<span>{passing_scores[0].passing_score}</span>
+						</Space>
+						<Space size={16}>
+							<span className={s.item__title}>Бюджетные места</span>
+							<span>{budget_places}</span>
+						</Space>
 					</Space>
 				</Space>
-			</Space>
-		</div>
+			</div>
+		</MoreInfo>
 	);
 };
