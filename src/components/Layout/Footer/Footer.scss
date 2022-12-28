@@ -1,28 +1,7 @@
-@import "../../../constants";
-
 .footer {
   background-color: #FFFFFF;
 
-  .text_default {
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 19px;
-    color: rgba(0, 0, 0, 0.45);
-    transition: 200ms;
-  }
-
-  a.text_default:hover {
-    color: $blue;
-    text-decoration: underline;
-  }
-
-  a.text_default:active {
-    color: $darkBlue;
-  }
-
-  &__social {
-    &__icon {
-      margin-right: 8px;
-    }
+  @media screen and (max-width: 820px) {
+    padding: 15px 20px;
   }
 }

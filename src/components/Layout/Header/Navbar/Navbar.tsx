@@ -6,12 +6,19 @@ import { useCurrentPage } from '../../../../hooks';
 
 type NavbarProps = {
 	items: MenuProps['items'];
+	mode?: MenuProps['mode'];
 };
 
-export const Navbar: React.FC<NavbarProps> = ({ items }) => {
+export const Navbar: React.FC<NavbarProps> = ({ items, mode }) => {
 	const currentPage = useCurrentPage();
 
 	return (
-		<Menu mode="horizontal" items={items} selectedKeys={[currentPage]} className="navbar" disabledOverflow={true} />
+		<Menu
+			mode={mode ?? 'horizontal'}
+			items={items}
+			selectedKeys={[currentPage]}
+			className="navbar"
+			disabledOverflow={true}
+		/>
 	);
 };

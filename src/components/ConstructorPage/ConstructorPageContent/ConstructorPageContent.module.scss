@@ -17,6 +17,10 @@
     flex-direction: column;
     flex: 1;
 
+    @media screen and (max-width: 1216px) {
+      width: auto;
+    }
+
     .pageHeader {
       display: grid;
       gap: 32px;
