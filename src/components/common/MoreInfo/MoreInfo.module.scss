@@ -1,0 +1,25 @@
+@import "../../../constants";
+
+.moreInfo {
+  position: relative;
+
+  &__button {
+    border: 1px solid $orange;
+    position: absolute;
+    background-color: #FFF7E6;
+    border-radius: 2px;
+    transition: 200ms;
+
+    &:hover {
+      border: 1px solid $orange;
+      background-color: #FFF7E6;
+      transform: scale(1.1);
+    }
+
+    &:focus {
+      border: 1px solid $orange;
+      background-color: #FFF7E6;
+      transform: scale(1.1);
+    }
+  }
+}
