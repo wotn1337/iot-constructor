@@ -5,6 +5,7 @@ import { setSelectedDirection, useConstructorContext } from '../Context';
 import { useEducationalDirectionsQuery } from '../../../hooks/useEducationalDirections';
 import { Loader } from '../../common/Loader/Loader';
 import { reachGoal } from '../../../common/utils';
+import s from './DirectionSelection.module.scss';
 
 type ChoiceInstituteProps = {};
 
@@ -16,9 +17,9 @@ export const DirectionSelection: React.FC<ChoiceInstituteProps> = () => {
 	} = useConstructorContext();
 	return (
 		<Loader loading={isLoading || isFetching}>
-			<Row gutter={[20, 32]}>
+			<Row gutter={[20, 32]} style={{ margin: 0 }}>
 				{data?.map((dir) => (
-					<Col key={`dirCard-${dir.id}`} span={12}>
+					<Col key={`dirCard-${dir.id}`} span={24} md={12} className={s.cardCol}>
 						<DirectionCard
 							{...dir}
 							selected={selectedDirection === dir.id}

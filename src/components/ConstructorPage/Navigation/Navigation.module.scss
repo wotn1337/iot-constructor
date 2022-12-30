@@ -1,0 +1,25 @@
+.navigation {
+  margin: 0 !important;
+
+  .backButton {
+    padding: 0 !important;
+
+    @media screen and (max-width: 768px) {
+      position: fixed;
+      left: 20px;
+      bottom: 20px;
+      z-index: 100;
+    }
+  }
+
+  .nextButton {
+    padding: 0 !important;
+
+    @media screen and (max-width: 768px) {
+      position: fixed;
+      right: 20px;
+      bottom: 20px;
+      z-index: 100;
+    }
+  }
+}
