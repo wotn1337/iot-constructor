@@ -33,9 +33,9 @@ export const TypeSelection: React.FC<TypeSelectionProps> = () => {
 	} = useConstructorContext();
 
 	return (
-		<Row gutter={20} className={s.wrapper}>
+		<Row gutter={[20, 20]} className={s.wrapper} justify="center">
 			{CONSTRUCTOR_TYPES.map((type) => (
-				<Col key={type.id} span={12}>
+				<Col key={type.id} span={24} md={12}>
 					<TypeCard
 						{...type}
 						selected={selectedType === type.type}

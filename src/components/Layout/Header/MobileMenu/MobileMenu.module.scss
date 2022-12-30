@@ -1,0 +1,19 @@
+@import '../../../../constants';
+
+.mobileMenu {
+  &__button {
+    border: none;
+  }
+
+  &__navlink {
+    color: black;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 22px;
+
+    &.active {
+      color: $fontBlue;
+      text-decoration: underline;
+    }
+  }
+}

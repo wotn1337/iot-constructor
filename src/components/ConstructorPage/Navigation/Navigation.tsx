@@ -6,6 +6,8 @@ import { Step, STEP_TYPE } from '../types';
 import { useConstructorContext } from '../Context';
 import { NavLink } from 'react-router-dom';
 import { reachGoal } from '../../../common/utils';
+import s from './Navigation.module.scss';
+import { useMediaQuery } from 'react-responsive';
 
 type NavigationTitleProps = {
 	currentStep: Step | undefined;
@@ -14,6 +16,7 @@ type NavigationTitleProps = {
 };
 
 export const Navigation: React.FC<NavigationTitleProps> = ({ percent, currentStep, steps }) => {
+	const isDesktop = useMediaQuery({ minWidth: 768 });
 	const {
 		state: { selectedDirection, selectedType, selectedTrajectory },
 	} = useConstructorContext();
@@ -49,14 +52,14 @@ export const Navigation: React.FC<NavigationTitleProps> = ({ percent, currentSte
 	}, [currentStep, percent, selectedDirection, selectedType, selectedTrajectory]);
 
 	return (
-		<Row justify="space-between" align="middle" gutter={20} style={{ margin: 0 }}>
-			<Col flex="110px" style={{ padding: 0 }}>
+		<Row justify="space-between" align="middle" gutter={20} className={s.navigation}>
+			<Col flex="110px" className={s.backButton}>
 				{currentStep?.type !== STEP_TYPE.DIRECTION_SELECTION && (
 					<Button style={{ color: 'black' }}>
 						<NavLink to={steps[currentStepIndex - 1]?.type}>
 							<Space size={4}>
-								<ArrowLeftOutlined />
-								Назад
+								<ArrowLeftOutlined style={{ fontSize: isDesktop ? 'initial' : 20 }} />
+								{isDesktop ? 'Назад' : ''}
 							</Space>
 						</NavLink>
 					</Button>
@@ -77,7 +80,7 @@ export const Navigation: React.FC<NavigationTitleProps> = ({ percent, currentSte
 					/>
 				</Col>
 			)}
-			<Col style={{ padding: 0 }}>
+			<Col className={s.nextButton}>
 				{currentStep?.type !== STEP_TYPE.TRAJECTORY_ANALYSIS && (
 					<Button
 						type="primary"
@@ -92,8 +95,8 @@ export const Navigation: React.FC<NavigationTitleProps> = ({ percent, currentSte
 							{currentStep?.type === STEP_TYPE.CONSTRUCTOR && 'Создать траекторию'}
 							{currentStep?.type !== STEP_TYPE.CONSTRUCTOR && (
 								<Space size={4}>
-									Далее
-									<ArrowRightOutlined />
+									{isDesktop ? 'Далее' : ''}
+									<ArrowRightOutlined style={{ fontSize: isDesktop ? 'initial' : 20 }} />
 								</Space>
 							)}
 						</NavLink>

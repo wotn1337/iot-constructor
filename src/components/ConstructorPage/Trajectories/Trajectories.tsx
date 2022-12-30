@@ -13,7 +13,7 @@ export const Trajectories: React.FC<TrajectoriesProps> = () => {
 		<Loader loading={isLoading || isFetching} size="large">
 			<Row gutter={[20, 16]} align="middle">
 				{data?.map((track) => (
-					<Col span={8} key={track.id}>
+					<Col key={track.id} span={24} lg={8} md={12}>
 						<TrajectoryCard {...track} />
 					</Col>
 				))}
