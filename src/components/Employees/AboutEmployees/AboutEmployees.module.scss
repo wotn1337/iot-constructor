@@ -1,0 +1,10 @@
+.aboutEmployees {
+  display: grid;
+  grid-template-columns: 600px 1fr;
+  justify-content: space-between;
+
+  &__image {
+    display: block;
+    margin-left: 275px;
+  }
+}

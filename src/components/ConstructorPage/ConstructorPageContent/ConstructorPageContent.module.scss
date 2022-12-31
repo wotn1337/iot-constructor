@@ -1,66 +1,52 @@
 @import "../../../constants";
 
-.wrapper {
-  background-image: url("../../../images/constructor/constructor_bg.svg");
-  background-size: cover;
-  background-position: top;
-  background-repeat: no-repeat;
-  flex: 1;
+.inner {
+  padding: 64px 0;
+  width: 1216px;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
+  flex: 1;
 
   @media screen and (max-width: 1216px) {
-    padding: 0 20px;
+    width: auto;
   }
 
-  .inner {
-    padding: 64px 0;
-    width: 1216px;
-    margin: 0 auto;
+  @media screen and (max-width: 768px) {
+    padding: 32px 0;
+  }
+
+  .pageHeader {
+    display: grid;
+    gap: 32px;
+
+    @media screen and (max-width: 768px) {
+      gap: 16px;
+    }
+
+    .title {
+      text-align: center;
+
+      @media screen and (max-width: 768px) {
+        font-size: $h5-fontSize;
+      }
+    }
+
+    .direction {
+      display: block;
+      text-align: center;
+      color: $fontBlue;
+    }
+  }
+
+  .content {
+    padding: 54px 0 32px;
     display: flex;
     flex-direction: column;
     flex: 1;
 
-    @media screen and (max-width: 1216px) {
-      width: auto;
-    }
-
     @media screen and (max-width: 768px) {
-      padding: 32px 0;
-    }
-
-    .pageHeader {
-      display: grid;
-      gap: 32px;
-
-      @media screen and (max-width: 768px) {
-        gap: 16px;
-      }
-
-      .title {
-        text-align: center;
-
-        @media screen and (max-width: 768px) {
-          font-size: $h5-fontSize;
-        }
-      }
-
-      .direction {
-        display: block;
-        text-align: center;
-        color: $fontBlue;
-      }
-    }
-
-    .content {
-      padding: 54px 0 32px;
-      display: flex;
-      flex-direction: column;
-      flex: 1;
-
-      @media screen and (max-width: 768px) {
-        padding: 24px 0;
-      }
+      padding: 24px 0;
     }
   }
 }

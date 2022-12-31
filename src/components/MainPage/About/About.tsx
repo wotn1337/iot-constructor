@@ -1,26 +1,18 @@
 import React from 'react';
 import { IntroImage } from '../../../images';
 import { Hexagon } from '../../../components';
-import { Col, Row, Space, Typography } from 'antd';
+import { Col, Row, Typography } from 'antd';
 import s from './About.module.scss';
+import { HexagonList } from '../../common/HexagonList/HexagonList';
 
 type AboutProps = {};
 
 export const About: React.FC<AboutProps> = () => {
 	const list = [
-		{ id: 1, text: 'Создайте свой уникальный путь' },
-		{
-			id: 2,
-			text: 'Всегда можно изменить траекторию обучения',
-		},
-		{
-			id: 3,
-			text: 'Удобный и разнообразный выбор каждый семестр',
-		},
-		{
-			id: 4,
-			text: 'Освойте востребованные IT профессии',
-		},
+		'Создайте свой уникальный путь',
+		'Всегда можно изменить траекторию обучения',
+		'Удобный и разнообразный выбор каждый семестр',
+		'Освойте востребованные IT профессии',
 	];
 
 	return (
@@ -44,14 +36,7 @@ export const About: React.FC<AboutProps> = () => {
 					Студенты могут выбирать разные дисциплины, преподавателей, уровни сложности и технологии обучения
 				</Typography.Paragraph>
 				<Typography.Paragraph className={s.info__text}></Typography.Paragraph>
-				<div className={s.info__list}>
-					{list.map((item) => (
-						<Space key={item.id} align="start">
-							<Hexagon size={10} rotateAngle={90} color="#FA8C16" style={{ marginTop: 2 }} />
-							{item.text}
-						</Space>
-					))}
-				</div>
+				<HexagonList list={list} />
 			</Col>
 		</Row>
 	);
