@@ -1,5 +1,4 @@
 import React from 'react';
-import { Space } from 'antd';
 import { IntroImage } from '../../../images';
 import { HexagonList } from '../../common/HexagonList/HexagonList';
 import s from './AboutEmployees.module.scss';
@@ -16,11 +15,9 @@ export const AboutEmployees: React.FC<AboutEmployeesProps> = () => {
 
 	return (
 		<div className={s.aboutEmployees}>
-			<Space direction="vertical" size={32}>
-				<h3>Зачем нужен тьютор?</h3>
-				<HexagonList list={list} />
-			</Space>
+			<h3 className={s.aboutEmployees__title}>Зачем нужен тьютор?</h3>
 			<img src={IntroImage} alt="employees" width={225} className={s.aboutEmployees__image} />
+			<HexagonList list={list} className={s.aboutEmployees__list} />
 		</div>
 	);
 };

@@ -1,0 +1,14 @@
+.employees {
+  display: flex;
+  flex-direction: column;
+  gap: 64px;
+
+  @media screen and (max-width: 821px) {
+    gap: 24px;
+  }
+
+  &__title {
+    width: 100%;
+    text-align: center;
+  }
+}
