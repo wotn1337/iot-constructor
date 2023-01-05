@@ -54,6 +54,17 @@ export const deleteTask = (columns: IColumns, droppableId: string, index: number
 	}
 };
 
+export const chooseTask = (columns: IColumns, droppableId: string, index: number) => {
+	columns = clone(columns);
+	let columnKey = getColumnKey(columns, droppableId);
+	const module = getTargetModule(columns, columnKey, droppableId);
+	if (module) {
+		const newDisciplines = module?.disciplines;
+		const [removed] = newDisciplines.splice(index, 1);
+		return removed;
+	}
+};
+
 export const addTask = (columns: IColumns, droppableId: string, index: number, newDiscipline: Discipline) => {
 	columns = clone(columns);
 	let columnKey = getColumnKey(columns, droppableId);

@@ -8,6 +8,7 @@ import {
 	PartnersResponse,
 	ProfessionalTrajectoriesResponse,
 	ProfessionalTrajectoryResponse,
+	SemestersResponse,
 	SocialNetworksResponse,
 	StudentReviewResponse,
 } from './types';
@@ -98,6 +99,13 @@ export const disciplinesAPI = {
 		return undefined;
 	},
 };
+
+export const semestersNameAPI = {
+	getSemestersName: async () => {
+		const res = await instance.get<SemestersResponse>('semesters');
+		return res.data.semesters;
+  }
+}
 
 export const employeesAPI = {
 	getEmployees: async (positionId?: Id) => {

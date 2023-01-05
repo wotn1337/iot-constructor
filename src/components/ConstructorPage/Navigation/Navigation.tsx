@@ -17,6 +17,8 @@ type NavigationTitleProps = {
 
 export const Navigation: React.FC<NavigationTitleProps> = ({ percent, currentStep, steps }) => {
 	const isDesktop = useMediaQuery({ minWidth: 768 });
+	const isProgressVisible = useMediaQuery({ minWidth: 1216 });
+
 	const {
 		state: { selectedDirection, selectedType, selectedTrajectory },
 	} = useConstructorContext();
@@ -65,7 +67,7 @@ export const Navigation: React.FC<NavigationTitleProps> = ({ percent, currentSte
 					</Button>
 				)}
 			</Col>
-			{currentStep?.type === STEP_TYPE.CONSTRUCTOR && (
+			{currentStep?.type === STEP_TYPE.CONSTRUCTOR && isProgressVisible && (
 				<Col flex="auto">
 					<Progress
 						percent={percent}

@@ -83,3 +83,9 @@ export type EducationModule = {
 	is_spec: boolean;
 	disciplines: Discipline[];
 };
+
+export type Semester = {
+	id: number;
+	text_representation: string;
+	numerical_representation: number;
+};
