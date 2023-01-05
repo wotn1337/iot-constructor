@@ -9,6 +9,7 @@ import {
 	Direction,
 	Id,
 } from '../common/types';
+import { Employee } from '../components/Employees/types';
 
 export type PartnersResponse = { partners: Partner[] };
 export type StudentReviewResponse = {
@@ -43,3 +44,5 @@ export type EducationalModulesResponse = {
 export type ProfessionalTrajectoriesResponse = { professional_trajectories: Trajectory[] };
 export type ProfessionalTrajectoryResponse = { professional_trajectory: Trajectory };
 export type DisciplinesResponse = { discipline: Discipline };
+
+export type EmployeesResponse = { employees: Employee[] };

@@ -8,34 +8,68 @@ import { useMediaQuery } from 'react-responsive';
 
 type EmployeeCardProps = Employee;
 
-export const EmployeeCard: React.FC<EmployeeCardProps> = ({ name, info, avatar, contacts, vk }) => {
+export const EmployeeCard: React.FC<EmployeeCardProps> = ({
+	full_name,
+	additional_information,
+	photo,
+	audience,
+	email,
+	address,
+	vk_profile,
+	phone_number,
+}) => {
 	const isDesktop = useMediaQuery({ minWidth: 500 });
-	const { address, audience, email, phone } = contacts;
 
 	return (
 		<div className={s.employeeCard}>
 			<Space size={isDesktop ? 40 : 12} direction="vertical">
 				<div className={s.employeeCard__mainInfo}>
 					<img
-						src={avatar ?? AvatarPlaceholder}
-						alt={name}
+						src={photo ?? AvatarPlaceholder}
+						alt={full_name}
 						width={150}
 						height={150}
 						className={s.employeeCard__avatar}
 					/>
-					<span className={s.employeeCard__name}>{name}</span>
-					<p className={s.employeeCard__info}>{info}</p>
+					<span className={s.employeeCard__name}>{full_name}</span>
+					<p className={s.employeeCard__info}>{additional_information}</p>
 				</div>
 				<div className={s.employeeCard__contacts}>
 					{address && <IconText icon={LocationIcon} textElement={address} iconSize={isDesktop ? 20 : 15} />}
 					{audience && <IconText icon={AudienceIcon} textElement={audience} iconSize={isDesktop ? 20 : 15} />}
-					{email && <IconText icon={MailIcon} textElement={email} iconSize={isDesktop ? 20 : 15} />}
-					{phone && <IconText icon={PhoneIcon} textElement={phone} iconSize={isDesktop ? 20 : 15} />}
+					{email && (
+						<IconText
+							icon={MailIcon}
+							textElement={
+								<a href={`mailto:${email}`} className={s.contacts__link}>
+									{email}
+								</a>
+							}
+							iconSize={isDesktop ? 20 : 15}
+						/>
+					)}
+					{phone_number && (
+						<IconText
+							icon={PhoneIcon}
+							textElement={
+								<a href={`tel:${phone_number}`} className={s.contacts__link}>
+									{phone_number}
+								</a>
+							}
+							iconSize={isDesktop ? 20 : 15}
+						/>
+					)}
 				</div>
 			</Space>
-			{vk && (
-				<a href={vk.url} target="_blank" rel="noreferrer" className={s.employeeCard__vk}>
-					<img src={vk.icon} alt={vk.name} className={s.employeeCard__vk__icon} width={23} height={23} />
+			{vk_profile && (
+				<a href={vk_profile.url} target="_blank" rel="noreferrer" className={s.employeeCard__vk}>
+					<img
+						src={vk_profile.icon}
+						alt={vk_profile.name}
+						className={s.employeeCard__vk__icon}
+						width={23}
+						height={23}
+					/>
 				</a>
 			)}
 		</div>

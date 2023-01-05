@@ -19,9 +19,10 @@ export const DirectionCard: React.FC<DirectionCardProps> = ({
 	training_period,
 	selected,
 	onClick,
+	page_link,
 }) => {
 	return (
-		<MoreInfo>
+		<MoreInfo onClick={() => window.open(page_link)}>
 			<div className={`${s.card} ${selected ? s.selected : ''}`} onClick={onClick}>
 				<Space direction="vertical" size={24} className={s.card__info}>
 					<p className={s.info__title}>{`${cipher} ${title}`}</p>

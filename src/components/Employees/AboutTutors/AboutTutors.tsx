@@ -1,11 +1,12 @@
 import React from 'react';
 import { IntroImage } from '../../../images';
 import { HexagonList } from '../../common/HexagonList/HexagonList';
-import s from './AboutEmployees.module.scss';
+import s from './AboutTutors.module.scss';
+import { Promo } from '../../common/Promo/Promo';
 
 type AboutEmployeesProps = {};
 
-export const AboutEmployees: React.FC<AboutEmployeesProps> = () => {
+export const AboutTutors: React.FC<AboutEmployeesProps> = () => {
 	const list = [
 		'Поможет вам ориентироваться в образовательном пространстве',
 		'Познакомит вас с жизнью в университете',
@@ -14,10 +15,10 @@ export const AboutEmployees: React.FC<AboutEmployeesProps> = () => {
 	];
 
 	return (
-		<div className={s.aboutEmployees}>
-			<h3 className={s.aboutEmployees__title}>Зачем нужен тьютор?</h3>
-			<img src={IntroImage} alt="employees" width={225} className={s.aboutEmployees__image} />
-			<HexagonList list={list} className={s.aboutEmployees__list} />
-		</div>
+		<Promo
+			title="Зачем нужен тьютор?"
+			image={IntroImage}
+			content={<HexagonList list={list} className={s.aboutEmployees__list} />}
+		/>
 	);
 };

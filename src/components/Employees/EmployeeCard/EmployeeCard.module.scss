@@ -1,9 +1,12 @@
+@import "../../../constants";
+
 .employeeCard {
   background-color: white;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
   border-radius: 2px;
   padding: 23px 24px;
   position: relative;
+  height: 100%;
 
   @media screen and (max-width: 500px) {
     padding: 8px;
@@ -12,6 +15,7 @@
   &__mainInfo {
     display: grid;
     grid-template-columns: 150px 1fr;
+    grid-template-rows: auto 1fr;
     column-gap: 16px;
     row-gap: 8px;
 
@@ -25,6 +29,7 @@
       height: 150px;
       border-radius: 50%;
       grid-row: span 2;
+      border: 1px solid #D9D9D9;
 
       @media screen and (max-width: 500px) {
         width: 90px;
@@ -60,6 +65,20 @@
     grid-template-columns: 1fr 1fr;
     gap: 20px;
     font-size: 16px;
+    color: black;
+
+    .contacts__link {
+      color: black;
+
+      &:hover {
+        color: $blue;
+        text-decoration: underline;
+      }
+
+      &:active {
+        color: $darkBlue;
+      }
+    }
 
     @media screen and (max-width: 500px) {
       font-size: 12px;
