@@ -1,0 +1,12 @@
+.aboutROPs {
+  &__content {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 130%;
+
+    @media screen and (max-width: 821px) {
+      font-size: 14px;
+    }
+  }
+}

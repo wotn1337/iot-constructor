@@ -4,6 +4,7 @@ import {
 	DisciplinesResponse,
 	EducationalDirectionsResponse,
 	EducationalModulesResponse,
+	EmployeesResponse,
 	PartnersResponse,
 	ProfessionalTrajectoriesResponse,
 	ProfessionalTrajectoryResponse,
@@ -89,8 +90,8 @@ export const professionalTrajectoriesAPI = {
 	},
 };
 
-export const disciplinsAPI = {
-	getDisciplin: async (id: Id | undefined) => {
+export const disciplinesAPI = {
+	getDiscipline: async (id: Id | undefined) => {
 		if (id) {
 			const res = await instance.get<DisciplinesResponse>(`disciplines/${id}`);
 			return res.data.discipline;
@@ -103,5 +104,25 @@ export const semestersNameAPI = {
 	getSemestersName: async () => {
 		const res = await instance.get<SemestersResponse>('semesters');
 		return res.data.semesters;
+  }
+}
+
+export const employeesAPI = {
+	getEmployees: async (positionId?: Id) => {
+		const params = new URLSearchParams();
+		if (positionId) {
+			params.append('positionId', String(positionId));
+		}
+
+		const res = await instance.get<EmployeesResponse>(`employees?${params.toString()}`);
+		return res.data.employees;
+	},
+
+	getTutors: async () => {
+		return employeesAPI.getEmployees(2);
+	},
+
+	getROPs: async () => {
+		return employeesAPI.getEmployees(1);
 	},
 };

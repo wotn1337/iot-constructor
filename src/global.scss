@@ -1,7 +1,6 @@
 @import "./constants";
 
 * {
-
   &::-webkit-scrollbar {
     width: 5px;
   }
@@ -46,10 +45,26 @@ h2 {
 
 h3 {
   font-size: $h3-fontSize;
+
+  @media screen and (max-width: 821px) {
+   font-size: $h3-fontSize-tablet;
+  }
+
+  @media screen and (max-width: 321px) {
+    font-size: $h3-fontSize-mobile;
+  }
 }
 
 h4 {
   font-size: $h4-fontSize;
+
+  @media screen and (max-width: 821px) {
+    font-size: $h4-fontSize-tablet;
+  }
+
+  @media screen and (max-width: 321px) {
+    font-size: $h4-fontSize-mobile;
+  }
 }
 
 h5 {

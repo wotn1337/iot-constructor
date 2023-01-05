@@ -43,6 +43,7 @@ export type Direction = {
 	];
 	training_period: string;
 	budget_places: number;
+	page_link: string;
 };
 
 export type Course = {

@@ -15,6 +15,7 @@ import { getDirectionFullTitle } from '../../../common/utils';
 import { Trajectories } from '../Trajectories/Trajectories';
 import { TrajectoryAnalysis } from '../TrajectoryAnalysis/TrajectoryAnalysis';
 import { GreatChoice } from '../TrajectoryAnalysis/GreatChoice/GreatChoice';
+import { BackgroundWrapper } from '../../common/BackgroundWrapper/BackgroundWrapper';
 
 type ConstructorProps = {};
 
@@ -87,7 +88,7 @@ export const ConstructorPageContent: React.FC<ConstructorProps> = () => {
 			<Helmet>
 				<title>{currentStep?.pageTitle}</title>
 			</Helmet>
-			<section className={s.wrapper}>
+			<BackgroundWrapper>
 				{currentStep?.type === STEP_TYPE.TRAJECTORY_ANALYSIS && <GreatChoice />}
 				<div className={s.inner}>
 					<Routes>
@@ -125,7 +126,7 @@ export const ConstructorPageContent: React.FC<ConstructorProps> = () => {
 						onCancel={() => dispatch(setDisciplineId(undefined))}
 					/>
 				</div>
-			</section>
+			</BackgroundWrapper>
 		</>
 	);
 };

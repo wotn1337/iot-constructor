@@ -1,0 +1,32 @@
+.promo {
+  display: grid;
+  grid-template-columns: 600px 225px;
+  row-gap: 32px;
+  justify-content: space-around;
+  align-items: center;
+
+  @media screen and (max-width: 821px) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+  }
+
+  &__image {
+    grid-row: span 2;
+
+    @media screen and (max-width: 821px) {
+      width: 80%;
+      max-width: 400px;
+    }
+  }
+
+  &__content {
+    @media screen and (max-width: 821px) {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      width: 100%;
+    }
+  }
+}

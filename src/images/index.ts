@@ -14,6 +14,8 @@ import MailIcon from './icons/icon_mail.svg';
 import PhoneIcon from './icons/icon_phone.svg';
 import GreatChoice from './constructor/greate-choice.svg';
 import Empty from './constructor/empty.svg';
+import AvatarPlaceholder from './users/avatar_placeholder.svg';
+import AudienceIcon from './icons/icon_audience.svg';
 
 export {
 	IntroImage,
@@ -32,4 +34,6 @@ export {
 	PhoneIcon,
 	GreatChoice,
 	Empty,
+	AvatarPlaceholder,
+	AudienceIcon,
 };
