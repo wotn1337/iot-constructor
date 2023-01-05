@@ -46,4 +46,12 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+
+  .ant-empty-image {
+    height: 216px;
+  }
+
+  .ant-empty-description {
+    font-size: 18px;
+  }
 }

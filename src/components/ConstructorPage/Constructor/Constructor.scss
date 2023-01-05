@@ -5,21 +5,6 @@
     display: flex;
     gap: 20px;
 
-    &__pagination {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      margin-right: 30px;
-
-      .title {
-        font-weight: 400;
-        font-size: 12px;
-        line-height: 24px;
-        text-align: center;
-        color: rgba(0, 0, 0, 0.45);
-      }
-    }
-
     .score {
       display: flex;
       width: 289px;

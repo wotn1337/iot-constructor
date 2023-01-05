@@ -7,6 +7,7 @@ import {
 	PartnersResponse,
 	ProfessionalTrajectoriesResponse,
 	ProfessionalTrajectoryResponse,
+	SemestersResponse,
 	SocialNetworksResponse,
 	StudentReviewResponse,
 } from './types';
@@ -95,5 +96,12 @@ export const disciplinsAPI = {
 			return res.data.discipline;
 		}
 		return undefined;
+	},
+};
+
+export const semestersNameAPI = {
+	getSemestersName: async () => {
+		const res = await instance.get<SemestersResponse>('semesters');
+		return res.data.semesters;
 	},
 };

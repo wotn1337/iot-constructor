@@ -8,6 +8,7 @@ import {
 	Trajectory,
 	Direction,
 	Id,
+	Semester,
 } from '../common/types';
 
 export type PartnersResponse = { partners: Partner[] };
@@ -43,3 +44,5 @@ export type EducationalModulesResponse = {
 export type ProfessionalTrajectoriesResponse = { professional_trajectories: Trajectory[] };
 export type ProfessionalTrajectoryResponse = { professional_trajectory: Trajectory };
 export type DisciplinesResponse = { discipline: Discipline };
+
+export type SemestersResponse = { semesters: Semester[] };

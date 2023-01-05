@@ -1,13 +1,12 @@
 import React, { useEffect } from 'react';
-import { Space } from 'antd';
 import './Constructor.scss';
-import { Semester } from './Semester/Semester';
-import { TrackPicker } from './TrackPicker/TrackPicker';
 import { useEducationalModules } from '../../../hooks/useEducationalModules';
 import { Loader } from '../../common/Loader/Loader';
-import { setCurrentSemester, setSemesters, setTracks, useConstructorContext } from '../Context';
-import { TrackProgresses } from './TrackProgresses/TrackProgresses';
+import { setSemesters, setTracks, useConstructorContext } from '../Context';
 import { useProfessionalTrajectoriesQuery } from '../../../hooks/useProfessionalTrajectoriesQuery';
+import { useMediaQuery } from 'react-responsive';
+import { DesktopConstructor } from './DesktopConstructor/DesktopConstructor';
+import { MobileConstructor } from './MobileConstructor/MobileConstructor';
 
 type ConstructorProps = {};
 
@@ -23,6 +22,8 @@ export const Constructor: React.FC<ConstructorProps> = () => {
 		semesters: semestersFromBack,
 	} = useEducationalModules(selectedDirection ?? 1, currentSemester);
 
+	const isDesktop = useMediaQuery({ minWidth: 910 });
+
 	useEffect(() => {
 		dispatch(setTracks(trajectories?.map((track) => ({ ...track, points: 0, percent: 0 })) ?? []));
 	}, [trajectories]);
@@ -36,28 +37,7 @@ export const Constructor: React.FC<ConstructorProps> = () => {
 	return (
 		<div className="constructor">
 			<Loader loading={loading}>
-				<div className="constructor__middle">
-					<div className="constructor__middle__pagination">
-						<Space direction="vertical" size={16}>
-							<p className="title">семестры</p>
-							{semesters.map((sem) => (
-								<Semester
-									semester={sem}
-									key={sem.id}
-									selected={currentSemester === sem.order}
-									setCurrentSemester={(order) => dispatch(setCurrentSemester(order))}
-								/>
-							))}
-						</Space>
-					</div>
-					<div className="picker">
-						<TrackPicker modules={modules} />
-					</div>
-					<div className="score">
-						<div className="score__title">Мои траектории</div>
-						<TrackProgresses />
-					</div>
-				</div>
+				{isDesktop ? <DesktopConstructor modules={modules} /> : <MobileConstructor modules={modules} />}
 			</Loader>
 		</div>
 	);

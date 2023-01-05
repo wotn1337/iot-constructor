@@ -1,40 +1,37 @@
 @import "../../../../constants";
 
 .semester {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 50px;
-    height: 40px;
-    background: #FFFFFF;
-    border: 1px solid $gray;
-    border-radius: 2px;
-    font-family: $TekturRegular;
-    font-size: 20px;
-    line-height: 25px;
-    cursor: pointer;
-    transition: all 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+  display: block;
+  width: 50px;
+  height: 40px;
+  background: #FFFFFF;
+  border: 1px solid $gray;
+  border-radius: 2px;
+  font-family: $TekturRegular;
+  font-size: 20px;
+  line-height: 25px;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+  margin: 0 auto;
 
-    &:hover:not(:disabled) {
-      border: 1px solid $fontBlue;
-      color: $fontBlue;
-      scale: 1.1;
-    }
+  &:hover:not(:disabled) {
+    border: 1px solid $fontBlue;
+    color: $fontBlue;
+  }
 
-    &:disabled {
-      background: #F5F5F5;
-      color: rgba(0, 0, 0, 0.25);
-      cursor: not-allowed;
-    }
-}
-
-.selected:not(:disabled) {
-  border: 1px solid $fontBlue;
-  color: $fontBlue;
-  scale: 1.1;
+  &:disabled {
+    background: #F5F5F5;
+    color: rgba(0, 0, 0, 0.25);
+    cursor: not-allowed;
+  }
 }
 
 .finish:not(:focus) {
   border: 1px solid #73D13D;
   color: #73D13D;
+}
+
+.selected:not(:disabled) {
+  border: 1px solid $orange;
+  color: $orange;
 }
