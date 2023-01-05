@@ -17,7 +17,7 @@ export const DirectionSelection: React.FC<ChoiceInstituteProps> = () => {
 	} = useConstructorContext();
 	return (
 		<Loader loading={isLoading || isFetching}>
-			<Row gutter={[20, 32]} style={{ margin: 0 }}>
+			<Row gutter={[20, 32]}>
 				{data?.map((dir) => (
 					<Col key={`dirCard-${dir.id}`} span={24} md={12} className={s.cardCol}>
 						<DirectionCard
