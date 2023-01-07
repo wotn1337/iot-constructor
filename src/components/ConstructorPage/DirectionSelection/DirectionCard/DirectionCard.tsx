@@ -3,6 +3,7 @@ import { Direction } from '../../../../common/types';
 import s from './DirectionCard.module.scss';
 import { Space } from 'antd';
 import { MoreInfo } from '../../../common/MoreInfo/MoreInfo';
+import { useMediaQuery } from 'react-responsive';
 
 type DirectionCardProps = Direction & {
 	selected: boolean;
@@ -21,23 +22,25 @@ export const DirectionCard: React.FC<DirectionCardProps> = ({
 	onClick,
 	page_link,
 }) => {
+	const isDesktop = useMediaQuery({ minWidth: 768 });
+
 	return (
 		<MoreInfo onClick={() => window.open(page_link)}>
 			<div className={`${s.card} ${selected ? s.selected : ''}`} onClick={onClick}>
-				<Space direction="vertical" size={24} className={s.card__info}>
+				<Space direction="vertical" size={isDesktop ? 24 : 12} className={s.card__info}>
 					<p className={s.info__title}>{`${cipher} ${title}`}</p>
 					<Space direction="vertical" size={8} className={s.info__list}>
-						<Space size={16}>
+						<Space size={16} className={s.info__statistic}>
 							<span className={s.item__title}>Срок обучения</span>
 							<span>{training_period}</span>
 						</Space>
-						<Space size={16}>
+						<Space size={16} className={s.info__statistic}>
 							<span className={s.item__title}>
 								Проходной балл в {passing_scores[0].year ?? prevYear} году
 							</span>
 							<span>{passing_scores[0].passing_score}</span>
 						</Space>
-						<Space size={16}>
+						<Space size={16} className={s.info__statistic}>
 							<span className={s.item__title}>Бюджетные места</span>
 							<span>{budget_places}</span>
 						</Space>

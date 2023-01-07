@@ -1,6 +1,11 @@
 .academicPlanWrapper {
-  width: 1200px;
+  width: 1216px;
   margin: 0 auto;
+
+  @media screen and (max-width: 1216px) {
+    width: auto;
+  }
+
   .titleWrapper {
     display: flex;
     justify-content: space-between;

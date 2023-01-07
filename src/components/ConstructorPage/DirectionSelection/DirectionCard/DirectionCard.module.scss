@@ -7,21 +7,11 @@
   border: 1px solid transparent;
   box-sizing: border-box;
   transition: 300ms;
-
-  @media screen and (max-width: 768px) {
-  }
+  height: 100%;
 
   &:hover {
     cursor: pointer;
     border: 1px solid $darkBlue;
-
-    .card__code__wrapper {
-      .inner {
-        .number {
-          color: $darkBlue;
-        }
-      }
-    }
 
     .card__info {
       .info__title {
@@ -48,29 +38,9 @@
     }
   }
 
-  &__code__wrapper {
-    border-right: 1px solid rgba(0, 0, 0, 0.25);
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 24px;
-
-    .inner {
-      .number {
-        display: block;
-        color: #1890FF;
-        font-family: $TekturRegular;
-        font-size: 36px;
-        line-height: initial;
-        transition: 300ms;
-      }
-    }
-  }
-
   &__info {
     padding: 16px 24px;
+    width: 100%;
 
     .info__title {
       font-style: normal;
@@ -79,10 +49,27 @@
       line-height: 25px;
       color: $fontBlue;
       transition: 300ms;
+
+      @media screen and (max-width: 400px) {
+        font-size: 15px;
+      }
     }
 
     .info__list {
       font-size: 16px;
+      width: 100%;
+
+      .info__statistic {
+        @media screen and (max-width: 768px) {
+          width: 100%;
+          display: flex;
+          justify-content: space-between;
+        }
+
+        @media screen and (max-width: 400px) {
+          font-size: 12px;
+        }
+      }
 
       .item__title {
         color: rgba(0, 0, 0, 0.45);

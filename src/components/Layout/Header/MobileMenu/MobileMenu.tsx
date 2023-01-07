@@ -23,6 +23,7 @@ export const MobileMenu: React.FC<MobileMenuProps> = () => {
 						<NavLink
 							to={ROUTES.MAIN}
 							className={({ isActive }) => `${s.mobileMenu__navlink} ${isActive ? s.active : ''}`}
+							key="main"
 						>
 							Главная
 						</NavLink>,
@@ -30,6 +31,7 @@ export const MobileMenu: React.FC<MobileMenuProps> = () => {
 							<NavLink
 								to={item.route}
 								className={({ isActive }) => `${s.mobileMenu__navlink} ${isActive ? s.active : ''}`}
+								key={item.title}
 							>
 								{item.title}
 							</NavLink>
@@ -39,6 +41,7 @@ export const MobileMenu: React.FC<MobileMenuProps> = () => {
 							target="_blank"
 							rel="noreferrer"
 							className={s.mobileMenu__navlink}
+							key="review"
 						>
 							Оставить отзыв
 						</a>,
