@@ -13,7 +13,13 @@ export const TrajectoryInfo: React.FC<TrajectoryInfoProps> = ({
 	vacancies_count,
 }) => {
 	return (
-		<Row className={s.trajectoryInfo} gutter={[32, 32]}>
+		<Row
+			className={s.trajectoryInfo}
+			gutter={[
+				{ xl: 32, xs: 16 },
+				{ xl: 32, xs: 16 },
+			]}
+		>
 			<Col span={24} xl={24} order={1}>
 				<h2 className={`${s.trajectoryInfo__item} ${s.trajectoryInfo__title}`}>{title}</h2>
 			</Col>
