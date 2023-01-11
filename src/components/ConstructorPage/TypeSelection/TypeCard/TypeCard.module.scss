@@ -18,8 +18,18 @@
     max-width: none;
   }
 
+  @media screen and (max-width: 400px) {
+    height: 100px;
+    min-height: auto;
+    padding: 18px;
+  }
+
   &__icon {
     width: 86px;
+
+    @media screen and (max-width: 400px) {
+      width: 60px;
+    }
   }
 
   &__title {
@@ -31,6 +41,10 @@
     text-align: center;
     color: rgba(0, 0, 0, 0.85);
     transition: 300ms;
+
+    @media screen and (max-width: 400px) {
+      font-size: 14px;
+    }
   }
 
   &:hover {

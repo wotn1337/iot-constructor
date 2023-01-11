@@ -41,6 +41,14 @@ h1 {
 
 h2 {
   font-size: $h2-fontSize;
+
+  @media screen and (max-width: 821px) {
+    font-size: $h3-fontSize-tablet;
+  }
+
+  @media screen and (max-width: 321px) {
+    font-size: $h2-fontSize-mobile;
+  }
 }
 
 h3 {

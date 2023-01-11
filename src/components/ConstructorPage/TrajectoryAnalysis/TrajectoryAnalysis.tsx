@@ -9,6 +9,7 @@ import { useEducationalModules } from '../../../hooks/useEducationalModules';
 import { Semester } from '../AcademicPlan/types';
 import { STEP_TYPE } from '../types';
 import { getAcademicSemestersFromConstructor, getAcademicSemestersFromTrajectory } from './utils';
+import { GreatChoice } from './GreatChoice/GreatChoice';
 
 type TrajectoryAnalysisProps = {};
 
@@ -44,6 +45,7 @@ export const TrajectoryAnalysis: React.FC<TrajectoryAnalysisProps> = () => {
 	return (
 		<Loader loading={isLoading || isFetching || loading} size="large">
 			<Space direction="vertical" size={100}>
+				<GreatChoice />
 				{data && <TrajectoryInfo {...data} />}
 				{!!semesters && !!semesters.length && <AcademicPlan semesters={semesters} />}
 			</Space>

@@ -29,6 +29,7 @@ export const MobileFooter: React.FC<MobileFooterProps> = () => {
 								target="_blank"
 								rel="noreferrer"
 								onClick={() => reachGoal(sn.name === 'Telegram' ? 'telegram' : 'vk')}
+								key={sn.name}
 							>
 								<img src={sn.icon} width={25} alt={sn.name} />
 							</a>

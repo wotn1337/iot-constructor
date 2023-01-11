@@ -16,7 +16,7 @@ export const DesktopFooter = () => {
 	const { data: socialNetworks } = useSocialNetworksQuery();
 
 	return (
-		<Row gutter={{ xxl: 168, xl: 100 }} justify="center" style={{ margin: 0 }}>
+		<Row gutter={{ xxl: 168, xl: 100 }} justify="center" className="desktop-footer">
 			<Col className="footer__brand">
 				<Space direction="vertical" size="large">
 					<Logo />

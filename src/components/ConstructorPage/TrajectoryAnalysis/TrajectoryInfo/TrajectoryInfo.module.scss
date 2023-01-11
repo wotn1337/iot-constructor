@@ -5,11 +5,19 @@
     background-color: white;
     border-radius: 2px;
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+
+    @media screen and (max-width: 1200px) {
+      &.trajectoryInfo__iconWrapper {
+        background-color: transparent;
+        box-shadow: none;
+      }
+    }
   }
 
   &__title {
     text-align: center;
     color: $fontBlue;
+    padding: 8px;
   }
 
   &__description {
@@ -22,6 +30,10 @@
     font-size: 18px;
     line-height: 130%;
     color: rgba(0, 0, 0, 0.85);
+
+    @media screen and (max-width: 321px) {
+      font-size: 14px;
+    }
 
     &::-webkit-scrollbar {
       width: 3px;
@@ -45,6 +57,14 @@
     align-items: center;
     padding: 16px;
 
+    @media screen and (max-width: 1200px) {
+      padding: 0;
+    }
+
+    @media screen and (max-width: 321px) {
+      height: 120px;
+    }
+
     .iconWrapper__icon {
       width: 180px;
       max-height: 100%;
@@ -59,12 +79,29 @@
     justify-content: center;
     padding: 20px 30px;
 
+    @media screen and (max-width: 800px) {
+      height: 100%;
+      padding: 8px 16px;
+    }
+
     .statistic__number {
       font-family: $TekturRegular;
       font-weight: 400;
       font-size: 64px;
       line-height: 130%;
       color: $orange;
+
+      @media screen and (max-width: 800px) {
+        font-size: 60px;
+      }
+
+      @media screen and (max-width: 600px) {
+        font-size: 54px;
+      }
+
+      @media screen and (max-width: 321px) {
+        font-size: 48px;
+      }
     }
 
     .statistic__title {
@@ -75,6 +112,19 @@
       line-height: 130%;
       text-align: center;
       color: rgba(0, 0, 0, 0.85);
+
+      @media screen and (max-width: 800px) {
+        font-size: 20px;
+      }
+
+      @media screen and (max-width: 600px) {
+        font-size: 16px;
+      }
+
+      @media screen and (max-width: 321px) {
+        font-size: 10px;
+        color: rgba(0, 0, 0, 0.45);
+      }
     }
   }
 }

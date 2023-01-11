@@ -14,7 +14,6 @@ import { useEducationalDirectionsQuery } from '../../../hooks/useEducationalDire
 import { getDirectionFullTitle } from '../../../common/utils';
 import { Trajectories } from '../Trajectories/Trajectories';
 import { TrajectoryAnalysis } from '../TrajectoryAnalysis/TrajectoryAnalysis';
-import { GreatChoice } from '../TrajectoryAnalysis/GreatChoice/GreatChoice';
 import { BackgroundWrapper } from '../../common/BackgroundWrapper/BackgroundWrapper';
 
 type ConstructorProps = {};
@@ -57,6 +56,7 @@ export const ConstructorPageContent: React.FC<ConstructorProps> = () => {
 				content: <TrajectoryAnalysis />,
 				type: STEP_TYPE.TRAJECTORY_ANALYSIS,
 				pageTitle: 'Анализ траектории',
+				title: 'Анализ твоей траектории',
 			},
 		],
 		[selectedType]
@@ -89,7 +89,6 @@ export const ConstructorPageContent: React.FC<ConstructorProps> = () => {
 				<title>{currentStep?.pageTitle}</title>
 			</Helmet>
 			<BackgroundWrapper>
-				{currentStep?.type === STEP_TYPE.TRAJECTORY_ANALYSIS && <GreatChoice />}
 				<div className={s.inner}>
 					<Routes>
 						{steps.map((step) => (
@@ -101,8 +100,7 @@ export const ConstructorPageContent: React.FC<ConstructorProps> = () => {
 										<div className={s.pageHeader}>
 											<h4 className={s.title}>{step.title}</h4>
 											{selectedDirection &&
-												currentStep?.type !== STEP_TYPE.DIRECTION_SELECTION &&
-												currentStep?.type !== STEP_TYPE.TRAJECTORY_ANALYSIS && (
+												currentStep?.type !== STEP_TYPE.DIRECTION_SELECTION && (
 													<span className={s.direction}>
 														{getDirectionFullTitle(
 															selectedDirection,
