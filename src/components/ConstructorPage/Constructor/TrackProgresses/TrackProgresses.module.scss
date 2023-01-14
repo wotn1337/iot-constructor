@@ -1,8 +1,17 @@
 @import "../../../../constants";
 
 .wrapper {
+  position: relative;
   width: 230px;
   height: calc(100% - 45px - 12px);
   overflow-y: auto;
   padding-right: 10px;
+
+  &__track_icon {
+    width: 100px;
+    height: 100px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
 }

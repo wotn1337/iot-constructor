@@ -18,16 +18,21 @@ export const Column: React.FC<ColumnProps> = ({ column }) => {
 
 	return (
 		<div key={column.id}>
-			<div className="card">
-				<div className="card__head">
+			<div className="column">
+				<div className="column__head">
 					<p className={column.id === 2 ? 'title__blue' : 'title'}>{column.name}</p>
 					{column.id === 1 && (
-						<Tooltip className="card__head__icon" placement="topRight" color="#FA8C16" title={tooltipTitle}>
+						<Tooltip
+							className="column__head__icon"
+							placement="topRight"
+							color="#FA8C16"
+							title={tooltipTitle}
+						>
 							<QuestionCircleOutlined />
 						</Tooltip>
 					)}
 				</div>
-				<div className={`card__content ${isColumnEmpty ? 'emptyColumn' : ''}`}>
+				<div className={`column__content ${isColumnEmpty ? 'emptyColumn' : ''}`}>
 					{isColumnEmpty && (
 						<Empty image={EmptyImage} description="В этом семестре нет дисциплин по выбору" />
 					)}

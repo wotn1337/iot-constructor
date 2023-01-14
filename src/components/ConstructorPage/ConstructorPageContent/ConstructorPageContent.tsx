@@ -11,7 +11,7 @@ import { Step, STEP_TYPE } from '../types';
 import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import { useEducationalDirectionsQuery } from '../../../hooks/useEducationalDirections';
-import { getDirectionFullTitle } from '../../../common/utils';
+import { getBestTrajectory, getDirectionFullTitle } from '../../../common/utils';
 import { Trajectories } from '../Trajectories/Trajectories';
 import { TrajectoryAnalysis } from '../TrajectoryAnalysis/TrajectoryAnalysis';
 import { BackgroundWrapper } from '../../common/BackgroundWrapper/BackgroundWrapper';
@@ -70,9 +70,7 @@ export const ConstructorPageContent: React.FC<ConstructorProps> = () => {
 
 	useEffect(() => {
 		if (percent >= 100) {
-			const tracksCopy = [...tracks];
-			tracksCopy.sort((a, b) => b.points - a.points);
-			dispatch(setSelectedTrajectory(tracksCopy[0].id));
+			dispatch(setSelectedTrajectory(getBestTrajectory(tracks)));
 		}
 	}, [percent]);
 

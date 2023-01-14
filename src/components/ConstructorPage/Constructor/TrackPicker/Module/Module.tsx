@@ -24,16 +24,13 @@ export const Module: React.FC<ModuleProps> = ({ module, column }) => {
 				return (
 					<div className="module_wrapper" {...provided.droppableProps} ref={provided.innerRef}>
 						<Collapse ghost defaultActiveKey={module.is_spec ? [`${module.id}`] : ''}>
-							<Panel header={module.title} key={module.id}>
+							<Panel
+								header={module.title}
+								key={module.id}
+								style={{ color: column.id === 2 ? '#1890FF' : '#00000073' }}
+							>
 								<div className={!module.disciplines.length ? 'module_wrapper__placeholder' : undefined}>
-									{!module.disciplines.length && (
-										<p>
-											Выбрано{' '}
-											<strong className="module_wrapper__placeholder__strong">
-												{`0 / ${module.choice_limit}`}
-											</strong>
-										</p>
-									)}
+									{!module.disciplines.length && <p>Выбрано {` 0 / ${module.choice_limit}`}</p>}
 									{module.disciplines.map((item, index) => (
 										<Card
 											course={item}
