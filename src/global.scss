@@ -24,6 +24,12 @@ body {
   font-weight: $fontWeight;
 }
 
+#root {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
 p {
   margin-bottom: 0;
 }

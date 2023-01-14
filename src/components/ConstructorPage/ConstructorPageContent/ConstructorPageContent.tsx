@@ -83,6 +83,10 @@ export const ConstructorPageContent: React.FC<ConstructorProps> = () => {
 		}
 	}, [currentSemester]);
 
+	if (!selectedDirection && currentStepType !== STEP_TYPE.DIRECTION_SELECTION) {
+		return <Navigate to={steps[0].type} />;
+	}
+
 	return (
 		<>
 			<Helmet>

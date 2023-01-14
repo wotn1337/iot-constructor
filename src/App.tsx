@@ -6,6 +6,8 @@ import { ROUTES } from './routes';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { PageInProgress } from './components/common/PageInProgress/PageInProgress';
 import { Helmet } from 'react-helmet';
+import { EmployeesPage } from './pages/EmployeesPage';
+import { NotFoundPage } from './pages/NotFoundPage';
 
 const queryClient = new QueryClient();
 
@@ -29,6 +31,7 @@ export const App = () => {
 					<Route element={<Layout />}>
 						<Route index path={ROUTES.MAIN} element={<MainPage />} />
 						<Route path={`${ROUTES.CONSTRUCTOR}/*`} element={<ConstructorPage />} />
+						<Route path={ROUTES.EMPLOYEES} element={<EmployeesPage />} />
 						<Route
 							path={ROUTES.PROFESSIONS}
 							element={
@@ -37,17 +40,6 @@ export const App = () => {
 										<title>Профессии</title>
 									</Helmet>
 									<PageInProgress page="Профессии" />
-								</>
-							}
-						/>
-						<Route
-							path={ROUTES.EMPLOYEES}
-							element={
-								<>
-									<Helmet>
-										<title>Кураторы</title>
-									</Helmet>
-									<PageInProgress page="Кураторы" />
 								</>
 							}
 						/>
@@ -63,6 +55,7 @@ export const App = () => {
 							}
 						/>
 					</Route>
+					<Route path="*" element={<NotFoundPage />} />
 				</Routes>
 			</QueryClientProvider>
 		</>
