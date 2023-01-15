@@ -4,8 +4,11 @@ import { TrackProgress } from '../../Context/types';
 import { Doughnut } from 'react-chartjs-2';
 import { Chart as ChartJS, ArcElement } from 'chart.js/auto';
 import { LegendItem } from './LegendItem/LegendItem';
-import { Space } from 'antd';
+import { Space, Tooltip } from 'antd';
 import s from './TrackProgresses.module.scss';
+import { getBestTrajectory } from '../../../../common/utils';
+import { useProfessionalTrajectoryByIdQuery } from '../../../../hooks/useProfessionalTrajectoryByIdQuery';
+import { Id } from '../../../../common/types';
 
 type TrackProgressesProps = {};
 
@@ -36,6 +39,9 @@ export const TrackProgresses: React.FC<TrackProgressesProps> = () => {
 		height: 230,
 	});
 	const [legend, setLegend] = useState<TrackProgress[]>([]);
+	const [bestTrajectoryId, setBestTrajectoryId] = useState<Id>(2);
+	const [bestTrajectoryIcon, setBestTrajectoryIcon] = useState<string>('');
+	const { data: trajectory, refetch } = useProfessionalTrajectoryByIdQuery(bestTrajectoryId);
 
 	useEffect(() => {
 		const newTracks: TrackProgress[] = tracks.map((t) => ({ ...t, points: 0 }));
@@ -72,9 +78,47 @@ export const TrackProgresses: React.FC<TrackProgressesProps> = () => {
 		}));
 	}, [tracks]);
 
+	useEffect(() => {
+		if (legend.length) {
+			setBestTrajectoryId(getBestTrajectory(legend));
+		}
+	}, [legend]);
+
+	useEffect(() => {
+		refetch();
+	}, [bestTrajectoryId]);
+
+	useEffect(() => {
+		if (trajectory) {
+			setBestTrajectoryIcon(trajectory?.icons[0]);
+		}
+	}, [trajectory]);
+
 	return (
 		<Space direction="vertical" size="large" className={s.wrapper}>
-			<Doughnut data={data} />
+			<div
+				style={{
+					position: 'relative',
+					width: 230,
+					height: 230,
+					display: 'flex',
+					alignItems: 'center',
+					justifyContent: 'center',
+				}}
+			>
+				<div style={{ position: 'absolute', width: 230, height: 230 }}>
+					<Doughnut data={data} />
+				</div>
+
+				{!!legend.length && (
+					<Tooltip
+						title={`Твоя лидирующая траектория: ${trajectory?.title.toLocaleLowerCase()}!`}
+						color={'#FA8C16'}
+					>
+						<img className={s.wrapper__track_icon} src={bestTrajectoryIcon} alt={'bestTrajectory'} />
+					</Tooltip>
+				)}
+			</div>
 			<Space size="small" direction="vertical">
 				{legend.map((item) => (
 					<LegendItem title={item.title} color={item.color} key={item.id} />
