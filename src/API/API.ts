@@ -3,6 +3,7 @@ import {
 	AdmissionCommitteeContactsResponse,
 	DisciplinesResponse,
 	EducationalDirectionsResponse,
+	EducationalModuleResponse,
 	EducationalModulesResponse,
 	EmployeesResponse,
 	PartnersResponse,
@@ -74,6 +75,13 @@ export const educationalModulesAPI = {
 		);
 		return res.data;
 	},
+
+	getEducationalModuleById: async (id?: Id) => {
+		const res = await instance.get<EducationalModuleResponse>(
+			`educationalDirections/educationalModules/${id}?withDisciplines=true`
+		);
+		return res.data.educational_module;
+	},
 };
 
 export const professionalTrajectoriesAPI = {
@@ -104,8 +112,8 @@ export const semestersNameAPI = {
 	getSemestersName: async () => {
 		const res = await instance.get<SemestersResponse>('semesters');
 		return res.data.semesters;
-  }
-}
+	},
+};
 
 export const employeesAPI = {
 	getEmployees: async (positionId?: Id) => {

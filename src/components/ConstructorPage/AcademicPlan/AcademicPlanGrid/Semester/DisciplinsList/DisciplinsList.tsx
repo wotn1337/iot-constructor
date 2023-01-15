@@ -1,23 +1,32 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { List, Space } from 'antd';
 import { AcademicPlanItem, List as ListType } from '../../../types';
 import './DisciplinsList.scss';
 import { Tag } from '../../../../../common/Tag/Tag';
 import { setDisciplineId, useConstructorContext } from '../../../../Context';
 import { reachGoal } from '../../../../../../common/utils';
-import { PlusSquareTwoTone } from '@ant-design/icons';
-import { ChooseModal } from '../../../ChooseModal/ChooseModal';
+import { ElectedDiscipline } from './ElectedDiscipline/ElectedDiscipline';
+import { Discipline } from '../../../../../../common/types';
 
-type DisciplinsListProps = ListType & { hidden: boolean };
+type DisciplinsListProps = ListType & {
+	hidden?: boolean;
+	addDiscipline?: (discipline: Discipline) => void;
+};
 
-export const DisciplinsList: React.FC<DisciplinsListProps> = ({ title, items, type, hidden, placeholder }) => {
+export const DisciplinsList: React.FC<DisciplinsListProps> = ({
+	title,
+	items,
+	type,
+	hidden,
+	placeholder,
+	addDiscipline,
+}) => {
 	const { dispatch } = useConstructorContext();
-	const [openChooseModal, setOpenChooseModal] = useState(false);
 
 	const onCLickHandler = (item: AcademicPlanItem) => {
-		if (item.isEmpty) {
-			setOpenChooseModal(true);
-		} else {
+		if (addDiscipline) {
+			addDiscipline(item);
+		} else if (!item.isEmpty) {
 			dispatch(setDisciplineId(item.id));
 			reachGoal('moreAboutDisciplineUP');
 		}
@@ -27,7 +36,7 @@ export const DisciplinsList: React.FC<DisciplinsListProps> = ({ title, items, ty
 		<>
 			<List
 				size="small"
-				header={<div className={type === 'primary' ? 'primary' : ''}>{title}</div>}
+				header={title ? <div className={type === 'primary' ? 'primary' : ''}>{title}</div> : undefined}
 				bordered
 				dataSource={items}
 				renderItem={(item) => (
@@ -42,10 +51,7 @@ export const DisciplinsList: React.FC<DisciplinsListProps> = ({ title, items, ty
 								</Space>
 							</Space>
 						) : (
-							<Space direction="horizontal" style={{ width: '100%' }} className="item-inner__empty">
-								<span>{item.emptyText}</span>
-								<PlusSquareTwoTone twoToneColor="#FA8C16" style={{ fontSize: 20 }} />
-							</Space>
+							<ElectedDiscipline item={item} />
 						)}
 					</List.Item>
 				)}
@@ -53,7 +59,6 @@ export const DisciplinsList: React.FC<DisciplinsListProps> = ({ title, items, ty
 				locale={{ emptyText: placeholder }}
 				style={{ display: hidden ? 'none' : 'block' }}
 			/>
-			<ChooseModal open={openChooseModal} onCancel={() => setOpenChooseModal(false)} />
 		</>
 	);
 };

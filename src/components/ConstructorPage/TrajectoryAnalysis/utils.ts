@@ -86,6 +86,7 @@ export const getAcademicSemestersFromTrajectory = (
 							isEmpty: true,
 							emptyText: 'Здесь мы оставили выбор за тобой',
 							moduleId: module.id,
+							id: Math.floor(Math.random() * 100).toString(),
 						})
 					);
 				} else {

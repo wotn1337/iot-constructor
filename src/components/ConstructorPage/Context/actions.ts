@@ -12,10 +12,12 @@ import {
 	SET_TRACKS,
 	SET_SELECTED_TRAJECTORY,
 	SET_TRAJECTORY_ACADEMIC_PLAN,
+	SET_FINAL_ACADEMIC_PLAN,
 } from './constants';
 import { Id } from '../../../common/types';
 import { IColumns, Semester, TrackProgress } from './types';
 import { STEP_TYPE } from '../types';
+import { Semester as AcademicSemester } from '../AcademicPlan/types';
 
 type Action<T extends string, U extends any = any> = { type: T; payload: U };
 
@@ -89,5 +91,12 @@ export const setTrajectoryAcademicPlan = <T extends Semester[] | undefined>(
 	semesters: T
 ): Action<typeof SET_TRAJECTORY_ACADEMIC_PLAN, T> => ({
 	type: SET_TRAJECTORY_ACADEMIC_PLAN,
+	payload: semesters,
+});
+
+export const setFinalAcademicPlan = <T extends AcademicSemester[] | undefined>(
+	semesters: T
+): Action<typeof SET_FINAL_ACADEMIC_PLAN, T> => ({
+	type: SET_FINAL_ACADEMIC_PLAN,
 	payload: semesters,
 });
