@@ -7,9 +7,9 @@ export type Semester = {
 };
 
 export type List = {
-	id: Id;
-	title: string;
-	type: 'default' | 'primary';
+	id?: Id;
+	title?: string;
+	type?: 'default' | 'primary';
 	items: AcademicPlanItem[];
 	placeholder?: string;
 };

@@ -16,8 +16,8 @@ export const TrajectoryInfo: React.FC<TrajectoryInfoProps> = ({
 		<Row
 			className={s.trajectoryInfo}
 			gutter={[
-				{ xl: 32, xs: 16 },
-				{ xl: 32, xs: 16 },
+				{ xl: 32, lg: 24, md: 24, sm: 20, xs: 16 },
+				{ xl: 32, lg: 24, md: 24, sm: 20, xs: 16 },
 			]}
 		>
 			<Col span={24} xl={24} order={1}>

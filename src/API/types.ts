@@ -42,6 +42,7 @@ export type EducationalModulesResponse = {
 		educationalModules: EducationModule[];
 	}[];
 };
+export type EducationalModuleResponse = { educational_module: EducationModule };
 export type ProfessionalTrajectoriesResponse = { professional_trajectories: Trajectory[] };
 export type ProfessionalTrajectoryResponse = { professional_trajectory: Trajectory };
 export type DisciplinesResponse = { discipline: Discipline };

@@ -1,12 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useProfessionalTrajectoryByIdQuery } from '../../../hooks/useProfessionalTrajectoryByIdQuery';
 import { TrajectoryInfo } from './TrajectoryInfo/TrajectoryInfo';
 import { Loader } from '../../common/Loader/Loader';
-import { useConstructorContext } from '../Context';
+import { setFinalAcademicPlan, useConstructorContext } from '../Context';
 import { AcademicPlan } from '../AcademicPlan/AcademicPlan';
 import { Space } from 'antd';
 import { useEducationalModules } from '../../../hooks/useEducationalModules';
-import { Semester } from '../AcademicPlan/types';
 import { STEP_TYPE } from '../types';
 import { getAcademicSemestersFromConstructor, getAcademicSemestersFromTrajectory } from './utils';
 import { GreatChoice } from './GreatChoice/GreatChoice';
@@ -15,11 +14,11 @@ type TrajectoryAnalysisProps = {};
 
 export const TrajectoryAnalysis: React.FC<TrajectoryAnalysisProps> = () => {
 	const {
-		state: { selectedTrajectory, semesters: constructorSemesters, selectedDirection, selectedType },
+		state: { selectedTrajectory, semesters: constructorSemesters, selectedDirection, selectedType, academicPlan },
+		dispatch,
 	} = useConstructorContext();
 	const { data, isFetching, isLoading, refetch } = useProfessionalTrajectoryByIdQuery(selectedTrajectory);
 	const { trajectorySemesters, loading } = useEducationalModules(selectedDirection, undefined, selectedTrajectory);
-	const [semesters, setSemesters] = useState<Semester[]>();
 
 	useEffect(() => {
 		refetch();
@@ -28,11 +27,13 @@ export const TrajectoryAnalysis: React.FC<TrajectoryAnalysisProps> = () => {
 	useEffect(() => {
 		switch (selectedType) {
 			case STEP_TYPE.CONSTRUCTOR: {
-				setSemesters(getAcademicSemestersFromConstructor(constructorSemesters));
+				dispatch(setFinalAcademicPlan(getAcademicSemestersFromConstructor(constructorSemesters)));
 				break;
 			}
 			case STEP_TYPE.TRAJECTORIES: {
-				setSemesters(getAcademicSemestersFromTrajectory(trajectorySemesters, selectedTrajectory));
+				dispatch(
+					setFinalAcademicPlan(getAcademicSemestersFromTrajectory(trajectorySemesters, selectedTrajectory))
+				);
 				break;
 			}
 		}
@@ -47,7 +48,7 @@ export const TrajectoryAnalysis: React.FC<TrajectoryAnalysisProps> = () => {
 			<Space direction="vertical" size={100}>
 				<GreatChoice />
 				{data && <TrajectoryInfo {...data} />}
-				{!!semesters && !!semesters.length && <AcademicPlan semesters={semesters} />}
+				{!!academicPlan && !!academicPlan.length && <AcademicPlan semesters={academicPlan} />}
 			</Space>
 		</Loader>
 	);
