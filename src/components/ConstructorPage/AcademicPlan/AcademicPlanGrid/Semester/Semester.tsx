@@ -17,25 +17,24 @@ export const Semester: React.FC<SemesterProps> = ({ semesterTitle, lists, showDe
 	return (
 		<Space size={isOnColumn ? 8 : 16} direction="vertical" className="semesters-disciplins">
 			<Typography.Text className="semester-title">{semesterTitle}</Typography.Text>
-			{lists.map((list) =>
-				isOnColumn ? (
-					<Collapse
-						key={list.id}
-						defaultActiveKey={list.type === 'primary' ? [list.id + '-panel'] : undefined}
-						className={`semesters-disciplins__collapse ${list.type === 'primary' ? 'primary' : ''}`}
-					>
-						<Collapse.Panel key={list.id + '-panel'} header={list.title}>
-							<DisciplinsList
-								{...list}
-								title={undefined}
-								hidden={!showDefault && list.type === 'default'}
-							/>
-						</Collapse.Panel>
-					</Collapse>
-				) : (
-					<DisciplinsList key={list.id} {...list} hidden={!showDefault && list.type === 'default'} />
-				)
-			)}
+			{lists
+				.filter((list) => showDefault || list.type !== 'default')
+				.map((list) => {
+					if (isOnColumn) {
+						return (
+							<Collapse
+								key={list.id}
+								defaultActiveKey={list.type === 'primary' ? [list.id + '-panel'] : undefined}
+								className={`semesters-disciplins__collapse ${list.type === 'primary' ? 'primary' : ''}`}
+							>
+								<Collapse.Panel key={list.id + '-panel'} header={list.title}>
+									<DisciplinsList {...list} title={undefined} />
+								</Collapse.Panel>
+							</Collapse>
+						);
+					}
+					return <DisciplinsList key={list.id} {...list} />;
+				})}
 		</Space>
 	);
 };

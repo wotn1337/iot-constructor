@@ -13,14 +13,7 @@ type DisciplinsListProps = ListType & {
 	addDiscipline?: (discipline: Discipline) => void;
 };
 
-export const DisciplinsList: React.FC<DisciplinsListProps> = ({
-	title,
-	items,
-	type,
-	hidden,
-	placeholder,
-	addDiscipline,
-}) => {
+export const DisciplinsList: React.FC<DisciplinsListProps> = ({ title, items, type, placeholder, addDiscipline }) => {
 	const { dispatch } = useConstructorContext();
 
 	const onCLickHandler = (item: AcademicPlanItem) => {
@@ -57,7 +50,6 @@ export const DisciplinsList: React.FC<DisciplinsListProps> = ({
 				)}
 				className="disciplins-list"
 				locale={{ emptyText: placeholder }}
-				style={{ display: hidden ? 'none' : 'block' }}
 			/>
 		</>
 	);
