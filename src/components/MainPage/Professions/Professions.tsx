@@ -20,7 +20,6 @@ export const Professions = () => {
 						width={440}
 					/>
 				</div>
-				{/*<img className={s.profession__image} src={IntroImage} alt="professions" width={440} />*/}
 				<p className={s.profession__description}>
 					В современном мире существуют сотни различных специальностей в сфере IT, от дизайнеров до инженеров
 					по машинному обучению. Многие из востребованных профессий вы сможете освоить в ИРИТ-РТФ благодаря
