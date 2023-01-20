@@ -1,6 +1,10 @@
 @import '../../../../../constants';
 
 .ant-ribbon-wrapper {
+  @media screen and (max-width: 570px) {
+    width: 98%;
+  }
+
   .ant-ribbon {
     top: 33px;
   }
@@ -8,17 +12,29 @@
 
 .card {
   width: 500px;
-  .ant-card-body {
-    height: 325px;
+
+  @media screen and (max-width: 570px) {
+    width: 100%;
   }
 
   .ant-card-body {
+    height: 325px;
     padding: 32px 24px;
+
+    @media screen and (max-width: 570px) {
+      padding: 12px;
+      height: auto;
+    }
   }
 
   &__avatar {
     display: block;
     margin: 0 auto;
+
+    @media screen and (max-width: 570px) {
+      width: 50px !important;
+      height: 50px !important;
+    }
   }
 
   &__info {
@@ -36,6 +52,8 @@
     .card__direction {
       font-size: 10px;
       color: $darkGray;
+      display: block;
+      line-height: initial;
     }
   }
 
@@ -44,5 +62,9 @@
     margin: 0;
     height: 115px;
     overflow-y: auto;
+
+    @media screen and (max-width: 570px) {
+      font-size: 12px;
+    }
   }
 }

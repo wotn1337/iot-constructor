@@ -18,7 +18,6 @@ export const ElectedDisciplineContent: React.FC<ElectedDisciplineContentProps> =
 	} = useConstructorContext();
 
 	const addDiscipline = (discipline: Discipline) => {
-		console.log(discipline);
 		dispatch(
 			setFinalAcademicPlan(
 				academicPlan?.map((semester) => ({
