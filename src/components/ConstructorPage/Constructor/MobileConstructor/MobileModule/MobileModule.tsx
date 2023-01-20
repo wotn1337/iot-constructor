@@ -16,7 +16,7 @@ export const MobileModule: React.FC<MobileModuleProps> = ({ module }) => {
 	return (
 		<Collapse ghost>
 			<Panel header={module.title} key={module.id}>
-				<Space size={8} direction="vertical">
+				<Space size={8} style={{ width: '100%' }} direction="vertical">
 					{module.disciplines.map((item, index) => (
 						<MobileCard
 							course={item}

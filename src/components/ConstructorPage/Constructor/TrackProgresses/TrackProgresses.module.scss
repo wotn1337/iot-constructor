@@ -4,8 +4,7 @@
   position: relative;
   width: 230px;
   height: calc(100% - 45px - 12px);
-  overflow-y: auto;
-  padding-right: 10px;
+  overflow-y:  auto;
 
   &__track_icon {
     width: 100px;
@@ -13,5 +12,16 @@
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+  }
+
+  &__placeholder_image {
+    width: 100%;
+    height: auto;
+  }
+
+  &__placeholder_text {
+    color: #00000073;
+    font-size: 16px;
+    text-align: center;
   }
 }
