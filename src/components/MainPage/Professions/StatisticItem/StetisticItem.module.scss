@@ -3,15 +3,30 @@
 .statistic {
   min-width: 244px;
 
+  @media screen and (max-width: 1190px) {
+    display: flex;
+    align-items: center;
+  }
+
   &__amount {
     font-size: 40px;
     font-weight: 500;
     color: $orange;
     line-height: 100%;
+
+    @media screen and (max-width: 1190px) {
+      font-size: 32px;
+      line-height: 130%;
+    }
   }
 
   &__caption {
     color: rgba(0, 0, 0, 0.85);
     line-height: 130%;
+
+    @media screen and (max-width: 1190px) {
+      font-size: 12px;
+      line-height: 130%;
+    }
   }
 }

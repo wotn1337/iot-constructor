@@ -12,6 +12,11 @@
   background-size: cover;
   box-shadow: inset 0px -4px 30px rgba(0, 0, 0, 0.15), inset 0px 4px 30px rgba(0, 0, 0, 0.15);
   overflow: hidden;
+
+  @media screen and (max-width: 1230px) {
+    height: auto;
+    padding: 32px 20px;
+  }
 }
 
 .profession {
@@ -27,16 +32,52 @@
   "stat i"
   "b i";
 
+  @media screen and (max-width: 1230px) {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  @media screen and (max-width: 1190px) {
+    width: 100%;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(5, auto);
+    grid-template-areas:
+    "t"
+    "i"
+    "d"
+    "stat"
+    "b";
+  }
+
   &__title {
     grid-area: t;
     line-height: 130%;
     z-index: 1;
     margin-bottom: 32px;
+
+    @media screen and (max-width: 1190px) {
+      margin-bottom: 20px;
+      text-align: center;
+      font-size: 18px;
+    }
   }
 
-  &__image {
+  &__image_wrapper {
+    display: flex;
+    justify-content: center;
     grid-area: i;
     z-index: 1;
+    width: 100%;
+
+    &__image {
+      @media screen and (max-width: 1190px) {
+        width: 300px;
+      }
+
+      @media screen and (max-width: 500px) {
+        width: 240px;
+      }
+    }
+
   }
 
   &__description {
@@ -47,6 +88,14 @@
     color: rgba(0, 0, 0, 0.85);
     line-height: 130%;
     z-index: 1;
+
+    @media screen and (max-width: 1190px) {
+      max-width: 100%;
+      margin-bottom: 20px;
+      text-align: center;
+      font-size: 14px;
+      color: #00000073;
+    }
   }
 
   &__note {
@@ -56,6 +105,10 @@
     color: rgba(0, 0, 0, 0.45);
     z-index: 1;
     margin-bottom: 32px;
+
+    @media screen and (max-width: 1190px) {
+      display: none;
+    }
   }
 
   &__statistic {
@@ -63,11 +116,22 @@
     grid-area: stat;
     z-index: 1;
     margin-bottom: 32px;
+
+    @media screen and (max-width: 1190px) {
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
   }
 
   &__button {
     grid-area: b;
     z-index: 1;
+
+    @media screen and (max-width: 1190px) {
+      display: flex;
+      justify-content: center;
+    }
   }
 
   .hexagon {
