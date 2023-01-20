@@ -32,3 +32,16 @@
     }
   }
 }
+
+.mobileAdvantageItem {
+  &__title {
+    color: $fontBlue;
+    text-align: center;
+  }
+
+  &__description {
+    text-align: center;
+    display: block;
+    margin: 0 auto;
+  }
+}

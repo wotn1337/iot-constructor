@@ -35,18 +35,6 @@
       .ant-space-item:has(.tags-list) {
         margin-left: auto;
       }
-
-      &__empty {
-        color: $orange;
-
-        &:hover {
-          color: $darkOrange;
-        }
-
-        &:active {
-          color: $superDarkOrange;
-        }
-      }
     }
   }
 

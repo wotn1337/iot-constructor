@@ -5,12 +5,25 @@
   align-items: center;
   justify-content: center;
 
+  @media screen and (max-width: 1005px) {
+    margin-top: 32px;
+
+    @media screen and (max-width: 965px) {
+      padding: 0 20px;
+      margin-bottom: 64px;
+    }
+  }
+
   .title {
     width: 100%;
 
     .text {
       text-align: center;
       margin-bottom: 160px;
+
+      @media screen and (max-width: 965px) {
+        margin-bottom: 40px;
+      }
     }
   }
 

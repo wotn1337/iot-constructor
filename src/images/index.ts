@@ -17,6 +17,7 @@ import Empty from './constructor/empty.svg';
 import AvatarPlaceholder from './users/avatar_placeholder.svg';
 import AudienceIcon from './icons/icon_audience.svg';
 import DiagramPlaceholder from './constructor/chart-diagram-dognut-graph-statistics-svgrepo-com.svg';
+import VKIcon from './icons/icon_VK.svg';
 
 export {
 	IntroImage,
@@ -38,4 +39,5 @@ export {
 	AvatarPlaceholder,
 	AudienceIcon,
 	DiagramPlaceholder,
+	VKIcon,
 };

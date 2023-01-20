@@ -1,6 +1,6 @@
 import React from 'react';
 import { Employee } from '../types';
-import { AudienceIcon, AvatarPlaceholder, LocationIcon, MailIcon, PhoneIcon } from '../../../images';
+import { AudienceIcon, AvatarPlaceholder, LocationIcon, MailIcon, PhoneIcon, VKIcon } from '../../../images';
 import { IconText } from '../../common/IconText/IconText';
 import s from './EmployeeCard.module.scss';
 import { Space } from 'antd';
@@ -62,14 +62,8 @@ export const EmployeeCard: React.FC<EmployeeCardProps> = ({
 				</div>
 			</Space>
 			{vk_profile && (
-				<a href={vk_profile.url} target="_blank" rel="noreferrer" className={s.employeeCard__vk}>
-					<img
-						src={vk_profile.icon}
-						alt={vk_profile.name}
-						className={s.employeeCard__vk__icon}
-						width={23}
-						height={23}
-					/>
+				<a href={vk_profile} target="_blank" rel="noreferrer" className={s.employeeCard__vk}>
+					<img src={VKIcon} alt="ВКонтакте" className={s.employeeCard__vk__icon} width={23} height={23} />
 				</a>
 			)}
 		</div>
