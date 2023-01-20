@@ -4,11 +4,12 @@ import { TrackProgress } from '../../Context/types';
 import { Doughnut } from 'react-chartjs-2';
 import { Chart as ChartJS, ArcElement } from 'chart.js/auto';
 import { LegendItem } from './LegendItem/LegendItem';
-import { Space, Tooltip } from 'antd';
+import { Space } from 'antd';
 import s from './TrackProgresses.module.scss';
 import { getBestTrajectory } from '../../../../common/utils';
 import { useProfessionalTrajectoryByIdQuery } from '../../../../hooks/useProfessionalTrajectoryByIdQuery';
 import { Id } from '../../../../common/types';
+import { DiagramPlaceholder } from './../../../../images';
 
 type TrackProgressesProps = {};
 
@@ -96,34 +97,38 @@ export const TrackProgresses: React.FC<TrackProgressesProps> = () => {
 
 	return (
 		<Space direction="vertical" size="large" className={s.wrapper}>
-			<div
-				style={{
-					position: 'relative',
-					width: 230,
-					height: 230,
-					display: 'flex',
-					alignItems: 'center',
-					justifyContent: 'center',
-				}}
-			>
-				<div style={{ position: 'absolute', width: 230, height: 230 }}>
-					<Doughnut data={data} />
-				</div>
-
-				{!!legend.length && (
-					<Tooltip
-						title={`Твоя лидирующая траектория: ${trajectory?.title.toLocaleLowerCase()}!`}
-						color={'#FA8C16'}
+			{!legend.length ? (
+				<Space size="large" direction="vertical">
+					<img className={s.wrapper__placeholder_image} src={DiagramPlaceholder} alt="DiagramPlaceholder" />
+					<div className={s.wrapper__placeholder_text}>Здесь будут ваши траектории</div>
+				</Space>
+			) : (
+				<>
+					<div
+						style={{
+							position: 'relative',
+							width: 230,
+							height: 230,
+							display: 'flex',
+							alignItems: 'center',
+							justifyContent: 'center',
+						}}
 					>
-						<img className={s.wrapper__track_icon} src={bestTrajectoryIcon} alt={'bestTrajectory'} />
-					</Tooltip>
-				)}
-			</div>
-			<Space size="small" direction="vertical">
-				{legend.map((item) => (
-					<LegendItem title={item.title} color={item.color} key={item.id} />
-				))}
-			</Space>
+						<div style={{ position: 'absolute', width: 230, height: 230 }}>
+							<Doughnut data={data} />
+						</div>
+
+						{!!legend.length && (
+							<img className={s.wrapper__track_icon} src={bestTrajectoryIcon} alt={'bestTrajectory'} />
+						)}
+					</div>
+					<Space size="small" direction="vertical">
+						{legend.map((item) => (
+							<LegendItem title={item.title} color={item.color} key={item.id} />
+						))}
+					</Space>
+				</>
+			)}
 		</Space>
 	);
 };
