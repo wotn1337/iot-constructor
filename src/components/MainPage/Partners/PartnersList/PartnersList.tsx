@@ -1,16 +1,19 @@
 import React from 'react';
-import { Image, Space } from 'antd';
+import { Col, Row } from 'antd';
 import { usePartnersQuery } from '../../../../hooks/usePartnersQuery';
+import s from './PartnersList.module.scss';
 
 type PartnersListProps = {};
 
 export const PartnersList: React.FC<PartnersListProps> = () => {
 	const { data: partners } = usePartnersQuery();
 	return (
-		<Space size={66}>
+		<Row gutter={[60, 20]} justify="center" align="middle" className={s.partnersList}>
 			{partners?.map((p) => (
-				<Image src={p.logo} key={p.id} preview={false} height={80} />
+				<Col key={p.id}>
+					<img src={p.logo} height={80} alt={p.title} className={s.partnersList__logo} />
+				</Col>
 			))}
-		</Space>
+		</Row>
 	);
 };

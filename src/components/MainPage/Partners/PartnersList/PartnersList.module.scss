@@ -1,0 +1,8 @@
+.partnersList {
+  margin: 0 !important;
+  &__logo {
+    @media screen and (max-width: 821px) {
+      height: 60px;
+    }
+  }
+}

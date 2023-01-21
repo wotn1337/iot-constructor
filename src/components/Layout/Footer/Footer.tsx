@@ -12,8 +12,8 @@ const { Footer: AntdFooter } = Layout;
 
 type FooterProps = {};
 
-export const Footer: React.FC<FooterProps> = ({ ...props }) => {
-	const isDesktop = useMediaQuery({ minWidth: 820 });
+export const Footer: React.FC<FooterProps> = () => {
+	const isDesktop = useMediaQuery({ minWidth: 821 });
 	const { isFetching: contactsFetching, isLoading: contactsLoading } = useContactsQuery();
 	const { isFetching: socialNetworksFetching, isLoading: socialNetworksLoading } = useSocialNetworksQuery();
 

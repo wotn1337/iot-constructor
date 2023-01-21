@@ -1,6 +1,6 @@
 import React from 'react';
 import { Course as CourseType } from '../../../../../common/types';
-import { Col, Image, Row, Space, Typography } from 'antd';
+import { Col, Row, Space, Typography } from 'antd';
 import s from './Course.module.scss';
 import { useMediaQuery } from 'react-responsive';
 
@@ -21,8 +21,12 @@ export const Course: React.FC<CourseProps> = ({ title, realization, partner, num
 				</Space>
 			</Col>
 			{partner && (
-				<Col flex={isMobile ? 'auto' : '135px'} className={s.course__image}>
-					<Image src={partner.logo} preview={false} style={{ maxHeight: 60 }} />
+				<Col
+					flex={isMobile ? 'auto' : '135px'}
+					span={isMobile ? 24 : undefined}
+					className={s.course__image__wrapper}
+				>
+					<img src={partner.logo} alt={partner.title} className={s.course__image} />
 				</Col>
 			)}
 		</Row>

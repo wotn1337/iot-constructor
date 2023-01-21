@@ -1,7 +1,10 @@
 .partners {
   width: 100%;
-  padding-top: 128px;
-  padding-bottom: 60px;
+  padding: 128px 20px 60px;
+
+  @media screen and (max-width: 821px) {
+    padding: 32px 20px 0;
+  }
 
   &__title {
     text-align: center;
