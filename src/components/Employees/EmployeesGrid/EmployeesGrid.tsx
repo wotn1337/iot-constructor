@@ -15,7 +15,7 @@ export const EmployeesGrid: React.FC<EmployeesGridProps> = ({ title, employees }
 			<h4 className={s.employees__title}>{title}</h4>
 			<Row gutter={[20, 32]}>
 				{employees.map((employee) => (
-					<Col key={employee.id} span={24} md={12}>
+					<Col key={employee.id} span={24} lg={12}>
 						<EmployeeCard {...employee} />
 					</Col>
 				))}
