@@ -1,3 +1,5 @@
+import { ElectiveIcon, LevelIcon, TechnologyIcon } from '../../../images';
+
 export const AdvantagesList = [
 	{
 		title: 'Уровень сложности',
@@ -5,6 +7,7 @@ export const AdvantagesList = [
 		list: ['Базовый', 'Повышенный'],
 		align: 'right',
 		id: 0,
+		image: LevelIcon,
 	},
 	{
 		title: 'Технология реализации',
@@ -12,12 +15,13 @@ export const AdvantagesList = [
 		list: ['Очная', 'Онлайн', 'Смешанная'],
 		align: 'left',
 		id: 1,
+		image: TechnologyIcon,
 	},
 	{
 		title: 'Элективные дисциплины',
 		description: 'Предметы по выбору, набор которых вы определяете исходя из своих личных потребностей',
-		list: undefined,
 		align: 'right',
 		id: 2,
+		image: ElectiveIcon,
 	},
 ];

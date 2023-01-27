@@ -1,0 +1,32 @@
+@import "../../../../../../../constants";
+
+.elected-discipline-popover {
+  .ant-popover-arrow {
+    display: none;
+  }
+
+  .ant-popover-inner-content {
+    padding: 0;
+    width: 300px;
+
+    @media screen and (max-width: 321px) {
+      width: auto;
+    }
+  }
+}
+
+.item-inner__empty {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  color: $orange;
+
+  &:hover {
+    color: $darkOrange;
+  }
+
+  &:active {
+    color: $superDarkOrange;
+  }
+}

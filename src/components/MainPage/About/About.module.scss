@@ -1,23 +1,61 @@
 .about {
   padding-top: 20px;
 
+  @media screen and (max-width: 1100px) {
+    padding-top: 50px;
+
+    @media screen and (max-width: 1005px) {
+      background: white;
+      padding: 150px 20px 32px 20px;
+      margin-top: -100px;
+    }
+  }
+
   .info {
     width: 600px;
 
+    @media screen and (max-width: 1005px) {
+      width: auto;
+    }
+
     &__title {
       margin-bottom: 32px;
+
+      @media screen and (max-width: 769px) {
+        text-align: center;
+      }
     }
 
     div.info__text {
       width: 500px;
       line-height: 20.8px;
       margin-bottom: 64px;
+      font-size: 16px;
+
+      @media screen and (max-width: 1005px) {
+        width: auto;
+      }
+
+      @media screen and (max-width: 1370px) {
+        margin-bottom: 32px;
+
+        @media screen and (max-width: 769px) {
+          margin-bottom: 24px;
+          font-size: 14px;
+          color: rgba(0, 0, 0, 0.45);
+          text-align: center;
+        }
+      }
     }
 
     &__list {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 20px;
+
+      @media screen and (max-width: 1370px) {
+        gap: 10px;
+      }
     }
   }
 }

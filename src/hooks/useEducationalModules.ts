@@ -18,7 +18,6 @@ export const useEducationalModules = (id?: Id, semester?: number, trajectoryId?:
 
 		getEducationalModules(id, semester, trajectoryId)
 			.then((data) => {
-				console.log(data);
 				if (semester) {
 					setModules(data.semesters[0].educationalModules);
 					let newSemesters: Semester[] = [];

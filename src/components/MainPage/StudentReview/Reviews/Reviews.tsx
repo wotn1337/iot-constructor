@@ -6,6 +6,7 @@ import s from './Reviews.module.scss';
 import { setStudentReviewsPage, useMainPageContext } from '../../Context';
 import { useStudentReviewsQuery } from '../../../../hooks/useStudentReviewsQuery';
 import { Loader } from '../../../common/Loader/Loader';
+import { useMediaQuery } from 'react-responsive';
 
 type ReviewsProps = {};
 
@@ -15,6 +16,7 @@ export const Reviews: React.FC<ReviewsProps> = () => {
 		dispatch,
 	} = useMainPageContext();
 	const { data, isLoading, isFetching } = useStudentReviewsQuery(studentReviewsPage);
+	const isLarge = useMediaQuery({ minWidth: 1060 });
 
 	return (
 		<>
@@ -30,7 +32,12 @@ export const Reviews: React.FC<ReviewsProps> = () => {
 			>
 				{[
 					<Loader loading={isLoading || isFetching} style={{ height: 327 }} size="large" key="carousel">
-						<Space size={20}>
+						<Space
+							size={20}
+							direction={isLarge ? 'horizontal' : 'vertical'}
+							align="center"
+							// style={{ width: '100%' }}
+						>
 							{data?.reviews.map((r) => (
 								<ReviewCard {...r} key={r.id} />
 							))}

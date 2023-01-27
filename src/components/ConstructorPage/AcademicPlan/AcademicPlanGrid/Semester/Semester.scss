@@ -1,0 +1,35 @@
+@import "../../../../../constants";
+
+.semesters-disciplins {
+  width: 100%;
+
+  .semester-title {
+    font-size: 20px;
+  }
+
+  &__collapse {
+    .ant-collapse-item {
+      .ant-list-bordered {
+        border: none;
+      }
+
+      div.ant-collapse-header {
+        padding: 8px 16px;
+
+        .ant-collapse-header-text {
+          color: black;
+        }
+      }
+    }
+
+    &.primary {
+      .ant-collapse-item {
+        div.ant-collapse-header {
+          .ant-collapse-header-text {
+            color: $fontBlue;
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,6 +1,14 @@
 .studentReview {
+  @media screen and (max-width: 1060px) {
+    padding: 0 20px;
+  }
+
   &__title {
     text-align: center;
     margin-bottom: 64px;
+
+    @media screen and (max-width: 1060px) {
+      margin-bottom: 32px;
+    }
   }
 }
