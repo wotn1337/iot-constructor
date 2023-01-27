@@ -11,7 +11,7 @@ const CONSTRUCTOR_TYPES = [
 	{
 		id: 1,
 		icon: LightBlue,
-		title: 'Попробовать создать свою траекторию',
+		title: 'Определить свою траекторию',
 		type: STEP_TYPE.CONSTRUCTOR,
 		onClick: () => reachGoal('makeTrajectory'),
 	},

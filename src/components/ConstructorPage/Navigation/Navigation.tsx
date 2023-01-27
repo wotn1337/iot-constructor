@@ -18,6 +18,7 @@ type NavigationTitleProps = {
 export const Navigation: React.FC<NavigationTitleProps> = ({ percent, currentStep, steps }) => {
 	const isDesktop = useMediaQuery({ minWidth: 768 });
 	const isProgressVisible = useMediaQuery({ minWidth: 1216 });
+	const isConstructor = currentStep?.type === STEP_TYPE.CONSTRUCTOR;
 
 	const {
 		state: { selectedDirection, selectedType, selectedTrajectory },
@@ -54,20 +55,20 @@ export const Navigation: React.FC<NavigationTitleProps> = ({ percent, currentSte
 	}, [currentStep, percent, selectedDirection, selectedType, selectedTrajectory]);
 
 	return (
-		<Row justify="space-between" align="middle" gutter={20} className={s.navigation}>
-			<Col flex="110px" className={s.backButton}>
+		<Row justify="space-between" align="middle" gutter={isConstructor ? 40 : 20} className={s.navigation}>
+			<Col flex={isConstructor ? '82px' : '110px'} className={s.backButton}>
 				{currentStep?.type !== STEP_TYPE.DIRECTION_SELECTION && (
-					<Button style={{ color: 'black' }}>
+					<Button classname={s.backButton__btn}>
 						<NavLink to={steps[currentStepIndex - 1]?.type}>
 							<Space size={4}>
 								<ArrowLeftOutlined style={{ fontSize: isDesktop ? 'initial' : 20 }} />
-								{isDesktop ? 'Назад' : ''}
+								{isDesktop && !isConstructor ? 'Назад' : ''}
 							</Space>
 						</NavLink>
 					</Button>
 				)}
 			</Col>
-			{currentStep?.type === STEP_TYPE.CONSTRUCTOR && isProgressVisible && (
+			{isConstructor && isProgressVisible && (
 				<Col flex="auto">
 					<Progress
 						percent={percent}
@@ -79,23 +80,21 @@ export const Navigation: React.FC<NavigationTitleProps> = ({ percent, currentSte
 							'100%': '#FF8413',
 						}}
 						trailColor="#D9D9D9"
+						style={{ marginLeft: 0 }}
 					/>
 				</Col>
 			)}
-			<Col className={s.nextButton}>
+			<Col className={s.nextButton} flex={isConstructor ? '289px' : undefined}>
 				{currentStep?.type !== STEP_TYPE.TRAJECTORY_ANALYSIS && (
 					<Button
 						type="primary"
 						disabled={disabledNext}
-						onClick={
-							currentStep?.type === STEP_TYPE.CONSTRUCTOR
-								? () => reachGoal('lastCreateTrajectory')
-								: undefined
-						}
+						onClick={isConstructor ? () => reachGoal('lastCreateTrajectory') : undefined}
+						style={isConstructor ? { width: 289 } : undefined}
 					>
 						<NavLink to={steps[currentStepIndex + 1]?.type}>
-							{currentStep?.type === STEP_TYPE.CONSTRUCTOR && 'Создать траекторию'}
-							{currentStep?.type !== STEP_TYPE.CONSTRUCTOR && (
+							{isConstructor && 'Создать траекторию'}
+							{!isConstructor && (
 								<Space size={4}>
 									{isDesktop ? 'Далее' : ''}
 									<ArrowRightOutlined style={{ fontSize: isDesktop ? 'initial' : 20 }} />
