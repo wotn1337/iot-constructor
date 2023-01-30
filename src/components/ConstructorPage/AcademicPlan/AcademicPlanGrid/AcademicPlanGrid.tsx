@@ -13,11 +13,7 @@ export const AcademicPlanGrid: React.FC<AcademicPlanGridProps> = ({ semesters, s
 		<Row gutter={[20, 32]}>
 			{semesters.map((semester) => (
 				<Col span={6} lg={6} md={8} sm={12} xs={24} key={semester.id}>
-					<Semester
-						semesterTitle={`${semester.name} семестр`}
-						lists={semester.lists}
-						showDefault={showDefault}
-					/>
+					<Semester semesterTitle={semester.name} lists={semester.lists} showDefault={showDefault} />
 				</Col>
 			))}
 		</Row>
