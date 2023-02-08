@@ -1,0 +1,10 @@
+.academicPlanGrid {
+  @media print {
+    padding: 10px;
+    font-size: 10px;
+
+    @page {
+      padding: 20px;
+    }
+  }
+}

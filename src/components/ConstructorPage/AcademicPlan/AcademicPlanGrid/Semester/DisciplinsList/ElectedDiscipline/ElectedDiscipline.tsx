@@ -19,7 +19,7 @@ export const ElectedDiscipline: React.FC<ElectedDisciplineProps> = ({ item }) =>
 		>
 			<div className="item-inner__empty">
 				<span>{item.emptyText}</span>
-				<PlusSquareTwoTone twoToneColor="#FA8C16" style={{ fontSize: 20 }} />
+				<PlusSquareTwoTone twoToneColor="#FA8C16" style={{ fontSize: 20 }} className="plus-icon" />
 			</div>
 		</Popover>
 	);

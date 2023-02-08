@@ -12,6 +12,12 @@
     border-bottom: 1px solid rgba(0, 0, 0, 0.25);
     border-radius: 2px 2px 0 0;
 
+    @media print {
+      font-size: 10px;
+      line-height: 130%;
+      padding: 5px;
+    }
+
     .primary {
       color: $fontBlue;
     }
@@ -19,6 +25,12 @@
 
   .discipline-item {
     cursor: pointer;
+
+    @media print {
+      font-size: 10px !important;
+      line-height: 130%;
+      padding: 6px 10px !important;
+    }
 
     .item-inner {
       width: 100%;
@@ -41,5 +53,11 @@
   .ant-list-empty-text {
     text-align: left;
     color: rgba(0, 0, 0, 0.45);
+
+    @media print {
+      font-size: 10px !important;
+      line-height: 130%;
+      padding: 4px 8px !important;
+    }
   }
 }
