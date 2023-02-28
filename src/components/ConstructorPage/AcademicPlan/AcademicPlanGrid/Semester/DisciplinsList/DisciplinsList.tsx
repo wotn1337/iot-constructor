@@ -29,7 +29,7 @@ export const DisciplinsList: React.FC<DisciplinsListProps> = ({ title, items, ty
 		<>
 			<List
 				size="small"
-				header={title ? <div className={type === 'primary' ? 'primary' : ''}>{title}</div> : undefined}
+				header={title ? <div className={type === 'primary' ? 'primary' : undefined}>{title}</div> : undefined}
 				bordered
 				dataSource={items}
 				renderItem={(item) => (

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Tag as AntdTag, Tooltip } from 'antd';
 import { hexToRGB, lightenDarkenColor } from './utils';
+import s from './Tag.module.scss';
 
 type TagProps = {
 	color: string;
@@ -11,7 +12,7 @@ type TagProps = {
 
 export const Tag: React.FC<TagProps> = ({ text, color, shouldShowTooltip, tooltipText }) => {
 	return (
-		<Tooltip title={shouldShowTooltip ? tooltipText : ''}>
+		<Tooltip title={shouldShowTooltip ? tooltipText : ''} className={s.track__tag}>
 			<AntdTag
 				color={hexToRGB(color, 0.15)}
 				style={{

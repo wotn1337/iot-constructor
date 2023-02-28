@@ -5,6 +5,10 @@
 
   .semester-title {
     font-size: 20px;
+
+    @media print {
+      font-size: 16px;
+    }
   }
 
   &__collapse {
