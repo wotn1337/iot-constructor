@@ -5,6 +5,7 @@ import {
 	setCurrentSemester,
 	setCurrentStep,
 	setDisciplineId,
+	setDraggableId,
 	setFinalAcademicPlan,
 	setSelectedDirection,
 	setSelectedTrajectory,
@@ -32,6 +33,7 @@ export type ConstructorContextState = {
 	disciplineId?: Id;
 	trajectoryAcademicPlan?: Semester[];
 	academicPlan?: AcademicSemester[];
+	draggableId: string;
 };
 
 export type Semester = {
@@ -81,6 +83,7 @@ export type ConstructorContextActions = ReturnType<
 	| typeof setSelectedTrajectory
 	| typeof setTrajectoryAcademicPlan
 	| typeof setFinalAcademicPlan
+	| typeof setDraggableId
 >;
 
 export type ConstructorContext = {

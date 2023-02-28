@@ -22,6 +22,10 @@
       align-items: start;
       column-gap: 10px;
 
+      &__disabled {
+        color: rgba(0, 0, 0, 0.45);
+      }
+
       &__buttons {
         display: flex;
         gap: 5px;

@@ -13,6 +13,7 @@ import {
 	SET_SELECTED_TRAJECTORY,
 	SET_TRAJECTORY_ACADEMIC_PLAN,
 	SET_FINAL_ACADEMIC_PLAN,
+	SET_DRAGGABLE_ID,
 } from './constants';
 import { Id } from '../../../common/types';
 import { IColumns, Semester, TrackProgress } from './types';
@@ -99,4 +100,9 @@ export const setFinalAcademicPlan = <T extends AcademicSemester[] | undefined>(
 ): Action<typeof SET_FINAL_ACADEMIC_PLAN, T> => ({
 	type: SET_FINAL_ACADEMIC_PLAN,
 	payload: semesters,
+});
+
+export const setDraggableId = <T extends string>(id: T): Action<typeof SET_DRAGGABLE_ID, T> => ({
+	type: SET_DRAGGABLE_ID,
+	payload: id,
 });

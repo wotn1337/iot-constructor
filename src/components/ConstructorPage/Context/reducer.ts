@@ -14,6 +14,7 @@ import {
 	SET_SELECTED_TRAJECTORY,
 	SET_TRAJECTORY_ACADEMIC_PLAN,
 	SET_FINAL_ACADEMIC_PLAN,
+	SET_DRAGGABLE_ID,
 } from './constants';
 
 export const MainPageContextInitialState: ConstructorContextState = {
@@ -21,6 +22,7 @@ export const MainPageContextInitialState: ConstructorContextState = {
 	semesters: [],
 	tracks: [],
 	currentSemester: 1,
+	draggableId: '',
 	columns: {
 		'1': {
 			id: 1,
@@ -120,6 +122,9 @@ export const MainPageContextReducer = (
 		}
 		case SET_FINAL_ACADEMIC_PLAN: {
 			return { ...state, academicPlan: action.payload };
+		}
+		case SET_DRAGGABLE_ID: {
+			return { ...state, draggableId: action.payload };
 		}
 		default:
 			return state;

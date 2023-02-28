@@ -16,12 +16,30 @@ type ModuleProps = {
 
 export const Module: React.FC<ModuleProps> = ({ module, column }) => {
 	const {
-		state: { semesters, columns },
+		state: { semesters, columns, draggableId },
 	} = useConstructorContext();
 
 	const [isModuleCollapse, setIsModuleCollapse] = useState<string[] | string>(
 		!module.is_spec ? '' : [`${module.id}`]
 	);
+
+	const isDropDisabled = !module.is_spec || module.disciplines.length === module.choice_limit;
+
+	const getPlaceholderClassName = () => {
+		if (module.disciplines.length) {
+			return '';
+		} else if (module.id.toString() === draggableId) {
+			return 'module_wrapper__placeholder module_wrapper__placeholder__target_background';
+		} else return 'module_wrapper__placeholder module_wrapper__placeholder__empty_background';
+	};
+
+	const getPanelHeaderClassName = () => {
+		if (module.id.toString() === draggableId) {
+			return 'module_wrapper__title__target';
+		} else if (module.disciplines.length === module.choice_limit) {
+			return 'module_wrapper__title__finish';
+		} else return 'module_wrapper__title';
+	};
 
 	useEffect(() => {
 		if (!module.is_spec) {
@@ -33,12 +51,8 @@ export const Module: React.FC<ModuleProps> = ({ module, column }) => {
 	}, [semesters]);
 
 	return column.id === 1 && !module.is_spec ? null : (
-		<Droppable
-			droppableId={module.id.toString()}
-			key={module.id}
-			isDropDisabled={!module.is_spec || module.disciplines.length === module.choice_limit}
-		>
-			{(provided) => {
+		<Droppable droppableId={module.id.toString()} key={module.id} isDropDisabled={isDropDisabled}>
+			{(provided, snapshot) => {
 				return (
 					<div className="module_wrapper" {...provided.droppableProps} ref={provided.innerRef}>
 						<Collapse
@@ -46,24 +60,20 @@ export const Module: React.FC<ModuleProps> = ({ module, column }) => {
 							activeKey={isModuleCollapse}
 							onChange={() => setIsModuleCollapse((prev) => (prev === '' ? [`${module.id}`] : ''))}
 						>
-							<Panel
-								header={module.title}
-								key={module.id}
-								style={{ color: column.id === 2 ? '#1890FF' : '#00000073' }}
-							>
-								<div className={!module.disciplines.length ? 'module_wrapper__placeholder' : undefined}>
+							<Panel className={getPanelHeaderClassName()} header={module.title} key={module.id}>
+								<div className={getPlaceholderClassName()}>
 									{!module.disciplines.length && <p>Выбрано {` 0 / ${module.choice_limit}`}</p>}
-									{module.disciplines.map((item, index) => (
-										<Card
-											course={item}
-											key={item.id}
-											index={index}
-											isDragDisabled={!module.is_spec}
-											isSelected={column.id === 2}
-											droppableId={module.id.toString()}
-										/>
-									))}
 								</div>
+								{module.disciplines.map((item, index) => (
+									<Card
+										course={item}
+										key={item.id}
+										index={index}
+										isDragDisabled={!module.is_spec}
+										isSelected={column.id === 2}
+										droppableId={module.id.toString()}
+									/>
+								))}
 							</Panel>
 						</Collapse>
 						{provided.placeholder}
