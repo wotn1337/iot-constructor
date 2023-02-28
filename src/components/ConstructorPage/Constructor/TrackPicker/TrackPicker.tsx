@@ -1,9 +1,15 @@
 import React, { useEffect } from 'react';
-import { DragDropContext, DropResult } from 'react-beautiful-dnd';
+import { DragDropContext, DragStart, DropResult } from 'react-beautiful-dnd';
 import { message } from 'antd';
 import { Column } from './Column/Column';
 import { Discipline, EducationModule } from '../../../../common/types';
-import { setColumns, setSemesterColumns, setSemesterFinish, useConstructorContext } from '../../Context';
+import {
+	setColumns,
+	setDraggableId,
+	setSemesterColumns,
+	setSemesterFinish,
+	useConstructorContext,
+} from '../../Context';
 import { IColumns } from '../../Context/types';
 import { addTask, deleteTask, isModulesEqual, isModulesInSameColumn } from '../utils';
 
@@ -17,8 +23,18 @@ export const TrackPicker: React.FC<TrackPickerProps> = ({ modules }) => {
 		dispatch,
 	} = useConstructorContext();
 
+	const onDragStart = (result: DragStart) => {
+		const draggableId = result.source.droppableId;
+		dispatch(setDraggableId(''));
+		if (!draggableId.includes('_')) {
+			dispatch(setDraggableId(`module_${draggableId}`));
+			console.log(result);
+		} else dispatch(setDraggableId(''));
+	};
+
 	const onDragEnd = (result: DropResult, columns: IColumns) => {
 		const { source, destination } = result;
+		dispatch(setDraggableId(''));
 
 		if (!destination || isModulesInSameColumn(source.droppableId, destination?.droppableId)) {
 			return message.warn('Необходимо перетащить десциплину в соседнюю колонку');
@@ -102,7 +118,10 @@ export const TrackPicker: React.FC<TrackPickerProps> = ({ modules }) => {
 	}, [currentSemester]);
 
 	return (
-		<DragDropContext onDragEnd={(result) => onDragEnd(result, columns)}>
+		<DragDropContext
+			onDragStart={(result) => onDragStart(result)}
+			onDragEnd={(result) => onDragEnd(result, columns)}
+		>
 			{Object.values(columns).map((item) => (
 				<Column column={item} key={item.id} />
 			))}

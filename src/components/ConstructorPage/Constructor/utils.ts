@@ -1,4 +1,4 @@
-import { IColumns } from '../Context/types';
+import { IColumns, Semester } from '../Context/types';
 import { Discipline, EducationModule } from '../../../common/types';
 
 export const clone = (data: IColumns) => {
@@ -85,4 +85,22 @@ export const isModulesEqual = (source: string, destination: string) => {
 
 export const isModulesInSameColumn = (source: string, destination: string) => {
 	return (source.includes('_') && destination.includes('_')) || (!source.includes('_') && !destination.includes('_'));
+};
+
+export const isDisciplineSelectedBefore = (semesters: Semester[], discipline: Discipline) => {
+	let isSelected = false;
+	semesters.forEach((sem) => {
+		if (sem.columns) {
+			sem.columns['2']?.items?.forEach((module) => {
+				if (module.disciplines.some((disc) => disc.id === discipline.id)) {
+					console.log(
+						module.disciplines.some((disc) => disc.id === discipline.id),
+						discipline.title
+					);
+					isSelected = module.disciplines.some((disc) => disc.id === discipline.id);
+				}
+			});
+		}
+	});
+	return isSelected;
 };
