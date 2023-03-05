@@ -41,7 +41,7 @@ export const PossibleProfessions: React.FC<PossibleProfessionsProps> = ({ ...pro
 			image: 'https://avatarko.ru/img/kartinka/33/multfilm_lyagushka_32117.jpg',
 			salary: {
 				minimal: 10000,
-				median: 50000,
+				median: 40000,
 				maximum: 90000,
 			},
 		},

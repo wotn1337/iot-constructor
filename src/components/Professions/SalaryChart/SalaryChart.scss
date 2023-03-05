@@ -1,5 +1,6 @@
 .salary-chart {
   display: flex;
+  align-items: center;
   max-width: 100%;
 
   .salary-chart__part-1 .ant-steps-item-custom:nth-child(2) {

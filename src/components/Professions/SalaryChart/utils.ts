@@ -6,8 +6,12 @@ export const getSalaryChartWidth = (salary: ProfessionType['salary']) => {
 	const secondPart = maximum / median;
 	const full = firstPart + secondPart;
 
-	const firstWidth = Math.min(Math.round((firstPart / full) * 100), 90);
-	const secondWidth = Math.max(Math.round((secondPart / full) * 100), 10);
+	const firstWidth = getNumberBetween(Math.round((firstPart / full) * 100), 10, 90);
+	const secondWidth = getNumberBetween(Math.round((secondPart / full) * 100), 10, 90);
 
 	return [firstWidth, secondWidth];
+};
+
+const getNumberBetween = (num: number, min: number, max: number) => {
+	return Math.max(Math.min(num, max), min);
 };
