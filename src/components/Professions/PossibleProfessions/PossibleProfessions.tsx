@@ -46,6 +46,7 @@ export const PossibleProfessions: React.FC<PossibleProfessionsProps> = ({ ...pro
 			},
 		},
 	];
+
 	return (
 		<section className={s.possibleProfessions}>
 			<h3 className={s.title}>Возможные профессии</h3>
@@ -54,7 +55,7 @@ export const PossibleProfessions: React.FC<PossibleProfessionsProps> = ({ ...pro
 				setCurrentProfessionIndex={setCurrentProfessionIndex}
 				professions={professions.map((p) => ({ title: p.title }))}
 			/>
-			<Profession {...professions[currentProfessionIndex]} />
+			<Profession profession={professions[currentProfessionIndex]} />
 		</section>
 	);
 };

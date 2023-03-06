@@ -6,11 +6,13 @@
   grid-template-columns: 475px 1fr;
   padding-left: 20px;
   column-gap: 120px;
+  overflow: hidden;
+  min-height: 380px;
 
   &__image-wrapper {
     grid-row: span 3;
-    max-width: 500px;
-    max-height: 320px;
+    width: 500px;
+    height: 320px;
     position: relative;
 
     .image {
