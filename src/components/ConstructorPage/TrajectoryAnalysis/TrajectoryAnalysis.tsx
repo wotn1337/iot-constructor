@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { useProfessionalTrajectoryByIdQuery } from '../../../hooks/useProfessionalTrajectoryByIdQuery';
 import { TrajectoryInfo } from './TrajectoryInfo/TrajectoryInfo';
 import { Loader } from '../../common/Loader/Loader';
@@ -9,6 +9,8 @@ import { useEducationalModules } from '../../../hooks/useEducationalModules';
 import { STEP_TYPE } from '../types';
 import { getAcademicSemestersFromConstructor, getAcademicSemestersFromTrajectory } from './utils';
 import { GreatChoice } from './GreatChoice/GreatChoice';
+import { PossibleProfessions } from '../../Professions/PossibleProfessions/PossibleProfessions';
+import { ServerErrorContext } from '../../../providers/ServerErrorProvider';
 
 type TrajectoryAnalysisProps = {};
 
@@ -17,8 +19,28 @@ export const TrajectoryAnalysis: React.FC<TrajectoryAnalysisProps> = () => {
 		state: { selectedTrajectory, semesters: constructorSemesters, selectedDirection, selectedType, academicPlan },
 		dispatch,
 	} = useConstructorContext();
-	const { data, isFetching, isLoading, refetch } = useProfessionalTrajectoryByIdQuery(selectedTrajectory);
-	const { trajectorySemesters, loading } = useEducationalModules(selectedDirection, undefined, selectedTrajectory);
+	const {
+		data,
+		isFetching,
+		isLoading,
+		refetch,
+		error: trajectoryError,
+	} = useProfessionalTrajectoryByIdQuery(selectedTrajectory);
+	const {
+		trajectorySemesters,
+		loading,
+		error: modulesError,
+	} = useEducationalModules(selectedDirection, undefined, selectedTrajectory);
+	const { setError } = useContext(ServerErrorContext);
+
+	useEffect(() => {
+		if (trajectoryError) {
+			setError(trajectoryError);
+		}
+		if (modulesError) {
+			setError(modulesError);
+		}
+	}, [trajectoryError, modulesError]);
 
 	useEffect(() => {
 		refetch();
@@ -49,6 +71,7 @@ export const TrajectoryAnalysis: React.FC<TrajectoryAnalysisProps> = () => {
 				<GreatChoice />
 				{data && <TrajectoryInfo {...data} />}
 				{!!academicPlan && !!academicPlan.length && <AcademicPlan semesters={academicPlan} />}
+				<PossibleProfessions />
 			</Space>
 		</Loader>
 	);

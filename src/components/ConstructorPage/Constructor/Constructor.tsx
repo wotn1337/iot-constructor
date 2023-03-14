@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import './Constructor.scss';
 import { useEducationalModules } from '../../../hooks/useEducationalModules';
 import { Loader } from '../../common/Loader/Loader';
@@ -7,6 +7,7 @@ import { useProfessionalTrajectoriesQuery } from '../../../hooks/useProfessional
 import { useMediaQuery } from 'react-responsive';
 import { DesktopConstructor } from './DesktopConstructor/DesktopConstructor';
 import { MobileConstructor } from './MobileConstructor/MobileConstructor';
+import { ServerErrorContext } from '../../../providers/ServerErrorProvider';
 
 type ConstructorProps = {};
 
@@ -15,12 +16,23 @@ export const Constructor: React.FC<ConstructorProps> = () => {
 		state: { semesters, currentSemester, selectedDirection },
 		dispatch,
 	} = useConstructorContext();
-	const { data: trajectories } = useProfessionalTrajectoriesQuery();
-	let {
+	const { data: trajectories, error: trajectoriesError } = useProfessionalTrajectoriesQuery();
+	const {
 		modules,
 		loading,
 		semesters: semestersFromBack,
+		error: modulesError,
 	} = useEducationalModules(selectedDirection ?? 1, currentSemester);
+	const { setError } = useContext(ServerErrorContext);
+
+	useEffect(() => {
+		if (trajectoriesError) {
+			setError(trajectoriesError);
+		}
+		if (modulesError) {
+			setError(modulesError);
+		}
+	}, [trajectoriesError, modulesError]);
 
 	const isDesktop = useMediaQuery({ minWidth: 910 });
 

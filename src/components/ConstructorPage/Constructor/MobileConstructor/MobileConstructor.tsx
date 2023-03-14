@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { setColumns, setSemesterColumns, setSemesterFinish, useConstructorContext } from '../../Context';
 import { Discipline, EducationModule } from '../../../../common/types';
 import { useSemestersQuery } from '../../../../hooks/useSemestersQuery';
@@ -8,6 +8,7 @@ import { SemesterPagination } from '../SemesterPagination/SemesterPagination';
 import './MobileConstructor.scss';
 import { LeftOutlined, RightOutlined } from '@ant-design/icons';
 import { MobileModule } from './MobileModule/MobileModule';
+import { ServerErrorContext } from '../../../../providers/ServerErrorProvider';
 
 type MobileConstructorProps = {
 	modules: EducationModule[];
@@ -19,12 +20,19 @@ export const MobileConstructor: React.FC<MobileConstructorProps> = ({ modules })
 		dispatch,
 	} = useConstructorContext();
 
-	const { data: semestersName } = useSemestersQuery();
+	const { data: semestersName, error } = useSemestersQuery();
 	const currentSemesterTitle = semestersName?.find(
 		(sem) => sem.numerical_representation === currentSemester
 	)?.text_representation;
 	const isColumnEmpty = columns['1'].items.length === 0;
 	const [isPaginationOpen, setIsPaginationOpen] = useState<boolean>(false);
+	const { setError } = useContext(ServerErrorContext);
+
+	useEffect(() => {
+		if (error) {
+			setError(error);
+		}
+	}, [error]);
 
 	useEffect(() => {
 		if (
