@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { useProfessionalTrajectoryByIdQuery } from '../../../hooks/useProfessionalTrajectoryByIdQuery';
 import { TrajectoryInfo } from './TrajectoryInfo/TrajectoryInfo';
 import { Loader } from '../../common/Loader/Loader';
@@ -10,6 +10,8 @@ import { STEP_TYPE } from '../types';
 import { getAcademicSemestersFromConstructor, getAcademicSemestersFromTrajectory } from './utils';
 import { GreatChoice } from './GreatChoice/GreatChoice';
 import { PossibleProfessions } from '../../Professions/PossibleProfessions/PossibleProfessions';
+import { useProfessionsQuery } from '../../../hooks/useProfessionsQuery';
+import { Id } from '../../../common/types';
 
 type TrajectoryAnalysisProps = {};
 
@@ -18,8 +20,26 @@ export const TrajectoryAnalysis: React.FC<TrajectoryAnalysisProps> = () => {
 		state: { selectedTrajectory, semesters: constructorSemesters, selectedDirection, selectedType, academicPlan },
 		dispatch,
 	} = useConstructorContext();
-	const { data, isFetching, isLoading, refetch } = useProfessionalTrajectoryByIdQuery(selectedTrajectory);
-	const { trajectorySemesters, loading } = useEducationalModules(selectedDirection, undefined, selectedTrajectory);
+	const {
+		data,
+		isFetching: trajectoryFetching,
+		isLoading: trajectoryLoading,
+		refetch,
+	} = useProfessionalTrajectoryByIdQuery(selectedTrajectory);
+	const { trajectorySemesters, loading: modulesLoading } = useEducationalModules(
+		selectedDirection,
+		undefined,
+		selectedTrajectory
+	);
+	const {
+		data: possibleProfessions,
+		isLoading: professionsLoading,
+		isFetching: professionsFetching,
+	} = useProfessionsQuery({ professionalTrajectories: [selectedTrajectory as Id] });
+	const loading = useMemo(
+		() => trajectoryFetching || trajectoryLoading || modulesLoading || professionsLoading || professionsFetching,
+		[trajectoryFetching, trajectoryLoading, modulesLoading, professionsLoading, professionsFetching]
+	);
 
 	useEffect(() => {
 		refetch();
@@ -45,7 +65,7 @@ export const TrajectoryAnalysis: React.FC<TrajectoryAnalysisProps> = () => {
 	}, []);
 
 	return (
-		<Loader loading={isLoading || isFetching || loading} size="large">
+		<Loader loading={loading} size="large">
 			<Space direction="vertical" size={100}>
 				<GreatChoice />
 				{data && <TrajectoryInfo {...data} />}

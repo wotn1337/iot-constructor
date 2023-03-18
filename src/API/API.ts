@@ -9,11 +9,13 @@ import {
 	PartnersResponse,
 	ProfessionalTrajectoriesResponse,
 	ProfessionalTrajectoryResponse,
+	ProfessionsQueryParams,
 	SemestersResponse,
 	SocialNetworksResponse,
 	StudentReviewResponse,
 } from './types';
 import { Id } from '../common/types';
+import { getQueryParams } from './utils';
 
 const DOMAIN = 'https://constructor-iot-backend.na4u.ru';
 const VERSION = 'v1';
@@ -132,5 +134,11 @@ export const employeesAPI = {
 
 	getROPs: async () => {
 		return employeesAPI.getEmployees(1);
+	},
+};
+
+export const professionsAPI = {
+	getProfessions: async (params: ProfessionsQueryParams) => {
+		return instance.get(`professions?${getQueryParams(params)}`);
 	},
 };
