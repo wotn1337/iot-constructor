@@ -1,0 +1,25 @@
+@import "../../../../constants";
+
+.possible-professions-switcher {
+  max-width: 450px;
+  margin: 0 auto;
+
+  &__item .ant-steps-item-container > .ant-steps-item-content > .ant-steps-item-title {
+    font-family: $NotoSans;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 130%;
+    text-align: center;
+    color: rgba(0, 0, 0, 0.45);
+  }
+
+  &__item.ant-steps-item-active > .ant-steps-item-container > .ant-steps-item-content > .ant-steps-item-title {
+    color: $fontBlue;
+  }
+
+  .ant-steps-item-container > .ant-steps-item-tail::after {
+    background-color: rgba(0, 0, 0, 0.25);
+    height: 2px;
+  }
+}
