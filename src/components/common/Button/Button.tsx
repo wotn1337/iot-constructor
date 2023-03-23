@@ -2,7 +2,7 @@ import React from 'react';
 import { Button as AntdButton } from 'antd';
 import s from './Button.module.scss';
 
-type ButtonProps = {
+export type ButtonProps = {
 	type?: 'primary' | 'default';
 	onClick?: React.MouseEventHandler<HTMLElement>;
 	icon?: React.ReactNode;

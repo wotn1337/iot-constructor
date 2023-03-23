@@ -5,11 +5,14 @@ import './global.scss';
 import { App } from './App';
 import reportWebVitals from './reportWebVitals';
 import { HashRouter } from 'react-router-dom';
+import { ServerErrorProvider } from './providers/ServerErrorProvider';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
 	<HashRouter>
-		<App />
+		<ServerErrorProvider>
+			<App />
+		</ServerErrorProvider>
 	</HashRouter>
 );
 
