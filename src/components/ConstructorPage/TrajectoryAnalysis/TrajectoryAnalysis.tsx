@@ -21,17 +21,19 @@ export const TrajectoryAnalysis: React.FC<TrajectoryAnalysisProps> = () => {
 		state: { selectedTrajectory, semesters: constructorSemesters, selectedDirection, selectedType, academicPlan },
 		dispatch,
 	} = useConstructorContext();
+	const { setError } = useContext(ServerErrorContext);
 	const {
 		data,
 		isFetching: trajectoryFetching,
 		isLoading: trajectoryLoading,
+		error: trajectoryError,
 		refetch,
 	} = useProfessionalTrajectoryByIdQuery(selectedTrajectory);
-	const { trajectorySemesters, loading: modulesLoading } = useEducationalModules(
-		selectedDirection,
-		undefined,
-		selectedTrajectory
-	);
+	const {
+		trajectorySemesters,
+		loading: modulesLoading,
+		error: modulesError,
+	} = useEducationalModules(selectedDirection, undefined, selectedTrajectory);
 	const {
 		data: possibleProfessions,
 		isLoading: professionsLoading,
