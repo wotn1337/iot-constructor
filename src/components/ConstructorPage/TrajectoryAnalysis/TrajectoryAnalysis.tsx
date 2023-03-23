@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from 'react';
+import React, { useEffect, useMemo, useContext } from 'react';
 import { useProfessionalTrajectoryByIdQuery } from '../../../hooks/useProfessionalTrajectoryByIdQuery';
 import { TrajectoryInfo } from './TrajectoryInfo/TrajectoryInfo';
 import { Loader } from '../../common/Loader/Loader';
@@ -12,6 +12,7 @@ import { GreatChoice } from './GreatChoice/GreatChoice';
 import { PossibleProfessions } from '../../Professions/PossibleProfessions/PossibleProfessions';
 import { useProfessionsQuery } from '../../../hooks/useProfessionsQuery';
 import { Id } from '../../../common/types';
+import { ServerErrorContext } from '../../../providers/ServerErrorProvider';
 
 type TrajectoryAnalysisProps = {};
 
@@ -40,6 +41,15 @@ export const TrajectoryAnalysis: React.FC<TrajectoryAnalysisProps> = () => {
 		() => trajectoryFetching || trajectoryLoading || modulesLoading || professionsLoading || professionsFetching,
 		[trajectoryFetching, trajectoryLoading, modulesLoading, professionsLoading, professionsFetching]
 	);
+
+	useEffect(() => {
+		if (trajectoryError) {
+			setError(trajectoryError);
+		}
+		if (modulesError) {
+			setError(modulesError);
+		}
+	}, [trajectoryError, modulesError]);
 
 	useEffect(() => {
 		refetch();

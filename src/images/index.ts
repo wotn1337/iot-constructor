@@ -18,6 +18,9 @@ import AvatarPlaceholder from './users/avatar_placeholder.svg';
 import AudienceIcon from './icons/icon_audience.svg';
 import DiagramPlaceholder from './constructor/chart-diagram-dognut-graph-statistics-svgrepo-com.svg';
 import VKIcon from './icons/icon_VK.svg';
+import Error404Robot from './errors/error_robot_404.svg';
+import ServerErrorRobot from './errors/server_error_robot.svg';
+import Socket from './errors/socket.svg';
 
 export {
 	IntroImage,
@@ -40,4 +43,7 @@ export {
 	AudienceIcon,
 	DiagramPlaceholder,
 	VKIcon,
+	Error404Robot,
+	Socket,
+	ServerErrorRobot,
 };

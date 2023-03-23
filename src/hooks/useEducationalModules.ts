@@ -4,12 +4,14 @@ import { educationalModulesAPI } from '../API/API';
 import { message } from 'antd';
 import { Semester } from '../components/ConstructorPage/Context/types';
 import { EducationalModulesResponse } from '../API/types';
+import { AxiosError } from 'axios';
 
 export const useEducationalModules = (id?: Id, semester?: number, trajectoryId?: Id) => {
 	const [modules, setModules] = useState<EducationModule[]>([]);
 	const [loading, setLoading] = useState<boolean>(true);
 	const [semesters, setSemesters] = useState<Semester[]>([]);
 	const [trajectorySemesters, setTrajectorySemesters] = useState<EducationalModulesResponse['semesters']>([]);
+	const [error, setError] = useState<AxiosError>();
 
 	// get modules
 	useEffect(() => {
@@ -35,11 +37,14 @@ export const useEducationalModules = (id?: Id, semester?: number, trajectoryId?:
 					setTrajectorySemesters(data.semesters);
 				}
 			})
-			.catch(() => message.error('Не удалось получить список курсов :('))
+			.catch((err) => {
+				setError(err);
+				message.error('Не удалось получить список курсов :(');
+			})
 			.finally(() => {
 				setLoading(false);
 			});
 	}, [semester]);
 
-	return { modules, loading, semesters, trajectorySemesters };
+	return { modules, loading, semesters, trajectorySemesters, error };
 };

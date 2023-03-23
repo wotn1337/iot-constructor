@@ -1,11 +1,17 @@
 import { educationalDirectionsAPI } from '../API/API';
 import { message } from 'antd';
 import { useQuery } from '@tanstack/react-query';
+import { Direction } from '../common/types';
+import { AxiosError } from 'axios';
 
 export const useEducationalDirectionsQuery = () => {
-	return useQuery(['educationalDirections'], educationalDirectionsAPI.getEducationalDirections, {
-		keepPreviousData: true,
-		staleTime: 300000,
-		onError: () => message.error('Не удалось получить список направлений подготовки :('),
-	});
+	return useQuery<Direction[], AxiosError>(
+		['educationalDirections'],
+		educationalDirectionsAPI.getEducationalDirections,
+		{
+			keepPreviousData: true,
+			staleTime: 300000,
+			onError: () => message.error('Не удалось получить список направлений подготовки :('),
+		}
+	);
 };
