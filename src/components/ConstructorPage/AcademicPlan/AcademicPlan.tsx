@@ -18,7 +18,7 @@ export const AcademicPlan: React.FC<AcademicPlanProps> = ({ semesters }) => {
 		<Space className={s.academicPlanWrapper} direction="vertical" size={48}>
 			<div className={s.titleWrapper}>
 				<h4>Список дисциплин</h4>
-				<Space size={40}>
+				<Space size="middle" direction="vertical" align="end">
 					<Space direction="horizontal" size={10}>
 						<Typography.Text type="secondary">Показывать обязательные дисциплины</Typography.Text>
 						<Switch
@@ -29,10 +29,12 @@ export const AcademicPlan: React.FC<AcademicPlanProps> = ({ semesters }) => {
 							onChange={setShowDefault}
 						/>
 					</Space>
-					<SaveToPdfButton
-						tooltipText="Вы можете распечатать эту версию списка дисциплин или сохранить в pdf"
-						targetRef={academicPlanRef}
-					/>
+					<Space direction="horizontal" size={10}>
+						<Typography.Text type="secondary">
+							Вы можете распечатать эту версию списка дисциплин или сохранить в pdf
+						</Typography.Text>
+						<SaveToPdfButton targetRef={academicPlanRef} />
+					</Space>
 				</Space>
 			</div>
 			<AcademicPlanGrid semesters={semesters} showDefault={showDefault} ref={academicPlanRef} />

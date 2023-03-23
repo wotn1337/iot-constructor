@@ -9,6 +9,7 @@ import { useEducationalModules } from '../../../hooks/useEducationalModules';
 import { STEP_TYPE } from '../types';
 import { getAcademicSemestersFromConstructor, getAcademicSemestersFromTrajectory } from './utils';
 import { GreatChoice } from './GreatChoice/GreatChoice';
+import { PossibleProfessions } from '../../Professions/PossibleProfessions/PossibleProfessions';
 
 type TrajectoryAnalysisProps = {};
 
@@ -49,6 +50,7 @@ export const TrajectoryAnalysis: React.FC<TrajectoryAnalysisProps> = () => {
 				<GreatChoice />
 				{data && <TrajectoryInfo {...data} />}
 				{!!academicPlan && !!academicPlan.length && <AcademicPlan semesters={academicPlan} />}
+				<PossibleProfessions />
 			</Space>
 		</Loader>
 	);

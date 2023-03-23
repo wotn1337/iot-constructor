@@ -1,0 +1,29 @@
+@import "../../../../constants";
+
+.salaryItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  &__salary {
+    display: block;
+    font-family: $NotoSans;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 130%;
+    color: $orange;
+    margin-bottom: 16px;
+  }
+
+  &__title {
+    display: block;
+    font-family: $NotoSans;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 130%;
+    color: rgba(0, 0, 0, 0.45);
+    margin-top: 8px;
+  }
+}
