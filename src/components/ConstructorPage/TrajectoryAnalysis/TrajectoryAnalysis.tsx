@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useEffect, useMemo, useContext } from 'react';
 import { useProfessionalTrajectoryByIdQuery } from '../../../hooks/useProfessionalTrajectoryByIdQuery';
 import { TrajectoryInfo } from './TrajectoryInfo/TrajectoryInfo';
 import { Loader } from '../../common/Loader/Loader';
@@ -10,6 +10,8 @@ import { STEP_TYPE } from '../types';
 import { getAcademicSemestersFromConstructor, getAcademicSemestersFromTrajectory } from './utils';
 import { GreatChoice } from './GreatChoice/GreatChoice';
 import { PossibleProfessions } from '../../Professions/PossibleProfessions/PossibleProfessions';
+import { useProfessionsQuery } from '../../../hooks/useProfessionsQuery';
+import { Id } from '../../../common/types';
 import { ServerErrorContext } from '../../../providers/ServerErrorProvider';
 
 type TrajectoryAnalysisProps = {};
@@ -21,17 +23,24 @@ export const TrajectoryAnalysis: React.FC<TrajectoryAnalysisProps> = () => {
 	} = useConstructorContext();
 	const {
 		data,
-		isFetching,
-		isLoading,
+		isFetching: trajectoryFetching,
+		isLoading: trajectoryLoading,
 		refetch,
-		error: trajectoryError,
 	} = useProfessionalTrajectoryByIdQuery(selectedTrajectory);
+	const { trajectorySemesters, loading: modulesLoading } = useEducationalModules(
+		selectedDirection,
+		undefined,
+		selectedTrajectory
+	);
 	const {
-		trajectorySemesters,
-		loading,
-		error: modulesError,
-	} = useEducationalModules(selectedDirection, undefined, selectedTrajectory);
-	const { setError } = useContext(ServerErrorContext);
+		data: possibleProfessions,
+		isLoading: professionsLoading,
+		isFetching: professionsFetching,
+	} = useProfessionsQuery({ professionalTrajectories: [selectedTrajectory as Id] });
+	const loading = useMemo(
+		() => trajectoryFetching || trajectoryLoading || modulesLoading || professionsLoading || professionsFetching,
+		[trajectoryFetching, trajectoryLoading, modulesLoading, professionsLoading, professionsFetching]
+	);
 
 	useEffect(() => {
 		if (trajectoryError) {
@@ -66,7 +75,7 @@ export const TrajectoryAnalysis: React.FC<TrajectoryAnalysisProps> = () => {
 	}, []);
 
 	return (
-		<Loader loading={isLoading || isFetching || loading} size="large">
+		<Loader loading={loading} size="large">
 			<Space direction="vertical" size={100}>
 				<GreatChoice />
 				{data && <TrajectoryInfo {...data} />}

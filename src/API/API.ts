@@ -9,11 +9,13 @@ import {
 	PartnersResponse,
 	ProfessionalTrajectoriesResponse,
 	ProfessionalTrajectoryResponse,
+	ProfessionsQueryParams,
 	SemestersResponse,
 	SocialNetworksResponse,
 	StudentReviewResponse,
 } from './types';
 import { Id } from '../common/types';
+import { getQueryParams } from './utils';
 
 const DOMAIN = process.env.REACT_APP_BACKEND_URL;
 const VERSION = process.env.REACT_APP_BACKEND_VERSION;
@@ -133,5 +135,11 @@ export const employeesAPI = {
 
 	getROPs: async () => {
 		return employeesAPI.getEmployees(1);
+	},
+};
+
+export const professionsAPI = {
+	getProfessions: async (params: ProfessionsQueryParams) => {
+		return instance.get(`professions?${getQueryParams(params)}`);
 	},
 };

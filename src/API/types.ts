@@ -9,6 +9,7 @@ import {
 	Direction,
 	Id,
 	Semester,
+	SortDirection,
 } from '../common/types';
 import { Employee } from '../components/Employees/types';
 
@@ -48,3 +49,14 @@ export type ProfessionalTrajectoryResponse = { professional_trajectory: Trajecto
 export type DisciplinesResponse = { discipline: Discipline };
 export type SemestersResponse = { semesters: Semester[] };
 export type EmployeesResponse = { employees: Employee[] };
+
+export type ProfessionsQueryParams = {
+	withProfessionalTrajectories?: true;
+	paginate?: number;
+	withEducationalPrograms?: true;
+	professionalTrajectories?: Id[];
+	professionTitle?: string;
+	educationalPrograms?: Id[];
+	sortBySalary?: SortDirection;
+	sortByVacancyCount?: SortDirection;
+};
