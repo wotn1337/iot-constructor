@@ -29,8 +29,9 @@ export const App = () => {
 				code={error.response?.status}
 				pageTitle={`Ошибка ${error.response?.status}`}
 				title="Sorry"
-				subTitle="Ошибка сервера"
+				subTitle={error.response?.status === 503 ? 'Сайт на техническом обслуживании' : 'Ошибка сервера'}
 				image={ServerErrorRobot}
+				textStyle={{ color: '#FA8C16' }}
 			/>
 		);
 	}
@@ -84,6 +85,7 @@ export const App = () => {
 									children: 'Вернуться на главную',
 									href: ROUTES.MAIN,
 								}}
+								textStyle={{ color: '#1890FF' }}
 							/>
 						}
 					/>

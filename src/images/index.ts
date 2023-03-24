@@ -21,6 +21,7 @@ import VKIcon from './icons/icon_VK.svg';
 import Error404Robot from './errors/error_robot_404.svg';
 import ServerErrorRobot from './errors/server_error_robot.svg';
 import Socket from './errors/socket.svg';
+import ErrorPageBackground from './errors/error_page_bg.svg';
 
 export {
 	IntroImage,
@@ -46,4 +47,5 @@ export {
 	Error404Robot,
 	Socket,
 	ServerErrorRobot,
+	ErrorPageBackground,
 };
