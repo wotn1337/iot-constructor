@@ -37,7 +37,7 @@ export const TrajectoryInfo: React.FC<TrajectoryInfoProps> = ({
 			<Col span={12} order={4}>
 				<div className={`${s.trajectoryInfo__item} ${s.trajectoryInfo__statistic}`}>
 					<span className={s.statistic__number}>{disciplines_count}</span>
-					<span className={s.statistic__title}>Курсов по выбранной траектории в ИРИТ-РТФ</span>
+					<span className={s.statistic__title}>Дисциплин по выбранной траектории в ИРИТ-РТФ</span>
 				</div>
 			</Col>
 			<Col span={12} order={5}>

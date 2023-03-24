@@ -33,8 +33,7 @@ export type SocialNetwork = {
 
 export type Direction = {
 	id: Id;
-	title: string;
-	cipher: string;
+	educational_direction: string;
 	passing_scores: [
 		{
 			year: number | null;

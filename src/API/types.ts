@@ -12,6 +12,7 @@ import {
 	SortDirection,
 } from '../common/types';
 import { Employee } from '../components/Employees/types';
+import { ProfessionType } from '../components/Professions/types';
 
 export type PartnersResponse = { partners: Partner[] };
 export type StudentReviewResponse = {
@@ -30,9 +31,9 @@ export type SocialNetworksResponse = {
 	social_networks_block: { id: string; data: SocialNetwork[]; institute: string };
 };
 
-export type EducationalDirectionsResponse = {
+export type EducationalProgramsResponse = {
 	meta: { total: number };
-	educational_directions: Direction[];
+	educational_programs: Direction[];
 };
 export type EducationalModulesResponse = {
 	meta: { total: number };
@@ -60,3 +61,5 @@ export type ProfessionsQueryParams = {
 	sortBySalary?: SortDirection;
 	sortByVacancyCount?: SortDirection;
 };
+
+export type ProfessionsResponse = { professions: ProfessionType[] };

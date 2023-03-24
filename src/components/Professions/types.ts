@@ -4,14 +4,18 @@ export type ProfessionType = {
 	id: Id;
 	title: string;
 	description: string;
-	image: string;
+	photo: string | null;
+	vacancies_count: number;
+	minimal_salary: number;
+	median_salary: number;
+	maximal_salary: number;
 	salary: Record<SalaryType, number>;
 };
 
-export type SalaryType = 'minimal' | 'median' | 'maximum';
+export type SalaryType = 'minimal_salary' | 'median_salary' | 'maximal_salary';
 
 export const salaryLocale = {
-	minimal: 'Минимальная',
-	median: 'Медианная',
-	maximum: 'Максимальная',
+	minimal_salary: 'Минимальная',
+	median_salary: 'Медианная',
+	maximal_salary: 'Максимальная',
 };
