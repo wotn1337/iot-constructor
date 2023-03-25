@@ -13,7 +13,7 @@ const { Header: AntdHeader } = AntdLayout;
 type HeaderProps = {};
 
 export const Header: React.FC<HeaderProps> = () => {
-	const isDesktop = useMediaQuery({ minWidth: 821 });
+	const isDesktop = useMediaQuery({ minWidth: 1062 });
 
 	return (
 		<AntdHeader className={s.header}>

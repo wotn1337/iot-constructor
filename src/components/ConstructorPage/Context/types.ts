@@ -1,5 +1,5 @@
 import type { Dispatch } from 'react';
-import { EducationModule, Id } from '../../../common/types';
+import { EducationModule, Id, Trajectory } from '../../../common/types';
 import {
 	setColumns,
 	setCurrentSemester,
@@ -56,16 +56,10 @@ export interface IColumns {
 	[key: string]: Column;
 }
 
-export type TrackProgress = {
-	id: Id;
-	title: string;
+export type TrackProgress = Trajectory & {
 	color: React.CSSProperties['color'];
 	points: number;
 	percent?: number;
-	discipline_evaluation?: number;
-	slug?: string;
-	description?: string;
-	sum_discipline_levels_points: number;
 };
 
 export type ConstructorContextActions = ReturnType<

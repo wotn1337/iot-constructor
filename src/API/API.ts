@@ -57,8 +57,8 @@ export const socialNetworksAPI = {
 	},
 };
 
-export const educationalDirectionsAPI = {
-	getEducationalDirections: async () => {
+export const educationalProgramsAPI = {
+	getEducationalPrograms: async () => {
 		const res = await instance.get<EducationalProgramsResponse>('educationalPrograms');
 		return res.data.educational_programs;
 	},
@@ -83,7 +83,7 @@ export const educationalModulesAPI = {
 
 	getEducationalModuleById: async (id?: Id) => {
 		const res = await instance.get<EducationalModuleResponse>(
-			`educationalDirections/educationalModules/${id}?withDisciplines=true`
+			`educationalPrograms/educationalModules/${id}?withDisciplines=true`
 		);
 		return res.data.educational_module;
 	},

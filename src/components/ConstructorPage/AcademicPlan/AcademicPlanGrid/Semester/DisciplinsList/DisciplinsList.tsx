@@ -39,7 +39,7 @@ export const DisciplinsList: React.FC<DisciplinsListProps> = ({ title, items, ty
 								{item.title}
 								<Space size={4} className="tags-list">
 									{item.professional_trajectories?.map((track) => (
-										<Tag key={track.id} color={track.color} text={track.slug} />
+										<Tag key={track.id} color={track.color} text={track.abbreviated_name} />
 									))}
 								</Space>
 							</Space>

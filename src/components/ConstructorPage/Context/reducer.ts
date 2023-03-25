@@ -108,7 +108,7 @@ export const MainPageContextReducer = (
 						? {
 								...track,
 								points: action.payload.points,
-								percent: (action.payload.points / track.sum_discipline_levels_points) * 100,
+								percent: (action.payload.points / track.discipline_evaluation) * 100,
 						  }
 						: track
 				),

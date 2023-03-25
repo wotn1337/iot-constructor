@@ -57,11 +57,10 @@ export type Course = {
 export type Trajectory = {
 	id: Id;
 	title: string;
-	slug: string;
+	abbreviated_name: string;
 	description: string;
 	color: string;
 	discipline_evaluation: number;
-	sum_discipline_levels_points: number;
 	icons: string[];
 	disciplines_count: number;
 	vacancies_count: number;
@@ -88,7 +87,6 @@ export type Semester = {
 	text_representation: string;
 	numerical_representation: number;
 };
-
 
 export type FAQType = {
 	id: Id;

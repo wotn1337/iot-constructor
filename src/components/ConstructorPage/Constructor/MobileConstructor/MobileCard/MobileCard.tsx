@@ -108,7 +108,13 @@ export const MobileCard: React.FC<MobileCardProps> = ({ course, moduleId, index 
 				</div>
 				<div className="card__tags">
 					{course.professional_trajectories?.map((tag) => (
-						<Tag text={tag.slug} color={tag.color} tooltipText={tag.title} shouldShowTooltip key={tag.id} />
+						<Tag
+							text={tag.abbreviated_name}
+							color={tag.color}
+							tooltipText={tag.title}
+							shouldShowTooltip
+							key={tag.id}
+						/>
 					))}
 				</div>
 			</div>

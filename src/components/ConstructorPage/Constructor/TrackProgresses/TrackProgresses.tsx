@@ -54,7 +54,7 @@ export const TrackProgresses: React.FC<TrackProgressesProps> = () => {
 						const existedTrack = newTracks.find((t) => t.id === track.id);
 						if (existedTrack) {
 							existedTrack.points += track.discipline_evaluation;
-							existedTrack.percent = (existedTrack.points / track.sum_discipline_levels_points) * 100;
+							existedTrack.percent = (existedTrack.points / track.discipline_evaluation) * 100;
 						}
 					});
 				})

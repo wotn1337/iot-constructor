@@ -128,7 +128,7 @@ export const Card: React.FC<ColumnProps> = ({ course, index, droppableId, isDrag
 								<div className="card__tags">
 									{course.professional_trajectories?.map((tag) => (
 										<Tag
-											text={tag.slug}
+											text={tag.abbreviated_name}
 											color={tag.color}
 											tooltipText={tag.title}
 											shouldShowTooltip
