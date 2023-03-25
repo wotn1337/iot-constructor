@@ -12,10 +12,11 @@ import {
 	SemestersResponse,
 	SocialNetworksResponse,
 	StudentReviewResponse,
+	FAQResponse,
 } from './types';
 import { Id } from '../common/types';
 
-const DOMAIN = 'https://constructor-iot-backend.na4u.ru';
+const DOMAIN = 'https://api.iot.nik-web.ru';
 const VERSION = 'v1';
 const API_URL = `${DOMAIN}/api/${VERSION}`;
 const CONFIG = {
@@ -132,5 +133,12 @@ export const employeesAPI = {
 
 	getROPs: async () => {
 		return employeesAPI.getEmployees(1);
+	},
+};
+
+export const FAQAPI = {
+	getFAQ: async () => {
+		const res = await instance.get<FAQResponse>('faq');
+		return res.data.FAQ;
 	},
 };
