@@ -28,7 +28,6 @@ export const TrackPicker: React.FC<TrackPickerProps> = ({ modules }) => {
 		dispatch(setDraggableId(''));
 		if (!draggableId.includes('_')) {
 			dispatch(setDraggableId(`module_${draggableId}`));
-			console.log(result);
 		} else dispatch(setDraggableId(''));
 	};
 
@@ -37,10 +36,10 @@ export const TrackPicker: React.FC<TrackPickerProps> = ({ modules }) => {
 		dispatch(setDraggableId(''));
 
 		if (!destination || isModulesInSameColumn(source.droppableId, destination?.droppableId)) {
-			return message.warn('Необходимо перетащить десциплину в соседнюю колонку');
+			return message.warning('Необходимо перетащить дисциплину в соседнюю колонку');
 		}
 		if (!isModulesEqual(source.droppableId, destination?.droppableId)) {
-			return message.warn('Неверный модуль!');
+			return message.warning('Неверный модуль!');
 		}
 
 		let data = deleteTask(columns, source.droppableId, source.index);

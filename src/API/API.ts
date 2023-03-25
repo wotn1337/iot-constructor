@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, { CreateAxiosDefaults } from 'axios';
 import {
 	AdmissionCommitteeContactsResponse,
 	DisciplinesResponse,
@@ -9,19 +9,21 @@ import {
 	PartnersResponse,
 	ProfessionalTrajectoriesResponse,
 	ProfessionalTrajectoryResponse,
+	ProfessionsQueryParams,
 	SemestersResponse,
 	SocialNetworksResponse,
 	StudentReviewResponse,
-	FAQResponse,
 } from './types';
 import { Id } from '../common/types';
+import { getQueryParams } from './utils';
 
-const DOMAIN = 'https://api.iot.nik-web.ru';
-const VERSION = 'v1';
-const API_URL = `${DOMAIN}/api/${VERSION}`;
-const CONFIG = {
+const DOMAIN = process.env.REACT_APP_BACKEND_URL;
+const VERSION = process.env.REACT_APP_BACKEND_VERSION;
+const POSTFIX = process.env.REACT_APP_BACKEND_POSTFIX;
+const API_URL = `${DOMAIN}/${POSTFIX}/${VERSION}`;
+const CONFIG: CreateAxiosDefaults = {
 	baseURL: API_URL,
-	header: { 'content-type': 'application/json' },
+	headers: { 'content-type': 'application/json' },
 };
 const instance = axios.create(CONFIG);
 
@@ -136,9 +138,8 @@ export const employeesAPI = {
 	},
 };
 
-export const FAQAPI = {
-	getFAQ: async () => {
-		const res = await instance.get<FAQResponse>('faq');
-		return res.data.FAQ;
+export const professionsAPI = {
+	getProfessions: async (params: ProfessionsQueryParams) => {
+		return instance.get(`professions?${getQueryParams(params)}`);
 	},
 };

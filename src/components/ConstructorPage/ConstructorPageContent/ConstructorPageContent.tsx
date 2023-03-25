@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useContext, useEffect, useMemo, useState } from 'react';
 import s from './ConstructorPageContent.module.scss';
 import { DirectionSelection } from '../DirectionSelection/DirectionSelection';
 import { TypeSelection } from '../TypeSelection/TypeSelection';
@@ -15,6 +15,7 @@ import { getBestTrajectory, getDirectionFullTitle } from '../../../common/utils'
 import { Trajectories } from '../Trajectories/Trajectories';
 import { TrajectoryAnalysis } from '../TrajectoryAnalysis/TrajectoryAnalysis';
 import { BackgroundWrapper } from '../../common/BackgroundWrapper/BackgroundWrapper';
+import { ServerErrorContext } from '../../../providers/ServerErrorProvider';
 
 type ConstructorProps = {};
 
@@ -29,8 +30,10 @@ export const ConstructorPageContent: React.FC<ConstructorProps> = () => {
 		data: discipline,
 		isFetching: disciplineFetching,
 		isLoading: disciplineLoading,
+		error: disciplineError,
 	} = useDisciplineQuery(disciplineId);
-	const { data: educationalDirections } = useEducationalDirectionsQuery();
+	const { data: educationalDirections, error: educationalDirectionsError } = useEducationalDirectionsQuery();
+	const { setError } = useContext(ServerErrorContext);
 	const [percent, setPercent] = useState<number>(0);
 	const steps: Step[] = useMemo(
 		() => [
@@ -77,9 +80,18 @@ export const ConstructorPageContent: React.FC<ConstructorProps> = () => {
 	useEffect(() => {
 		if (currentSemester) {
 			// @ts-ignore
-			// window.ym(91451529, 'hit', pathname + '/' + currentSemester);
+			window.ym(91451529, 'hit', pathname + '/' + currentSemester);
 		}
 	}, [currentSemester]);
+
+	useEffect(() => {
+		if (educationalDirectionsError) {
+			setError(educationalDirectionsError);
+		}
+		if (disciplineError) {
+			setError(disciplineError);
+		}
+	}, [educationalDirectionsError, disciplineError]);
 
 	if (!selectedDirection && currentStepType !== STEP_TYPE.DIRECTION_SELECTION) {
 		return <Navigate to={steps[0].type} />;
@@ -116,7 +128,7 @@ export const ConstructorPageContent: React.FC<ConstructorProps> = () => {
 								}
 							/>
 						))}
-						<Route index element={<Navigate to={steps[0].type} />} />
+						<Route index element={<Navigate to={steps[0].type} />} path="*" />
 					</Routes>
 					<Navigation percent={percent} currentStep={currentStep} steps={steps} />
 					<DisciplineModal

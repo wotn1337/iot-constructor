@@ -90,8 +90,11 @@ export type Semester = {
 	numerical_representation: number;
 };
 
+
 export type FAQType = {
 	id: Id;
 	question: string;
 	answer: string;
 };
+
+export type SortDirection = 'asc' | 'desc';

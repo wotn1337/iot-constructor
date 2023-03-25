@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
 import { ReviewCard } from './ReviewCard/ReviewCard';
 import { Carousel } from 'react-responsive-carousel';
 import { Pagination, Space } from 'antd';
@@ -7,6 +7,7 @@ import { setStudentReviewsPage, useMainPageContext } from '../../Context';
 import { useStudentReviewsQuery } from '../../../../hooks/useStudentReviewsQuery';
 import { Loader } from '../../../common/Loader/Loader';
 import { useMediaQuery } from 'react-responsive';
+import { ServerErrorContext } from '../../../../providers/ServerErrorProvider';
 
 type ReviewsProps = {};
 
@@ -15,8 +16,15 @@ export const Reviews: React.FC<ReviewsProps> = () => {
 		state: { studentReviewsPage },
 		dispatch,
 	} = useMainPageContext();
-	const { data, isLoading, isFetching } = useStudentReviewsQuery(studentReviewsPage);
+	const { data, isLoading, isFetching, error } = useStudentReviewsQuery(studentReviewsPage);
 	const isLarge = useMediaQuery({ minWidth: 1060 });
+	const { setError } = useContext(ServerErrorContext);
+
+	useEffect(() => {
+		if (error) {
+			setError(error);
+		}
+	}, [error]);
 
 	return (
 		<>
