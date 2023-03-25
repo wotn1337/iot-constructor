@@ -11,6 +11,8 @@ import { NavLink } from 'react-router-dom';
 import { reachGoal } from '../../../../common/utils';
 import { Logo } from '../../../common/Logo/Logo';
 
+const currentYear = new Date().getFullYear();
+
 export const DesktopFooter = () => {
 	const { data: contacts } = useContactsQuery();
 	const { data: socialNetworks } = useSocialNetworksQuery();
@@ -20,7 +22,7 @@ export const DesktopFooter = () => {
 			<Col className="footer__brand">
 				<Space direction="vertical" size="large">
 					<Logo />
-					<p className="text_default">© ИРИТ-РТФ ИОТ, 2022</p>
+					<p className="text_default">{`© ИРИТ-РТФ ИОТ, ${currentYear}`}</p>
 				</Space>
 			</Col>
 			<Col className="footer__contacts">
