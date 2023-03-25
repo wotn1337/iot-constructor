@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Intro } from '../Intro/Intro';
 import { About } from '../About/About';
 import { Advantages } from '../Advantages/Advantages';
@@ -10,6 +10,8 @@ import { usePartnersQuery } from '../../../hooks/usePartnersQuery';
 import { useStudentReviewsQuery } from '../../../hooks/useStudentReviewsQuery';
 import { useMainPageContext } from '../Context';
 import s from './MainPageContent.module.scss';
+import { ServerErrorContext } from '../../../providers/ServerErrorProvider';
+import { AxiosError } from 'axios';
 
 type MainPageContentProps = {};
 
@@ -17,9 +19,20 @@ export const MainPageContent: React.FC<MainPageContentProps> = () => {
 	const {
 		state: { studentReviewsPage },
 	} = useMainPageContext();
-	const { isLoading: partnersLoading } = usePartnersQuery();
-	const { isLoading: studentReviewsLoading } = useStudentReviewsQuery(studentReviewsPage);
+	const { isLoading: partnersLoading, error: partnersError } = usePartnersQuery();
+	const { isLoading: studentReviewsLoading, error: studentReviewsError } = useStudentReviewsQuery(studentReviewsPage);
+	const { setError } = useContext(ServerErrorContext);
 	const loading = partnersLoading || studentReviewsLoading;
+
+	useEffect(() => {
+		if (partnersError) {
+			setError(partnersError as AxiosError);
+			return;
+		}
+		if (studentReviewsError) {
+			setError(studentReviewsError as AxiosError);
+		}
+	}, [partnersError, studentReviewsError]);
 
 	return (
 		<Loader loading={loading} size="large">

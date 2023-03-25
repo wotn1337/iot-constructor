@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, { CreateAxiosDefaults } from 'axios';
 import {
 	AdmissionCommitteeContactsResponse,
 	DisciplinesResponse,
@@ -9,18 +9,21 @@ import {
 	PartnersResponse,
 	ProfessionalTrajectoriesResponse,
 	ProfessionalTrajectoryResponse,
+	ProfessionsQueryParams,
 	SemestersResponse,
 	SocialNetworksResponse,
 	StudentReviewResponse,
 } from './types';
 import { Id } from '../common/types';
+import { getQueryParams } from './utils';
 
-const DOMAIN = 'https://constructor-iot-backend.na4u.ru';
-const VERSION = 'v1';
-const API_URL = `${DOMAIN}/api/${VERSION}`;
-const CONFIG = {
+const DOMAIN = process.env.REACT_APP_BACKEND_URL;
+const VERSION = process.env.REACT_APP_BACKEND_VERSION;
+const POSTFIX = process.env.REACT_APP_BACKEND_POSTFIX;
+const API_URL = `${DOMAIN}/${POSTFIX}/${VERSION}`;
+const CONFIG: CreateAxiosDefaults = {
 	baseURL: API_URL,
-	header: { 'content-type': 'application/json' },
+	headers: { 'content-type': 'application/json' },
 };
 const instance = axios.create(CONFIG);
 
@@ -132,5 +135,11 @@ export const employeesAPI = {
 
 	getROPs: async () => {
 		return employeesAPI.getEmployees(1);
+	},
+};
+
+export const professionsAPI = {
+	getProfessions: async (params: ProfessionsQueryParams) => {
+		return instance.get(`professions?${getQueryParams(params)}`);
 	},
 };

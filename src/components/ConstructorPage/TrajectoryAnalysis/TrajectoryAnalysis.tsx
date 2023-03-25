@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useMemo, useContext } from 'react';
 import { useProfessionalTrajectoryByIdQuery } from '../../../hooks/useProfessionalTrajectoryByIdQuery';
 import { TrajectoryInfo } from './TrajectoryInfo/TrajectoryInfo';
 import { Loader } from '../../common/Loader/Loader';
@@ -9,6 +9,10 @@ import { useEducationalModules } from '../../../hooks/useEducationalModules';
 import { STEP_TYPE } from '../types';
 import { getAcademicSemestersFromConstructor, getAcademicSemestersFromTrajectory } from './utils';
 import { GreatChoice } from './GreatChoice/GreatChoice';
+import { PossibleProfessions } from '../../Professions/PossibleProfessions/PossibleProfessions';
+import { useProfessionsQuery } from '../../../hooks/useProfessionsQuery';
+import { Id } from '../../../common/types';
+import { ServerErrorContext } from '../../../providers/ServerErrorProvider';
 
 type TrajectoryAnalysisProps = {};
 
@@ -17,8 +21,37 @@ export const TrajectoryAnalysis: React.FC<TrajectoryAnalysisProps> = () => {
 		state: { selectedTrajectory, semesters: constructorSemesters, selectedDirection, selectedType, academicPlan },
 		dispatch,
 	} = useConstructorContext();
-	const { data, isFetching, isLoading, refetch } = useProfessionalTrajectoryByIdQuery(selectedTrajectory);
-	const { trajectorySemesters, loading } = useEducationalModules(selectedDirection, undefined, selectedTrajectory);
+	const { setError } = useContext(ServerErrorContext);
+	const {
+		data,
+		isFetching: trajectoryFetching,
+		isLoading: trajectoryLoading,
+		error: trajectoryError,
+		refetch,
+	} = useProfessionalTrajectoryByIdQuery(selectedTrajectory);
+	const {
+		trajectorySemesters,
+		loading: modulesLoading,
+		error: modulesError,
+	} = useEducationalModules(selectedDirection, undefined, selectedTrajectory);
+	const {
+		data: possibleProfessions,
+		isLoading: professionsLoading,
+		isFetching: professionsFetching,
+	} = useProfessionsQuery({ professionalTrajectories: [selectedTrajectory as Id] });
+	const loading = useMemo(
+		() => trajectoryFetching || trajectoryLoading || modulesLoading || professionsLoading || professionsFetching,
+		[trajectoryFetching, trajectoryLoading, modulesLoading, professionsLoading, professionsFetching]
+	);
+
+	useEffect(() => {
+		if (trajectoryError) {
+			setError(trajectoryError);
+		}
+		if (modulesError) {
+			setError(modulesError);
+		}
+	}, [trajectoryError, modulesError]);
 
 	useEffect(() => {
 		refetch();
@@ -44,11 +77,12 @@ export const TrajectoryAnalysis: React.FC<TrajectoryAnalysisProps> = () => {
 	}, []);
 
 	return (
-		<Loader loading={isLoading || isFetching || loading} size="large">
+		<Loader loading={loading} size="large">
 			<Space direction="vertical" size={100}>
 				<GreatChoice />
 				{data && <TrajectoryInfo {...data} />}
 				{!!academicPlan && !!academicPlan.length && <AcademicPlan semesters={academicPlan} />}
+				<PossibleProfessions />
 			</Space>
 		</Loader>
 	);

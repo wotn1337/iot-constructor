@@ -1,13 +1,21 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Col, Row } from 'antd';
 import { useProfessionalTrajectoriesQuery } from '../../../hooks/useProfessionalTrajectoriesQuery';
 import { Loader } from '../../common/Loader/Loader';
 import { TrajectoryCard } from './TrajectoryCard/TrajectoryCard';
+import { ServerErrorContext } from '../../../providers/ServerErrorProvider';
 
 type TrajectoriesProps = {};
 
 export const Trajectories: React.FC<TrajectoriesProps> = () => {
-	const { data, isLoading, isFetching } = useProfessionalTrajectoriesQuery();
+	const { data, isLoading, isFetching, error } = useProfessionalTrajectoriesQuery();
+	const { setError } = useContext(ServerErrorContext);
+
+	useEffect(() => {
+		if (error) {
+			setError(error);
+		}
+	}, [error]);
 
 	return (
 		<Loader loading={isLoading || isFetching} size="large">

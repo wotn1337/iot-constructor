@@ -20,6 +20,9 @@ import DiagramPlaceholder from './constructor/chart-diagram-dognut-graph-statist
 import VKIcon from './icons/icon_VK.svg';
 import FAQ from './FAQ/FAQ.svg';
 import FAQQuestionBackground from './FAQ/faqQuestionBackground.svg';
+import Error404Robot from './errors/error_robot_404.svg';
+import ServerErrorRobot from './errors/server_error_robot.svg';
+import Socket from './errors/socket.svg';
 
 export {
 	IntroImage,
@@ -44,4 +47,7 @@ export {
 	VKIcon,
 	FAQ,
 	FAQQuestionBackground,
+	Error404Robot,
+	Socket,
+	ServerErrorRobot,
 };
