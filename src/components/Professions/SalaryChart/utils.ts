@@ -1,9 +1,9 @@
 import { ProfessionType } from '../types';
 
 export const getSalaryChartWidth = (salary: ProfessionType['salary']) => {
-	const { minimal, median, maximum } = salary;
-	const firstPart = median / minimal;
-	const secondPart = maximum / median;
+	const { minimal_salary, median_salary, maximal_salary } = salary;
+	const firstPart = median_salary / minimal_salary;
+	const secondPart = maximal_salary / median_salary;
 	const full = firstPart + secondPart;
 
 	const firstWidth = getNumberBetween(Math.round((firstPart / full) * 100), 10, 90);

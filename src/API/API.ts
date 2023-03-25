@@ -2,7 +2,7 @@ import axios, { CreateAxiosDefaults } from 'axios';
 import {
 	AdmissionCommitteeContactsResponse,
 	DisciplinesResponse,
-	EducationalDirectionsResponse,
+	EducationalProgramsResponse,
 	EducationalModuleResponse,
 	EducationalModulesResponse,
 	EmployeesResponse,
@@ -13,6 +13,7 @@ import {
 	SemestersResponse,
 	SocialNetworksResponse,
 	StudentReviewResponse,
+	ProfessionsResponse,
 } from './types';
 import { Id } from '../common/types';
 import { getQueryParams } from './utils';
@@ -57,8 +58,8 @@ export const socialNetworksAPI = {
 
 export const educationalDirectionsAPI = {
 	getEducationalDirections: async () => {
-		const res = await instance.get<EducationalDirectionsResponse>('educationalDirections');
-		return res.data.educational_directions;
+		const res = await instance.get<EducationalProgramsResponse>('educationalPrograms');
+		return res.data.educational_programs;
 	},
 };
 
@@ -74,7 +75,7 @@ export const educationalModulesAPI = {
 		}
 
 		const res = await instance.get<EducationalModulesResponse>(
-			`educationalDirections/${id}/educationalModules?${params.toString()}`
+			`educationalPrograms/${id}/educationalModules?${params.toString()}`
 		);
 		return res.data;
 	},
@@ -140,6 +141,7 @@ export const employeesAPI = {
 
 export const professionsAPI = {
 	getProfessions: async (params: ProfessionsQueryParams) => {
-		return instance.get(`professions?${getQueryParams(params)}`);
+		const res = await instance.get<ProfessionsResponse>(`professions?${getQueryParams(params)}`);
+		return res.data.professions;
 	},
 };

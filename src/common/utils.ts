@@ -32,7 +32,7 @@ export const reachGoal = (name: Goal) => {
 export const getDirectionFullTitle = (directionId: Id | undefined, educationalDirections: Direction[] | undefined) => {
 	const direction = educationalDirections?.find((dir) => dir.id === directionId);
 
-	return `${direction?.cipher} ${direction?.title}`;
+	return direction?.educational_direction;
 };
 
 export const getBestTrajectory = (tracks: TrackProgress[]) => {

@@ -10,7 +10,9 @@ export const Profession: React.FC<ProfessionProps> = (props) => {
 	const [textStyle, textApi] = useSpring(() => ({ from: { x: 0 } }));
 	const [imageStyle, imageApi] = useSpring(() => ({ from: { opacity: 0 } }));
 	const [salaryStyle, salaryApi] = useSpring(() => ({ from: { y: 0 } }));
-	const [{ title, description, salary, image }, setProfession] = useState(props.profession);
+	const [{ title, description, photo, minimal_salary, median_salary, maximal_salary }, setProfession] = useState(
+		props.profession
+	);
 
 	const startAnimation = () => {
 		textApi.start({
@@ -45,7 +47,7 @@ export const Profession: React.FC<ProfessionProps> = (props) => {
 		<section className="profession">
 			<div className="profession__image-wrapper">
 				<animated.div style={{ ...imageStyle }} className="image">
-					<img src={image} alt={title} className="image" />
+					<img src={photo ?? undefined} alt={title} className="image" />
 				</animated.div>
 				<div className="image-background" />
 			</div>
@@ -56,7 +58,14 @@ export const Profession: React.FC<ProfessionProps> = (props) => {
 				<p className="profession__description">{description}</p>
 			</animated.div>
 			<animated.div style={{ ...salaryStyle }}>
-				<SalaryChart salary={salary} />
+				<SalaryChart
+					minimal_salary={minimal_salary}
+					median_salary={median_salary}
+					maximal_salary={maximal_salary}
+				/>
+			</animated.div>
+			<animated.div style={{ ...salaryStyle }}>
+				<span className="profession__comment">Данные о зарплате взяты с сайта hh.ru</span>
 			</animated.div>
 		</section>
 	);

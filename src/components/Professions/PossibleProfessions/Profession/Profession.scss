@@ -10,7 +10,7 @@
   min-height: 380px;
 
   &__image-wrapper {
-    grid-row: span 3;
+    grid-row: span 4;
     width: 500px;
     height: 320px;
     position: relative;
@@ -58,5 +58,15 @@
     line-height: 130%;
     color: rgba(0, 0, 0, 0.85);
     margin-bottom: 64px;
+  }
+
+  &__comment {
+    font-family: $NotoSans;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 10px;
+    line-height: 130%;
+    color: rgba(0, 0, 0, 0.45);
+    margin-top: 16px;
   }
 }

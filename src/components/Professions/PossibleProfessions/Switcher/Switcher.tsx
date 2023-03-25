@@ -6,7 +6,7 @@ import './Switcher.scss';
 type SwitcherProps = {
 	currentProfessionIndex: number;
 	setCurrentProfessionIndex: React.Dispatch<React.SetStateAction<number>>;
-	professions: {
+	professions?: {
 		title: string;
 	}[];
 };
@@ -20,7 +20,7 @@ export const Switcher: React.FC<SwitcherProps> = ({
 		<Steps
 			className="possible-professions-switcher"
 			current={currentProfessionIndex}
-			items={professions.map((p, index) => ({
+			items={professions?.map((p, index) => ({
 				...p,
 				icon: (
 					<Hexagon

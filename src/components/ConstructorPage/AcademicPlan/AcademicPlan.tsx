@@ -30,9 +30,7 @@ export const AcademicPlan: React.FC<AcademicPlanProps> = ({ semesters }) => {
 						/>
 					</Space>
 					<Space direction="horizontal" size={10}>
-						<Typography.Text type="secondary">
-							Вы можете распечатать эту версию списка дисциплин или сохранить в pdf
-						</Typography.Text>
+						<Typography.Text type="secondary">Сформировать pdf</Typography.Text>
 						<SaveToPdfButton targetRef={academicPlanRef} />
 					</Space>
 				</Space>
