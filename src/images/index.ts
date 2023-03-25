@@ -21,8 +21,10 @@ import VKIcon from './icons/icon_VK.svg';
 import FAQ from './FAQ/FAQ.svg';
 import FAQQuestionBackground from './FAQ/faqQuestionBackground.svg';
 import Error404Robot from './errors/error_robot_404.svg';
+import Error503Robot from './errors/error_503_robot.svg';
 import ServerErrorRobot from './errors/server_error_robot.svg';
 import Socket from './errors/socket.svg';
+import ErrorPageBackground from './errors/error_page_bg.svg';
 
 export {
 	IntroImage,
@@ -48,6 +50,8 @@ export {
 	FAQ,
 	FAQQuestionBackground,
 	Error404Robot,
+	Error503Robot,
 	Socket,
 	ServerErrorRobot,
+	ErrorPageBackground,
 };

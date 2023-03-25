@@ -6,7 +6,7 @@ import { ROUTES } from './routes';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { PageInProgress } from './components/common/PageInProgress/PageInProgress';
 import { Helmet } from 'react-helmet';
-import { Error404Robot, ServerErrorRobot, Socket } from './images';
+import { Error404Robot, Error503Robot, ServerErrorRobot, Socket } from './images';
 import { ServerErrorContext } from './providers/ServerErrorProvider';
 
 const queryClient = new QueryClient();
@@ -28,8 +28,9 @@ export const App = () => {
 				code={error.response?.status}
 				pageTitle={`Ошибка ${error.response?.status}`}
 				title="Sorry"
-				subTitle="Ошибка сервера"
-				image={ServerErrorRobot}
+				subTitle={error.response?.status === 503 ? 'Сайт на техническом обслуживании' : 'Ошибка сервера'}
+				image={error.response?.status === 503 ? Error503Robot : ServerErrorRobot}
+				textStyle={{ color: '#FA8C16' }}
 			/>
 		);
 	}
@@ -84,6 +85,7 @@ export const App = () => {
 									children: 'Вернуться на главную',
 									href: ROUTES.MAIN,
 								}}
+								textStyle={{ color: '#1890FF' }}
 							/>
 						}
 					/>
