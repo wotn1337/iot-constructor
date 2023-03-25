@@ -7,7 +7,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { PageInProgress } from './components/common/PageInProgress/PageInProgress';
 import { Helmet } from 'react-helmet';
 import { EmployeesPage } from './pages/EmployeesPage';
-import { Error404Robot, ServerErrorRobot, Socket } from './images';
+import { Error404Robot, Error503Robot, ServerErrorRobot, Socket } from './images';
 import { ServerErrorContext } from './providers/ServerErrorProvider';
 
 const queryClient = new QueryClient();
@@ -30,7 +30,7 @@ export const App = () => {
 				pageTitle={`Ошибка ${error.response?.status}`}
 				title="Sorry"
 				subTitle={error.response?.status === 503 ? 'Сайт на техническом обслуживании' : 'Ошибка сервера'}
-				image={ServerErrorRobot}
+				image={error.response?.status === 503 ? Error503Robot : ServerErrorRobot}
 				textStyle={{ color: '#FA8C16' }}
 			/>
 		);
