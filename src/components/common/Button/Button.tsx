@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button as AntdButton } from 'antd';
+import { Button as AntdButton, ButtonProps as AntdButtonProps } from 'antd';
 import s from './Button.module.scss';
 
 type ButtonProps = {
@@ -11,6 +11,7 @@ type ButtonProps = {
 	href?: string;
 	children?: React.ReactNode;
 	classname?: string;
+	target?: AntdButtonProps['target'];
 };
 
 export const Button: React.FC<ButtonProps> = ({
@@ -22,6 +23,7 @@ export const Button: React.FC<ButtonProps> = ({
 	style,
 	children,
 	classname,
+	target,
 }) => {
 	return (
 		<AntdButton
@@ -30,6 +32,7 @@ export const Button: React.FC<ButtonProps> = ({
 			icon={icon}
 			className={`${s.button} ${classname} ${type === 'primary' ? s.primary : s.default}`}
 			href={href}
+			target={target}
 			style={{ ...style }}
 		>
 			{children}

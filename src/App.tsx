@@ -1,12 +1,11 @@
 import React, { useEffect } from 'react';
 import { Route, Routes, useLocation } from 'react-router-dom';
 import { Layout } from './components';
-import { ConstructorPage, MainPage } from './pages';
+import { ConstructorPage, MainPage, EmployeesPage, FAQPage } from './pages';
 import { ROUTES } from './routes';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { PageInProgress } from './components/common/PageInProgress/PageInProgress';
 import { Helmet } from 'react-helmet';
-import { EmployeesPage } from './pages/EmployeesPage';
 import { NotFoundPage } from './pages/NotFoundPage';
 
 const queryClient = new QueryClient();
@@ -54,6 +53,7 @@ export const App = () => {
 								</>
 							}
 						/>
+						<Route path={ROUTES.FAQ} element={<FAQPage />} />
 					</Route>
 					<Route path="*" element={<NotFoundPage />} />
 				</Routes>

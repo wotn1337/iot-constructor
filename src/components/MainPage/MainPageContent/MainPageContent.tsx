@@ -5,7 +5,6 @@ import { Advantages } from '../Advantages/Advantages';
 import { StudentReview } from '../StudentReview/StudentReview';
 import { Professions } from '../Professions/Professions';
 import { Partners } from '../Partners/Partners';
-import { MobileApp } from '../MobileApp/MobileApp';
 import { Loader } from '../../common/Loader/Loader';
 import { usePartnersQuery } from '../../../hooks/usePartnersQuery';
 import { useStudentReviewsQuery } from '../../../hooks/useStudentReviewsQuery';
@@ -31,7 +30,6 @@ export const MainPageContent: React.FC<MainPageContentProps> = () => {
 				<StudentReview />
 				<Professions />
 				<Partners />
-				{/*<MobileApp />*/}
 			</section>
 		</Loader>
 	);

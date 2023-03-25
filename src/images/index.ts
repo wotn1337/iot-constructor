@@ -18,6 +18,8 @@ import AvatarPlaceholder from './users/avatar_placeholder.svg';
 import AudienceIcon from './icons/icon_audience.svg';
 import DiagramPlaceholder from './constructor/chart-diagram-dognut-graph-statistics-svgrepo-com.svg';
 import VKIcon from './icons/icon_VK.svg';
+import FAQ from './FAQ/FAQ.svg';
+import FAQQuestionBackground from './FAQ/faqQuestionBackground.svg';
 
 export {
 	IntroImage,
@@ -40,4 +42,6 @@ export {
 	AudienceIcon,
 	DiagramPlaceholder,
 	VKIcon,
+	FAQ,
+	FAQQuestionBackground,
 };

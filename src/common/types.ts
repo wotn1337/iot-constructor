@@ -89,3 +89,9 @@ export type Semester = {
 	text_representation: string;
 	numerical_representation: number;
 };
+
+export type FAQType = {
+	id: Id;
+	question: string;
+	answer: string;
+};
