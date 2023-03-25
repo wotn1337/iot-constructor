@@ -6,6 +6,7 @@ import {
 	EducationalModuleResponse,
 	EducationalModulesResponse,
 	EmployeesResponse,
+	FAQResponse,
 	PartnersResponse,
 	ProfessionalTrajectoriesResponse,
 	ProfessionalTrajectoryResponse,
@@ -143,5 +144,12 @@ export const professionsAPI = {
 	getProfessions: async (params: ProfessionsQueryParams) => {
 		const res = await instance.get<ProfessionsResponse>(`professions?${getQueryParams(params)}`);
 		return res.data.professions;
+	},
+};
+
+export const FAQAPI = {
+	getFAQ: async () => {
+		const res = await instance.get<FAQResponse>('faq');
+		return res.data.FAQ;
 	},
 };
