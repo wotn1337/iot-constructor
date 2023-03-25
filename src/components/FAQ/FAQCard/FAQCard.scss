@@ -1,0 +1,64 @@
+@import "../../../constants";
+
+.faq_card {
+  width: 598px;
+  border: 1px solid transparent;
+  transition: all 0.2s ease-in-out;
+  height: fit-content;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+
+  &:hover {
+    border: 1px solid $orange;
+  }
+
+  .ant-collapse {
+    background-color: transparent;
+    height: fit-content;
+  }
+
+  .ant-collapse > .ant-collapse-item > .ant-collapse-header .ant-collapse-arrow {
+     font-size: 25px;
+  }
+
+  .ant-collapse-item {
+    border-bottom: none;
+
+    .ant-collapse-header {
+      background-color: #FFFFFF;
+      font-size: 20px;
+      font-weight: 500;
+
+      .ant-collapse-header-text {
+        margin-right: 10px;
+      }
+
+      .icon {
+        color: $orange;
+        font-size: 25px;
+      }
+
+      @media screen and (max-width: 821px) {
+        font-size: 16px;
+      }
+    }
+  }
+
+  .ant-collapse-item:not(.ant-collapse-item-active) {
+    height: fit-content;
+  }
+
+  .ant-collapse-content {
+    border-top: none;
+    font-size: 16px;
+    color: rgba(0, 0, 0, 0.45);
+    padding: 0;
+
+    @media screen and (max-width: 821px) {
+      font-size: 14px;
+    }
+  }
+
+  @media screen and (max-width: 821px) {
+    width: 100%;
+  }
+}

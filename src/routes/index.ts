@@ -4,11 +4,13 @@ export enum ROUTES {
 	PROFESSIONS = 'professions',
 	EMPLOYEES = 'employees',
 	PARTNERS = 'partners',
+	FAQ = 'faq',
 }
 
 export const PageRoutes = [
 	{ title: 'Конструктор', route: ROUTES.CONSTRUCTOR },
 	{ title: 'Профессии', route: ROUTES.PROFESSIONS },
 	{ title: 'Кураторы', route: ROUTES.EMPLOYEES },
-	{ title: 'Партнеры', route: ROUTES.PARTNERS },
+	{ title: 'Партнерские курсы', route: ROUTES.PARTNERS },
+	{ title: 'Частые вопросы', route: ROUTES.FAQ },
 ];
