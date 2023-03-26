@@ -31,7 +31,7 @@ export type SocialNetwork = {
 	icon: string;
 };
 
-export type Direction = {
+export type EducationalProgram = {
 	id: Id;
 	educational_direction: string;
 	passing_scores: [
@@ -43,6 +43,7 @@ export type Direction = {
 	training_period: string;
 	budget_places: number;
 	page_link: string;
+	title: string;
 };
 
 export type Course = {

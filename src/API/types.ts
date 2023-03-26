@@ -6,7 +6,7 @@ import {
 	SocialNetwork,
 	StudentReview,
 	Trajectory,
-	Direction,
+	EducationalProgram,
 	Id,
 	Semester,
 	FAQType,
@@ -34,7 +34,7 @@ export type SocialNetworksResponse = {
 
 export type EducationalProgramsResponse = {
 	meta: { total: number };
-	educational_programs: Direction[];
+	educational_programs: EducationalProgram[];
 };
 export type EducationalModulesResponse = {
 	meta: { total: number };

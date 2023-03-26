@@ -8,6 +8,7 @@ import { PageInProgress } from './components/common/PageInProgress/PageInProgres
 import { Helmet } from 'react-helmet';
 import { Error404Robot, Error503Robot, ServerErrorRobot, Socket } from './images';
 import { ServerErrorContext } from './providers/ServerErrorProvider';
+import { ProfessionsPage } from './pages/ProfessionsPage';
 
 const queryClient = new QueryClient();
 
@@ -46,17 +47,7 @@ export const App = () => {
 						<Route index path={ROUTES.MAIN} element={<MainPage />} />
 						<Route path={`${ROUTES.CONSTRUCTOR}/*`} element={<ConstructorPage />} />
 						<Route path={ROUTES.EMPLOYEES} element={<EmployeesPage />} />
-						<Route
-							path={ROUTES.PROFESSIONS}
-							element={
-								<>
-									<Helmet>
-										<title>Профессии</title>
-									</Helmet>
-									<PageInProgress page="Профессии" />
-								</>
-							}
-						/>
+						<Route path={ROUTES.PROFESSIONS} element={<ProfessionsPage />} />
 						<Route
 							path={ROUTES.PARTNERS}
 							element={

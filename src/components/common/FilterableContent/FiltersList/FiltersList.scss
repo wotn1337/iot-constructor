@@ -1,0 +1,41 @@
+@import '../../../../constants';
+
+.filters-list {
+  &__title {
+    font-family: $NotoSans;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 130%;
+    color: rgba(0, 0, 0, 0.85);
+  }
+
+  &__checkbox {
+    &:hover .ant-checkbox-inner,
+    &:hover .ant-checkbox-indeterminate .ant-checkbox-inner,
+    .ant-checkbox:hover .ant-checkbox-inner,
+    .ant-checkbox-input:focus + .ant-checkbox-inner {
+      border-color: $orange !important;
+    }
+
+    & .ant-checkbox-indeterminate .ant-checkbox-inner::after {
+      background-color: $orange;
+    }
+
+    .filters-list__item-title {
+      font-family: $NotoSans;
+      font-style: normal;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 22px;
+      color: rgba(0, 0, 0, 0.85);
+    }
+  }
+}
+
+.filters-list__divider {
+  width: 100%;
+  height: 2px;
+  background-color: rgba(0, 0, 0, 0.06);
+  color: rgba(0, 0, 0, 0.06);
+}
