@@ -1,10 +1,13 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useMemo, useState } from 'react';
 import { FilterableContent } from '../components/common/FilterableContent/FilterableContent';
 import { Helmet } from 'react-helmet';
 import { useEducationalProgramsQuery } from '../hooks';
 import { useProfessionalTrajectoriesQuery } from '../hooks/useProfessionalTrajectoriesQuery';
 import { ServerErrorContext } from '../providers/ServerErrorProvider';
 import { Id } from '../common/types';
+import { useProfessionsInfinityQuery } from '../hooks/useProfessionsInfinityQuery';
+import { ProfessionsGrid } from '../components/Professions/ProfessionsGrid/ProfessionsGrid';
+import { ProfessionType } from '../components/Professions/types';
 
 type ProfessionsPageProps = {};
 
@@ -26,6 +29,33 @@ export const ProfessionsPage: React.FC<ProfessionsPageProps> = () => {
 	} = useProfessionalTrajectoriesQuery();
 	const [selectedProfessionalTrajectories, setSelectedProfessionalTrajectories] = useState<Id[]>([]);
 
+	const {
+		data: professionsData,
+		isLoading: professionsLoading,
+		isFetching: professionsFetching,
+		error: professionsError,
+		fetchNextPage,
+		isFetchingNextPage,
+		hasNextPage,
+		refetch,
+	} = useProfessionsInfinityQuery({
+		professionalTrajectories: selectedProfessionalTrajectories,
+		educationalPrograms: selectedEducationalDirections,
+	});
+
+	const professions = useMemo(() => {
+		const result: ProfessionType[] = [];
+		if (professionsData) {
+			professionsData.pages.forEach((page) => result.push(...page.professions));
+		}
+		return result;
+	}, [professionsData]);
+
+	const handleClearSelection = () => {
+		setSelectedEducationalDirections([]);
+		setSelectedProfessionalTrajectories([]);
+	};
+
 	useEffect(() => {
 		if (educationalDirectionsError) {
 			setError(educationalDirectionsError);
@@ -33,7 +63,10 @@ export const ProfessionsPage: React.FC<ProfessionsPageProps> = () => {
 		if (professionalTrajectoriesError) {
 			setError(professionalTrajectoriesError);
 		}
-	}, [educationalDirectionsError, professionalTrajectoriesError]);
+		if (professionsError) {
+			setError(professionsError);
+		}
+	}, [educationalDirectionsError, professionalTrajectoriesError, professionsError]);
 
 	return (
 		<>
@@ -53,6 +86,7 @@ export const ProfessionsPage: React.FC<ProfessionsPageProps> = () => {
 							})) ?? [],
 						selectedIds: selectedEducationalDirections,
 						onChange: (ids) => setSelectedEducationalDirections(ids),
+						loading: educationalDirectionsFetching || educationalDirectionsLoading,
 					},
 					{
 						title: 'Профессиональные траектории',
@@ -64,6 +98,7 @@ export const ProfessionsPage: React.FC<ProfessionsPageProps> = () => {
 							})) ?? [],
 						selectedIds: selectedProfessionalTrajectories,
 						onChange: (ids) => setSelectedProfessionalTrajectories(ids),
+						loading: professionalTrajectoriesFetching || professionalTrajectoriesLoading,
 					},
 				]}
 				sortersState={{
@@ -71,7 +106,13 @@ export const ProfessionsPage: React.FC<ProfessionsPageProps> = () => {
 					onChange: () => {},
 					directions: {},
 				}}
-				content={<div>content</div>}
+				content={<ProfessionsGrid professions={professions} />}
+				onCLearSelection={handleClearSelection}
+				fetchMoreState={{
+					loading: professionsLoading || professionsFetching || isFetchingNextPage,
+					onFetchMore: fetchNextPage,
+					hideFetchMoreButton: !hasNextPage,
+				}}
 			/>
 		</>
 	);

@@ -54,6 +54,7 @@ export type EmployeesResponse = { employees: Employee[] };
 export type FAQResponse = { FAQ: FAQType[] };
 
 export type ProfessionsQueryParams = {
+	page?: number;
 	withProfessionalTrajectories?: true;
 	paginate?: number;
 	withEducationalPrograms?: true;
@@ -64,4 +65,10 @@ export type ProfessionsQueryParams = {
 	sortByVacancyCount?: SortDirection;
 };
 
-export type ProfessionsResponse = { professions: ProfessionType[] };
+export type ProfessionsResponse = {
+	professions: ProfessionType[];
+	meta: {
+		current_page: number;
+		last_page: number;
+	};
+};

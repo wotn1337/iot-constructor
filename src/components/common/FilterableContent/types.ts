@@ -9,6 +9,7 @@ export type Filter = {
 	}[];
 	selectedIds: Id[];
 	onChange: (ids: Id[]) => void;
+	loading?: boolean;
 };
 
 export type Sorter = {
