@@ -1,6 +1,8 @@
 @import '../../../../constants';
 
 .filters-list {
+  width: 100%;
+
   &__title {
     font-family: $NotoSans;
     font-style: normal;
