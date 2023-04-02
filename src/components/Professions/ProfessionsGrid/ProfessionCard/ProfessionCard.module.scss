@@ -1,17 +1,31 @@
 @import '../../../../constants';
 
 .professionCard {
-  background-color: white;
   border-radius: 2px;
   overflow: hidden;
+  position: relative;
+  transition: 200ms;
+  border: 1px solid transparent;
+
+  &:hover {
+    border: 1px solid $fontBlue;
+  }
 
   &__mainContent {
     display: grid;
     grid-template-columns: 290px 1fr;
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+    min-height: 200px;
+    position: relative;
+    z-index: 2;
+    background-color: white;
+    cursor: pointer;
 
     .mainContent__image {
       width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
     }
 
     .mainContent__body {
@@ -48,6 +62,36 @@
           color: rgba(0, 0, 0, 0.85);
         }
       }
+
+      .body__bottom {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        gap: 90px;
+
+        .bottom__salaryChart {
+          flex: 1;
+        }
+      }
+    }
+  }
+
+  &__secondaryContent {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    z-index: 1;
+    background-color: white;
+    box-sizing: border-box;
+
+    .secondaryContent__description {
+      font-family: $NotoSans;
+      font-style: normal;
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 130%;
+      color: rgba(0, 0, 0, 0.85);
     }
   }
 }

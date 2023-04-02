@@ -3,6 +3,12 @@
   width: 1216px;
   padding: 64px 0;
 
+  .sortersWrapper {
+    margin-bottom: 18px;
+    display: flex;
+    justify-content: flex-end;
+  }
+
   .title {
     margin-bottom: 48px;
   }

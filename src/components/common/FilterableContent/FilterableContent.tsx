@@ -1,20 +1,16 @@
 import React from 'react';
 import { Filter, Sorter } from './types';
-import { Id, SortDirection } from '../../../common/types';
-import { Col, Row } from 'antd';
+import { Col, Row, Spin } from 'antd';
 import s from './FilterableContent.module.scss';
 import { FiltersList } from './FiltersList/FiltersList';
 import { Button } from '../Button/Button';
 import { Loader } from '../Loader/Loader';
+import { SortersList } from './SortersList/SortersList';
 
 type FilterableContentProps = {
 	title: string;
 	filtersState: Filter[];
-	sortersState: {
-		sorters: Sorter[];
-		directions: Record<Id, SortDirection>;
-		onChange: (id: Id) => void;
-	};
+	sortersState?: Sorter[];
 	content: React.ReactNode;
 	onCLearSelection: React.MouseEventHandler<HTMLElement>;
 	fetchMoreState?: {
@@ -34,7 +30,14 @@ export const FilterableContent: React.FC<FilterableContentProps> = ({
 }) => {
 	return (
 		<section className={s.filterableContent}>
-			<h3 className={s.title}>{title}</h3>
+			<h3 className={s.title} style={{ marginBottom: sortersState ? 10 : 48 }}>
+				{title}
+			</h3>
+			{sortersState && (
+				<div className={s.sortersWrapper}>
+					<SortersList sorters={sortersState} className={s.sorters} />
+				</div>
+			)}
 			<Row gutter={20}>
 				<Col span={6}>
 					{filtersState.map((filter, index) => (
@@ -45,8 +48,13 @@ export const FilterableContent: React.FC<FilterableContentProps> = ({
 					</Button>
 				</Col>
 				<Col span={18}>
-					<div>{content}</div>
-					<Loader loading={fetchMoreState?.loading} style={{ marginTop: 32 }}>
+					<Spin spinning={fetchMoreState?.loading}>
+						<div>{content}</div>
+					</Spin>
+					<Loader
+						loading={fetchMoreState?.loading && !fetchMoreState?.hideFetchMoreButton}
+						style={{ marginTop: 32 }}
+					>
 						{!fetchMoreState?.hideFetchMoreButton && (
 							<Button type="default" classname={s.fetchMoreButton} onClick={fetchMoreState?.onFetchMore}>
 								Показать ещё

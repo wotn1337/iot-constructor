@@ -1,0 +1,15 @@
+@import '../../../../../constants';
+
+.educationalPrograms {
+  font-family: $NotoSans;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 22px;
+  color: rgba(0, 0, 0, 0.45);
+
+  &__dot {
+    color: #D9D9D9;
+    font-size: 16px;
+  }
+}
