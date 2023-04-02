@@ -1,0 +1,53 @@
+@import '../../../../constants';
+
+.professionCard {
+  background-color: white;
+  border-radius: 2px;
+  overflow: hidden;
+
+  &__mainContent {
+    display: grid;
+    grid-template-columns: 290px 1fr;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+
+    .mainContent__image {
+      width: 100%;
+    }
+
+    .mainContent__body {
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+
+      .body__title {
+        font-family: $NotoSans;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 18px;
+        line-height: 130%;
+        color: rgba(0, 0, 0, 0.85);
+      }
+
+      .body__vacancies {
+        .vacancies__title {
+          font-family: $NotoSans;
+          font-style: normal;
+          font-weight: 400;
+          font-size: 14px;
+          line-height: 130%;
+          color: rgba(0, 0, 0, 0.45);
+        }
+
+        .vacancies__count {
+          font-family: $NotoSans;
+          font-style: normal;
+          font-weight: 500;
+          font-size: 16px;
+          line-height: 130%;
+          color: rgba(0, 0, 0, 0.85);
+        }
+      }
+    }
+  }
+}

@@ -10,7 +10,7 @@ import { STEP_TYPE } from '../types';
 import { getAcademicSemestersFromConstructor, getAcademicSemestersFromTrajectory } from './utils';
 import { GreatChoice } from './GreatChoice/GreatChoice';
 import { PossibleProfessions } from '../../Professions/PossibleProfessions/PossibleProfessions';
-import { useProfessionsQuery } from '../../../hooks/useProfessionsQuery';
+import { useProfessionsPaginateQuery } from '../../../hooks/useProfessionsPaginateQuery';
 import { Id } from '../../../common/types';
 import { ServerErrorContext } from '../../../providers/ServerErrorProvider';
 
@@ -35,10 +35,11 @@ export const TrajectoryAnalysis: React.FC<TrajectoryAnalysisProps> = () => {
 		error: modulesError,
 	} = useEducationalModules(selectedDirection, undefined, selectedTrajectory);
 	const {
-		data: possibleProfessions,
+		data: possibleProfessionsData,
 		isLoading: professionsLoading,
 		isFetching: professionsFetching,
-	} = useProfessionsQuery({ professionalTrajectories: [selectedTrajectory as Id] });
+		error: possibleProfessionsError,
+	} = useProfessionsPaginateQuery({ professionalTrajectories: [selectedTrajectory as Id] });
 	const loading = useMemo(
 		() => trajectoryFetching || trajectoryLoading || modulesLoading || professionsLoading || professionsFetching,
 		[trajectoryFetching, trajectoryLoading, modulesLoading, professionsLoading, professionsFetching]
@@ -51,7 +52,10 @@ export const TrajectoryAnalysis: React.FC<TrajectoryAnalysisProps> = () => {
 		if (modulesError) {
 			setError(modulesError);
 		}
-	}, [trajectoryError, modulesError]);
+		if (possibleProfessionsError) {
+			setError(possibleProfessionsError);
+		}
+	}, [trajectoryError, modulesError, possibleProfessionsError]);
 
 	useEffect(() => {
 		refetch();
@@ -82,7 +86,7 @@ export const TrajectoryAnalysis: React.FC<TrajectoryAnalysisProps> = () => {
 				<GreatChoice />
 				{data && <TrajectoryInfo {...data} />}
 				{!!academicPlan && !!academicPlan.length && <AcademicPlan semesters={academicPlan} />}
-				<PossibleProfessions professions={possibleProfessions ?? []} />
+				<PossibleProfessions professions={possibleProfessionsData?.professions ?? []} />
 			</Space>
 		</Loader>
 	);

@@ -143,7 +143,7 @@ export const employeesAPI = {
 export const professionsAPI = {
 	getProfessions: async (params: ProfessionsQueryParams) => {
 		const res = await instance.get<ProfessionsResponse>(`professions?${getQueryParams(params)}`);
-		return res.data.professions;
+		return res.data;
 	},
 };
 

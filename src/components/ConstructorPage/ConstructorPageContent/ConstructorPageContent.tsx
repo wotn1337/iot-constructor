@@ -10,7 +10,7 @@ import { useDisciplineQuery } from '../../../hooks/useDisciplineQuery';
 import { Step, STEP_TYPE } from '../types';
 import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
-import { useEducationalDirectionsQuery } from '../../../hooks/useEducationalDirections';
+import { useEducationalProgramsQuery } from '../../../hooks';
 import { getBestTrajectory, getDirectionFullTitle } from '../../../common/utils';
 import { Trajectories } from '../Trajectories/Trajectories';
 import { TrajectoryAnalysis } from '../TrajectoryAnalysis/TrajectoryAnalysis';
@@ -32,16 +32,16 @@ export const ConstructorPageContent: React.FC<ConstructorProps> = () => {
 		isLoading: disciplineLoading,
 		error: disciplineError,
 	} = useDisciplineQuery(disciplineId);
-	const { data: educationalDirections, error: educationalDirectionsError } = useEducationalDirectionsQuery();
+	const { data: educationalDirections, error: educationalDirectionsError } = useEducationalProgramsQuery();
 	const { setError } = useContext(ServerErrorContext);
 	const [percent, setPercent] = useState<number>(0);
 	const steps: Step[] = useMemo(
 		() => [
 			{
-				title: 'Выберите направление подготовки',
+				title: 'Выберите образовательную программу',
 				content: <DirectionSelection />,
 				type: STEP_TYPE.DIRECTION_SELECTION,
-				pageTitle: 'Выбор направления подготовки',
+				pageTitle: 'Выбор образовательной программы',
 			},
 			{
 				title: 'Как вы хотите использовать конструктор?',

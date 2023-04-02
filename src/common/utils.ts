@@ -1,5 +1,5 @@
 import { RobotOval, RobotRectangle, RobotTriangle } from '../images';
-import { Direction, Id } from './types';
+import { EducationalProgram, Id } from './types';
 import { TrackProgress } from '../components/ConstructorPage/Context/types';
 
 export const getAvatarPlaceholder = () => {
@@ -29,7 +29,10 @@ export const reachGoal = (name: Goal) => {
 	ym(91451529, 'reachGoal', name);
 };
 
-export const getDirectionFullTitle = (directionId: Id | undefined, educationalDirections: Direction[] | undefined) => {
+export const getDirectionFullTitle = (
+	directionId: Id | undefined,
+	educationalDirections: EducationalProgram[] | undefined
+) => {
 	const direction = educationalDirections?.find((dir) => dir.id === directionId);
 
 	return direction?.educational_direction;

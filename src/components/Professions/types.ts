@@ -9,7 +9,6 @@ export type ProfessionType = {
 	minimal_salary: number;
 	median_salary: number;
 	maximal_salary: number;
-	salary: Record<SalaryType, number>;
 };
 
 export type SalaryType = 'minimal_salary' | 'median_salary' | 'maximal_salary';

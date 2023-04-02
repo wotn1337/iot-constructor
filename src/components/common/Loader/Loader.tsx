@@ -2,7 +2,7 @@ import React from 'react';
 import { Spin, SpinProps } from 'antd';
 
 type LoaderProps = {
-	loading: boolean;
+	loading?: boolean;
 	children?: React.ReactNode;
 	size?: SpinProps['size'];
 	style?: React.CSSProperties;

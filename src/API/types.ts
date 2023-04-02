@@ -6,7 +6,7 @@ import {
 	SocialNetwork,
 	StudentReview,
 	Trajectory,
-	Direction,
+	EducationalProgram,
 	Id,
 	Semester,
 	FAQType,
@@ -34,7 +34,7 @@ export type SocialNetworksResponse = {
 
 export type EducationalProgramsResponse = {
 	meta: { total: number };
-	educational_programs: Direction[];
+	educational_programs: EducationalProgram[];
 };
 export type EducationalModulesResponse = {
 	meta: { total: number };
@@ -54,6 +54,7 @@ export type EmployeesResponse = { employees: Employee[] };
 export type FAQResponse = { FAQ: FAQType[] };
 
 export type ProfessionsQueryParams = {
+	page?: number;
 	withProfessionalTrajectories?: true;
 	paginate?: number;
 	withEducationalPrograms?: true;
@@ -64,4 +65,10 @@ export type ProfessionsQueryParams = {
 	sortByVacancyCount?: SortDirection;
 };
 
-export type ProfessionsResponse = { professions: ProfessionType[] };
+export type ProfessionsResponse = {
+	professions: ProfessionType[];
+	meta: {
+		current_page: number;
+		last_page: number;
+	};
+};

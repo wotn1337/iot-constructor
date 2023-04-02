@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from 'react';
 import { Col, Row } from 'antd';
 import { DirectionCard } from './DirectionCard/DirectionCard';
 import { setSelectedDirection, useConstructorContext } from '../Context';
-import { useEducationalDirectionsQuery } from '../../../hooks/useEducationalDirections';
+import { useEducationalProgramsQuery } from '../../../hooks';
 import { Loader } from '../../common/Loader/Loader';
 import { reachGoal } from '../../../common/utils';
 import s from './DirectionSelection.module.scss';
@@ -11,7 +11,7 @@ import { ServerErrorContext } from '../../../providers/ServerErrorProvider';
 type ChoiceInstituteProps = {};
 
 export const DirectionSelection: React.FC<ChoiceInstituteProps> = () => {
-	const { data, isLoading, isFetching, error } = useEducationalDirectionsQuery();
+	const { data, isLoading, isFetching, error } = useEducationalProgramsQuery();
 	const {
 		state: { selectedDirection },
 		dispatch,
