@@ -1,4 +1,5 @@
-import { Id } from '../../../common/types';
+import { Id, SortDirection } from '../../../common/types';
+import { SortAscendingOutlined, SortDescendingOutlined } from '@ant-design/icons';
 
 export type Filter = {
 	title: string;
@@ -13,6 +14,18 @@ export type Filter = {
 };
 
 export type Sorter = {
-	title: string;
-	id: Id;
+	titles: Record<SortDirection, string>;
+	key: string;
+	direction: SortDirection;
+	onChange: (newSortDirection: SortDirection) => void;
+};
+
+export const sortIcons = {
+	asc: SortAscendingOutlined,
+	desc: SortDescendingOutlined,
+};
+
+export const reverseSortDirection: Record<SortDirection, SortDirection> = {
+	asc: 'desc',
+	desc: 'asc',
 };

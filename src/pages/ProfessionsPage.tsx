@@ -4,7 +4,7 @@ import { Helmet } from 'react-helmet';
 import { useEducationalProgramsQuery } from '../hooks';
 import { useProfessionalTrajectoriesQuery } from '../hooks/useProfessionalTrajectoriesQuery';
 import { ServerErrorContext } from '../providers/ServerErrorProvider';
-import { Id } from '../common/types';
+import { Id, SortDirection } from '../common/types';
 import { useProfessionsInfinityQuery } from '../hooks/useProfessionsInfinityQuery';
 import { ProfessionsGrid } from '../components/Professions/ProfessionsGrid/ProfessionsGrid';
 import { ProfessionType } from '../components/Professions/types';
@@ -13,6 +13,8 @@ type ProfessionsPageProps = {};
 
 export const ProfessionsPage: React.FC<ProfessionsPageProps> = () => {
 	const { setError } = useContext(ServerErrorContext);
+	const [sortDirection, setSortDirection] = useState<SortDirection>('asc');
+
 	const {
 		data: educationalDirections,
 		isLoading: educationalDirectionsLoading,
@@ -41,6 +43,9 @@ export const ProfessionsPage: React.FC<ProfessionsPageProps> = () => {
 	} = useProfessionsInfinityQuery({
 		professionalTrajectories: selectedProfessionalTrajectories,
 		educationalPrograms: selectedEducationalDirections,
+		sortBySalary: sortDirection,
+		withProfessionalTrajectories: true,
+		withEducationalPrograms: true,
 	});
 
 	const professions = useMemo(() => {
@@ -55,6 +60,10 @@ export const ProfessionsPage: React.FC<ProfessionsPageProps> = () => {
 		setSelectedEducationalDirections([]);
 		setSelectedProfessionalTrajectories([]);
 	};
+
+	useEffect(() => {
+		void refetch();
+	}, [selectedEducationalDirections, selectedProfessionalTrajectories, sortDirection]);
 
 	useEffect(() => {
 		if (educationalDirectionsError) {
@@ -101,11 +110,17 @@ export const ProfessionsPage: React.FC<ProfessionsPageProps> = () => {
 						loading: professionalTrajectoriesFetching || professionalTrajectoriesLoading,
 					},
 				]}
-				sortersState={{
-					sorters: [],
-					onChange: () => {},
-					directions: {},
-				}}
+				sortersState={[
+					{
+						key: 'salary',
+						titles: {
+							asc: 'По возрастанию зарплаты',
+							desc: 'По убыванию зарплаты',
+						},
+						direction: sortDirection,
+						onChange: (dir) => setSortDirection(dir),
+					},
+				]}
 				content={<ProfessionsGrid professions={professions} />}
 				onCLearSelection={handleClearSelection}
 				fetchMoreState={{

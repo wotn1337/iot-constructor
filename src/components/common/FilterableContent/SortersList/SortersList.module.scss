@@ -1,0 +1,23 @@
+@import '../../../../constants';
+
+.sortersList {
+  &__sorterButton {
+    display: flex;
+    align-items: center;
+
+    &:hover {
+      .sorterButton__text {
+        text-decoration: underline;
+      }
+    }
+
+    .sorterButton__text {
+      font-family: $NotoSans;
+      font-style: normal;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 22px;
+      color: rgba(0, 0, 0, 0.85);
+    }
+  }
+}
