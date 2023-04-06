@@ -1,0 +1,47 @@
+@import "./../../../constants";
+
+.partnerCourseCard {
+  width: 289px;
+  height: 260px;
+  background-color: #FFFFFF;
+  border: 1px solid #FFFFFF;
+  border-radius: 2px;
+  color: rgba(0, 0, 0, 0.85);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+  transition: all 0.2s ease-in-out;
+
+  &:hover {
+    border-color: $fontBlue;
+    color: $fontBlue;
+    cursor: pointer;
+  }
+
+  &:active {
+    border-color: $orange;
+  }
+
+  &__innerContent {
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 16px;
+
+    &__logo {
+      height: 40px;
+    }
+
+    &__title {
+      font-size: 18px;
+      line-height: 23px;
+    }
+
+    &__tags {
+      min-height: 22.5px;
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+  }
+}

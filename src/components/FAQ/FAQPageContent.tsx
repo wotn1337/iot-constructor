@@ -9,6 +9,7 @@ import { FAQType } from '../../common/types';
 import { Space } from 'antd';
 import { useMediaQuery } from 'react-responsive';
 import { Loader } from '../common/Loader/Loader';
+import { Helmet } from 'react-helmet';
 
 type FAQProps = {};
 
@@ -31,6 +32,9 @@ export const FAQPageContent: React.FC<FAQProps> = ({}) => {
 
 	return (
 		<BackgroundWrapper>
+			<Helmet>
+				<title>Частые вопросы</title>
+			</Helmet>
 			<Loader loading={isLoading}>
 				<section className="inner">
 					<img src={FAQImage} alt={'image'} className="image" />

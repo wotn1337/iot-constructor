@@ -15,6 +15,9 @@ import {
 	SocialNetworksResponse,
 	StudentReviewResponse,
 	ProfessionsResponse,
+	PartnerCoursesQueryParams,
+	PartnerCoursesResponse,
+	PartnerCourseByIdResponse,
 } from './types';
 import { Id } from '../common/types';
 import { getQueryParams } from './utils';
@@ -151,5 +154,16 @@ export const FAQAPI = {
 	getFAQ: async () => {
 		const res = await instance.get<FAQResponse>('faq');
 		return res.data.FAQ;
+	},
+};
+
+export const partnerCoursesAPI = {
+	getPartnerCourses: async (params: PartnerCoursesQueryParams) => {
+		const res = await instance.get<PartnerCoursesResponse>(`partners/courses?${getQueryParams(params)}`);
+		return res.data;
+	},
+	getPartnerCourseById: async (Id: Id) => {
+		const res = await instance.get<PartnerCourseByIdResponse>(`partners/courses/${Id}`);
+		return res.data.course;
 	},
 };

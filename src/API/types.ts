@@ -11,6 +11,8 @@ import {
 	Semester,
 	FAQType,
 	SortDirection,
+	PartnerCourseTypeExtended,
+	PartnerCourseType,
 } from '../common/types';
 import { Employee } from '../components/Employees/types';
 import { ProfessionType } from '../components/Professions/types';
@@ -71,4 +73,24 @@ export type ProfessionsResponse = {
 		current_page: number;
 		last_page: number;
 	};
+};
+
+export type PartnerCoursesQueryParams = {
+	page?: number;
+	courseTitle?: string;
+	educationalPrograms?: Id[];
+	partners?: Id[];
+	professionalTrajectories?: Id[];
+	paginate?: number;
+};
+
+export type PartnerCoursesResponse = {
+	courses: PartnerCourseType[];
+	meta: {
+		current_page: number;
+		last_page: number;
+	};
+};
+export type PartnerCourseByIdResponse = {
+	course: PartnerCourseTypeExtended;
 };

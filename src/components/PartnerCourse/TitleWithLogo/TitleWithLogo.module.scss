@@ -1,0 +1,10 @@
+.wrapper {
+  display: grid;
+  grid-template-columns: 925px 1fr;
+  gap: 20px;
+
+  .image {
+    height: 80px;
+    width: auto;
+  }
+}

@@ -1,10 +1,9 @@
 import React, { useContext, useEffect } from 'react';
 import { Route, Routes, useLocation } from 'react-router-dom';
 import { Layout } from './components';
-import { ConstructorPage, MainPage, EmployeesPage, FAQPage, ErrorPage } from './pages';
+import { ConstructorPage, MainPage, EmployeesPage, FAQPage, ErrorPage, PartnerCoursesPage, CoursePage } from './pages';
 import { ROUTES } from './routes';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { PageInProgress } from './components/common/PageInProgress/PageInProgress';
 import { Helmet } from 'react-helmet';
 import { Error404Robot, Error503Robot, ServerErrorRobot, Socket } from './images';
 import { ServerErrorContext } from './providers/ServerErrorProvider';
@@ -48,18 +47,9 @@ export const App = () => {
 						<Route path={`${ROUTES.CONSTRUCTOR}/*`} element={<ConstructorPage />} />
 						<Route path={ROUTES.EMPLOYEES} element={<EmployeesPage />} />
 						<Route path={ROUTES.PROFESSIONS} element={<ProfessionsPage />} />
-						<Route
-							path={ROUTES.PARTNERS}
-							element={
-								<>
-									<Helmet>
-										<title>Партнеры</title>
-									</Helmet>
-									<PageInProgress page="Партнеры" />
-								</>
-							}
-						/>
+						<Route path={ROUTES.PARTNERS} element={<PartnerCoursesPage />} />
 						<Route path={ROUTES.FAQ} element={<FAQPage />} />
+						<Route path={`${ROUTES.PARTNERS}/${ROUTES.COURSE}/:id`} element={<CoursePage />} />
 					</Route>
 					<Route
 						path="*"
