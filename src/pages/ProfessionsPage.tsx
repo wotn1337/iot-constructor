@@ -4,16 +4,18 @@ import { Helmet } from 'react-helmet';
 import { useEducationalProgramsQuery } from '../hooks';
 import { useProfessionalTrajectoriesQuery } from '../hooks/useProfessionalTrajectoriesQuery';
 import { ServerErrorContext } from '../providers/ServerErrorProvider';
-import { Id, SortDirection } from '../common/types';
+import { Id } from '../common/types';
 import { useProfessionsInfinityQuery } from '../hooks/useProfessionsInfinityQuery';
 import { ProfessionsGrid } from '../components/Professions/ProfessionsGrid/ProfessionsGrid';
 import { ProfessionType } from '../components/Professions/types';
+import { Sorter } from '../components/common/FilterableContent/types';
+import { sorters } from '../components/Professions/constants';
 
 type ProfessionsPageProps = {};
 
 export const ProfessionsPage: React.FC<ProfessionsPageProps> = () => {
 	const { setError } = useContext(ServerErrorContext);
-	const [sortDirection, setSortDirection] = useState<SortDirection>('asc');
+	const [selectedSorter, setSelectedSorter] = useState<Sorter>(sorters[0]);
 
 	const {
 		data: educationalDirections,
@@ -43,7 +45,7 @@ export const ProfessionsPage: React.FC<ProfessionsPageProps> = () => {
 	} = useProfessionsInfinityQuery({
 		professionalTrajectories: selectedProfessionalTrajectories,
 		educationalPrograms: selectedEducationalDirections,
-		sortBySalary: sortDirection,
+		[selectedSorter.sortField]: selectedSorter.direction,
 		withProfessionalTrajectories: true,
 		withEducationalPrograms: true,
 	});
@@ -63,7 +65,7 @@ export const ProfessionsPage: React.FC<ProfessionsPageProps> = () => {
 
 	useEffect(() => {
 		void refetch();
-	}, [selectedEducationalDirections, selectedProfessionalTrajectories, sortDirection]);
+	}, [selectedEducationalDirections, selectedProfessionalTrajectories, selectedSorter]);
 
 	useEffect(() => {
 		if (educationalDirectionsError) {
@@ -110,17 +112,11 @@ export const ProfessionsPage: React.FC<ProfessionsPageProps> = () => {
 						loading: professionalTrajectoriesFetching || professionalTrajectoriesLoading,
 					},
 				]}
-				sortersState={[
-					{
-						key: 'salary',
-						titles: {
-							asc: 'По возрастанию зарплаты',
-							desc: 'По убыванию зарплаты',
-						},
-						direction: sortDirection,
-						onChange: (dir) => setSortDirection(dir),
-					},
-				]}
+				sortersState={{
+					sorters,
+					selectedSorter,
+					onChange: (index) => setSelectedSorter(sorters[index]),
+				}}
 				content={<ProfessionsGrid professions={professions} />}
 				onCLearSelection={handleClearSelection}
 				fetchMoreState={{

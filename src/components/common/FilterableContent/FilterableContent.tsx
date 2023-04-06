@@ -5,12 +5,16 @@ import s from './FilterableContent.module.scss';
 import { FiltersList } from './FiltersList/FiltersList';
 import { Button } from '../Button/Button';
 import { Loader } from '../Loader/Loader';
-import { SortersList } from './SortersList/SortersList';
+import { SorterComponent } from './SorterComponent/SorterComponent';
 
 type FilterableContentProps = {
 	title: string;
 	filtersState: Filter[];
-	sortersState?: Sorter[];
+	sortersState?: {
+		sorters: Sorter[];
+		selectedSorter: Sorter;
+		onChange: (index: number) => void;
+	};
 	content: React.ReactNode;
 	onCLearSelection: React.MouseEventHandler<HTMLElement>;
 	fetchMoreState?: {
@@ -35,7 +39,7 @@ export const FilterableContent: React.FC<FilterableContentProps> = ({
 			</h3>
 			{sortersState && (
 				<div className={s.sortersWrapper}>
-					<SortersList sorters={sortersState} className={s.sorters} />
+					<SorterComponent {...sortersState} />
 				</div>
 			)}
 			<Row gutter={20}>
