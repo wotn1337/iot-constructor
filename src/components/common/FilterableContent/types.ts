@@ -14,10 +14,10 @@ export type Filter = {
 };
 
 export type Sorter = {
-	titles: Record<SortDirection, string>;
-	key: string;
+	index: number;
+	label: string;
+	sortField: string;
 	direction: SortDirection;
-	onChange: (newSortDirection: SortDirection) => void;
 };
 
 export const sortIcons = {
