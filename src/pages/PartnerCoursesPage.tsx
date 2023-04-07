@@ -1,21 +1,16 @@
 import React, { useContext, useEffect, useMemo, useState } from 'react';
-import { FilterableContent } from '../components/common/FilterableContent/FilterableContent';
+import { PartnerCoursesContent } from '../components/PartnerCoursesList/PartnerCoursesContent';
 import { Helmet } from 'react-helmet';
-import { useEducationalProgramsQuery } from '../hooks';
-import { useProfessionalTrajectoriesQuery } from '../hooks/useProfessionalTrajectoriesQuery';
+import { FilterableContent } from '../components/common/FilterableContent/FilterableContent';
 import { ServerErrorContext } from '../providers/ServerErrorProvider';
-import { Id } from '../common/types';
-import { useProfessionsInfinityQuery } from '../hooks/useProfessionsInfinityQuery';
-import { ProfessionsGrid } from '../components/Professions/ProfessionsGrid/ProfessionsGrid';
-import { ProfessionType } from '../components/Professions/types';
-import { Sorter } from '../components/common/FilterableContent/types';
-import { sorters } from '../components/Professions/constants';
+import { useEducationalProgramsQuery, usePartnerCoursesInfinityQuery } from '../hooks';
+import { Id, PartnerCourseType } from '../common/types';
+import { useProfessionalTrajectoriesQuery } from '../hooks/useProfessionalTrajectoriesQuery';
+import { usePartnersQuery } from '../hooks/usePartnersQuery';
+import { BackgroundWrapper } from '../components/common/BackgroundWrapper/BackgroundWrapper';
 
-type ProfessionsPageProps = {};
-
-export const ProfessionsPage: React.FC<ProfessionsPageProps> = () => {
+export const PartnerCoursesPage: React.FC = () => {
 	const { setError } = useContext(ServerErrorContext);
-	const [selectedSorter, setSelectedSorter] = useState<Sorter>(sorters[0]);
 
 	const {
 		data: educationalDirections,
@@ -26,6 +21,14 @@ export const ProfessionsPage: React.FC<ProfessionsPageProps> = () => {
 	const [selectedEducationalDirections, setSelectedEducationalDirections] = useState<Id[]>([]);
 
 	const {
+		data: partners,
+		isLoading: partnersLoading,
+		isFetching: partnersFetching,
+		error: partnersError,
+	} = usePartnersQuery();
+	const [selectedPartners, setSelectedPartners] = useState<Id[]>([]);
+
+	const {
 		data: professionalTrajectories,
 		isLoading: professionalTrajectoriesLoading,
 		isFetching: professionalTrajectoriesFetching,
@@ -34,38 +37,33 @@ export const ProfessionsPage: React.FC<ProfessionsPageProps> = () => {
 	const [selectedProfessionalTrajectories, setSelectedProfessionalTrajectories] = useState<Id[]>([]);
 
 	const {
-		data: professionsData,
-		isLoading: professionsLoading,
-		isFetching: professionsFetching,
-		error: professionsError,
+		data: partnerCoursesData,
+		isLoading: partnerCoursesLoading,
+		isFetching: partnerCoursesFetching,
+		error: partnerCoursesError,
 		fetchNextPage,
 		isFetchingNextPage,
 		hasNextPage,
 		refetch,
-	} = useProfessionsInfinityQuery({
+	} = usePartnerCoursesInfinityQuery({
 		professionalTrajectories: selectedProfessionalTrajectories,
 		educationalPrograms: selectedEducationalDirections,
-		[selectedSorter.sortField]: selectedSorter.direction,
-		withProfessionalTrajectories: true,
-		withEducationalPrograms: true,
+		partners: selectedPartners,
 	});
 
-	const professions = useMemo(() => {
-		const result: ProfessionType[] = [];
-		if (professionsData) {
-			professionsData.pages.forEach((page) => result.push(...page.professions));
+	const partnerCourses = useMemo(() => {
+		const result: PartnerCourseType[] = [];
+		if (partnerCoursesData) {
+			partnerCoursesData.pages.forEach((page) => result.push(...page.courses));
 		}
 		return result;
-	}, [professionsData]);
+	}, [partnerCoursesData]);
 
 	const handleClearSelection = () => {
 		setSelectedEducationalDirections([]);
 		setSelectedProfessionalTrajectories([]);
+		setSelectedPartners([]);
 	};
-
-	useEffect(() => {
-		void refetch();
-	}, [selectedEducationalDirections, selectedProfessionalTrajectories, selectedSorter]);
 
 	useEffect(() => {
 		if (educationalDirectionsError) {
@@ -74,18 +72,25 @@ export const ProfessionsPage: React.FC<ProfessionsPageProps> = () => {
 		if (professionalTrajectoriesError) {
 			setError(professionalTrajectoriesError);
 		}
-		if (professionsError) {
-			setError(professionsError);
+		if (partnersError) {
+			setError(partnersError);
 		}
-	}, [educationalDirectionsError, professionalTrajectoriesError, professionsError]);
+		if (partnerCoursesError) {
+			setError(partnerCoursesError);
+		}
+	}, [educationalDirectionsError, professionalTrajectoriesError, partnersError, partnerCoursesError]);
+
+	useEffect(() => {
+		void refetch();
+	}, [selectedEducationalDirections, selectedProfessionalTrajectories, selectedPartners]);
 
 	return (
-		<>
+		<BackgroundWrapper>
 			<Helmet>
-				<title>Профессии</title>
+				<title>Курсы партнеров</title>
 			</Helmet>
 			<FilterableContent
-				title="Профессии"
+				title="Курсы партнеров"
 				filtersState={[
 					{
 						title: 'Образовательная программа',
@@ -100,6 +105,18 @@ export const ProfessionsPage: React.FC<ProfessionsPageProps> = () => {
 						loading: educationalDirectionsFetching || educationalDirectionsLoading,
 					},
 					{
+						title: 'Партнер',
+						key: 'partners',
+						items:
+							partners?.map((partner) => ({
+								id: partner.id,
+								title: partner.title,
+							})) ?? [],
+						selectedIds: selectedPartners,
+						onChange: (ids) => setSelectedPartners(ids),
+						loading: partnersFetching || partnersLoading,
+					},
+					{
 						title: 'Траектория',
 						key: 'professionalTrajectories',
 						items:
@@ -112,19 +129,14 @@ export const ProfessionsPage: React.FC<ProfessionsPageProps> = () => {
 						loading: professionalTrajectoriesFetching || professionalTrajectoriesLoading,
 					},
 				]}
-				sortersState={{
-					sorters,
-					selectedSorter,
-					onChange: (index) => setSelectedSorter(sorters[index]),
-				}}
-				content={<ProfessionsGrid professions={professions} />}
+				content={<PartnerCoursesContent partnerCourses={partnerCourses} />}
 				onCLearSelection={handleClearSelection}
 				fetchMoreState={{
-					loading: professionsLoading || professionsFetching || isFetchingNextPage,
+					loading: partnerCoursesLoading || partnerCoursesFetching || isFetchingNextPage,
 					onFetchMore: fetchNextPage,
 					hideFetchMoreButton: !hasNextPage,
 				}}
 			/>
-		</>
+		</BackgroundWrapper>
 	);
 };

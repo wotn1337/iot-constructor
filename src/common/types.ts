@@ -3,8 +3,8 @@ export type Id = string | number;
 export type Partner = {
 	id: Id;
 	title: string;
-	description: string;
 	logo: string;
+	site_link: string;
 };
 
 export type StudentReview = {
@@ -96,3 +96,24 @@ export type FAQType = {
 };
 
 export type SortDirection = 'asc' | 'desc';
+
+export type MediaType = {
+	name: string;
+	url: string;
+};
+
+export type PartnerCourseType = {
+	id: Id;
+	title: string;
+	description: string;
+	limit: number;
+	realization: string;
+	professional_trajectories: Trajectory[];
+	partner: Partner;
+};
+
+export type PartnerCourseTypeExtended = PartnerCourseType & {
+	educationalProgramms: EducationalProgram[];
+	video: MediaType;
+	presentation: MediaType;
+};

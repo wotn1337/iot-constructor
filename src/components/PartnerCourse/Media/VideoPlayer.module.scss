@@ -1,0 +1,12 @@
+.wrapper {
+  width: 1007px;
+  height: 522px;
+  margin: 0 auto;
+  position: relative;
+
+  .player {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+}
