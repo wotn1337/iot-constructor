@@ -1,6 +1,8 @@
 import { Id } from '../common/types';
 
-export const getQueryParams = (params: Record<string, boolean | number | string | Id[]>) => {
+export const getQueryParams = (params?: Record<string, boolean | number | string | Id[]>) => {
+	if (!params) return '';
+
 	const urlParams = new URLSearchParams();
 	for (const key in params) {
 		if (Array.isArray(params[key])) {

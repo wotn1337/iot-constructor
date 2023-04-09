@@ -18,6 +18,7 @@ import {
 	PartnerCoursesQueryParams,
 	PartnerCoursesResponse,
 	PartnerCourseByIdResponse,
+	PartnersParams,
 } from './types';
 import { Id } from '../common/types';
 import { getQueryParams } from './utils';
@@ -33,8 +34,8 @@ const CONFIG: CreateAxiosDefaults = {
 const instance = axios.create(CONFIG);
 
 export const partnersAPI = {
-	getPartners: async () => {
-		const res = await instance.get<PartnersResponse>('partners');
+	getPartners: async (params?: PartnersParams) => {
+		const res = await instance.get<PartnersResponse>(`partners?${getQueryParams(params)}`);
 		return res.data.partners;
 	},
 };

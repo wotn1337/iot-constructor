@@ -17,6 +17,15 @@ import {
 import { Employee } from '../components/Employees/types';
 import { ProfessionType } from '../components/Professions/types';
 
+export type PartnersParams = {
+	page?: number;
+	paginate?: number;
+	courseTitle?: string;
+	educationalProgramms?: Id[];
+	partners?: Id[];
+	professionalTrajectories?: Id[];
+};
+
 export type PartnersResponse = { partners: Partner[] };
 export type StudentReviewResponse = {
 	reviews: StudentReview[];

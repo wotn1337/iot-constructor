@@ -64,13 +64,13 @@
       }
 
       .body__bottom {
-        display: flex;
-        justify-content: space-between;
+        display: grid;
+        grid-template-columns: 450px 1fr;
         align-items: flex-end;
-        gap: 90px;
 
-        .bottom__salaryChart {
-          flex: 1;
+        .bottom__tag {
+          display: flex;
+          justify-content: flex-end;
         }
       }
     }

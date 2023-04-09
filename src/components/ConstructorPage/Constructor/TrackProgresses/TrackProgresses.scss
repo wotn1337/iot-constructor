@@ -5,7 +5,6 @@
   width: 289px;
   align-items: center;
   height: calc(100% - 45px - 12px);
-  overflow-y:  auto;
 
   &__track_icon {
     width: 100px;
@@ -24,5 +23,11 @@
     color: #00000073;
     font-size: 16px;
     text-align: center;
+  }
+
+  & .ant-space-item:last-child {
+    height: calc(100% - 230px - 24px);
+    overflow-y:  auto;
+    padding-right: 5px;
   }
 }

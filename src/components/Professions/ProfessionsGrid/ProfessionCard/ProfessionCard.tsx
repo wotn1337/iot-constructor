@@ -59,12 +59,14 @@ export const ProfessionCard: React.FC<ProfessionCardProps> = ({
 								type="light"
 							/>
 						</div>
-						<Tag
-							text={professionalTrajectories[0].abbreviated_name}
-							color={professionalTrajectories[0].color}
-							shouldShowTooltip={true}
-							tooltipText={professionalTrajectories[0].title}
-						/>
+						<div className={s.bottom__tag}>
+							<Tag
+								text={professionalTrajectories[0].abbreviated_name}
+								color={professionalTrajectories[0].color}
+								shouldShowTooltip={true}
+								tooltipText={professionalTrajectories[0].title}
+							/>
+						</div>
 					</div>
 				</div>
 			</div>
