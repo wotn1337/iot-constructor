@@ -19,7 +19,7 @@ export const MainPageContent: React.FC<MainPageContentProps> = () => {
 	const {
 		state: { studentReviewsPage },
 	} = useMainPageContext();
-	const { isLoading: partnersLoading, error: partnersError } = usePartnersQuery();
+	const { isLoading: partnersLoading, error: partnersError } = usePartnersQuery({ paginate: 5 });
 	const { isLoading: studentReviewsLoading, error: studentReviewsError } = useStudentReviewsQuery(studentReviewsPage);
 	const { setError } = useContext(ServerErrorContext);
 	const loading = partnersLoading || studentReviewsLoading;

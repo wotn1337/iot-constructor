@@ -5,7 +5,7 @@ import { Doughnut } from 'react-chartjs-2';
 import { Chart as ChartJS, ArcElement } from 'chart.js/auto';
 import { LegendItem } from './LegendItem/LegendItem';
 import { Space } from 'antd';
-import s from './TrackProgresses.module.scss';
+import './TrackProgresses.scss';
 import { getBestTrajectory } from '../../../../common/utils';
 import { useProfessionalTrajectoryByIdQuery } from '../../../../hooks/useProfessionalTrajectoryByIdQuery';
 import { Id } from '../../../../common/types';
@@ -96,11 +96,11 @@ export const TrackProgresses: React.FC<TrackProgressesProps> = () => {
 	}, [trajectory]);
 
 	return (
-		<Space direction="vertical" size="large" className={s.wrapper}>
+		<Space direction="vertical" size="large" className="wrapper">
 			{!legend.length ? (
 				<Space size="large" direction="vertical">
-					<img className={s.wrapper__placeholder_image} src={DiagramPlaceholder} alt="DiagramPlaceholder" />
-					<div className={s.wrapper__placeholder_text}>Здесь будут ваши траектории</div>
+					<img className="wrapper__placeholder_image" src={DiagramPlaceholder} alt="DiagramPlaceholder" />
+					<div className="wrapper__placeholder_text">Здесь будут ваши траектории</div>
 				</Space>
 			) : (
 				<>
@@ -119,10 +119,10 @@ export const TrackProgresses: React.FC<TrackProgressesProps> = () => {
 						</div>
 
 						{!!legend.length && (
-							<img className={s.wrapper__track_icon} src={bestTrajectoryIcon} alt={'bestTrajectory'} />
+							<img className="wrapper__track_icon" src={bestTrajectoryIcon} alt={'bestTrajectory'} />
 						)}
 					</div>
-					<Space size="small" direction="vertical">
+					<Space size="small" direction="vertical" className="legend">
 						{legend.map((item) => (
 							<LegendItem title={item.title} color={item.color} key={item.id} />
 						))}
