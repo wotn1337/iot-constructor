@@ -19,6 +19,8 @@ import {
 	PartnerCoursesResponse,
 	PartnerCourseByIdResponse,
 	PartnersParams,
+	EducationalModulesNewResponse,
+	EducationalModuleNewResponse,
 } from './types';
 import { Id } from '../common/types';
 import { getQueryParams } from './utils';
@@ -79,17 +81,33 @@ export const educationalModulesAPI = {
 			params.append('professionalTrajectoryId', String(trajectoryId));
 		}
 
-		const res = await instance.get<EducationalModulesResponse>(
-			`educationalPrograms/${id}/educationalModules?${params.toString()}`
+		const res = await instance.get<EducationalModulesNewResponse>(
+			`educationalPrograms/${id}/disciplines?${params.toString()}`
 		);
-		return res.data;
+		return {
+			...res.data,
+			semesters: res.data.semesters.map((sem) => ({
+				...sem,
+				educationalModules: sem.disciplines.map((dis) => ({
+					...dis,
+					disciplines: dis.course_assemblies,
+				})),
+			})),
+		} as EducationalModulesResponse;
 	},
 
 	getEducationalModuleById: async (id?: Id) => {
-		const res = await instance.get<EducationalModuleResponse>(
-			`educationalPrograms/educationalModules/${id}?withDisciplines=true`
+		const res = await instance.get<EducationalModuleNewResponse>(
+			`educationalPrograms/disciplines/${id}?withCourseAssemblies=true`
 		);
-		return res.data.educational_module;
+		return (
+			{
+				educational_module: {
+					...res.data.discipline,
+					disciplines: res.data.discipline.course_assemblies,
+				},
+			} as EducationalModuleResponse
+		).educational_module;
 	},
 };
 
@@ -101,7 +119,7 @@ export const professionalTrajectoriesAPI = {
 
 	getProfessionalTrajectoryById: async (id: Id | undefined) => {
 		const res = await instance.get<ProfessionalTrajectoryResponse>(
-			`professionalTrajectories/${id}?disciplinesCount=true`
+			`professionalTrajectories/${id}?disciplinesCount=true?loadProfessions=true`
 		);
 		return res.data.professional_trajectory;
 	},
@@ -110,8 +128,8 @@ export const professionalTrajectoriesAPI = {
 export const disciplinesAPI = {
 	getDiscipline: async (id: Id | undefined) => {
 		if (id) {
-			const res = await instance.get<DisciplinesResponse>(`disciplines/${id}`);
-			return res.data.discipline;
+			const res = await instance.get<DisciplinesResponse>(`courseAssemblies/${id}`);
+			return res.data.course_assembly;
 		}
 		return undefined;
 	},
