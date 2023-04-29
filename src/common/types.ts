@@ -61,7 +61,7 @@ export type Trajectory = {
 	abbreviated_name: string;
 	description: string;
 	color: string;
-	discipline_evaluation: number;
+	course_assembly_evaluation: number;
 	icons: string[];
 	disciplines_count: number;
 	vacancies_count: number;
@@ -121,7 +121,7 @@ export type PartnerCourseType = {
 };
 
 export type PartnerCourseTypeExtended = PartnerCourseType & {
-	educationalProgramms: EducationalProgram[];
+	educational_programms: EducationalProgram[];
 	video: MediaType;
 	presentation: MediaType;
 };

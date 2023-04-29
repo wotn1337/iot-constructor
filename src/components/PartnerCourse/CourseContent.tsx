@@ -16,8 +16,8 @@ export const CourseContent: React.FC<CourseContentProps> = ({ course }) => {
 		<div className={s.wrapper}>
 			<Space direction="vertical" size={32}>
 				<TitleWithLogo title={course?.title} logo={course?.partner.logo} url={course?.partner.site_link} />
-				<EducationalPrograms educationPrograms={course?.educationalProgramms} />
-				<Description description={course?.description || ''} />
+				<EducationalPrograms educationPrograms={course?.educational_programms} />
+				<Description description={course?.description} tags={course?.professional_trajectories} />
 				<VideoPlayer video={course?.video} />
 			</Space>
 		</div>
