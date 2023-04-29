@@ -83,6 +83,14 @@ export type EducationModule = {
 	disciplines: Discipline[];
 };
 
+export type EducationModuleNew = {
+	id: Id;
+	title: string;
+	choice_limit: number;
+	is_spec: boolean;
+	course_assemblies: Discipline[];
+};
+
 export type Semester = {
 	id: number;
 	text_representation: string;

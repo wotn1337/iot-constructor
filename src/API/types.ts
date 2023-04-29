@@ -13,6 +13,7 @@ import {
 	SortDirection,
 	PartnerCourseTypeExtended,
 	PartnerCourseType,
+	EducationModuleNew,
 } from '../common/types';
 import { Employee } from '../components/Employees/types';
 import { ProfessionType } from '../components/Professions/types';
@@ -56,10 +57,20 @@ export type EducationalModulesResponse = {
 		educationalModules: EducationModule[];
 	}[];
 };
+export type EducationalModulesNewResponse = {
+	meta: { total: number };
+	semesters: {
+		id: Id;
+		numerical_representation: number;
+		text_representation: string;
+		disciplines: EducationModuleNew[];
+	}[];
+};
 export type EducationalModuleResponse = { educational_module: EducationModule };
+export type EducationalModuleNewResponse = { discipline: EducationModuleNew };
 export type ProfessionalTrajectoriesResponse = { professional_trajectories: Trajectory[] };
 export type ProfessionalTrajectoryResponse = { professional_trajectory: Trajectory };
-export type DisciplinesResponse = { discipline: Discipline };
+export type DisciplinesResponse = { course_assembly: Discipline };
 export type SemestersResponse = { semesters: Semester[] };
 export type EmployeesResponse = { employees: Employee[] };
 export type FAQResponse = { FAQ: FAQType[] };

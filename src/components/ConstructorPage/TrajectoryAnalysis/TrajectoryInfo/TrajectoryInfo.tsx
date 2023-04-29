@@ -34,18 +34,22 @@ export const TrajectoryInfo: React.FC<TrajectoryInfoProps> = ({
 					<img src={icons[0]} alt={title} className={s.iconWrapper__icon} />
 				</div>
 			</Col>
-			<Col span={12} order={4}>
-				<div className={`${s.trajectoryInfo__item} ${s.trajectoryInfo__statistic}`}>
-					<span className={s.statistic__number}>{disciplines_count}</span>
-					<span className={s.statistic__title}>Дисциплин по выбранной траектории в ИРИТ-РТФ</span>
-				</div>
-			</Col>
-			<Col span={12} order={5}>
-				<div className={`${s.trajectoryInfo__item} ${s.trajectoryInfo__statistic}`}>
-					<span className={s.statistic__number}>{vacancies_count}</span>
-					<span className={s.statistic__title}>Вакансий на hh.ru</span>
-				</div>
-			</Col>
+			{disciplines_count && (
+				<Col span={12} order={4}>
+					<div className={`${s.trajectoryInfo__item} ${s.trajectoryInfo__statistic}`}>
+						<span className={s.statistic__number}>{disciplines_count}</span>
+						<span className={s.statistic__title}>Дисциплин по выбранной траектории в ИРИТ-РТФ</span>
+					</div>
+				</Col>
+			)}
+			{vacancies_count && (
+				<Col span={12} order={5}>
+					<div className={`${s.trajectoryInfo__item} ${s.trajectoryInfo__statistic}`}>
+						<span className={s.statistic__number}>{vacancies_count}</span>
+						<span className={s.statistic__title}>Вакансий на hh.ru</span>
+					</div>
+				</Col>
+			)}
 		</Row>
 	);
 };
