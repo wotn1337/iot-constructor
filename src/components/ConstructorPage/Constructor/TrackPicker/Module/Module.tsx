@@ -62,7 +62,7 @@ export const Module: React.FC<ModuleProps> = ({ module, column }) => {
 						>
 							<Panel className={getPanelHeaderClassName()} header={module.title} key={module.id}>
 								<div className={getPlaceholderClassName()}>
-									{!module.disciplines.length && <p>Выбрано {` 0 / ${module.choice_limit}`}</p>}
+									{!module.disciplines.length && <p>Выбрано 0 из {`${module.choice_limit}`}</p>}
 								</div>
 								{module.disciplines.map((item, index) => (
 									<Card

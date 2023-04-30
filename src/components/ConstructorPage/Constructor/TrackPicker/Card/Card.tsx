@@ -29,7 +29,7 @@ export const Card: React.FC<ColumnProps> = ({ course, index, droppableId, isDrag
 		dispatch,
 	} = useConstructorContext();
 	const [badgeVisible, setBadgeVisible] = useState<boolean>(false);
-	const [disableSelect, setDisableSelect] = useState<boolean>(false);
+	const [isSelectedBefore, setIsSelectedBefore] = useState<boolean>(false);
 
 	const onCloseHandle = () => {
 		const source = {
@@ -74,8 +74,13 @@ export const Card: React.FC<ColumnProps> = ({ course, index, droppableId, isDrag
 		}
 	};
 
+	const getCardClassname = () => {
+		if (isSelected) return 'selected';
+		if (!isSelected && isSelectedBefore) return 'selected-before';
+	};
+
 	useEffect(() => {
-		setDisableSelect(isDisciplineSelectedBefore(semesters, course));
+		setIsSelectedBefore(isDisciplineSelectedBefore(semesters, course));
 	}, [semesters]);
 
 	return (
@@ -83,7 +88,7 @@ export const Card: React.FC<ColumnProps> = ({ course, index, droppableId, isDrag
 			draggableId={String(course.id)}
 			key={index}
 			index={index}
-			isDragDisabled={isDragDisabled || disableSelect}
+			isDragDisabled={isDragDisabled || isSelectedBefore}
 		>
 			{(provided, snapshot) => {
 				return (
@@ -97,17 +102,19 @@ export const Card: React.FC<ColumnProps> = ({ course, index, droppableId, isDrag
 					>
 						<Tooltip
 							title={
-								disableSelect && !isSelected ? 'Эта дисциплина уже была выбрана вами ранее' : undefined
+								isSelectedBefore && !isSelected
+									? 'Эта дисциплина уже была выбрана вами ранее'
+									: undefined
 							}
 							placement="topLeft"
 							color="#FA8C16"
 						>
 							<div
-								className={`card ${isSelected ? 'selected' : ''}`}
+								className={`card ${getCardClassname()}`}
 								style={snapshot.isDragging ? { borderColor: '#40A9FF' } : {}}
 							>
 								<div className="card__header">
-									<p className={disableSelect ? 'card__header__disabled' : ''}>{course.title}</p>
+									<p>{course.title}</p>
 									<div className="card__header__buttons" style={{ opacity: badgeVisible ? 100 : 0 }}>
 										<button
 											className="button question"

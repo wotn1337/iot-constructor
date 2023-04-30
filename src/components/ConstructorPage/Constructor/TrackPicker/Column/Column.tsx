@@ -13,8 +13,8 @@ type ColumnProps = {
 export const Column: React.FC<ColumnProps> = ({ column }) => {
 	const isColumnEmpty = column.items.length === 0;
 	const tooltipTitle = isColumnEmpty
-		? 'В этом семестре нет курсов по выбору, перейдите к следующему'
-		: 'Необходимо выбрать один курс из каждого блока и перетащить его в Мои дисциплины';
+		? 'В этом семестре нет курсов по выбору, попробуй перейти в другой'
+		: 'Необходимо выбрать дисциплину из выпадающего списка и перетащить ее в колонку «Мои дисциплины»';
 
 	return (
 		<div key={column.id}>

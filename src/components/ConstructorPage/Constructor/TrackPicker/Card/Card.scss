@@ -15,12 +15,14 @@
     border: 1px solid #D9D9D9;
     border-radius: 2px;
     transition: all 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+    color: #000000D9;
 
     &__header {
       display: grid;
       grid-template-columns: 274px 45px;
       align-items: start;
       column-gap: 10px;
+      font-size: 14px;
 
       &__disabled {
         color: rgba(0, 0, 0, 0.45);
@@ -83,6 +85,11 @@
 
   .selected {
     border: 1px solid #73D13D;
+  }
+
+  .selected-before {
+    background: #F5F5F5;
+    color: rgba(0, 0, 0, 0.45);
   }
 
   .ant-ribbon-wrapper .ant-ribbon {

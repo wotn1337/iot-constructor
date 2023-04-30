@@ -19,6 +19,7 @@ export const Tag: React.FC<TagProps> = ({ text, color, shouldShowTooltip, toolti
 					color: lightenDarkenColor(color, -16),
 					border: `1px solid ${hexToRGB(color, 0.5)}`,
 					margin: 0,
+					cursor: 'default',
 				}}
 			>
 				{text}
