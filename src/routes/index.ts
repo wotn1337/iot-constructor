@@ -3,7 +3,7 @@ export enum ROUTES {
 	CONSTRUCTOR = 'constructor',
 	PROFESSIONS = 'professions',
 	EMPLOYEES = 'employees',
-	PARTNERS = 'partners/courses',
+	PARTNERS = 'partners-courses',
 	FAQ = 'faq',
 	COURSE = 'course',
 }
