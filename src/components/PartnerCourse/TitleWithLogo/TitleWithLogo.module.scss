@@ -1,10 +1,24 @@
 .wrapper {
   display: grid;
-  grid-template-columns: 925px 1fr;
-  gap: 20px;
+  grid-template-columns: 1fr max-content;
+  gap: 24px;
 
   .image {
     height: 80px;
     width: auto;
+  }
+
+  .title {
+    @media screen and (max-width: 725px) {
+      text-align: center;
+    }
+  }
+
+  @media screen and (max-width: 1216px) {
+    width: 100%;
+  }
+
+  @media screen and (max-width: 725px) {
+    grid-template-columns: 1fr;
   }
 }

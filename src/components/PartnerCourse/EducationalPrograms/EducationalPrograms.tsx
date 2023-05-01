@@ -11,7 +11,7 @@ export const EducationalPrograms: React.FC<EducationalProgramsProps> = ({ educat
 	return (
 		<Space direction="vertical" size={16}>
 			<span className={s.title}>Образовательные программы</span>
-			<Space size={8}>
+			<Space className={s.list} size={8}>
 				{educationPrograms?.map((program) => (
 					<Tag key={program.id} className={s.tag}>
 						<a href={program.page_link} target="_blank">

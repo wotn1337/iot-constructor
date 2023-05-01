@@ -6,6 +6,7 @@ import { EducationalPrograms } from './EducationalPrograms/EducationalPrograms';
 import { Description } from './Description/Description';
 import { TitleWithLogo } from './TitleWithLogo/TitleWithLogo';
 import { VideoPlayer } from './Media/VideoPlayer';
+import { Presentation } from './Media/Presentation/Presentation';
 
 type CourseContentProps = {
 	course: PartnerCourseTypeExtended | undefined;
@@ -14,11 +15,16 @@ type CourseContentProps = {
 export const CourseContent: React.FC<CourseContentProps> = ({ course }) => {
 	return (
 		<div className={s.wrapper}>
-			<Space direction="vertical" size={32}>
-				<TitleWithLogo title={course?.title} logo={course?.partner.logo} url={course?.partner.site_link} />
+			<Space className={s.wrapperContent} direction="vertical" size={32}>
+				<TitleWithLogo
+					title={course?.title}
+					partner={course?.partner}
+					tags={course?.professional_trajectories}
+				/>
 				<EducationalPrograms educationPrograms={course?.educational_programms} />
 				<Description description={course?.description} tags={course?.professional_trajectories} />
-				<VideoPlayer video={course?.video} />
+				{course?.video && <VideoPlayer video={course.video} />}
+				{course?.presentation && <Presentation file={course.presentation} />}
 			</Space>
 		</div>
 	);
