@@ -13,7 +13,6 @@ export const EducationalPrograms: React.FC<EducationalProgramsProps> = ({ educat
 	return (
 		<Space direction="vertical" size={16} className={className}>
 			<span className={s.title}>Образовательные программы</span>
-			<Space size={8} wrap={wrap}>
 			<Space className={s.list} size={8} wrap={wrap}>
 				{educationPrograms?.map((program) => (
 					<Tag key={program.id} className={s.tag}>
