@@ -1,17 +1,7 @@
-@import '../../../../constants';
+@import "../../../../../constants";
 
-.professionCard {
-  border-radius: 2px;
-  overflow: hidden;
-  position: relative;
-  transition: 200ms;
-  border: 1px solid transparent;
-
-  &:hover {
-    border: 1px solid $fontBlue;
-  }
-
-  &__mainContent {
+.profession-card {
+  .main-content {
     display: grid;
     grid-template-columns: 290px 1fr;
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
@@ -21,14 +11,14 @@
     background-color: white;
     cursor: pointer;
 
-    .mainContent__image {
+    .main-content__image {
       width: 100%;
       height: 100%;
       object-fit: cover;
       object-position: center;
     }
 
-    .mainContent__body {
+    .main-content__body {
       padding: 20px;
       display: flex;
       flex-direction: column;
@@ -43,30 +33,23 @@
         color: rgba(0, 0, 0, 0.85);
       }
 
-      .body__vacancies {
-        .vacancies__title {
-          font-family: $NotoSans;
-          font-style: normal;
-          font-weight: 400;
-          font-size: 14px;
-          line-height: 130%;
-          color: rgba(0, 0, 0, 0.45);
-        }
-
-        .vacancies__count {
-          font-family: $NotoSans;
-          font-style: normal;
-          font-weight: 500;
-          font-size: 16px;
-          line-height: 130%;
-          color: rgba(0, 0, 0, 0.85);
-        }
-      }
-
       .body__bottom {
         display: grid;
         grid-template-columns: 450px 1fr;
         align-items: flex-end;
+
+        @media screen and (max-width: 1216px) {
+          display: flex;
+          align-items: flex-end;
+          justify-content: space-between;
+          gap: 10px;
+        }
+
+        .bottom__salary-chart {
+          @media screen and (max-width: 1216px) {
+            flex: 1;
+          }
+        }
 
         .bottom__tag {
           display: flex;
@@ -76,7 +59,7 @@
     }
   }
 
-  &__secondaryContent {
+  .secondary-content {
     padding: 20px;
     display: flex;
     flex-direction: column;
@@ -85,13 +68,21 @@
     background-color: white;
     box-sizing: border-box;
 
-    .secondaryContent__description {
+    @media screen and (max-width: 1024px) {
+      gap: 8px;
+    }
+
+    .secondary-content__description {
       font-family: $NotoSans;
       font-style: normal;
       font-weight: 400;
       font-size: 16px;
       line-height: 130%;
       color: rgba(0, 0, 0, 0.85);
+
+      @media screen and (max-width: 1024px) {
+        font-size: 12px;
+      }
     }
   }
 }

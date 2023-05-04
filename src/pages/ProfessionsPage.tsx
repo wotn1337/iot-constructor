@@ -16,6 +16,7 @@ type ProfessionsPageProps = {};
 export const ProfessionsPage: React.FC<ProfessionsPageProps> = () => {
 	const { setError } = useContext(ServerErrorContext);
 	const [selectedSorter, setSelectedSorter] = useState<Sorter>(sorters[0]);
+	const [professionTitle, setProfessionTitle] = useState<string>();
 
 	const {
 		data: educationalDirections,
@@ -45,6 +46,7 @@ export const ProfessionsPage: React.FC<ProfessionsPageProps> = () => {
 	} = useProfessionsInfinityQuery({
 		professionalTrajectories: selectedProfessionalTrajectories,
 		educationalPrograms: selectedEducationalDirections,
+		professionTitle,
 		[selectedSorter.sortField]: selectedSorter.direction,
 		withProfessionalTrajectories: true,
 		withEducationalPrograms: true,
@@ -65,7 +67,7 @@ export const ProfessionsPage: React.FC<ProfessionsPageProps> = () => {
 
 	useEffect(() => {
 		void refetch();
-	}, [selectedEducationalDirections, selectedProfessionalTrajectories, selectedSorter]);
+	}, [selectedEducationalDirections, selectedProfessionalTrajectories, selectedSorter, professionTitle]);
 
 	useEffect(() => {
 		if (educationalDirectionsError) {
@@ -86,6 +88,10 @@ export const ProfessionsPage: React.FC<ProfessionsPageProps> = () => {
 			</Helmet>
 			<FilterableContent
 				title="Профессии"
+				searchTitleState={{
+					title: professionTitle,
+					setTitle: setProfessionTitle,
+				}}
 				filtersState={[
 					{
 						title: 'Образовательная программа',
@@ -118,12 +124,13 @@ export const ProfessionsPage: React.FC<ProfessionsPageProps> = () => {
 					onChange: (index) => setSelectedSorter(sorters[index]),
 				}}
 				content={<ProfessionsGrid professions={professions} />}
-				onCLearSelection={handleClearSelection}
+				onClearSelection={handleClearSelection}
 				fetchMoreState={{
 					loading: professionsLoading || professionsFetching || isFetchingNextPage,
 					onFetchMore: fetchNextPage,
 					hideFetchMoreButton: !hasNextPage,
 				}}
+				itemsCount={professions.length}
 			/>
 		</>
 	);

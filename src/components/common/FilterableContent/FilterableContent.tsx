@@ -1,11 +1,13 @@
 import React from 'react';
 import { Filter, Sorter } from './types';
-import { Col, Row, Spin } from 'antd';
+import { Col, Empty, Row, Spin } from 'antd';
 import s from './FilterableContent.module.scss';
 import { FiltersList } from './FiltersList/FiltersList';
 import { Button } from '../Button/Button';
 import { Loader } from '../Loader/Loader';
 import { SorterComponent } from './SorterComponent/SorterComponent';
+import { useMediaQuery } from 'react-responsive';
+import { MobileSearch } from './MobileSearch/MobileSearch';
 
 type FilterableContentProps = {
 	title: string;
@@ -16,11 +18,16 @@ type FilterableContentProps = {
 		onChange: (index: number) => void;
 	};
 	content: React.ReactNode;
-	onCLearSelection: React.MouseEventHandler<HTMLElement>;
+	itemsCount: number;
+	onClearSelection: React.MouseEventHandler<HTMLElement>;
 	fetchMoreState?: {
 		loading?: boolean;
 		onFetchMore?: () => void;
 		hideFetchMoreButton?: boolean;
+	};
+	searchTitleState?: {
+		title: string | undefined;
+		setTitle: React.Dispatch<React.SetStateAction<string | undefined>>;
 	};
 };
 
@@ -29,31 +36,52 @@ export const FilterableContent: React.FC<FilterableContentProps> = ({
 	filtersState,
 	content,
 	sortersState,
-	onCLearSelection,
+	onClearSelection,
 	fetchMoreState,
+	searchTitleState,
+	itemsCount,
 }) => {
+	const isLarge = useMediaQuery({ minWidth: 1024 });
+
 	return (
 		<section className={s.filterableContent}>
-			<h3 className={s.title} style={{ marginBottom: sortersState ? 10 : 48 }}>
+			<h3 className={s.title} style={{ marginBottom: sortersState && isLarge ? 10 : isLarge ? 48 : 24 }}>
 				{title}
 			</h3>
-			{sortersState && (
-				<div className={s.sortersWrapper}>
-					<SorterComponent {...sortersState} />
-				</div>
+			{isLarge ? (
+				<>
+					{sortersState && (
+						<div className={s.sortersWrapper}>
+							<SorterComponent {...sortersState} />
+						</div>
+					)}
+				</>
+			) : (
+				<MobileSearch
+					filtersState={filtersState}
+					sortersState={sortersState}
+					searchTitleState={searchTitleState}
+					onClearSelection={onClearSelection}
+				/>
 			)}
 			<Row gutter={20}>
-				<Col span={6}>
-					{filtersState.map((filter, index) => (
-						<FiltersList filter={filter} key={filter.key} divider={index !== filtersState.length - 1} />
-					))}
-					<Button type="default" classname={s.clearButton} onClick={onCLearSelection}>
-						Очистить
-					</Button>
-				</Col>
-				<Col span={18}>
+				{isLarge && (
+					<Col span={6}>
+						{filtersState.map((filter, index) => (
+							<FiltersList filter={filter} key={filter.key} divider={index !== filtersState.length - 1} />
+						))}
+						<Button type="default" classname={s.clearButton} onClick={onClearSelection}>
+							Очистить
+						</Button>
+					</Col>
+				)}
+				<Col span={isLarge ? 18 : 24}>
 					<Spin spinning={fetchMoreState?.loading}>
-						<div>{content}</div>
+						{itemsCount > 0 ? (
+							<div>{content}</div>
+						) : (
+							<Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description="Ничего не найдено" />
+						)}
 					</Spin>
 					<Loader
 						loading={fetchMoreState?.loading && !fetchMoreState?.hideFetchMoreButton}

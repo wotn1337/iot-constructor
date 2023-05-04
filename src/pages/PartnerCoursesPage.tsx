@@ -130,12 +130,13 @@ export const PartnerCoursesPage: React.FC = () => {
 					},
 				]}
 				content={<PartnerCoursesContent partnerCourses={partnerCourses} />}
-				onCLearSelection={handleClearSelection}
+				onClearSelection={handleClearSelection}
 				fetchMoreState={{
 					loading: partnerCoursesLoading || partnerCoursesFetching || isFetchingNextPage,
 					onFetchMore: fetchNextPage,
 					hideFetchMoreButton: !hasNextPage,
 				}}
+				itemsCount={partnerCourses.length}
 			/>
 		</BackgroundWrapper>
 	);

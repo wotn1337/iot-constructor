@@ -1,0 +1,42 @@
+@import "../../../../../constants";
+
+.filter-overlay {
+  &__sorters {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+
+    .sorters__title {
+      font-family: $NotoSans;
+      font-style: normal;
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 130%;
+      color: #FA8C16;
+    }
+
+    .sorter__radio {
+      .ant-radio:hover .ant-radio-inner,
+      .ant-radio input:focus + .ant-radio-inner,
+      .ant-radio.ant-radio-checked .ant-radio-inner {
+        border-color: #FA8C16;
+      }
+
+      .ant-radio .ant-radio-inner::after {
+        background-color: #FA8C16;
+      }
+    }
+
+    .sorters__divider {
+      margin: 8px 0 20px;
+      background-color: rgba(0, 0, 0, 0.06);
+    }
+  }
+
+  &__filters-list {
+    .filters-list__title {
+      color: $fontBlue;
+      font-weight: 400;
+    }
+  }
+}
