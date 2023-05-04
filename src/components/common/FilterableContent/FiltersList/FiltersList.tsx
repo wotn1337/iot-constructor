@@ -9,9 +9,10 @@ import { PlusOutlined } from '@ant-design/icons';
 type FiltersListProps = {
 	filter: Filter;
 	divider?: boolean;
+	className?: string;
 };
 
-export const FiltersList: React.FC<FiltersListProps> = ({ filter, divider }) => {
+export const FiltersList: React.FC<FiltersListProps> = ({ filter, divider, className }) => {
 	const { title, selectedIds, onChange, loading } = filter;
 	const [expanded, setExpanded] = useState(false);
 	const [searchValue, setSearchValue] = useState<string>();
@@ -39,7 +40,7 @@ export const FiltersList: React.FC<FiltersListProps> = ({ filter, divider }) => 
 
 	return (
 		<>
-			<Space direction="vertical" size={16} className="filters-list">
+			<Space direction="vertical" size={16} className={`filters-list ${className}`}>
 				<span className="filters-list__title">{title}</span>
 				<Loader loading={loading}>
 					<Space direction="vertical" size={10} className="filters-list__inner-space">

@@ -10,7 +10,7 @@ export const getQueryParams = (params?: Record<string, boolean | number | string
 				urlParams.append(key + '[]', String(item));
 			}
 		} else {
-			urlParams.append(key, String(params[key]));
+			params[key] && urlParams.append(key, String(params[key]));
 		}
 	}
 	return urlParams;

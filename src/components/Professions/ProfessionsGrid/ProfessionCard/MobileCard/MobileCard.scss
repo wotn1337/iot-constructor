@@ -1,0 +1,71 @@
+@import "../../../../../constants";
+
+.profession-card {
+  .body {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 8px;
+    background-color: white;
+    position: relative;
+    z-index: 2;
+    cursor: pointer;
+
+    .title {
+      font-family: $NotoSans;
+      font-style: normal;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 130%;
+      color: rgba(0, 0, 0, 0.85);
+    }
+  }
+
+  .divider {
+    width: auto;
+    min-width: auto;
+    margin: 0 8px;
+    background-color: rgba(0, 0, 0, 0.06);
+  }
+
+  .salary-chart {
+    .ant-divider {
+      background-color: rgba(0, 0, 0, 0.06);
+    }
+  }
+
+  .secondary-content {
+    .divider {
+      margin: 4px 0;
+    }
+    .educational-programs {
+      gap: 12px !important;
+
+      span {
+        font-size: 14px;
+      }
+
+      .ant-tag {
+        font-size: 12px;
+      }
+    }
+
+    &__description-title {
+      font-family: $NotoSans;
+      font-style: normal;
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 130%;
+      color: $fontBlue;
+    }
+
+    &__description {
+      font-family: $NotoSans;
+      font-style: normal;
+      font-weight: 400;
+      font-size: 12px;
+      line-height: 130%;
+      color: rgba(0, 0, 0, 0.85);
+    }
+  }
+}

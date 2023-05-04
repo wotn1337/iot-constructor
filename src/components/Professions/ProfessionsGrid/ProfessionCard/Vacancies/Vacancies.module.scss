@@ -1,0 +1,23 @@
+@import '../../../../../constants';
+
+.vacancies {
+  .vacancies__line {
+    .vacancies__title {
+      font-family: $NotoSans;
+      font-style: normal;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 130%;
+      color: rgba(0, 0, 0, 0.45);
+    }
+
+    .vacancies__count {
+      font-family: $NotoSans;
+      font-style: normal;
+      font-weight: 500;
+      font-size: 16px;
+      line-height: 130%;
+      color: rgba(0, 0, 0, 0.85);
+    }
+  }
+}

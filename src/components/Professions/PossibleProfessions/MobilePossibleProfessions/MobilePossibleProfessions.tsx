@@ -1,7 +1,8 @@
 import React from 'react';
-import { Divider, Space } from 'antd';
-import { ProfessionType, salaryLocale } from '../../types';
+import { Space } from 'antd';
+import { ProfessionType } from '../../types';
 import s from './MobilePossibleProfessions.module.scss';
+import { MobileSalaryChart } from '../../SalaryChart/MobileSalaryChart/MobileSalaryChart';
 
 type MobilePossibleProfessionsProps = {
 	professions: ProfessionType[];
@@ -15,22 +16,12 @@ export const MobilePossibleProfessions: React.FC<MobilePossibleProfessionsProps>
 					<div className={s.profession__title}>{p.title}</div>
 					<div className={s.profession__card}>
 						<img src={p.photo ?? undefined} alt={p.title} className={s.profession__image} />
-						<div className={s.profession__salaries}>
-							<div className={s.profession__salary}>
-								<span className={s.salary__number}>{p.minimal_salary}&#8381;</span>
-								<span className={s.salary__title}>{salaryLocale.minimal_salary}</span>
-							</div>
-							<Divider type="vertical" className={s.divider} />
-							<div className={`${s.profession__salary} ${s.medianSalary}`}>
-								<span className={s.salary__number}>{p.median_salary}&#8381;</span>
-								<span className={s.salary__title}>{salaryLocale.median_salary}</span>
-							</div>
-							<Divider type="vertical" className={s.divider} />
-							<div className={s.profession__salary}>
-								<span className={s.salary__number}>{p.maximal_salary}&#8381;</span>
-								<span className={s.salary__title}>{salaryLocale.maximal_salary}</span>
-							</div>
-						</div>
+						<MobileSalaryChart
+							minimal_salary={p.minimal_salary}
+							median_salary={p.median_salary}
+							maximal_salary={p.maximal_salary}
+							className={s.salaryChart}
+						/>
 					</div>
 					<div className={s.profession__comment}>Данные о зарплате взяты с сайта hh.ru</div>
 					<p className={s.profession__description}>{p.description}</p>
