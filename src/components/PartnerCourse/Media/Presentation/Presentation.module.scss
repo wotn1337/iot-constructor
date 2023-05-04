@@ -1,0 +1,41 @@
+.wrapper {
+  width: 1007px;
+  height: 522px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 100px;
+  margin: 56px auto 0 auto;
+
+  .description {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+    .text {
+      font-size: 18px;
+      text-wrap: normal;
+    }
+
+    @media screen and (max-width: 1216px) {
+      align-items: center;
+    }
+  }
+
+  .image {
+    height: 400px;
+
+    @media screen and (max-width: 725px) {
+      height: auto;
+      width: 100%;
+    }
+  }
+
+  @media screen and (max-width: 1216px) {
+    width: 100%;
+    height: auto;
+    flex-direction: column;
+    gap: 20px;
+    margin: 0 auto;
+  }
+}
