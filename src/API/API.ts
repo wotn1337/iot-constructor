@@ -22,7 +22,7 @@ import {
 	EducationalModulesNewResponse,
 	EducationalModuleNewResponse,
 } from './types';
-import { Id } from '../common/types';
+import { Id, StatisticDataType } from '../common/types';
 import { getQueryParams } from './utils';
 
 const DOMAIN = process.env.REACT_APP_BACKEND_URL;
@@ -119,7 +119,7 @@ export const professionalTrajectoriesAPI = {
 
 	getProfessionalTrajectoryById: async (id: Id | undefined) => {
 		const res = await instance.get<ProfessionalTrajectoryResponse>(
-			`professionalTrajectories/${id}?disciplinesCount=true?loadProfessions=true`
+			`professionalTrajectories/${id}?loadCourseAssembliesCount=true&loadProfessions=true`
 		);
 		return res.data.professional_trajectory;
 	},
@@ -184,5 +184,11 @@ export const partnerCoursesAPI = {
 	getPartnerCourseById: async (Id: Id) => {
 		const res = await instance.get<PartnerCourseByIdResponse>(`partners/courses/${Id}`);
 		return res.data.course;
+	},
+};
+
+export const statisticAPI = {
+	sendStatistic: async (data: StatisticDataType) => {
+		instance.post<StatisticDataType>(`stat`, data).catch((e) => console.error(e));
 	},
 };

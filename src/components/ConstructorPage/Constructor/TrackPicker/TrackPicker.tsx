@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { DragDropContext, DragStart, DropResult } from 'react-beautiful-dnd';
 import { message } from 'antd';
 import { Column } from './Column/Column';
-import { Discipline, EducationModule } from '../../../../common/types';
+import { Discipline, EducationModule, StatisticKey } from '../../../../common/types';
 import {
 	setColumns,
 	setDraggableId,
@@ -11,7 +11,8 @@ import {
 	useConstructorContext,
 } from '../../Context';
 import { IColumns } from '../../Context/types';
-import { addTask, deleteTask, isModulesEqual, isModulesInSameColumn } from '../utils';
+import { addTask, deleteTask, getColumnKey, isModulesEqual, isModulesInSameColumn } from '../utils';
+import { StatisticContext } from '../../../../providers/StatisticProvider';
 
 type TrackPickerProps = {
 	modules: EducationModule[];
@@ -22,6 +23,7 @@ export const TrackPicker: React.FC<TrackPickerProps> = ({ modules }) => {
 		state: { columns, currentSemester, semesters },
 		dispatch,
 	} = useConstructorContext();
+	const { addEvent } = useContext(StatisticContext);
 
 	const onDragStart = (result: DragStart) => {
 		const draggableId = result.source.droppableId;
@@ -47,6 +49,9 @@ export const TrackPicker: React.FC<TrackPickerProps> = ({ modules }) => {
 		let removed = data?.removed;
 
 		if (newData && removed) {
+			if (getColumnKey(columns, destination.droppableId) === '2' && removed.id) {
+				addEvent(removed.id, StatisticKey.CA, 'click_in_constructor');
+			}
 			newData = addTask(newData, destination?.droppableId, destination?.index, removed) ?? {};
 			dispatch(setColumns(newData));
 			dispatch(setSemesterColumns({ id: currentSemester, columns: newData }));

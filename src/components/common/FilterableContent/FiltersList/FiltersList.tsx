@@ -4,7 +4,7 @@ import { Button, Checkbox, Divider, Empty, Input, Space } from 'antd';
 import './FiltersList.scss';
 import { Id } from '../../../../common/types';
 import { Loader } from '../../Loader/Loader';
-import { PlusOutlined } from '@ant-design/icons';
+import { MinusOutlined, PlusOutlined } from '@ant-design/icons';
 
 type FiltersListProps = {
 	filter: Filter;
@@ -62,9 +62,21 @@ export const FiltersList: React.FC<FiltersListProps> = ({ filter, divider, class
 						) : (
 							<Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description="Ничего не найдено" />
 						)}
-						{filter.items.length > 5 && !expanded && (
-							<Button type="link" className="filters-list__more-button" onClick={() => setExpanded(true)}>
-								Еще {filter.items.length - 5} <PlusOutlined />
+						{filter.items.length > 5 && (
+							<Button
+								type="link"
+								className="filters-list__more-button"
+								onClick={() => setExpanded(!expanded)}
+							>
+								{!expanded ? (
+									<>
+										Еще {filter.items.length - 5} <PlusOutlined />
+									</>
+								) : (
+									<>
+										Свернуть <MinusOutlined />
+									</>
+								)}
 							</Button>
 						)}
 					</Space>

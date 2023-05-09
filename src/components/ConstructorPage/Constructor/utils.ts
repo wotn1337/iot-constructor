@@ -5,7 +5,7 @@ export const clone = (data: IColumns) => {
 	return JSON.parse(JSON.stringify(data));
 };
 
-const getColumnKey = (columns: IColumns, droppableId: string) => {
+export const getColumnKey = (columns: IColumns, droppableId: string) => {
 	let columnKey = '';
 	Object.entries(columns).forEach(
 		(column) =>

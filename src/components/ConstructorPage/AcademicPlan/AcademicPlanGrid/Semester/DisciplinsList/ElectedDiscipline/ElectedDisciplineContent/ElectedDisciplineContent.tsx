@@ -32,6 +32,7 @@ export const ElectedDisciplineContent: React.FC<ElectedDisciplineContentProps> =
 												...discipline,
 												isEmpty: false,
 												moduleId: item.moduleId,
+												elected: true,
 										  }
 										: i
 								),

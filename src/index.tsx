@@ -6,12 +6,15 @@ import { App } from './App';
 import reportWebVitals from './reportWebVitals';
 import { HashRouter } from 'react-router-dom';
 import { ServerErrorProvider } from './providers/ServerErrorProvider';
+import { StatisticProvider } from './providers/StatisticProvider';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
 	<HashRouter>
 		<ServerErrorProvider>
-			<App />
+			<StatisticProvider>
+				<App />
+			</StatisticProvider>
 		</ServerErrorProvider>
 	</HashRouter>
 );

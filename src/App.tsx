@@ -8,12 +8,15 @@ import { Helmet } from 'react-helmet';
 import { Error404Robot, Error503Robot, ServerErrorRobot, Socket } from './images';
 import { ServerErrorContext } from './providers/ServerErrorProvider';
 import { ProfessionsPage } from './pages/ProfessionsPage';
+import { StatisticContext } from './providers/StatisticProvider';
+import { statisticAPI } from './API/API';
 
 const queryClient = new QueryClient();
 
 export const App = () => {
 	const { pathname } = useLocation();
 	const { error } = useContext(ServerErrorContext);
+	const { data: statisticData } = useContext(StatisticContext);
 
 	useEffect(() => {
 		if (pathname) {
@@ -21,6 +24,14 @@ export const App = () => {
 			window.ym(91451529, 'hit', pathname);
 		}
 	}, [pathname]);
+
+	useEffect(() => {
+		window.onbeforeunload = async (e) => {
+			e.preventDefault();
+			await statisticAPI.sendStatistic({ data: statisticData });
+			window.close();
+		};
+	}, [statisticData]);
 
 	if (error) {
 		return (

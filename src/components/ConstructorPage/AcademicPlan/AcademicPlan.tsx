@@ -29,10 +29,7 @@ export const AcademicPlan: React.FC<AcademicPlanProps> = ({ semesters }) => {
 							onChange={setShowDefault}
 						/>
 					</Space>
-					<Space direction="horizontal" size={10}>
-						<Typography.Text type="secondary">Сформировать pdf</Typography.Text>
-						<SaveToPdfButton targetRef={academicPlanRef} />
-					</Space>
+					<SaveToPdfButton targetRef={academicPlanRef} />
 				</Space>
 			</div>
 			<AcademicPlanGrid semesters={semesters} showDefault={showDefault} ref={academicPlanRef} />

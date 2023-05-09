@@ -42,3 +42,21 @@ export const getBestTrajectory = (tracks: TrackProgress[]) => {
 	const tracksCopy = [...tracks];
 	return tracksCopy.sort((a, b) => b.points - a.points)[0].id;
 };
+
+export const getUTCDateString = () => {
+	const now = new Date();
+	const nowUTC = Date.UTC(
+		now.getUTCFullYear(),
+		now.getUTCMonth(),
+		now.getUTCDate(),
+		now.getUTCHours(),
+		now.getUTCMinutes(),
+		now.getUTCSeconds()
+	);
+
+	const utcDate = new Date(nowUTC);
+	const utcString = utcDate.toISOString();
+	const [date, time] = utcString.split('T');
+
+	return `${date} ${time.split('.')[0]}`;
+};

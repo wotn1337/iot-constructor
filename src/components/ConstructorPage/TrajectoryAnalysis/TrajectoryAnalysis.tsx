@@ -83,7 +83,7 @@ export const TrajectoryAnalysis: React.FC<TrajectoryAnalysisProps> = () => {
 	return (
 		<Loader loading={loading} size="large">
 			<Space direction="vertical" size={100}>
-				<GreatChoice />
+				{selectedType === STEP_TYPE.CONSTRUCTOR && <GreatChoice />}
 				{data && <TrajectoryInfo {...data} />}
 				<PossibleProfessions professions={possibleProfessionsData?.professions ?? []} />
 				{!!academicPlan && !!academicPlan.length && <AcademicPlan semesters={academicPlan} />}

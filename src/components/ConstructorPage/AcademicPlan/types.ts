@@ -18,4 +18,5 @@ export type AcademicPlanItem = Discipline & {
 	isEmpty?: boolean;
 	emptyText?: string;
 	moduleId?: Id;
+	elected?: boolean;
 };

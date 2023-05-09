@@ -12,6 +12,10 @@
   }
 
   &__collapse {
+    .ant-collapse-content-box {
+      padding: 0;
+    }
+
     .ant-collapse-item {
       .ant-list-bordered {
         border: none;

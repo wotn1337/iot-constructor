@@ -1,0 +1,37 @@
+.save-to-pdf-button {
+  padding-right: 0;
+  padding-left: 0;
+
+  .ant-typography {
+    color: rgba(0, 0, 0, 0.45);
+  }
+
+  .pdf-icon {
+    color: #40A9FF;
+    font-size: 20px;
+  }
+
+  &:hover, &:focus {
+    background-color: transparent;
+
+    .ant-typography {
+      color: #1890FF !important;
+    }
+
+    .pdf-icon {
+      color: #1890FF;
+    }
+  }
+
+  &:active {
+    background-color: transparent;
+
+    .ant-typography {
+      color: #096DD9 !important;
+    }
+
+    .pdf-icon {
+      color: #096DD9;
+    }
+  }
+}

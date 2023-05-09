@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Draggable } from 'react-beautiful-dnd';
 import './Card.scss';
 import { CloseOutlined, QuestionOutlined } from '@ant-design/icons';
-import { Discipline } from '../../../../../common/types';
+import { Discipline, StatisticKey } from '../../../../../common/types';
 import {
 	setColumns,
 	setDisciplineId,
@@ -14,6 +14,7 @@ import { addTask, deleteTask, isDisciplineSelectedBefore } from '../../utils';
 import { Tag } from '../../../../common/Tag/Tag';
 import { reachGoal } from '../../../../../common/utils';
 import { Tooltip } from 'antd';
+import { StatisticContext } from '../../../../../providers/StatisticProvider';
 
 type ColumnProps = {
 	course: Discipline;
@@ -28,6 +29,7 @@ export const Card: React.FC<ColumnProps> = ({ course, index, droppableId, isDrag
 		state: { columns, currentSemester, semesters },
 		dispatch,
 	} = useConstructorContext();
+	const { addEvent } = useContext(StatisticContext);
 	const [badgeVisible, setBadgeVisible] = useState<boolean>(false);
 	const [isSelectedBefore, setIsSelectedBefore] = useState<boolean>(false);
 
@@ -121,6 +123,7 @@ export const Card: React.FC<ColumnProps> = ({ course, index, droppableId, isDrag
 											onClick={() => {
 												dispatch(setDisciplineId(course.id));
 												reachGoal('moreAboutDiscipline');
+												addEvent(String(course.id), StatisticKey.CA, 'click_to_more');
 											}}
 										>
 											<QuestionOutlined />
