@@ -1,6 +1,8 @@
 @import "../../../constants";
 
 .professionWrapper {
+  display: flex;
+  align-content: center;
   position: relative;
   height: 644px;
   margin-top: 129px;
@@ -23,7 +25,7 @@
   display: grid;
   width: 1112px;
   margin: 0 auto;
-  grid-template-columns: 700px 440px;
+  grid-template-columns: 600px 440px;
   grid-template-rows: repeat(5, auto);
   grid-template-areas:
   "t i"
@@ -66,15 +68,19 @@
     justify-content: center;
     grid-area: i;
     z-index: 1;
-    width: 100%;
 
     &__image {
+      height: 100%;
+      width: 324px;
+
       @media screen and (max-width: 1190px) {
         width: 300px;
+        height: auto;
       }
 
       @media screen and (max-width: 500px) {
         width: 240px;
+        height: auto;
       }
     }
 
@@ -127,6 +133,7 @@
   &__button {
     grid-area: b;
     z-index: 1;
+
 
     @media screen and (max-width: 1190px) {
       display: flex;
