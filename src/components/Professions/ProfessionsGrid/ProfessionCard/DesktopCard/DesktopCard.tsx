@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { SalaryChart } from '../../../SalaryChart/SalaryChart';
 import { Tag } from '../../../../common/Tag/Tag';
 import { ProfessionType } from '../../../types';
@@ -8,10 +8,13 @@ import useMeasure from 'react-use-measure';
 import { Vacancies } from '../Vacancies/Vacancies';
 import '../ProfessionCard.scss';
 import './DesktopCard.scss';
+import { StatisticContext } from '../../../../../providers/StatisticProvider';
+import { StatisticKey } from '../../../../../common/types';
 
 type DesktopCardProps = ProfessionType;
 
 export const DesktopCard: React.FC<DesktopCardProps> = ({
+	id,
 	photo,
 	title,
 	vacancies_count,
@@ -25,6 +28,7 @@ export const DesktopCard: React.FC<DesktopCardProps> = ({
 }) => {
 	const [secContentRef, { height: secContentHeight }] = useMeasure();
 	const [showSecondary, setShowSecondary] = useState(false);
+	const { addEvent } = useContext(StatisticContext);
 	const secondaryContentStyle = useSpring({
 		config: config.default,
 		from: {
@@ -37,7 +41,15 @@ export const DesktopCard: React.FC<DesktopCardProps> = ({
 
 	return (
 		<div className="profession-card">
-			<div className="main-content" onClick={() => setShowSecondary((old) => !old)}>
+			<div
+				className="main-content"
+				onClick={() => {
+					setShowSecondary((old) => !old);
+					if (!showSecondary) {
+						addEvent(id, StatisticKey.PR, 'click_to_more');
+					}
+				}}
+			>
 				<img src={photo ?? undefined} alt={title} className="main-content__image" />
 				<div className="main-content__body">
 					<span className="body__title">{title}</span>

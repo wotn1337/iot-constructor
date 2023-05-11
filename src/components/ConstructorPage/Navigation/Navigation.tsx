@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useContext, useEffect, useMemo, useState } from 'react';
 import { Col, Progress, Row, Space } from 'antd';
 import { Button } from '../../common/Button/Button';
 import { ArrowLeftOutlined, ArrowRightOutlined } from '@ant-design/icons';
@@ -8,6 +8,8 @@ import { NavLink } from 'react-router-dom';
 import { reachGoal } from '../../../common/utils';
 import s from './Navigation.module.scss';
 import { useMediaQuery } from 'react-responsive';
+import { StatisticKey } from '../../../common/types';
+import { StatisticContext } from '../../../providers/StatisticProvider';
 
 type NavigationTitleProps = {
 	currentStep: Step | undefined;
@@ -23,11 +25,22 @@ export const Navigation: React.FC<NavigationTitleProps> = ({ percent, currentSte
 	const {
 		state: { selectedDirection, selectedType, selectedTrajectory },
 	} = useConstructorContext();
+	const { addEvent } = useContext(StatisticContext);
 	const [disabledNext, setDisabledNext] = useState(false);
 	const currentStepIndex = useMemo(
 		() => steps.findIndex((step) => step.type === currentStep?.type),
 		[steps, currentStep]
 	);
+
+	const onNextClick = () => {
+		if (isConstructor) {
+			reachGoal('lastCreateTrajectory');
+
+			if (selectedTrajectory) {
+				addEvent(selectedTrajectory, StatisticKey.PT, 'click_in_constructor');
+			}
+		}
+	};
 
 	useEffect(() => {
 		switch (currentStep?.type) {
@@ -89,7 +102,7 @@ export const Navigation: React.FC<NavigationTitleProps> = ({ percent, currentSte
 					<Button
 						type="primary"
 						disabled={disabledNext}
-						onClick={isConstructor ? () => reachGoal('lastCreateTrajectory') : undefined}
+						onClick={onNextClick}
 						style={isConstructor ? { width: 289 } : undefined}
 					>
 						<NavLink to={steps[currentStepIndex + 1]?.type}>

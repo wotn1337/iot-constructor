@@ -1,5 +1,5 @@
 import React from 'react';
-import { IntroImage } from '../../../images';
+import { WhatIsIOT } from '../../../images';
 import { Hexagon } from '../../../components';
 import { Col, Row, Typography } from 'antd';
 import s from './About.module.scss';
@@ -30,7 +30,7 @@ export const About: React.FC<AboutProps> = () => {
 						color="white"
 						rotateAngle={44.14}
 						border={{ width: 1, color: '#D9D9D9', padding: isXLarge ? 66.5 : 30 }}
-						image={IntroImage}
+						image={WhatIsIOT}
 					/>
 				</Col>
 			)}

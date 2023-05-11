@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { ProfessionType } from '../../../types';
 import { MobileSalaryChart } from '../../../SalaryChart/MobileSalaryChart/MobileSalaryChart';
 import { Tag } from '../../../../common/Tag/Tag';
@@ -9,10 +9,13 @@ import { EducationalPrograms } from '../../../../PartnerCourse/EducationalProgra
 import '../ProfessionCard.scss';
 import './MobileCard.scss';
 import { Vacancies } from '../Vacancies/Vacancies';
+import { StatisticKey } from '../../../../../common/types';
+import { StatisticContext } from '../../../../../providers/StatisticProvider';
 
 type MobileCardProps = ProfessionType;
 
 export const MobileCard: React.FC<MobileCardProps> = ({
+	id,
 	title,
 	vacancies_count,
 	area_vacancies_count,
@@ -23,6 +26,7 @@ export const MobileCard: React.FC<MobileCardProps> = ({
 	educationalPrograms,
 	description,
 }) => {
+	const { addEvent } = useContext(StatisticContext);
 	const [secContentRef, { height: secContentHeight }] = useMeasure();
 	const [showSecondary, setShowSecondary] = useState(false);
 	const secondaryContentStyle = useSpring({
@@ -36,7 +40,15 @@ export const MobileCard: React.FC<MobileCardProps> = ({
 	});
 
 	return (
-		<div className="profession-card" onClick={() => setShowSecondary((old) => !old)}>
+		<div
+			className="profession-card"
+			onClick={() => {
+				setShowSecondary((old) => !old);
+				if (!showSecondary) {
+					addEvent(id, StatisticKey.PR, 'click_to_more');
+				}
+			}}
+		>
 			<div
 				className="body"
 				style={{ filter: showSecondary ? 'drop-shadow(0px 2px 10px rgba(0, 0, 0, 0.1))' : undefined }}

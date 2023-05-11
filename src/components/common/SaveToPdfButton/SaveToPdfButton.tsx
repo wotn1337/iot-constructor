@@ -1,25 +1,32 @@
 import React, { ReactInstance } from 'react';
-import { Button, Tooltip } from 'antd';
-import { FilePdfTwoTone } from '@ant-design/icons';
+import { Button, Space, Tooltip, Typography } from 'antd';
+import { FilePdfOutlined } from '@ant-design/icons';
 import { useReactToPrint } from 'react-to-print';
+import './SaveToPdfButton.scss';
 
 type SaveToPdfButtonProps = {
 	targetRef: React.MutableRefObject<ReactInstance | null>;
 	tooltipText?: string;
+	buttonText?: string;
 };
 
-export const SaveToPdfButton: React.FC<SaveToPdfButtonProps> = ({ targetRef, tooltipText }) => {
+export const SaveToPdfButton: React.FC<SaveToPdfButtonProps> = ({
+	targetRef,
+	tooltipText,
+	buttonText = 'Сформировать pdf',
+}) => {
 	const handlePrint = useReactToPrint({
 		content: () => targetRef.current,
 	});
 
 	return (
 		<Tooltip title={tooltipText}>
-			<Button
-				type="text"
-				icon={<FilePdfTwoTone twoToneColor="#EF6C00" style={{ color: '#EF6C00', fontSize: 30 }} />}
-				onClick={handlePrint}
-			/>
+			<Button type="text" onClick={handlePrint} className="save-to-pdf-button">
+				<Space direction="horizontal" size={10}>
+					<Typography.Text>{buttonText}</Typography.Text>
+					<FilePdfOutlined className="pdf-icon" />
+				</Space>
+			</Button>
 		</Tooltip>
 	);
 };

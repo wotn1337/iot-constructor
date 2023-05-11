@@ -5,7 +5,6 @@ import { FilterableContent } from '../components/common/FilterableContent/Filter
 import { ServerErrorContext } from '../providers/ServerErrorProvider';
 import { useEducationalProgramsQuery, usePartnerCoursesInfinityQuery } from '../hooks';
 import { Id, PartnerCourseType } from '../common/types';
-import { useProfessionalTrajectoriesQuery } from '../hooks/useProfessionalTrajectoriesQuery';
 import { usePartnersQuery } from '../hooks/usePartnersQuery';
 import { BackgroundWrapper } from '../components/common/BackgroundWrapper/BackgroundWrapper';
 
@@ -28,12 +27,12 @@ export const PartnerCoursesPage: React.FC = () => {
 	} = usePartnersQuery();
 	const [selectedPartners, setSelectedPartners] = useState<Id[]>([]);
 
-	const {
-		data: professionalTrajectories,
-		isLoading: professionalTrajectoriesLoading,
-		isFetching: professionalTrajectoriesFetching,
-		error: professionalTrajectoriesError,
-	} = useProfessionalTrajectoriesQuery();
+	// const {
+	// 	data: professionalTrajectories,
+	// 	isLoading: professionalTrajectoriesLoading,
+	// 	isFetching: professionalTrajectoriesFetching,
+	// 	error: professionalTrajectoriesError,
+	// } = useProfessionalTrajectoriesQuery();
 	const [selectedProfessionalTrajectories, setSelectedProfessionalTrajectories] = useState<Id[]>([]);
 
 	const {
@@ -69,16 +68,16 @@ export const PartnerCoursesPage: React.FC = () => {
 		if (educationalDirectionsError) {
 			setError(educationalDirectionsError);
 		}
-		if (professionalTrajectoriesError) {
-			setError(professionalTrajectoriesError);
-		}
+		// if (professionalTrajectoriesError) {
+		// 	setError(professionalTrajectoriesError);
+		// }
 		if (partnersError) {
 			setError(partnersError);
 		}
 		if (partnerCoursesError) {
 			setError(partnerCoursesError);
 		}
-	}, [educationalDirectionsError, professionalTrajectoriesError, partnersError, partnerCoursesError]);
+	}, [educationalDirectionsError, partnersError, partnerCoursesError]);
 
 	useEffect(() => {
 		void refetch();
@@ -116,18 +115,18 @@ export const PartnerCoursesPage: React.FC = () => {
 						onChange: (ids) => setSelectedPartners(ids),
 						loading: partnersFetching || partnersLoading,
 					},
-					{
-						title: 'Траектория',
-						key: 'professionalTrajectories',
-						items:
-							professionalTrajectories?.map((track) => ({
-								id: track.id,
-								title: track.title,
-							})) ?? [],
-						selectedIds: selectedProfessionalTrajectories,
-						onChange: (ids) => setSelectedProfessionalTrajectories(ids),
-						loading: professionalTrajectoriesFetching || professionalTrajectoriesLoading,
-					},
+					// {
+					// 	title: 'Траектория',
+					// 	key: 'professionalTrajectories',
+					// 	items:
+					// 		professionalTrajectories?.map((track) => ({
+					// 			id: track.id,
+					// 			title: track.title,
+					// 		})) ?? [],
+					// 	selectedIds: selectedProfessionalTrajectories,
+					// 	onChange: (ids) => setSelectedProfessionalTrajectories(ids),
+					// 	loading: professionalTrajectoriesFetching || professionalTrajectoriesLoading,
+					// },
 				]}
 				content={<PartnerCoursesContent partnerCourses={partnerCourses} />}
 				onClearSelection={handleClearSelection}

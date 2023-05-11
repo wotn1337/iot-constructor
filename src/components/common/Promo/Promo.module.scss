@@ -1,8 +1,8 @@
 .promo {
   display: grid;
-  grid-template-columns: 600px 225px;
+  grid-template-columns: 1fr 425px;
   row-gap: 32px;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
 
   @media screen and (max-width: 821px) {

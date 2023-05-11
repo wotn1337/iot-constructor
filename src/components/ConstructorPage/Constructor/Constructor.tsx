@@ -16,7 +16,9 @@ export const Constructor: React.FC<ConstructorProps> = () => {
 		state: { semesters, currentSemester, selectedDirection },
 		dispatch,
 	} = useConstructorContext();
-	const { data: trajectories, error: trajectoriesError } = useProfessionalTrajectoriesQuery();
+	const { data: trajectories, error: trajectoriesError } = useProfessionalTrajectoriesQuery(
+		String(selectedDirection)
+	);
 	const {
 		modules,
 		loading,

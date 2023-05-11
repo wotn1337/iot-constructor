@@ -7,6 +7,8 @@ import { Loader } from '../../common/Loader/Loader';
 import { reachGoal } from '../../../common/utils';
 import s from './DirectionSelection.module.scss';
 import { ServerErrorContext } from '../../../providers/ServerErrorProvider';
+import { StatisticContext } from '../../../providers/StatisticProvider';
+import { StatisticKey } from '../../../common/types';
 
 type ChoiceInstituteProps = {};
 
@@ -17,6 +19,7 @@ export const DirectionSelection: React.FC<ChoiceInstituteProps> = () => {
 		dispatch,
 	} = useConstructorContext();
 	const { setError } = useContext(ServerErrorContext);
+	const { addEvent } = useContext(StatisticContext);
 
 	useEffect(() => {
 		if (error) {
@@ -35,6 +38,7 @@ export const DirectionSelection: React.FC<ChoiceInstituteProps> = () => {
 							onClick={() => {
 								dispatch(setSelectedDirection(dir.id));
 								reachGoal('direction');
+								addEvent(dir.id, StatisticKey.EP, 'click_in_constructor');
 							}}
 						/>
 					</Col>

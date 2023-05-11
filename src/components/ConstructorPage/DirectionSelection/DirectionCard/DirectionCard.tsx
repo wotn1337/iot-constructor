@@ -1,9 +1,10 @@
-import React from 'react';
-import { EducationalProgram } from '../../../../common/types';
+import React, { useContext } from 'react';
+import { EducationalProgram, StatisticKey } from '../../../../common/types';
 import s from './DirectionCard.module.scss';
 import { Space } from 'antd';
 import { MoreInfo } from '../../../common/MoreInfo/MoreInfo';
 import { useMediaQuery } from 'react-responsive';
+import { StatisticContext } from '../../../../providers/StatisticProvider';
 
 type DirectionCardProps = EducationalProgram & {
 	selected: boolean;
@@ -13,6 +14,7 @@ type DirectionCardProps = EducationalProgram & {
 const prevYear = new Date().getFullYear() - 1;
 
 export const DirectionCard: React.FC<DirectionCardProps> = ({
+	id,
 	budget_places,
 	passing_scores,
 	training_period,
@@ -22,9 +24,15 @@ export const DirectionCard: React.FC<DirectionCardProps> = ({
 	title,
 }) => {
 	const isDesktop = useMediaQuery({ minWidth: 768 });
+	const { addEvent } = useContext(StatisticContext);
 
 	return (
-		<MoreInfo onClick={() => window.open(page_link)}>
+		<MoreInfo
+			onClick={() => {
+				addEvent(id, StatisticKey.EP, 'click_to_more');
+				window.open(page_link);
+			}}
+		>
 			<div className={`${s.card} ${selected ? s.selected : ''}`} onClick={onClick}>
 				<Space direction="vertical" size={isDesktop ? 24 : 12} className={s.card__info}>
 					<p className={s.info__title}>{title}</p>

@@ -63,8 +63,8 @@ export type Trajectory = {
 	color: string;
 	course_assembly_evaluation: number;
 	icons: string[];
-	disciplines_count: number;
-	vacancies_count: number;
+	course_assemblies_count: number;
+	amount_vacancies: number;
 };
 
 export type Discipline = {
@@ -124,4 +124,24 @@ export type PartnerCourseTypeExtended = PartnerCourseType & {
 	educational_programms: EducationalProgram[];
 	video: MediaType;
 	presentation: MediaType;
+};
+
+export enum StatisticKey {
+	EP = 'educational_programs',
+	CA = 'course_assemblies',
+	PC = 'partner_courses',
+	PT = 'professional_trajectories',
+	PR = 'professions',
+}
+
+export type EventType = 'click_in_constructor' | 'click_to_more' | 'click_in_list';
+
+export type StatisticItemType = {
+	id: Id;
+	event_type: EventType;
+	created_at: string;
+};
+
+export type StatisticDataType = {
+	data: Record<StatisticKey, StatisticItemType[]>;
 };

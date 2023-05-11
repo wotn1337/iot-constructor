@@ -25,6 +25,60 @@
 
   .discipline-item {
     cursor: pointer;
+    position: relative;
+
+    .delete-button {
+      border: 1px solid #FF4D4F;
+      position: absolute;
+      border-radius: 2px;
+      transition: 200ms;
+      top: 8px;
+      right: 16px;
+      height: 20px;
+      width: 20px;
+      display: none;
+
+      &:hover {
+        border: 1px solid #FF4D4F;
+        transform: scale(1.1);
+      }
+
+      &:focus {
+        border: 1px solid #FF4D4F;
+        transform: scale(1.1);
+      }
+    }
+
+    .info-button {
+      border: 1px solid $orange;
+      position: absolute;
+      background-color: #FFF7E6;
+      border-radius: 2px;
+      transition: 200ms;
+      top: 8px;
+      right: 16px;
+      height: 20px;
+      width: 20px;
+      display: none;
+
+      &:hover {
+        border: 1px solid $orange;
+        background-color: #FFF7E6;
+        transform: scale(1.1);
+      }
+
+      &:focus {
+        border: 1px solid $orange;
+        background-color: #FFF7E6;
+        transform: scale(1.1);
+      }
+    }
+
+    &:hover {
+      .delete-button, .info-button {
+        display: block;
+      }
+    }
 
     @media print {
       font-size: 10px !important;

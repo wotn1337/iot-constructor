@@ -38,7 +38,7 @@
     }
 
     .employeeCard__name {
-      font-weight: bold;
+      font-weight: 500;
       font-size: 18px;
       padding-right: 35px;
 
@@ -96,6 +96,9 @@
     position: absolute;
     top: 23px;
     right: 24px;
+    display: flex;
+    gap: 8px;
+    color: rgba(0, 0, 0, 0.45);
 
     @media screen and (max-width: 500px) {
       top: 8px;
@@ -110,6 +113,14 @@
         width: 20px;
         height: 20px;
       }
+    }
+
+    &:hover {
+      color: #1890FF;
+    }
+
+    &:active, &.focus {
+      color: #096DD9;
     }
   }
 }

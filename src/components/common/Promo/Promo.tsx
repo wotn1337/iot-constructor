@@ -15,7 +15,7 @@ export const Promo: React.FC<PromoProps> = ({ content, image, title, hideImageOn
 	return (
 		<div className={s.promo}>
 			<h3 className={s.promo__title}>{title}</h3>
-			{!(isMobile && hideImageOnMobile) && <img src={image} alt="promo" width={225} className={s.promo__image} />}
+			{!(isMobile && hideImageOnMobile) && <img src={image} alt="promo" className={s.promo__image} />}
 			{content}
 		</div>
 	);

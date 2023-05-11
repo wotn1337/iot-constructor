@@ -1,6 +1,6 @@
 import React from 'react';
 import s from './Professions.module.scss';
-import { IntroImage } from '../../../images';
+import { Professions as ProfessionsImage } from '../../../images';
 import { Button } from '../../common/Button/Button';
 import { StatisticItem } from './StatisticItem/StatisticItem';
 import { NavLink } from 'react-router-dom';
@@ -15,7 +15,7 @@ export const Professions = () => {
 				<div className={s.profession__image_wrapper}>
 					<img
 						className={s.profession__image_wrapper__image}
-						src={IntroImage}
+						src={ProfessionsImage}
 						alt="professions"
 						width={440}
 					/>

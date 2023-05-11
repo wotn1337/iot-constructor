@@ -4,11 +4,15 @@ import { useProfessionalTrajectoriesQuery } from '../../../hooks/useProfessional
 import { Loader } from '../../common/Loader/Loader';
 import { TrajectoryCard } from './TrajectoryCard/TrajectoryCard';
 import { ServerErrorContext } from '../../../providers/ServerErrorProvider';
+import { useConstructorContext } from '../Context';
 
 type TrajectoriesProps = {};
 
 export const Trajectories: React.FC<TrajectoriesProps> = () => {
-	const { data, isLoading, isFetching, error } = useProfessionalTrajectoriesQuery();
+	const {
+		state: { selectedDirection },
+	} = useConstructorContext();
+	const { data, isLoading, isFetching, error } = useProfessionalTrajectoriesQuery(String(selectedDirection));
 	const { setError } = useContext(ServerErrorContext);
 
 	useEffect(() => {

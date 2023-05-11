@@ -1,5 +1,5 @@
 import React from 'react';
-import { IntroImage } from '../../../images';
+import { Tutors } from '../../../images';
 import { HexagonList } from '../../common/HexagonList/HexagonList';
 import s from './AboutTutors.module.scss';
 import { Promo } from '../../common/Promo/Promo';
@@ -17,7 +17,7 @@ export const AboutTutors: React.FC<AboutEmployeesProps> = () => {
 	return (
 		<Promo
 			title="Зачем нужен тьютор?"
-			image={IntroImage}
+			image={Tutors}
 			content={<HexagonList list={list} className={s.aboutEmployees__list} />}
 		/>
 	);
