@@ -63,6 +63,7 @@ export const EmployeeCard: React.FC<EmployeeCardProps> = ({
 			</Space>
 			{vk_profile && (
 				<a href={vk_profile} target="_blank" rel="noreferrer" className={s.employeeCard__vk}>
+					ВКонтакте
 					<img src={VKIcon} alt="ВКонтакте" className={s.employeeCard__vk__icon} width={23} height={23} />
 				</a>
 			)}

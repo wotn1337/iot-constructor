@@ -1,6 +1,6 @@
 import React from 'react';
 import { Promo } from '../../common/Promo/Promo';
-import { IntroImage } from '../../../images';
+import { ROPs } from '../../../images';
 import s from './AboutROPs.module.scss';
 
 type AboutROPsProps = {};
@@ -9,7 +9,7 @@ export const AboutROPs: React.FC<AboutROPsProps> = () => {
 	return (
 		<Promo
 			title="Кто такой РОП?"
-			image={IntroImage}
+			image={ROPs}
 			hideImageOnMobile={true}
 			content={
 				<p className={s.aboutROPs__content}>

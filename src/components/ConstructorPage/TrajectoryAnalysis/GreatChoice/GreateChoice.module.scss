@@ -1,5 +1,4 @@
 .greatChoiceWrapper {
-  height: 500px;
   margin: 0 calc((1221px - 100vw) / 2);
   background-color: white;
   background-image: url("../../../../images/main_page/profession_background.svg");
@@ -20,17 +19,19 @@
   }
 
   .greatChoiceInner {
+    height: 500px;
     width: 1216px;
     display: grid;
-    grid-template-columns: 500px 232px;
-    justify-content: space-around;
-    row-gap: 60px;
+    grid-template-columns: 500px 420px;
+    justify-content: center;
+    gap: 32px;
 
     @media screen and (max-width: 1216px) {
       width: 100%
     }
 
     @media screen and (max-width: 820px) {
+      height: auto;
       display: flex;
       flex-direction: column;
       gap: 40px;
@@ -39,15 +40,20 @@
     }
 
     &__title {
+      align-self: end;
 
+      @media screen and (max-width: 820px) {
+        align-self: center;
+      }
     }
 
     &__image {
-      width: 232px;
       grid-row: span 2;
+      align-self: end;
 
       @media screen and (max-width: 820px) {
         width: 200px;
+        align-self: center;
       }
     }
 
