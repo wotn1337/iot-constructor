@@ -25,6 +25,7 @@ export const Semester: React.FC<SemesterProps> = ({
 			disabled={semester.disabled ?? false}
 			key={semester.id}
 			onClick={(e) => {
+				window.scrollTo({ top: 0, behavior: 'smooth' });
 				e.preventDefault();
 				setCurrentSemester(semester.order);
 			}}

@@ -4,7 +4,7 @@
   .backButton {
     padding: 0 !important;
 
-    @media screen and (max-width: 768px) {
+    @media screen and (max-width: 960px) {
       position: fixed;
       left: 20px;
       bottom: 20px;
@@ -21,7 +21,7 @@
   .nextButton {
     padding: 0 !important;
 
-    @media screen and (max-width: 768px) {
+    @media screen and (max-width: 960px) {
       position: fixed;
       right: 20px;
       bottom: 20px;

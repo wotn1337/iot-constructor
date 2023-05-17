@@ -10,6 +10,7 @@ import { getBestTrajectory } from '../../../../common/utils';
 import { useProfessionalTrajectoryByIdQuery } from '../../../../hooks/useProfessionalTrajectoryByIdQuery';
 import { Id } from '../../../../common/types';
 import { DiagramPlaceholder } from './../../../../images';
+import { useMediaQuery } from 'react-responsive';
 
 type TrackProgressesProps = {};
 
@@ -22,7 +23,7 @@ export const TrackProgresses: React.FC<TrackProgressesProps> = () => {
 		state: { tracks, semesters },
 		dispatch,
 	} = useConstructorContext();
-
+	const isDesktop = useMediaQuery({ minWidth: 1216 });
 	const [data, setData] = useState({
 		labels: tracks.filter((track) => !!track.points).map((data) => data.title),
 		datasets: [
@@ -96,7 +97,7 @@ export const TrackProgresses: React.FC<TrackProgressesProps> = () => {
 	}, [trajectory]);
 
 	return (
-		<Space direction="vertical" size="large" className="wrapper">
+		<Space size="large" className="wrapper">
 			{!legend.length ? (
 				<Space size="large" direction="vertical">
 					<img className="wrapper__placeholder_image" src={DiagramPlaceholder} alt="DiagramPlaceholder" />
@@ -104,17 +105,14 @@ export const TrackProgresses: React.FC<TrackProgressesProps> = () => {
 				</Space>
 			) : (
 				<>
-					<div
-						style={{
-							position: 'relative',
-							width: 230,
-							height: 230,
-							display: 'flex',
-							alignItems: 'center',
-							justifyContent: 'center',
-						}}
-					>
-						<div style={{ position: 'absolute', width: 230, height: 230 }}>
+					<div className="doughnut_wrapper">
+						<div
+							style={{
+								position: 'absolute',
+								width: isDesktop ? 230 : 118,
+								height: isDesktop ? 230 : 118,
+							}}
+						>
 							<Doughnut data={data} />
 						</div>
 
@@ -122,7 +120,7 @@ export const TrackProgresses: React.FC<TrackProgressesProps> = () => {
 							<img className="wrapper__track_icon" src={bestTrajectoryIcon} alt={'bestTrajectory'} />
 						)}
 					</div>
-					<Space size="small" direction="vertical" className="legend">
+					<Space size="small" direction="vertical" align="start" className="legend">
 						{legend.map((item) => (
 							<LegendItem title={item.title} color={item.color} key={item.id} />
 						))}

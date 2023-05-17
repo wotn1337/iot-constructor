@@ -112,16 +112,14 @@ export const educationalModulesAPI = {
 };
 
 export const professionalTrajectoriesAPI = {
-	getProfessionalTrajectories: async (educationalProgramId: Id) => {
-		const res = await instance.get<ProfessionalTrajectoriesResponse>(
-			`educationalPrograms/${educationalProgramId}/professionalTrajectories`
-		);
+	getProfessionalTrajectories: async () => {
+		const res = await instance.get<ProfessionalTrajectoriesResponse>(`professionalTrajectories`);
 		return res.data.professional_trajectories;
 	},
 
 	getProfessionalTrajectoryById: async (id: Id | undefined) => {
 		const res = await instance.get<ProfessionalTrajectoryResponse>(
-			`educationalPrograms/professionalTrajectories/${id}?loadCourseAssembliesCount=true&loadProfessions=true`
+			`professionalTrajectories/${id}?loadCourseAssembliesCount=true&loadProfessions=true`
 		);
 		return res.data.professional_trajectory;
 	},

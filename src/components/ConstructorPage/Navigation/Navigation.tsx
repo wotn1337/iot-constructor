@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useMemo, useState } from 'react';
-import { Col, Progress, Row, Space } from 'antd';
+import { Col, message, Progress, Row, Space } from 'antd';
 import { Button } from '../../common/Button/Button';
 import { ArrowLeftOutlined, ArrowRightOutlined } from '@ant-design/icons';
 import { Step, STEP_TYPE } from '../types';
@@ -18,7 +18,7 @@ type NavigationTitleProps = {
 };
 
 export const Navigation: React.FC<NavigationTitleProps> = ({ percent, currentStep, steps }) => {
-	const isDesktop = useMediaQuery({ minWidth: 768 });
+	const isDesktop = useMediaQuery({ minWidth: 960 });
 	const isProgressVisible = useMediaQuery({ minWidth: 1216 });
 	const isConstructor = currentStep?.type === STEP_TYPE.CONSTRUCTOR;
 
@@ -34,6 +34,9 @@ export const Navigation: React.FC<NavigationTitleProps> = ({ percent, currentSte
 
 	const onNextClick = () => {
 		if (isConstructor) {
+			if (disabledNext) {
+				message.warning('Необходимо закончить выбор дичциплин');
+			}
 			reachGoal('lastCreateTrajectory');
 
 			if (selectedTrajectory) {

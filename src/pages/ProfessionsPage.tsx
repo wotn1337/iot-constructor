@@ -9,6 +9,7 @@ import { ProfessionsGrid } from '../components/Professions/ProfessionsGrid/Profe
 import { ProfessionType } from '../components/Professions/types';
 import { Sorter } from '../components/common/FilterableContent/types';
 import { sorters } from '../components/Professions/constants';
+import { useProfessionalTrajectoriesQuery } from '../hooks/useProfessionalTrajectoriesQuery';
 
 type ProfessionsPageProps = {};
 
@@ -25,12 +26,12 @@ export const ProfessionsPage: React.FC<ProfessionsPageProps> = () => {
 	} = useEducationalProgramsQuery();
 	const [selectedEducationalDirections, setSelectedEducationalDirections] = useState<Id[]>([]);
 
-	// const {
-	// 	data: professionalTrajectories,
-	// 	isLoading: professionalTrajectoriesLoading,
-	// 	isFetching: professionalTrajectoriesFetching,
-	// 	error: professionalTrajectoriesError,
-	// } = useProfessionalTrajectoriesQuery();
+	const {
+		data: professionalTrajectories,
+		isLoading: professionalTrajectoriesLoading,
+		isFetching: professionalTrajectoriesFetching,
+		error: professionalTrajectoriesError,
+	} = useProfessionalTrajectoriesQuery();
 	const [selectedProfessionalTrajectories, setSelectedProfessionalTrajectories] = useState<Id[]>([]);
 
 	const {
@@ -72,9 +73,9 @@ export const ProfessionsPage: React.FC<ProfessionsPageProps> = () => {
 		if (educationalDirectionsError) {
 			setError(educationalDirectionsError);
 		}
-		// if (professionalTrajectoriesError) {
-		// 	setError(professionalTrajectoriesError);
-		// }
+		if (professionalTrajectoriesError) {
+			setError(professionalTrajectoriesError);
+		}
 		if (professionsError) {
 			setError(professionsError);
 		}
@@ -104,18 +105,18 @@ export const ProfessionsPage: React.FC<ProfessionsPageProps> = () => {
 						onChange: (ids) => setSelectedEducationalDirections(ids),
 						loading: educationalDirectionsFetching || educationalDirectionsLoading,
 					},
-					// {
-					// 	title: 'Траектория',
-					// 	key: 'professionalTrajectories',
-					// 	items:
-					// 		professionalTrajectories?.map((track) => ({
-					// 			id: track.id,
-					// 			title: track.title,
-					// 		})) ?? [],
-					// 	selectedIds: selectedProfessionalTrajectories,
-					// 	onChange: (ids) => setSelectedProfessionalTrajectories(ids),
-					// 	loading: professionalTrajectoriesFetching || professionalTrajectoriesLoading,
-					// },
+					{
+						title: 'Траектория',
+						key: 'professionalTrajectories',
+						items:
+							professionalTrajectories?.map((track) => ({
+								id: track.id,
+								title: track.title,
+							})) ?? [],
+						selectedIds: selectedProfessionalTrajectories,
+						onChange: (ids) => setSelectedProfessionalTrajectories(ids),
+						loading: professionalTrajectoriesFetching || professionalTrajectoriesLoading,
+					},
 				]}
 				sortersState={{
 					sorters,
