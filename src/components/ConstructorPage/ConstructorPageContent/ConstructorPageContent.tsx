@@ -80,7 +80,7 @@ export const ConstructorPageContent: React.FC<ConstructorProps> = () => {
 	useEffect(() => {
 		if (currentSemester) {
 			// @ts-ignore
-			window.ym(91451529, 'hit', pathname + '/' + currentSemester);
+			// window.ym(91451529, 'hit', pathname + '/' + currentSemester);
 		}
 	}, [currentSemester]);
 

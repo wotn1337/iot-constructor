@@ -16,9 +16,7 @@ export const Constructor: React.FC<ConstructorProps> = () => {
 		state: { semesters, currentSemester, selectedDirection },
 		dispatch,
 	} = useConstructorContext();
-	const { data: trajectories, error: trajectoriesError } = useProfessionalTrajectoriesQuery(
-		String(selectedDirection)
-	);
+	const { data: trajectories, error: trajectoriesError } = useProfessionalTrajectoriesQuery();
 	const {
 		modules,
 		loading,
@@ -36,7 +34,7 @@ export const Constructor: React.FC<ConstructorProps> = () => {
 		}
 	}, [trajectoriesError, modulesError]);
 
-	const isDesktop = useMediaQuery({ minWidth: 910 });
+	const isDesktop = useMediaQuery({ minWidth: 960 });
 
 	useEffect(() => {
 		dispatch(setTracks(trajectories?.map((track) => ({ ...track, points: 0, percent: 0 })) ?? []));

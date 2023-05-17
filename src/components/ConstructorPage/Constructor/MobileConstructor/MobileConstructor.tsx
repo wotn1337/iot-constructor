@@ -25,7 +25,7 @@ export const MobileConstructor: React.FC<MobileConstructorProps> = ({ modules })
 		(sem) => sem.numerical_representation === currentSemester
 	)?.text_representation;
 	const isColumnEmpty = columns['1'].items.length === 0;
-	const [isPaginationOpen, setIsPaginationOpen] = useState<boolean>(false);
+	const [isPaginationOpen, setIsPaginationOpen] = useState<boolean>(true);
 	const { setError } = useContext(ServerErrorContext);
 
 	useEffect(() => {
