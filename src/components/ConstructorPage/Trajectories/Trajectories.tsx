@@ -9,10 +9,7 @@ import { useConstructorContext } from '../Context';
 type TrajectoriesProps = {};
 
 export const Trajectories: React.FC<TrajectoriesProps> = () => {
-	const {
-		state: { selectedDirection },
-	} = useConstructorContext();
-	const { data, isLoading, isFetching, error } = useProfessionalTrajectoriesQuery(String(selectedDirection));
+	const { data, isLoading, isFetching, error } = useProfessionalTrajectoriesQuery();
 	const { setError } = useContext(ServerErrorContext);
 
 	useEffect(() => {
