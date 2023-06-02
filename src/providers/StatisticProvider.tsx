@@ -3,7 +3,7 @@ import { EventType, Id, StatisticDataType, StatisticItemType, StatisticKey } fro
 import { getUTCDateString } from '../common/utils';
 
 type StatisticContextType = StatisticDataType & {
-	addEvent: (itemId: Id, key: StatisticKey, eventType: EventType) => void;
+	addEvent: (itemId: Id, key: StatisticKey, eventType: EventType, educationalProgramId?: Id) => void;
 };
 
 const initData = {
@@ -26,11 +26,12 @@ type StatisticProviderProps = {
 export const StatisticProvider: React.FC<StatisticProviderProps> = ({ children }) => {
 	const [data, setData] = useState<StatisticDataType['data']>(initData);
 
-	const addEvent = (itemId: Id, key: StatisticKey, eventType: EventType) => {
+	const addEvent = (itemId: Id, key: StatisticKey, eventType: EventType, educationalProgramId?: Id) => {
 		const eventItem: StatisticItemType = {
 			id: itemId,
 			event_type: eventType,
 			created_at: getUTCDateString(),
+			educational_program_id: educationalProgramId,
 		};
 
 		setData((oldData) => ({

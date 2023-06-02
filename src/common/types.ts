@@ -140,6 +140,7 @@ export type StatisticItemType = {
 	id: Id;
 	event_type: EventType;
 	created_at: string;
+	educational_program_id?: Id;
 };
 
 export type StatisticDataType = {

@@ -26,7 +26,7 @@ type ColumnProps = {
 
 export const Card: React.FC<ColumnProps> = ({ course, index, droppableId, isDragDisabled, isSelected }) => {
 	const {
-		state: { columns, currentSemester, semesters },
+		state: { columns, currentSemester, semesters, selectedDirection },
 		dispatch,
 	} = useConstructorContext();
 	const { addEvent } = useContext(StatisticContext);
@@ -123,7 +123,12 @@ export const Card: React.FC<ColumnProps> = ({ course, index, droppableId, isDrag
 											onClick={() => {
 												dispatch(setDisciplineId(course.id));
 												reachGoal('moreAboutDiscipline');
-												addEvent(String(course.id), StatisticKey.CA, 'click_to_more');
+												addEvent(
+													String(course.id),
+													StatisticKey.CA,
+													'click_to_more',
+													selectedDirection
+												);
 											}}
 										>
 											<QuestionOutlined />

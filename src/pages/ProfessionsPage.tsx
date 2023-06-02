@@ -10,6 +10,7 @@ import { ProfessionType } from '../components/Professions/types';
 import { Sorter } from '../components/common/FilterableContent/types';
 import { sorters } from '../components/Professions/constants';
 import { useProfessionalTrajectoriesQuery } from '../hooks/useProfessionalTrajectoriesQuery';
+import { BackgroundWrapper } from '../components/common/BackgroundWrapper/BackgroundWrapper';
 
 type ProfessionsPageProps = {};
 
@@ -82,7 +83,7 @@ export const ProfessionsPage: React.FC<ProfessionsPageProps> = () => {
 	}, [educationalDirectionsError, professionsError]);
 
 	return (
-		<>
+		<BackgroundWrapper>
 			<Helmet>
 				<title>Профессии</title>
 			</Helmet>
@@ -132,6 +133,6 @@ export const ProfessionsPage: React.FC<ProfessionsPageProps> = () => {
 				}}
 				itemsCount={professions.length}
 			/>
-		</>
+		</BackgroundWrapper>
 	);
 };

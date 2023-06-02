@@ -18,7 +18,7 @@ export const Partners: React.FC<PartnersProps> = () => {
 			<h4 className={s.partners__title}>Партнёры образовательных программ</h4>
 			<PartnersList />
 			<NavLink to={ROUTES.PARTNERS} onClick={() => reachGoal('seePartners')}>
-				<Button>Посмотреть всех</Button>
+				<Button>Перейти к партнерским курсам</Button>
 			</NavLink>
 		</Space>
 	);

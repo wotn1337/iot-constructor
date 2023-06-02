@@ -9,7 +9,7 @@ type TrajectoryCardProps = Trajectory;
 
 export const TrajectoryCard: React.FC<TrajectoryCardProps> = ({ id, title, icons }) => {
 	const {
-		state: { selectedTrajectory },
+		state: { selectedTrajectory, selectedDirection },
 		dispatch,
 	} = useConstructorContext();
 	const { addEvent } = useContext(StatisticContext);
@@ -22,7 +22,7 @@ export const TrajectoryCard: React.FC<TrajectoryCardProps> = ({ id, title, icons
 			wrap={false}
 			onClick={() => {
 				dispatch(setSelectedTrajectory(id));
-				addEvent(id, StatisticKey.PT, 'click_in_list');
+				addEvent(id, StatisticKey.PT, 'click_in_list', selectedDirection);
 			}}
 		>
 			<Col className={s.title}>{title}</Col>

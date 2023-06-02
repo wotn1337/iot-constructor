@@ -23,7 +23,7 @@ export const ConstructorPageContent: React.FC<ConstructorProps> = () => {
 	const { pathname } = useLocation();
 	const currentStepType = (pathname.split('/').pop() ?? STEP_TYPE.DIRECTION_SELECTION) as STEP_TYPE;
 	const {
-		state: { selectedType, disciplineId, semesters, currentSemester, selectedDirection, tracks },
+		state: { selectedType, disciplineId, semesters, selectedDirection, tracks },
 		dispatch,
 	} = useConstructorContext();
 	const {
@@ -76,13 +76,6 @@ export const ConstructorPageContent: React.FC<ConstructorProps> = () => {
 			dispatch(setSelectedTrajectory(getBestTrajectory(tracks)));
 		}
 	}, [percent]);
-
-	useEffect(() => {
-		if (currentSemester) {
-			// @ts-ignore
-			// window.ym(91451529, 'hit', pathname + '/' + currentSemester);
-		}
-	}, [currentSemester]);
 
 	useEffect(() => {
 		if (educationalDirectionsError) {

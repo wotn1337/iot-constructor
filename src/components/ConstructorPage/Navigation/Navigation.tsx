@@ -35,12 +35,12 @@ export const Navigation: React.FC<NavigationTitleProps> = ({ percent, currentSte
 	const onNextClick = () => {
 		if (isConstructor) {
 			if (disabledNext) {
-				message.warning('Необходимо закончить выбор дичциплин');
+				message.warning('Необходимо закончить выбор диcциплин');
 			}
 			reachGoal('lastCreateTrajectory');
 
 			if (selectedTrajectory) {
-				addEvent(selectedTrajectory, StatisticKey.PT, 'click_in_constructor');
+				addEvent(selectedTrajectory, StatisticKey.PT, 'click_in_constructor', selectedDirection);
 			}
 		}
 	};

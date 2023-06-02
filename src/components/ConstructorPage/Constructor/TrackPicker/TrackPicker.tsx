@@ -20,7 +20,7 @@ type TrackPickerProps = {
 
 export const TrackPicker: React.FC<TrackPickerProps> = ({ modules }) => {
 	const {
-		state: { columns, currentSemester, semesters },
+		state: { columns, currentSemester, semesters, selectedDirection },
 		dispatch,
 	} = useConstructorContext();
 	const { addEvent } = useContext(StatisticContext);
@@ -50,7 +50,7 @@ export const TrackPicker: React.FC<TrackPickerProps> = ({ modules }) => {
 
 		if (newData && removed) {
 			if (getColumnKey(columns, destination.droppableId) === '2' && removed.id) {
-				addEvent(removed.id, StatisticKey.CA, 'click_in_constructor');
+				addEvent(removed.id, StatisticKey.CA, 'click_in_constructor', selectedDirection);
 			}
 			newData = addTask(newData, destination?.droppableId, destination?.index, removed) ?? {};
 			dispatch(setColumns(newData));

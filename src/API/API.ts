@@ -112,8 +112,13 @@ export const educationalModulesAPI = {
 };
 
 export const professionalTrajectoriesAPI = {
-	getProfessionalTrajectories: async () => {
-		const res = await instance.get<ProfessionalTrajectoriesResponse>(`professionalTrajectories`);
+	getProfessionalTrajectories: async (educationalProgramId?: Id) => {
+		const params = new URLSearchParams();
+		if (educationalProgramId) {
+			params.append('educational_program_id', String(educationalProgramId));
+		}
+
+		const res = await instance.get<ProfessionalTrajectoriesResponse>(`professionalTrajectories?${params}`);
 		return res.data.professional_trajectories;
 	},
 
