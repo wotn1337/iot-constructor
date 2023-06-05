@@ -1,17 +1,27 @@
 @import "../../../../../constants";
 .mobileConstructor {
-  .ant-collapse > .ant-collapse-item > .ant-collapse-header {
-    padding: 0;
-    align-items: center;
-    color: rgba(0, 0, 0, 0.45);
-
-    .ant-collapse-header-text {
-      font-size: 16px;
+  .mobile-module {
+    .ant-collapse-item > .ant-collapse-header {
+      margin-bottom: 12px;
+      padding: 0;
+      align-items: center;
       color: rgba(0, 0, 0, 0.45);
+      font-size: 16px;
     }
-  }
 
-  .ant-collapse-content > .ant-collapse-content-box {
-    padding: 0;
+    .finish {
+      .ant-collapse-header {
+        color: #73D13D;
+      }
+    }
+
+    .ant-collapse-content > .ant-collapse-content-box {
+      padding: 0;
+    }
+
+    .panel_icon {
+      font-size: 18px;
+      color: #BFBFBF;
+    }
   }
 }

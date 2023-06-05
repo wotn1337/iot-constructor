@@ -18,9 +18,10 @@ type MobileCardProps = {
 	course: Discipline;
 	moduleId: string;
 	index: number;
+	isRequiredModule: boolean;
 };
 
-export const MobileCard: React.FC<MobileCardProps> = ({ course, moduleId, index }) => {
+export const MobileCard: React.FC<MobileCardProps> = ({ course, moduleId, index, isRequiredModule }) => {
 	const {
 		state: { columns, currentSemester },
 		dispatch,
@@ -30,7 +31,7 @@ export const MobileCard: React.FC<MobileCardProps> = ({ course, moduleId, index 
 	const [isDisabled, setIsDisabled] = useState<boolean | undefined>(
 		columns['2'].items
 			?.find((item) => item.id === `module_${moduleId}`)
-			?.disciplines?.some((item) => item.id === course.id)
+			?.disciplines?.some((item) => item.id === course.id) || isRequiredModule
 	);
 	const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
 
@@ -102,7 +103,10 @@ export const MobileCard: React.FC<MobileCardProps> = ({ course, moduleId, index 
 
 	return (
 		<div className="card-wrapper">
-			<div className={`card ${isSelected ? 'selected' : ''}`} onClick={() => setIsMenuOpen(true)}>
+			<div
+				className={`card ${isSelected ? 'selected' : ''}`}
+				onClick={() => (!isRequiredModule ? setIsMenuOpen(true) : undefined)}
+			>
 				<div className="card__header">
 					<p>{course.title}</p>
 				</div>

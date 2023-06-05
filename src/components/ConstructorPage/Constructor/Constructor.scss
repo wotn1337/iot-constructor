@@ -25,6 +25,13 @@
         margin-bottom: 12px;
       }
 
+      &__collapse {
+        .panel_icon {
+          font-size: 18px;
+          color: #BFBFBF;
+        }
+      }
+
       @media screen and (max-width: 1216px) {
         width: 804px;
         height: fit-content;

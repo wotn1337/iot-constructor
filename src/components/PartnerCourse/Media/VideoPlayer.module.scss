@@ -1,14 +1,24 @@
 .wrapper {
-  width: 1007px;
-  height: 522px;
+  width: 100%;
   margin: 0 auto;
   position: relative;
 
-  .player {
-    width: 1007px;
+  .spaceBlock {
+    gap: 16px;
 
-    @media screen and (max-width: 1216px) {
+    .title {
+      font-weight: 500;
+      font-size: 18px;
+      line-height: 130%;
+      color: #1890FF;
+    }
+
+    .player {
       width: 100%;
+
+      @media screen and (max-width: 1216px) {
+        width: 100%;
+      }
     }
   }
 

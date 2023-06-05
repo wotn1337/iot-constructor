@@ -106,6 +106,7 @@ export const TrackPicker: React.FC<TrackPickerProps> = ({ modules }) => {
 					'2': {
 						...columns['2'],
 						items: [
+							requiredModule,
 							...modules
 								?.filter((module) => module.is_spec)
 								.map((module) => ({
@@ -113,7 +114,6 @@ export const TrackPicker: React.FC<TrackPickerProps> = ({ modules }) => {
 									id: `module_${module.id}`,
 									disciplines: [],
 								})),
-							requiredModule,
 						],
 					},
 				})

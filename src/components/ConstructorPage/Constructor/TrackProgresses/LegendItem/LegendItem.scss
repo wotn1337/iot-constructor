@@ -3,5 +3,16 @@
     width: 23px;
     height: 14px;
     border-radius: 2px;
+
+    @media screen and (max-width: 1216px) {
+      width: 15px;
+      height: 10px;
+    }
+  }
+
+  &__text {
+    @media screen and (max-width: 1216px) {
+      font-size: 12px;
+    }
   }
 }

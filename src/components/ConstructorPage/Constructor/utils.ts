@@ -93,10 +93,6 @@ export const isDisciplineSelectedBefore = (semesters: Semester[], discipline: Di
 		if (sem.columns) {
 			sem.columns['2']?.items?.forEach((module) => {
 				if (module.disciplines.some((disc) => disc.id === discipline.id)) {
-					console.log(
-						module.disciplines.some((disc) => disc.id === discipline.id),
-						discipline.title
-					);
 					isSelected = module.disciplines.some((disc) => disc.id === discipline.id);
 				}
 			});

@@ -3,12 +3,13 @@ import { setColumns, setSemesterColumns, setSemesterFinish, useConstructorContex
 import { Discipline, EducationModule } from '../../../../common/types';
 import { useSemestersQuery } from '../../../../hooks/useSemestersQuery';
 import { Empty as EmptyImage } from '../../../../images';
-import { Empty, Space } from 'antd';
+import { Collapse, Empty, Space } from 'antd';
 import { SemesterPagination } from '../SemesterPagination/SemesterPagination';
 import './MobileConstructor.scss';
 import { LeftOutlined, RightOutlined } from '@ant-design/icons';
 import { MobileModule } from './MobileModule/MobileModule';
 import { ServerErrorContext } from '../../../../providers/ServerErrorProvider';
+import { TrackProgresses } from '../TrackProgresses/TrackProgresses';
 
 type MobileConstructorProps = {
 	modules: EducationModule[];
@@ -70,11 +71,12 @@ export const MobileConstructor: React.FC<MobileConstructorProps> = ({ modules })
 				setColumns({
 					'1': {
 						...columns['1'],
-						items: modules?.filter((module) => module.is_spec),
+						items: [requiredModule, ...modules?.filter((module) => module.is_spec)],
 					},
 					'2': {
 						...columns['2'],
 						items: [
+							requiredModule,
 							...modules
 								?.filter((module) => module.is_spec)
 								.map((module) => ({
@@ -82,7 +84,6 @@ export const MobileConstructor: React.FC<MobileConstructorProps> = ({ modules })
 									id: `module_${module.id}`,
 									disciplines: [],
 								})),
-							requiredModule,
 						],
 					},
 				})
@@ -92,8 +93,12 @@ export const MobileConstructor: React.FC<MobileConstructorProps> = ({ modules })
 
 	return (
 		<div className="mobileConstructor">
+			<Collapse defaultActiveKey="1" className="collapse" ghost>
+				<Collapse.Panel key="1" header="Мои траектории" className="panel">
+					<TrackProgresses />
+				</Collapse.Panel>
+			</Collapse>
 			<div className="mobileConstructor__title">{currentSemesterTitle}</div>
-
 			{isColumnEmpty ? (
 				<Empty
 					className="mobileConstructor__empty"
@@ -101,9 +106,9 @@ export const MobileConstructor: React.FC<MobileConstructorProps> = ({ modules })
 					description="В этом семестре нет дисциплин по выбору"
 				/>
 			) : (
-				<Space size={16} direction="vertical">
+				<Space className="mobileConstructor__modulesWrapper" size={16} direction="vertical">
 					{columns['1'].items.map((module) => (
-						<MobileModule column={columns['1']} module={module} />
+						<MobileModule column={columns['1']} module={module} key={module.id} />
 					))}
 				</Space>
 			)}
