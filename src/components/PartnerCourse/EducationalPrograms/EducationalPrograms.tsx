@@ -16,7 +16,7 @@ export const EducationalPrograms: React.FC<EducationalProgramsProps> = ({ educat
 			<Space className={s.list} size={8} wrap={wrap}>
 				{educationPrograms?.map((program) => (
 					<Tag key={program.id} className={s.tag}>
-						<a href={program.page_link} target="_blank" rel="noreferrer">
+						<a className={s.text} href={program.page_link} target="_blank" rel="noreferrer">
 							{program.title}
 						</a>
 					</Tag>

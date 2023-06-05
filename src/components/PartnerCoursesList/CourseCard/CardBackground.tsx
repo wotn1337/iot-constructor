@@ -6,7 +6,6 @@ type CardBackgroundProps = {
 
 export const CardBackground: React.FC<CardBackgroundProps> = ({ darkColor }) => {
 	const randomNum = Math.round(Math.random());
-	console.debug(randomNum);
 
 	return (
 		<div style={{ position: 'absolute' }}>

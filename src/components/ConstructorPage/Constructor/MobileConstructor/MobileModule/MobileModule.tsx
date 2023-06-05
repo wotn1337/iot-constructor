@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { Collapse, Space } from 'antd';
+import { Collapse, Space, Tooltip } from 'antd';
 import { Column } from '../../../Context/types';
 import { EducationModule } from '../../../../../common/types';
 import { MobileCard } from '../MobileCard/MobileCard';
 import './MobileModule.scss';
 import { useConstructorContext } from '../../../Context';
+import { QuestionCircleOutlined } from '@ant-design/icons';
 
 type MobileModuleProps = {
 	column: Column;
@@ -24,6 +25,18 @@ export const MobileModule: React.FC<MobileModuleProps> = ({ module, column }) =>
 	const [isModuleFinish, setIsModuleFinish] = useState<boolean>(false);
 
 	const getPanelHeaderClassName = () => (isModuleFinish || !module.is_spec ? 'finish' : undefined);
+	const getExtra = () => {
+		return (
+			<Tooltip
+				title="Здесь расположены обязательные дисциплины, их невозможно изменить"
+				placement="topRight"
+				trigger="click"
+				color="#FA8C16"
+			>
+				<QuestionCircleOutlined className="panel_icon" onClick={(e) => e.stopPropagation()} />
+			</Tooltip>
+		);
+	};
 
 	useEffect(() => {
 		if (!module.is_spec) {
@@ -35,8 +48,6 @@ export const MobileModule: React.FC<MobileModuleProps> = ({ module, column }) =>
 		setIsModuleFinish(choiceList?.choice_limit === choiceList?.disciplines.length);
 	}, [semesters]);
 
-	useEffect(() => {}, []);
-
 	return (
 		<Collapse
 			className="mobile-module"
@@ -45,7 +56,12 @@ export const MobileModule: React.FC<MobileModuleProps> = ({ module, column }) =>
 			onChange={() => setIsModuleCollapse((prev) => (prev === '' ? [`${module.id}`] : ''))}
 			ghost
 		>
-			<Panel className={getPanelHeaderClassName()} header={module.title} key={module.id}>
+			<Panel
+				className={getPanelHeaderClassName()}
+				header={module.title}
+				key={module.id}
+				extra={!module.is_spec && getExtra()}
+			>
 				<Space size={8} style={{ width: '100%' }} direction="vertical">
 					{module.disciplines.map((item, index) => (
 						<MobileCard

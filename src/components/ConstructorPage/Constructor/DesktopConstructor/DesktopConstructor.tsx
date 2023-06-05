@@ -15,8 +15,13 @@ export const DesktopConstructor: React.FC<DesktopConstructorProps> = ({ modules 
 	const isDesktop = useMediaQuery({ minWidth: 1216 });
 	const getExtra = () => {
 		return (
-			<Tooltip title="Здесь отображаются выбранные вами траектории" placement="topRight" trigger="click">
-				<QuestionCircleOutlined onClick={(e) => e.stopPropagation()} />
+			<Tooltip
+				title="Здесь отображаются выбранные вами траектории"
+				placement="topRight"
+				trigger="click"
+				color="#FA8C16"
+			>
+				<QuestionCircleOutlined className="panel_icon" onClick={(e) => e.stopPropagation()} />
 			</Tooltip>
 		);
 	};

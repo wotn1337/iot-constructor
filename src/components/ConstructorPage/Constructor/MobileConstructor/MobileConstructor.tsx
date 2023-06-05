@@ -108,7 +108,7 @@ export const MobileConstructor: React.FC<MobileConstructorProps> = ({ modules })
 			) : (
 				<Space className="mobileConstructor__modulesWrapper" size={16} direction="vertical">
 					{columns['1'].items.map((module) => (
-						<MobileModule column={columns['1']} module={module} />
+						<MobileModule column={columns['1']} module={module} key={module.id} />
 					))}
 				</Space>
 			)}

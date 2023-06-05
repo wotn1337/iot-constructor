@@ -4,8 +4,9 @@ import { EducationModule } from '../../../../../common/types';
 import { Droppable } from 'react-beautiful-dnd';
 import './Module.scss';
 import { Column } from '../../../Context/types';
-import { Collapse } from 'antd';
+import { Collapse, Tooltip } from 'antd';
 import { useConstructorContext } from '../../../Context';
+import { QuestionCircleOutlined } from '@ant-design/icons';
 
 const { Panel } = Collapse;
 
@@ -32,13 +33,24 @@ export const Module: React.FC<ModuleProps> = ({ module, column }) => {
 			return 'module_wrapper__placeholder module_wrapper__placeholder__target_background';
 		} else return 'module_wrapper__placeholder module_wrapper__placeholder__empty_background';
 	};
-
 	const getPanelHeaderClassName = () => {
 		if (module.id.toString() === draggableId) {
 			return 'module_wrapper__title__target';
 		} else if (module.disciplines.length === module.choice_limit || !module.is_spec) {
 			return 'module_wrapper__title__finish';
 		} else return 'module_wrapper__title';
+	};
+
+	const getExtra = () => {
+		return (
+			<Tooltip
+				title="Здесь расположены обязательные дисциплины, их невозможно изменить"
+				placement="topRight"
+				color="#FA8C16"
+			>
+				<QuestionCircleOutlined className="panel-icon" onClick={(e) => e.stopPropagation()} />
+			</Tooltip>
+		);
 	};
 
 	useEffect(() => {
@@ -60,7 +72,12 @@ export const Module: React.FC<ModuleProps> = ({ module, column }) => {
 							activeKey={isModuleCollapse}
 							onChange={() => setIsModuleCollapse((prev) => (prev === '' ? [`${module.id}`] : ''))}
 						>
-							<Panel className={getPanelHeaderClassName()} header={module.title} key={module.id}>
+							<Panel
+								className={getPanelHeaderClassName()}
+								header={module.title}
+								key={module.id}
+								extra={!module.is_spec && getExtra()}
+							>
 								<div className={getPlaceholderClassName()}>
 									{!module.disciplines.length && <p>Выбрано 0 из {`${module.choice_limit}`}</p>}
 								</div>
