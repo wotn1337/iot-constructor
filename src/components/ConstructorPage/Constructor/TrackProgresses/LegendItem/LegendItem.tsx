@@ -11,7 +11,7 @@ export const LegendItem: React.FC<LegendItemProps> = ({ title, color }) => {
 	return (
 		<Space size="small">
 			<div className="legend__mark" style={{ borderColor: color, backgroundColor: color }} />
-			<Typography.Text>{title}</Typography.Text>
+			<Typography.Text className="legend__text">{title}</Typography.Text>
 		</Space>
 	);
 };

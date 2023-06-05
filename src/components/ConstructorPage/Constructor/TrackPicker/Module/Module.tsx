@@ -36,7 +36,7 @@ export const Module: React.FC<ModuleProps> = ({ module, column }) => {
 	const getPanelHeaderClassName = () => {
 		if (module.id.toString() === draggableId) {
 			return 'module_wrapper__title__target';
-		} else if (module.disciplines.length === module.choice_limit) {
+		} else if (module.disciplines.length === module.choice_limit || !module.is_spec) {
 			return 'module_wrapper__title__finish';
 		} else return 'module_wrapper__title';
 	};
@@ -52,7 +52,7 @@ export const Module: React.FC<ModuleProps> = ({ module, column }) => {
 
 	return column.id === 1 && !module.is_spec ? null : (
 		<Droppable droppableId={module.id.toString()} key={module.id} isDropDisabled={isDropDisabled}>
-			{(provided, snapshot) => {
+			{(provided) => {
 				return (
 					<div className="module_wrapper" {...provided.droppableProps} ref={provided.innerRef}>
 						<Collapse

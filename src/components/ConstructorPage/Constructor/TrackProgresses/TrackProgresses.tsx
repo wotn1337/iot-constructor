@@ -24,6 +24,7 @@ export const TrackProgresses: React.FC<TrackProgressesProps> = () => {
 		dispatch,
 	} = useConstructorContext();
 	const isDesktop = useMediaQuery({ minWidth: 1216 });
+	const isMobile = useMediaQuery({ maxWidth: 960 });
 	const [data, setData] = useState({
 		labels: tracks.filter((track) => !!track.points).map((data) => data.title),
 		datasets: [
@@ -99,7 +100,7 @@ export const TrackProgresses: React.FC<TrackProgressesProps> = () => {
 	return (
 		<Space size="large" className="wrapper">
 			{!legend.length ? (
-				<Space size="large" direction="vertical">
+				<Space size="large" direction={isDesktop || isMobile ? 'vertical' : 'horizontal'} align="center">
 					<img className="wrapper__placeholder_image" src={DiagramPlaceholder} alt="DiagramPlaceholder" />
 					<div className="wrapper__placeholder_text">Здесь будут ваши траектории</div>
 				</Space>
@@ -109,8 +110,8 @@ export const TrackProgresses: React.FC<TrackProgressesProps> = () => {
 						<div
 							style={{
 								position: 'absolute',
-								width: isDesktop ? 230 : 118,
-								height: isDesktop ? 230 : 118,
+								width: isDesktop || isMobile ? 230 : 118,
+								height: isDesktop || isMobile ? 230 : 118,
 							}}
 						>
 							<Doughnut data={data} />
